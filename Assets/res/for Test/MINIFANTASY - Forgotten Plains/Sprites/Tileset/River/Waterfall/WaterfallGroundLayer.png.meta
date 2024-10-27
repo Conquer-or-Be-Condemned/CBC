@@ -1,0 +1,716 @@
+fileFormatVersion: 2
+guid: 3ddde431ca5c9d14db6efc1ec3bdf431
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8239214474336732873
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_0
+  - first:
+      213: 2947979707022444830
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_1
+  - first:
+      213: -4959239177358774066
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_2
+  - first:
+      213: 3725481598333277515
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_3
+  - first:
+      213: 2735987492916810776
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_4
+  - first:
+      213: -7901010420644826423
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_5
+  - first:
+      213: -3232188030558388326
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_6
+  - first:
+      213: 2960596547515580891
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_7
+  - first:
+      213: 4255619105510635818
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_8
+  - first:
+      213: -5895253846087953807
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_9
+  - first:
+      213: 1684224341852899811
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_10
+  - first:
+      213: -50829059748572217
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_11
+  - first:
+      213: 8630102175956086725
+    second: WaterfallGround1a
+  - first:
+      213: -6224283800805417084
+    second: WaterfallGround2a
+  - first:
+      213: 6576936642578654046
+    second: WaterfallGround3a
+  - first:
+      213: -4147088398120219278
+    second: WaterfallGround1b
+  - first:
+      213: -8868092757516852463
+    second: WaterfallGround2b
+  - first:
+      213: -5696832695944434711
+    second: WaterfallGround3b
+  - first:
+      213: -5523789877617195528
+    second: WaterfallGround1c
+  - first:
+      213: 6385951297089516574
+    second: WaterfallGround2c
+  - first:
+      213: -4574651484080124776
+    second: WaterfallGround3c
+  - first:
+      213: -1309423263901819475
+    second: WaterfallGround1d
+  - first:
+      213: -6238302836082690025
+    second: WaterfallGround2d
+  - first:
+      213: 4383235183741968974
+    second: WaterfallGround3d
+  - first:
+      213: 6395950799876522201
+    second: WaterfallGround4
+  - first:
+      213: 4420199109394429676
+    second: WaterfallGround5
+  - first:
+      213: -4494076843388518743
+    second: WaterfallGround6
+  - first:
+      213: 8515405058751622037
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_27
+  - first:
+      213: 8970546803153609005
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_28
+  - first:
+      213: 2489298813776223830
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_29
+  - first:
+      213: 774898537730414071
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_30
+  - first:
+      213: -8828513978604320644
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_31
+  - first:
+      213: 6457063658333945289
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_32
+  - first:
+      213: -6614518783942639613
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_33
+  - first:
+      213: -8580103165089524145
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_34
+  - first:
+      213: 8630884530162121872
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_35
+  - first:
+      213: 851457957736781272
+    second: WaterfallGround7
+  - first:
+      213: 7233315084790722477
+    second: WaterfallGround8
+  - first:
+      213: 682517080762634190
+    second: WaterfallGround9
+  - first:
+      213: -498984776491355967
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_39
+  - first:
+      213: 6069425023135552522
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_40
+  - first:
+      213: -6322294570375195743
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_41
+  - first:
+      213: -9138519748658693718
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_42
+  - first:
+      213: -6920891052985656451
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_43
+  - first:
+      213: 6141998315204864184
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_44
+  - first:
+      213: -5591306271989741442
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_45
+  - first:
+      213: 5915760543914129240
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_46
+  - first:
+      213: -4392281479099541122
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_47
+  - first:
+      213: -8423127641221080170
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_48
+  - first:
+      213: -4176053124113037016
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_49
+  - first:
+      213: 4451201068151926043
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_50
+  - first:
+      213: 2111837906817867934
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_51
+  - first:
+      213: 2455705693393370059
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_52
+  - first:
+      213: 1544411244575724148
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_53
+  - first:
+      213: 4118246274570854654
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_54
+  - first:
+      213: -6942550362605821220
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_55
+  - first:
+      213: -8291870727181225684
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_56
+  - first:
+      213: -1530153481827182750
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_57
+  - first:
+      213: 6928199803341546085
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_58
+  - first:
+      213: -7752377635895667449
+    second: Minifantasy_ForgottenPlainsWaterfallGroundLayer_59
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WaterfallGround1a
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cf203d643844c770800000000000000
+      internalID: 8630102175956086725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround2a
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48f56cf5cd6ee99a0800000000000000
+      internalID: -6224283800805417084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround3a
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e53a623c709f54b50800000000000000
+      internalID: 6576936642578654046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround1b
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d86e9f2159276c0800000000000000
+      internalID: -4147088398120219278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround2b
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1136ef84f943ee480800000000000000
+      internalID: -8868092757516852463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround3b
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eba66d98d8c0f0b0800000000000000
+      internalID: -5696832695944434711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround1c
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f58ab26f5e8753b0800000000000000
+      internalID: -5523789877617195528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround2c
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1437f7ded47f9850800000000000000
+      internalID: 6385951297089516574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround3c
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89cc03876b29380c0800000000000000
+      internalID: -4574651484080124776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround1d
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daddf76aa7ef3dde0800000000000000
+      internalID: -1309423263901819475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround2d
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 718bafd5f981d69a0800000000000000
+      internalID: -6238302836082690025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround3d
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e422fed1d2164dc30800000000000000
+      internalID: 4383235183741968974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround4
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d004838d5bf2c850800000000000000
+      internalID: 6395950799876522201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce6f3f7bba3b75d30800000000000000
+      internalID: 4420199109394429676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround6
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aeb48cebe4d1a1c0800000000000000
+      internalID: -4494076843388518743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround7
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d59418508cf0db00800000000000000
+      internalID: 851457957736781272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dafec61feb5e16460800000000000000
+      internalID: 7233315084790722477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterfallGround9
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecf4ef73ba9c87900800000000000000
+      internalID: 682517080762634190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      WaterfallGround1a: 8630102175956086725
+      WaterfallGround1b: -4147088398120219278
+      WaterfallGround1c: -5523789877617195528
+      WaterfallGround1d: -1309423263901819475
+      WaterfallGround2a: -6224283800805417084
+      WaterfallGround2b: -8868092757516852463
+      WaterfallGround2c: 6385951297089516574
+      WaterfallGround2d: -6238302836082690025
+      WaterfallGround3a: 6576936642578654046
+      WaterfallGround3b: -5696832695944434711
+      WaterfallGround3c: -4574651484080124776
+      WaterfallGround3d: 4383235183741968974
+      WaterfallGround4: 6395950799876522201
+      WaterfallGround5: 4420199109394429676
+      WaterfallGround6: -4494076843388518743
+      WaterfallGround7: 851457957736781272
+      WaterfallGround8: 7233315084790722477
+      WaterfallGround9: 682517080762634190
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

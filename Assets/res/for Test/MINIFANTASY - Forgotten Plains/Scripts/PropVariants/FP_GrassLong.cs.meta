@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 91bc1877f581c6640a8ab919d78cc5ff
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - grassLong1: {fileID: -6474741099014325866, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - grassLong2: {fileID: 639047068651763350, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - shadowGrassLong1: {fileID: 7844603315982627044, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowGrassLong2: {fileID: -6214563721479241393, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6c6f80182aefb134a991b24abd3c00b9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - treeApples: {fileID: 1339536321328131832, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - treeNoApples: {fileID: -3953209486756653526, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - shadowTreeApples: {fileID: -8184837761918644901, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowTreeNoApples: {fileID: -5767133754201675963, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
