@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: cf96fe6189832b2468d3b7be632da5ae
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - flowerRed: {fileID: -8278581524229224121, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - flowerWhite: {fileID: 7733943634869700832, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - flowerPink: {fileID: 6349360267525728516, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - shadowFlowerRed: {fileID: -8563485134082019111, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowFlowerWhite: {fileID: -2447343969858186023, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowFlowerPink: {fileID: 3730822783780485838, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
