@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: eb7b65bf44e71cc4bab72e04e8f61e1e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - creeper1: {fileID: 6972190123475480336, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - creeper2: {fileID: -8763836129941271082, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - creeper3: {fileID: -4222553177948739811, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - creeper4: {fileID: -6095646586433703057, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - creeper5: {fileID: -6257515481187279047, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - creeper6: {fileID: 7943778286642929983, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - creeper7: {fileID: -7485240063669998773, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - creeper8: {fileID: -537874932439381219, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - shadowCreeper1: {fileID: -7963566005678081763, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowCreeper2: {fileID: -5111578541363739173, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowCreeper3: {fileID: 357156586833447690, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowCreeper4: {fileID: 7816809880885889572, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowCreeper5: {fileID: -3269588682443333802, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowCreeper6: {fileID: -8065697511682960049, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowCreeper7: {fileID: 6375545030312398460, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowCreeper8: {fileID: -7420284942809958150, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

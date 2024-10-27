@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 53fcedef8c1326b4c8c22b0d914cce29
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - cattail1: {fileID: -7623661144529183703, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - cattail2: {fileID: 4877495625615747448, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  - shadowCattail1: {fileID: 1804689221886211288, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  - shadowCattail2: {fileID: 1804689221886211288, guid: da4d732596845594e9b99bf9488ee15f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

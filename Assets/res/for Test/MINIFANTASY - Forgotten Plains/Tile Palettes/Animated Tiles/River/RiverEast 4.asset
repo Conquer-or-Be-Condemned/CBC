@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: RiverEast 4
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -7755774111284887643, guid: 5fb211b3d4c3f0e4dad8d7b2d60fc3a9, type: 3}
+  - {fileID: -7301595916725123070, guid: 5fb211b3d4c3f0e4dad8d7b2d60fc3a9, type: 3}
+  - {fileID: -1045238507063445240, guid: 5fb211b3d4c3f0e4dad8d7b2d60fc3a9, type: 3}
+  - {fileID: 2692411322754317934, guid: 5fb211b3d4c3f0e4dad8d7b2d60fc3a9, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
