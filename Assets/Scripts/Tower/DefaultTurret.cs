@@ -25,7 +25,7 @@ public class DefaultTurret : MonoBehaviour
     [SerializeField] private float fireRate = 1f;//발사 속도
     [SerializeField] private float damage;//공격력
     private Transform _target;
-    private float _timeTilFire;
+    private float _timeTilFire = -0.3f;
     private void Update() {
         if (_target == null) {
             FindTarget();
@@ -35,6 +35,7 @@ public class DefaultTurret : MonoBehaviour
         if (!CheckTargetIsInRange()) {
             //Debug.Log("notinrange");
             _target = null;
+            _timeTilFire = -0.3f;
         }
         else
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -10,9 +11,9 @@ public class Bullet : MonoBehaviour
 
     [Header("Attributes")] 
     [SerializeField] private float bulletSpeed = 5f;
-
+    [SerializeField] private float bulletDamage = 5f;
     private Transform _target;
-
+    
     // 타겟을 설정하는 메서드
     public void SetTarget(Transform target)
     {
@@ -36,7 +37,9 @@ public class Bullet : MonoBehaviour
 
     // 충돌 시 총알 파괴
     private void OnCollisionEnter2D(Collision2D other)
-    {
+    {   
+        Monster monster = other.gameObject.GetComponent<Monster>();
+        monster.TakeDamage(bulletDamage);
         Destroy(gameObject);
     }
 }
