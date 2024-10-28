@@ -15,5 +15,9 @@ public class test : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = new Vector3(transform.position.x-0.1f, transform.position.y, transform.position.z);
+        if (transform.position.x < -24)
+        {
+            transform.position = new Vector3(55, transform.position.y, transform.position.z);
+        }
     }
 }
