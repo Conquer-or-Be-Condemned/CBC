@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Debug = System.Diagnostics.Debug;
 
-public class Player : MonoBehaviour
+public class testMove : MonoBehaviour
 {
+
     public Tilemap map;
     public Animator ani;
     
@@ -48,40 +48,26 @@ public class Player : MonoBehaviour
     //  또한 대각선 이동을 허용하도록 else if 사용하지 않음
     private void PlayerMove2()
     {
-        //  반드시 0으로 초기화 시켜야 오류가 생기지 않음
-        Vector3 sumVector = new Vector3(0,0,0);
-        
         if (Input.GetKey(KeyCode.UpArrow))
         {
             setArrowkeyinput(1);
-            sumVector += Vector3.up * moveSpeed;
+            transform.Translate(Vector3.up * moveSpeed);
         }   
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             setArrowkeyinput(1);
-            sumVector += Vector3.left * moveSpeed;
+            transform.Translate(Vector3.left * moveSpeed);
         }   
         if (Input.GetKey(KeyCode.DownArrow))
         {
             setArrowkeyinput(1);
-            sumVector += Vector3.down * moveSpeed;
-
+            transform.Translate(Vector3.down * moveSpeed);
         }   
         if (Input.GetKey(KeyCode.RightArrow))
         {
             setArrowkeyinput(1);
-            sumVector += Vector3.right * moveSpeed;
+            transform.Translate(Vector3.right * moveSpeed);
         }
-    
-        //  조금 복잡하긴 하지만, collider를 사용하지 않고 플레이어가 맵 밖으로 나가지 않도록
-        //  설정할 수 있는 최선의 방법 - 양현석
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x+sumVector.x, 
-                map.localBounds.min.x + transform.localScale.x / 2,
-                map.localBounds.max.x - transform.localScale.x / 2),
-            Mathf.Clamp(transform.position.y + sumVector.y,
-                map.localBounds.min.y + transform.localScale.y / 2,
-                map.localBounds.max.y - transform.localScale.y / 2)
-            , transform.position.z);
     }
     
     private void setArrowkeyinput(int key)

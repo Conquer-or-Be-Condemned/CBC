@@ -15,7 +15,6 @@ public class CameraController : MonoBehaviour
     
     private float _cameraHalfHeight;
     private float _cameraHalfWidth;
-
     
     private void Start()
     {
@@ -26,6 +25,9 @@ public class CameraController : MonoBehaviour
         }
         _cameraHalfHeight = Camera.main.orthographicSize;
         _cameraHalfWidth = Camera.main.aspect * Camera.main.orthographicSize;
+        
+        //  카메라의 size를 초기화 
+        gameObject.GetComponent<Camera>().orthographicSize = 8;
     }
 
     private void FixedUpdate()
@@ -38,8 +40,8 @@ public class CameraController : MonoBehaviour
         //  영역 지정
         //  Clamp는 구간 내의 범위에서만 수를 허용하는 함수
         Vector3 desiredPosition = new Vector3(
-            Mathf.Clamp(transform.position.x + target.transform.position.x,  map.localBounds.min.x+ _cameraHalfWidth, map.localBounds.max.x - _cameraHalfWidth),
-            Mathf.Clamp(transform.position.y + target.transform.position.y, map.localBounds.min.y + _cameraHalfHeight, map.localBounds.max.y - _cameraHalfHeight),
+            Mathf.Clamp(target.transform.position.x,  map.localBounds.min.x+ _cameraHalfWidth, map.localBounds.max.x - _cameraHalfWidth),
+            Mathf.Clamp(target.transform.position.y, map.localBounds.min.y + _cameraHalfHeight, map.localBounds.max.y - _cameraHalfHeight),
             transform.position.z);
         
         //  부드러운 움직임
