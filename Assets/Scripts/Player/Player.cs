@@ -17,6 +17,12 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _isMoving = false;
+
+        //  타일맵 객체가 없다면 타일맵 객체를 찾는다.
+        if (map == null)
+        {
+            map = FindObjectOfType<Tilemap>();
+        }
     }
 
     private void FixedUpdate()
