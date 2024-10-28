@@ -21,6 +21,12 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _isMoving = false;
+
+        //  타일맵 객체가 없다면 타일맵 객체를 찾는다.
+        if (map == null)
+        {
+            map = FindObjectOfType<Tilemap>();
+        }
     }
 
     private void FixedUpdate()
