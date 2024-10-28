@@ -5,7 +5,7 @@ using System.Collections;
 public class MonsterSpawnData
 {
     public GameObject monsterPrefab;
-    public string monsterType;
+
     public int spawnCount;
 }
 
