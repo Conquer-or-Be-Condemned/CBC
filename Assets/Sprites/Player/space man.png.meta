@@ -100,15 +100,56 @@ TextureImporter:
       name: space man_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1000
-        width: 340
-        height: 500
+        x: 120
+        y: 1136
+        width: 116
+        height: 224
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 1, y: -104}
+        - {x: 0, y: -106}
+        - {x: 0, y: -113}
+        - {x: 3, y: -144}
+        - {x: 10, y: -87}
+        - {x: 17, y: -116}
+        - {x: 20, y: -110}
+        - {x: 20, y: -104}
+      - - {x: -20, y: -88}
+        - {x: -20, y: -100}
+        - {x: -17, y: -104}
+        - {x: 33, y: -104}
+        - {x: 36, y: -100}
+        - {x: 36, y: -88}
+      - - {x: 42, y: -56}
+        - {x: 68, y: -56}
+        - {x: 68, y: 97}
+        - {x: 65, y: 112}
+        - {x: -20, y: 112}
+        - {x: -52, y: 80}
+        - {x: -52, y: -42}
+        - {x: -51, y: -49}
+        - {x: -38, y: -56}
+        - {x: -20, y: -56}
+        - {x: -24, y: -57}
+        - {x: -30, y: -56}
+        - {x: -40, y: -56}
+        - {x: -40, y: -88}
+        - {x: 9, y: -197}
+        - {x: 46, y: -88}
+        - {x: 49, y: -72}
+        - {x: 49, y: -57}
+        - {x: 46, y: -56}
+      - - {x: 6, y: -77}
+        - {x: 9, y: -74}
+        - {x: 8, y: -72}
+        - {x: 7, y: -74}
+        - {x: 10, y: -77}
+        - {x: 32, y: -76}
+        - {x: -20, y: -76}
+        - {x: -19, y: -77}
       tessellationDetail: 0
       bones: []
       spriteID: c368c8eaa686d4003bd9f7299e6310eb
@@ -121,15 +162,46 @@ TextureImporter:
       name: space man_1
       rect:
         serializedVersion: 2
-        x: 340
-        y: 1000
-        width: 340
-        height: 500
+        x: 460
+        y: 1136
+        width: 116
+        height: 224
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 6, y: -108}
+        - {x: 4, y: -110}
+        - {x: 4, y: -114}
+        - {x: 6, y: -116}
+        - {x: 14, y: -116}
+        - {x: 7, y: -208}
+        - {x: 16, y: -110}
+        - {x: 14, y: -108}
+      - - {x: -14, y: -92}
+        - {x: -16, y: -94}
+        - {x: -16, y: -106}
+        - {x: -14, y: -108}
+        - {x: 30, y: -108}
+        - {x: 32, y: -106}
+        - {x: 32, y: -94}
+        - {x: 30, y: -92}
+      - - {x: -26, y: -76}
+        - {x: -28, y: -78}
+        - {x: -28, y: -90}
+        - {x: -26, y: -92}
+        - {x: 34, y: -92}
+        - {x: 36, y: -90}
+        - {x: 36, y: -76}
+      - - {x: -32, y: 112}
+        - {x: -52, y: 101}
+        - {x: -52, y: -58}
+        - {x: -48, y: -76}
+        - {x: 59, y: -76}
+        - {x: 68, y: -71}
+        - {x: 68, y: 95}
+        - {x: 65, y: 112}
       tessellationDetail: 0
       bones: []
       spriteID: ebe0bafc092f041f393e6ccb917e9ff1
@@ -142,12 +214,12 @@ TextureImporter:
       name: space man_2
       rect:
         serializedVersion: 2
-        x: 680
-        y: 1000
-        width: 340
-        height: 500
+        x: 800
+        y: 1140
+        width: 116
+        height: 216
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +235,12 @@ TextureImporter:
       name: space man_3
       rect:
         serializedVersion: 2
-        x: 1020
-        y: 1000
-        width: 340
-        height: 500
+        x: 1140
+        y: 1136
+        width: 116
+        height: 216
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +256,12 @@ TextureImporter:
       name: space man_4
       rect:
         serializedVersion: 2
-        x: 1360
-        y: 1000
-        width: 340
-        height: 500
+        x: 1480
+        y: 1136
+        width: 116
+        height: 220
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +277,12 @@ TextureImporter:
       name: space man_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 500
-        width: 340
-        height: 500
+        x: 120
+        y: 636
+        width: 116
+        height: 220
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,12 +298,12 @@ TextureImporter:
       name: space man_6
       rect:
         serializedVersion: 2
-        x: 340
-        y: 500
-        width: 340
-        height: 500
+        x: 460
+        y: 636
+        width: 115
+        height: 220
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +319,12 @@ TextureImporter:
       name: space man_7
       rect:
         serializedVersion: 2
-        x: 680
-        y: 500
-        width: 340
-        height: 500
+        x: 800
+        y: 640
+        width: 116
+        height: 212
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,12 +340,12 @@ TextureImporter:
       name: space man_8
       rect:
         serializedVersion: 2
-        x: 1020
-        y: 500
-        width: 340
-        height: 500
+        x: 1140
+        y: 636
+        width: 116
+        height: 212
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,12 +361,12 @@ TextureImporter:
       name: space man_9
       rect:
         serializedVersion: 2
-        x: 1360
-        y: 500
-        width: 340
-        height: 500
+        x: 1480
+        y: 636
+        width: 116
+        height: 216
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -310,12 +382,12 @@ TextureImporter:
       name: space man_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 340
-        height: 500
+        x: 128
+        y: 160
+        width: 160
+        height: 188
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -331,12 +403,12 @@ TextureImporter:
       name: space man_11
       rect:
         serializedVersion: 2
-        x: 340
-        y: 0
-        width: 340
-        height: 500
+        x: 468
+        y: 160
+        width: 160
+        height: 188
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -352,12 +424,12 @@ TextureImporter:
       name: space man_12
       rect:
         serializedVersion: 2
-        x: 680
-        y: 0
-        width: 340
-        height: 500
+        x: 808
+        y: 156
+        width: 156
+        height: 188
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -373,12 +445,12 @@ TextureImporter:
       name: space man_13
       rect:
         serializedVersion: 2
-        x: 1020
-        y: 0
-        width: 340
-        height: 500
+        x: 1148
+        y: 160
+        width: 156
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -394,12 +466,12 @@ TextureImporter:
       name: space man_14
       rect:
         serializedVersion: 2
-        x: 1360
-        y: 0
-        width: 340
-        height: 500
+        x: 1487
+        y: 155
+        width: 153
+        height: 189
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
