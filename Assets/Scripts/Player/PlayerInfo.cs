@@ -10,7 +10,7 @@ public class PlayerInfo : MonoBehaviour
     public int maxHp = 100;
     
     public UnityEvent onDeath = new UnityEvent();
-    public UnityEvent onHpChange = new UnityEvent();
+    public UnityEvent<int,int> onHpChange = new UnityEvent<int, int>();
 
     private void Awake()
     {
@@ -19,27 +19,29 @@ public class PlayerInfo : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void FixedUpdate()
     {
-        
+        onHpChange.Invoke(curHp, maxHp);
     }
 
     public void Die()
     {
         Debug.Log("Player Die");
+        
+        //  SceneController를 사용할 때는 반드시 Build Setting 확인
         SceneController.ChangeScene("GameOver");
     }
 
     public void TakeDamage(int damage)
     {
         curHp -= damage;
-        onHpChange.Invoke();
+        
         if (curHp <= 0)
         {
-            Invoke("Die", 3f);
+            Invoke("Die", 1f);
         }
     }
 
