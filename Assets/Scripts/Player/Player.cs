@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = true;
 
         }
-        else if (dir.x < 0&& dir.y ==0) //왼쪽 방향키
+        if (dir.x < 0&& dir.y ==0) //왼쪽 방향키
         {
             _animator.SetBool("isSide", true);
             _animator.SetBool("isIdle", false);
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = false;
 
         }
-        else if (dir.x == 0 && dir.y > 0) //위쪽 방향키
+        if (dir.x == 0 && dir.y > 0) //위쪽 방향키
         {
             _animator.SetBool("isSide", false);
             _animator.SetBool("isIdle", false);
@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = false;
         
         }
-        else if (dir.x == 0 && dir.y < 0) //아래쪽 방향키
+        if (dir.x == 0 && dir.y < 0) //아래쪽 방향키
         {
             _animator.SetBool("isSide", false);
             _animator.SetBool("isIdle", true);
@@ -144,12 +144,43 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = false;
         
         }
-        else if (dir.x == 0 && dir.y == 0)
+        if (dir.x == 0 && dir.y == 0)
         {
             _animator.SetBool("isSide", false);
-            _animator.SetBool("isIdle", true);
-            _animator.SetBool("isUp", false);
+            // _animator.SetBool("isIdle", true);
+            // _animator.SetBool("isUp", false);
             
+        }
+
+        if (dir.x < 0 && dir.y < 0)//왼쪽 키 && 아래 키
+        {
+            _animator.SetBool("isIdle", false);
+            _animator.SetBool("isSide", true);
+            _spriteRenderer.flipX = false;
+
+        }
+        if (dir.x > 0 && dir.y <0)//오른쪽 키 && 아래 킼
+        {
+            _animator.SetBool("isIdle", false);
+            _animator.SetBool("isSide", true);
+            _spriteRenderer.flipX = true;
+
+        }
+        if (dir.x < 0 && dir.y > 0)//왼쪽 키 && 위 키
+        {
+            _animator.SetBool("isUp", false);
+            //_animator.SetBool("isIdle", false);
+            _animator.SetBool("isSide", true);
+            _spriteRenderer.flipX = false;
+
+        }
+        if (dir.x > 0 && dir.y >0)//오른쪽 키 && 위 킼
+        {
+            _animator.SetBool("isUp", false);
+            //_animator.SetBool("isIdle", false);
+            _animator.SetBool("isSide", true);
+            _spriteRenderer.flipX = true;
+
         }
     }
 
