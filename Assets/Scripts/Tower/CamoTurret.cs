@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
 
@@ -9,7 +10,7 @@ public class CamoTurret : MonoBehaviour
     [SerializeField] private Transform turretRotationPoint; // 타워 회전 각도
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private Animator animator;
-    
+    //[SerializeField] private GameObject towerPrefab;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
 
@@ -17,57 +18,117 @@ public class CamoTurret : MonoBehaviour
     [SerializeField] private float range = 10f; // 타워 사거리
     [SerializeField] private float rotationSpeed = 200f; // 타워 회전 속도
     [SerializeField] private float fireRate = 1f; // 발사 속도
+    [SerializeField] private int power = 60;
+    [SerializeField]private bool isActivated = false;
+    [SerializeField]private bool _previousIsActivated = false;
+
     // [SerializeField] private float damage; // 공격력
+    private GameObject OriginPower;
     private Transform _target;
     
     private float _timeTilFire;
-    private float angleThreshold = 5f; // 타워와 적의 각도 차이 허용 범위 (조정 가능)
-
+    private float _angleThreshold = 5f; // 타워와 적의 각도 차이 허용 범위 (조정 가능)
     
+    // private bool isActivated = false;
+    // private bool _previousIsActivated = false;
+
+    private void Start()
+    {
+        OriginPower = GameObject.Find("ControlUnit");
+        // ControlUnitStatus cus = gameObject.GetComponent<ControlUnitStatus>();
+        //GameObject tw = Instantiate(towerPrefab, Vector3.zero, Quaternion.identity);
+
+    }
     private void Update() 
     {
-        if (_target == null) 
+        if (isActivated != _previousIsActivated)
         {
-            animator.SetBool("isShoot",false);
-            FindTarget();
-            return;
-        }
-
-        RotateTowardsTarget();
-
-        if (!CheckTargetIsInRange()) 
-        {
-            animator.SetBool("isShoot",false);
-            _target = null;
-            _timeTilFire = 0f;
-        }
-        else
-        {
-            _timeTilFire += Time.deltaTime;
-            if (_timeTilFire >= (1f / fireRate) && IsTargetInSight())
+            if (isActivated)
             {
-                //animator.enabled = true;
-                
-                Shoot();
-                // animator.enabled = false;
-                _timeTilFire = 0f;
-                
+                _previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
+
+                Debug.Log("Activated");
+                AddTurret();
+            }
+            else if (isActivated == false)
+            {
+                animator.SetBool("isShoot", false);
+
+                _previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
+
+                Debug.Log("DeActivated");
+                DeleteTurret();
             }
             
         }
-        if (IsTargetInSight())
+        if (isActivated)
         {
-            animator.SetBool("isShoot", true);
-        }
-        else
-        {
-            animator.SetBool("isShoot",false);
+            if (_target == null)
+            {
+                animator.SetBool("isShoot", false);
+                FindTarget();
+                return;
+            }
+
+            RotateTowardsTarget();
+
+            if (!CheckTargetIsInRange())
+            {
+                animator.SetBool("isShoot", false);
+                _target = null;
+                _timeTilFire = 0f;
+            }
+            else
+            {
+                _timeTilFire += Time.deltaTime;
+                if (_timeTilFire >= (1f / fireRate) && IsTargetInSight())
+                {
+                    //animator.enabled = true;
+
+                    Shoot();
+                    // animator.enabled = false;
+                    _timeTilFire = 0f;
+
+                }
+
+            }
+
+            if (IsTargetInSight())
+            {
+                animator.SetBool("isShoot", true);
+            }
+            else
+            {
+                animator.SetBool("isShoot", false);
+            }
         }
     }
 
     private void FixedUpdate()
     {
         
+    }
+
+    private void AddTurret()
+    {
+        
+        
+        if (OriginPower.GetComponent<ControlUnitStatus>().getCurrentPower() > power)
+        {
+            OriginPower.GetComponent<ControlUnitStatus>().AddUnit(power);  
+        }
+        else
+        {
+            isActivated = false;
+            _previousIsActivated = false;
+        }
+        
+    }
+    private void DeleteTurret()
+    {
+        
+
+        OriginPower.GetComponent<ControlUnitStatus>().RemoveUnit(power);
     }
     private void Shoot()
     {
@@ -112,7 +173,7 @@ public class CamoTurret : MonoBehaviour
         float angleToTarget = Mathf.Atan2(_target.position.y - transform.position.y, _target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
         float turretAngle = turretRotationPoint.eulerAngles.z;
         float angleDifference = Mathf.DeltaAngle(turretAngle, angleToTarget);
-        return Mathf.Abs(angleDifference) <= angleThreshold;
+        return Mathf.Abs(angleDifference) <= _angleThreshold;
     }
 
     private void OnDrawGizmosSelected()
