@@ -184,15 +184,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void setArrowkeyinput(int key)
-    {
-        //  애니메이션이 구현되지 않았을 경우를 가정하여
-        if (_animator != null)
-        {
-            _animator.SetInteger("state",0);
-            _animator.speed = 1;
-            _animator.SetInteger("state",key);
-        }
-        _isMoving = true;
-    }
+    // private void SetArrowKeyInput(int key)
+    // {
+    //     //  애니메이션이 구현되지 않았을 경우를 가정하여
+    //     if (_animator != null)
+    //     {
+    //         _animator.SetInteger("state",0);
+    //         _animator.speed = 1;
+    //         _animator.SetInteger("state",key);
+    //     }
+    //     _isMoving = true;
+    // }
 }
