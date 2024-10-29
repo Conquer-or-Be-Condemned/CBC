@@ -26,6 +26,8 @@ public abstract class Monster : MonoBehaviour
 
     protected virtual void Die()
     {
+        //InitTurretSprite fire = GetComponentInParent<InitTurretSprite>();
+        //fire.am.SetBool("isShoot",false);
         // 사망 처리 로직
         Destroy(gameObject);
     }

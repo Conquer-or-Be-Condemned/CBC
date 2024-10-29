@@ -8,16 +8,18 @@ public class Bullet : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Rigidbody2D rb;
+    
 
     [Header("Attributes")] 
     [SerializeField] private float bulletSpeed = 5f;
-    [SerializeField] private float bulletDamage = 5f;
+    [SerializeField] private float bulletDamage = 10f;
     private Transform _target;
     
     // 타겟을 설정하는 메서드
     public void SetTarget(Transform target)
     {
         this._target = target;
+        StartCoroutine(destroyObjectIfNotHit());
     }
 
     private void FixedUpdate()
@@ -35,6 +37,11 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
+    private IEnumerator destroyObjectIfNotHit()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
     // 충돌 시 총알 파괴
     private void OnCollisionEnter2D(Collision2D other)
     {   
