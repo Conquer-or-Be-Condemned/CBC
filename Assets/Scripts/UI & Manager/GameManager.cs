@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //  다음 씬에서도 동일하게 유지하기 위함
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this.gameObject);
         
         if (player == null)
         {
