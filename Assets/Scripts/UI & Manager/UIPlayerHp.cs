@@ -15,6 +15,7 @@ public class UIPlayerHp : MonoBehaviour
     private float maxWidth;
     private RectTransform hpRect;
     public TMP_Text hpText;
+
     private void Awake()
     {
         if (player == null)

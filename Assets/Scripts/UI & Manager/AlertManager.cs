@@ -13,8 +13,12 @@ public class AlertManager : MonoBehaviour
     {
         if (alertBox == null)
         {
-            //  수정 금지!!!! 제작 중
-//            alertBox = Gane
+            alertBox = GameObject.FindGameObjectWithTag("AlertBox");
+        }
+
+        if (alertInfo == null)
+        {
+            alertInfo = GameObject.FindGameObjectWithTag("AlertInfo").GetComponent<TMP_Text>();
         }
     }
 }
