@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - HpBar
+  - HpText
+  - AlertBox
+  - AlertInfo
   layers:
   - Default
   - TransparentFX
