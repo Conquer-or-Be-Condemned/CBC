@@ -15,7 +15,12 @@ public class CameraController : MonoBehaviour
     
     private float _cameraHalfHeight;
     private float _cameraHalfWidth;
-    
+
+    private void Awake()
+    {
+        //  카메라의 size를 초기화 
+        gameObject.GetComponent<Camera>().orthographicSize = 8;
+    }
     private void Start()
     {
         if (target == null)
@@ -25,9 +30,6 @@ public class CameraController : MonoBehaviour
         }
         _cameraHalfHeight = Camera.main.orthographicSize;
         _cameraHalfWidth = Camera.main.aspect * Camera.main.orthographicSize;
-        
-        //  카메라의 size를 초기화 
-        gameObject.GetComponent<Camera>().orthographicSize = 8;
     }
 
     private void FixedUpdate()

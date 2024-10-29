@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Debug = System.Diagnostics.Debug;
+
 public class Player : MonoBehaviour
 {
     
@@ -37,7 +37,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        CheckDirection(sumVector);
+        if (_animator != null)
+        {
+            CheckDirection(sumVector);
+        }
+        // else
+        // {
+        //     Debug.Log("Can't find animator");
+        // }
     }
    
     // private void LateUpdate()
