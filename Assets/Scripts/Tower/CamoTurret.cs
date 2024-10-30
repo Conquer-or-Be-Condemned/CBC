@@ -13,7 +13,7 @@ public class CamoTurret : MonoBehaviour
     //[SerializeField] private GameObject towerPrefab;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
-
+    [SerializeField] private SpriteRenderer gunRenderer;
     [Header("Attributes")]
     [SerializeField] private float range = 10f; // 타워 사거리
     [SerializeField] private float rotationSpeed = 200f; // 타워 회전 속도
@@ -24,16 +24,19 @@ public class CamoTurret : MonoBehaviour
 
     // [SerializeField] private float damage; // 공격력
     private GameObject OriginPower;
+    private GameObject _gunPrefab;
     private Transform _target;
-    
+    private SpriteRenderer _gunSprite;
     private float _timeTilFire;
     private float _angleThreshold = 5f; // 타워와 적의 각도 차이 허용 범위 (조정 가능)
-    
+    private float _fireTime = 0f;//과열시 중지 위한 변수
     // private bool isActivated = false;
     // private bool _previousIsActivated = false;
 
     private void Start()
     {
+        
+        
         OriginPower = GameObject.Find("ControlUnit");
         // ControlUnitStatus cus = gameObject.GetComponent<ControlUnitStatus>();
         //GameObject tw = Instantiate(towerPrefab, Vector3.zero, Quaternion.identity);
@@ -63,6 +66,8 @@ public class CamoTurret : MonoBehaviour
         }
         if (isActivated)
         {
+            
+            
             if (_target == null)
             {
                 animator.SetBool("isShoot", false);
@@ -95,7 +100,19 @@ public class CamoTurret : MonoBehaviour
 
             if (IsTargetInSight())
             {
-                animator.SetBool("isShoot", true);
+                _fireTime += Time.deltaTime;
+                if (_fireTime >= 5f)
+                {
+                    isActivated = false;
+                    _previousIsActivated = false;
+                    animator.SetBool("isShoot", false);
+                    gunRenderer.color = Color.red;
+                    StartCoroutine(OverHeat());
+                }
+                else
+                {
+                    animator.SetBool("isShoot", true); 
+                }
             }
             else
             {
@@ -104,6 +121,15 @@ public class CamoTurret : MonoBehaviour
         }
     }
 
+    private IEnumerator OverHeat()
+    {
+        animator.SetBool("isShoot", false);
+        yield return new WaitForSeconds(5f);
+        gunRenderer.color = Color.white;
+        _fireTime = 0f;
+        isActivated = true;
+        _previousIsActivated = true;
+    }
     private void FixedUpdate()
     {
         
@@ -113,7 +139,7 @@ public class CamoTurret : MonoBehaviour
     {
         
         
-        if (OriginPower.GetComponent<ControlUnitStatus>().getCurrentPower() > power)
+        if (OriginPower.GetComponent<ControlUnitStatus>().getCurrentPower() >= power)
         {
             OriginPower.GetComponent<ControlUnitStatus>().AddUnit(power);  
         }
