@@ -19,7 +19,7 @@ public class CamoTurret : MonoBehaviour
     [SerializeField] private float rotationSpeed = 200f; // 타워 회전 속도
     [SerializeField] private float fireRate = 1f; // 발사 속도
     [SerializeField] private int power = 60;
-    [SerializeField]private bool isActivated = false;
+    public bool isActivated = false;
     [SerializeField]private bool _previousIsActivated = false;
 
     // [SerializeField] private float damage; // 공격력
@@ -207,4 +207,5 @@ public class CamoTurret : MonoBehaviour
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, range);
     }
+    
 }
