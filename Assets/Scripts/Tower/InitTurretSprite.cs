@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class InitTurretSprite : MonoBehaviour
 {
-    [SerializeField] private Sprite[] sprites;
-    public Animator am;
+    
+    private SpriteRenderer _sr;
     // Start is called before the first frame update
     void Start()
     {
-        am = GetComponent<Animator>();
+        _sr = GetComponent<SpriteRenderer>();
+        
     }
 
+    private void OverHeat()
+    {
+        _sr.color = Color.red;
+    }
+
+    private void UnderHeat()
+    {
+        _sr.color = Color.white;
+    }
+    
+    
     // Update is called once per frame
     void Update()
     {
