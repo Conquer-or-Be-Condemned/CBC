@@ -9,6 +9,7 @@ TagManager:
   - HpText
   - AlertBox
   - AlertInfo
+  - Enemy
   layers:
   - Default
   - TransparentFX
