@@ -14,12 +14,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletSpeed = 5f;
     [SerializeField] private float bulletDamage = 10f;
     private Transform _target;
-    
+
+    private Vector2 direction;
     // 타겟을 설정하는 메서드
     public void SetTarget(Transform target)
     {
         this._target = target;
         StartCoroutine(destroyObjectIfNotHit());
+        direction = (_target.position - transform.position).normalized;
     }
 
     private void FixedUpdate()
@@ -27,7 +29,7 @@ public class Bullet : MonoBehaviour
         if (!_target) return; // 타겟이 없으면 아무 것도 하지 않음
 
         // 타겟을 향하는 방향 벡터 계산
-        Vector2 direction = (_target.position - transform.position).normalized;
+        
 
         // Rigidbody2D의 속도를 방향과 속도에 맞게 설정
         rb.velocity = direction * bulletSpeed;

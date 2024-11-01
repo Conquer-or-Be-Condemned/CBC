@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 7
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -95,7 +95,343 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 432
+        width: 37
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddc917130048b40bf9281a6610aed4d9
+      internalID: 1534425395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 432
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8e83a5c589a54984853fae782f17e77
+      internalID: -166928795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 432
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81b5de0f75acc4ebd850d68e27747079
+      internalID: 789122980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 432
+        width: 37
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1f78033adec64bff9cb9ba543a431b5
+      internalID: 744930252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 304
+        width: 31
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8ef0dca2bbe44b6cb65c969deef1e35
+      internalID: -873182240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 304
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e696d80198f94e3e8f95631856712df
+      internalID: -2059838590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 304
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5d74e559727a430c80b4146c2759186
+      internalID: 150278805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 304
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9cee79c484e04149abb4e01dfd3f9af
+      internalID: 9473485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 176
+        width: 31
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a8df2de1dd1e4e7f8d5c73674763024
+      internalID: 1539361528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 176
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01fdabf266d27439581c2fdcfb3a3be0
+      internalID: 706204992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 176
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea62be4dbabf04d7c89592246ac7e87b
+      internalID: -1355462793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 176
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5976b72786954f289007d39e728561b
+      internalID: 1593619887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 48
+        width: 37
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3788ce7f191ab45d0bea09207bb417e6
+      internalID: 1004394769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 48
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa662330d7bc04007a46d37de62022b5
+      internalID: 1551587651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 48
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2265c776cef0b4b5d9f910112ec0632c
+      internalID: -188901499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golem_Blue_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 48
+        width: 37
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a2ec0a1f91ed41769b299485944c0eb
+      internalID: 991036446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +442,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Golem_Blue_Idle_0: 1534425395
+      Golem_Blue_Idle_1: -166928795
+      Golem_Blue_Idle_10: -1355462793
+      Golem_Blue_Idle_11: 1593619887
+      Golem_Blue_Idle_12: 1004394769
+      Golem_Blue_Idle_13: 1551587651
+      Golem_Blue_Idle_14: -188901499
+      Golem_Blue_Idle_15: 991036446
+      Golem_Blue_Idle_2: 789122980
+      Golem_Blue_Idle_3: 744930252
+      Golem_Blue_Idle_4: -873182240
+      Golem_Blue_Idle_5: -2059838590
+      Golem_Blue_Idle_6: 150278805
+      Golem_Blue_Idle_7: 9473485
+      Golem_Blue_Idle_8: 1539361528
+      Golem_Blue_Idle_9: 706204992
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

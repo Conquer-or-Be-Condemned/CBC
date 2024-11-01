@@ -40,7 +40,7 @@ public class Missile : MonoBehaviour
         rb.velocity = direction * bulletSpeed;
 
         // 총알의 회전 설정 (방향 벡터 기준)
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg-90f;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
