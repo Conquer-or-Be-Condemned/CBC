@@ -152,19 +152,31 @@ public class CamoTurret : MonoBehaviour
             {
                 _previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
 
-                Debug.Log("Activated");
+                // Debug.Log("Activated");
                 AddTurret();
             }
             else if (isActivated == false)
             {
                 animator.SetBool("isShoot", false);
+                StartCoroutine(DeactivateProcess());
+                // _fireTime = 0f;
 
                 _previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
 
-                Debug.Log("DeActivated");
+                // Debug.Log("DeActivated");
                 DeleteTurret();
             }
             
+        }
+    }
+    private IEnumerator DeactivateProcess()
+    {
+        // _totCoolTime = _fireTime;
+        while (_fireTime >= 0f)
+        {
+            gunRenderer.color = new Color(1f,((coolTime - _fireTime) / coolTime),((coolTime - _fireTime) / coolTime));
+            _fireTime -= Time.deltaTime;
+            yield return null;
         }
     }
     private IEnumerator OverHeat()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
