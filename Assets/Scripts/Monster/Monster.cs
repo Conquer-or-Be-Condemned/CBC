@@ -9,7 +9,9 @@ public abstract class Monster : MonoBehaviour
     public float attackDamage;
     public float moveSpeed;
     public float attackRange;
-
+[Header("References")]
+    [Tooltip("플레이어의 Transform을 할당하세요.")]
+    public Transform player; // Inspector에서 할당할 변수
     protected virtual void Start()
     {
         currentHealth = maxHealth;

@@ -5,7 +5,6 @@ using System.Collections;
 public class MonsterSpawnData
 {
     public GameObject monsterPrefab;
-
     public int spawnCount;
 }
 
@@ -19,11 +18,7 @@ public class MonsterSpawner : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] private float spawnInterval = 2f;
-    [SerializeField] private float spawnAngle = 180f; // 기본값: 아래 방향
     [SerializeField] private float spawnRadius = 1f;   // 스폰 범위
-    
-    [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;     // 이동 속도
 
     private void Start()
     {
@@ -55,19 +50,35 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (monsterData.monsterPrefab == null) return;
 
-        // 스폰 위치 계산
-        float randomOffset = Random.Range(-spawnRadius, spawnRadius);
-        Vector2 spawnPosition = transform.position + new Vector3(randomOffset, 0, 0);
+        // 랜덤 스폰 위치 계산 (원형으로 스폰)
+        float randomAngle = Random.Range(0f, 360f);
+        Vector2 spawnOffset = new Vector2(
+            Mathf.Cos(randomAngle * Mathf.Deg2Rad),
+            Mathf.Sin(randomAngle * Mathf.Deg2Rad)
+        ) * spawnRadius;
+        
+        Vector2 spawnPosition = (Vector2)transform.position + spawnOffset;
 
         // 몬스터 생성
         GameObject monster = Instantiate(monsterData.monsterPrefab, spawnPosition, Quaternion.identity);
         
-        // 이동 방향 설정
-        float angleInRadians = spawnAngle * Mathf.Deg2Rad;
-        Vector2 direction = new Vector2(Mathf.Sin(angleInRadians), -Mathf.Cos(angleInRadians));
-        
-        // 몬스터에 이동 컴포넌트 추가
-        MonsterMovement movement = monster.AddComponent<MonsterMovement>();
-        movement.Initialize(direction, moveSpeed);
+        // Monster 컴포넌트 가져오기 및 플레이어 참조 설정
+        Monster monsterComponent = monster.GetComponent<Monster>();
+        if (monsterComponent != null)
+        {
+            // 플레이어 찾아서 할당
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                monsterComponent.player = player.transform;
+            }
+        }
+    }
+
+    // 디버그용 기즈모
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
 }
