@@ -7,9 +7,16 @@ public class Treant : Monster
     private float attackTimer = 0f;
     private float attackCooldown = 2f;
     private bool isAttacking = false;
+    private bool isMoving = false;
     private float debugTimer = 0f;
     private float debugInterval = 0.5f;
-    private MonsterMovement movement;
+    private int currentDirection = 0;
+
+    // 방향 상수 정의
+    private const int DIRECTION_DOWN = 0;
+    private const int DIRECTION_UP = 1;
+    private const int DIRECTION_LEFT = 2;
+    private const int DIRECTION_RIGHT = 3;
 
     protected override void Start()
     {
@@ -21,8 +28,8 @@ public class Treant : Monster
         
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        movement = GetComponent<MonsterMovement>();
         
+        SetDirection(DIRECTION_DOWN);
         base.Start();
     }
 
@@ -33,92 +40,95 @@ public class Treant : Monster
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // MonsterMovement가 있다면 비활성화
-        if (movement != null)
-        {
-            movement.enabled = false;
-        }
+        // MonsterMovement 관련 코드 제거
 
-        // 이동 및 방향 업데이트
-        if (distanceToPlayer <= attackRange)
-        {
-            if (attackTimer <= 0 && !isAttacking)
-            {
-                // StartAttack(directionToPlayer);
-            }
-            UpdateAnimation(directionToPlayer, true);
-        }
-        else
-        {
-            if (!isAttacking)
-            {
-                Move();
-                UpdateAnimation(directionToPlayer, false);
-            }
-        }
+        UpdateState(distanceToPlayer, directionToPlayer);
 
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
         }
+
+        UpdateDebugInfo(directionToPlayer);
     }
-
-    private void UpdateAnimation(Vector3 moveDirection, bool inAttackRange)
+    
+    
+    private void UpdateState(float distanceToPlayer, Vector3 directionToPlayer)
     {
-        debugTimer += Time.deltaTime;
-        
-        animator.SetBool("isMoving", !isAttacking && !inAttackRange);
-        animator.SetBool("isAttacking", isAttacking);
+        // 방향 업데이트
+        UpdateDirection(directionToPlayer);
 
-        // 방향 결정
-        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-        
-        if (debugTimer >= debugInterval)
+        // 상태 업데이트
+        if (distanceToPlayer <= attackRange)
         {
-            Debug.Log($"Position - Monster: {transform.position}, Player: {player.position}");
-            Debug.Log($"Movement Vector3: ({moveDirection.x}, {moveDirection.y}, {moveDirection.z})");
-            Debug.Log($"Calculated Angle: {angle}");
-            debugTimer = 0f;
+            SetMoving(false);
+            if (attackTimer <= 0 && !isAttacking)
+            {
+                StartAttack(directionToPlayer);
+            }
+        }
+        else
+        {
+            SetMoving(true);
+            if (!isAttacking)
+            {
+                Move();
+            }
         }
 
-        int direction;
-        string directionName;
+        // 애니메이션 상태 업데이트
+        UpdateAnimationState();
+    }
 
-        // 각도를 기반으로 방향 설정
+    private void UpdateDirection(Vector3 moveDirection)
+    {
+        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+
+        int newDirection;
         if (angle > -45 && angle <= 45) // 오른쪽
         {
-            direction = 3;
-            directionName = "Right";
+            newDirection = DIRECTION_RIGHT;
         }
         else if (angle > 45 && angle <= 135) // 위
         {
-            direction = 1;
-            directionName = "Up";
+            newDirection = DIRECTION_UP;
         }
         else if (angle > -135 && angle <= -45) // 아래
         {
-            direction = 0;
-            directionName = "Down";
+            newDirection = DIRECTION_DOWN;
         }
         else // 왼쪽
         {
-            direction = 2;
-            directionName = "Left";
+            newDirection = DIRECTION_LEFT;
         }
 
-        if (debugTimer < 0.1f) // 디버그 정보는 위의 주기와 별개로 방향 변경시에만 출력
+        if (currentDirection != newDirection)
         {
-            Debug.Log($"Current Direction: {directionName} (Value: {direction})");
-            Debug.Log($"Animation States - Moving: {!isAttacking && !inAttackRange}, Attacking: {isAttacking}");
+            SetDirection(newDirection);
         }
-        
+    }
+
+    private void SetDirection(int direction)
+    {
+        currentDirection = direction;
         animator.SetInteger("direction", direction);
-
-        // 좌우 스프라이트 반전
-        if (moveDirection.x != 0)
+        
+        if (debugTimer < 0.1f)
         {
-            spriteRenderer.flipX = (moveDirection.x < 0);
+            Debug.Log($"Direction changed to: {GetDirectionName(direction)}");
         }
+    }
+
+    private void SetMoving(bool moving)
+    {
+        isMoving = moving;
+        animator.SetBool("isMoving", moving && !isAttacking);
+    }
+
+    private void UpdateAnimationState()
+    {
+        animator.SetBool("isMoving", isMoving && !isAttacking);
+        animator.SetBool("isAttacking", isAttacking);
     }
 
     protected override void Move()
@@ -127,55 +137,64 @@ public class Treant : Monster
 
         Vector3 direction = (player.position - transform.position).normalized;
         Vector3 movement = direction * (moveSpeed * Time.deltaTime);
-        
-        if (debugTimer >= debugInterval)
-        {
-            Debug.Log($"Move Vector3: ({movement.x}, {movement.y}, {movement.z})");
-        }
-        
         transform.position += movement;
     }
 
-    // private void StartAttack(Vector3 attackDirection)
-    // {
-    //     isAttacking = true;
-    //     attackTimer = attackCooldown;
-    //     
-    //     if (debugTimer >= debugInterval)
-    //     {
-    //         Debug.Log($"Starting Attack in direction: ({attackDirection.x}, {attackDirection.y}, {attackDirection.z})");
-    //     }
-    //     
-    //     // 플레이어에게 데미지
-    //     PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
-    //     if (playerInfo != null)
-    //     {
-    //         playerInfo.TakeDamage((int)attackDamage);
-    //     }
-    //
-    //     Invoke(nameof(FinishAttack), 1f);
-    // }
+    private void StartAttack(Vector3 attackDirection)
+    {
+        isAttacking = true;
+        SetMoving(false);
+        attackTimer = attackCooldown;
+        
+        UpdateAnimationState();
+        
+        // 플레이어에게 데미지
+        PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
+        if (playerInfo != null)
+        {
+            playerInfo.TakeDamage((int)attackDamage);
+        }
+
+        Invoke(nameof(FinishAttack), 1f);
+    }
 
     private void FinishAttack()
     {
         isAttacking = false;
+        UpdateAnimationState();
         Debug.Log("Attack Finished");
     }
 
-    // protected override void Die()
-    // {
-    //     Debug.Log($"{monsterName} died at position: {transform.position}");
-    //     base.Die();
-    // }
+    private string GetDirectionName(int direction)
+    {
+        return direction switch
+        {
+            DIRECTION_DOWN => "Down",
+            DIRECTION_UP => "Up",
+            DIRECTION_LEFT => "Left",
+            DIRECTION_RIGHT => "Right",
+            _ => "Unknown"
+        };
+    }
 
-    // 추가 디버그용 메서드
+    private void UpdateDebugInfo(Vector3 moveDirection)
+    {
+        debugTimer += Time.deltaTime;
+        
+        if (debugTimer >= debugInterval)
+        {
+            Debug.Log($"Position - Monster: {transform.position}, Player: {player.position}");
+            Debug.Log($"Movement Vector3: ({moveDirection.x}, {moveDirection.y}, {moveDirection.z})");
+            Debug.Log($"Current State - Direction: {GetDirectionName(currentDirection)}, Moving: {isMoving}, Attacking: {isAttacking}");
+            debugTimer = 0f;
+        }
+    }
+
     private void OnDrawGizmos()
     {
-        // 공격 범위 시각화
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         
-        // 플레이어 방향 시각화
         if (player != null)
         {
             Gizmos.color = Color.blue;
