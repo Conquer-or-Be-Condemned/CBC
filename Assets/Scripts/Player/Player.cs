@@ -6,18 +6,21 @@ using UnityEngine.Tilemaps;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 0.3f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform bulletSpawnPoint;
     public Tilemap map;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private Vector2 _mouse;
     private Vector3 sumVector;
-
+    private Transform _mouseTransform;
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // 타일맵 객체가 없다면 타일맵 객체를 찾음
         if (map == null)
@@ -29,6 +32,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         PlayerMove2();
+        
     }
 
     private void Update()
@@ -56,7 +60,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A)) sumVector += Vector3.left * moveSpeed;
         if (Input.GetKey(KeyCode.S)) sumVector += Vector3.down * moveSpeed;
         if (Input.GetKey(KeyCode.D)) sumVector += Vector3.right * moveSpeed;
-        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            PlayerBullet playerBulletScript = bulletObj.GetComponent<PlayerBullet>();
+            playerBulletScript.SetTarget(_mouse);
+        }
         transform.position = new Vector3(
             Mathf.Clamp(transform.position.x + sumVector.x, map.localBounds.min.x + transform.localScale.x / 2, map.localBounds.max.x - transform.localScale.x / 2),
             Mathf.Clamp(transform.position.y + sumVector.y, map.localBounds.min.y + transform.localScale.y / 2, map.localBounds.max.y - transform.localScale.y / 2),
