@@ -10,6 +10,7 @@ TagManager:
   - AlertBox
   - AlertInfo
   - Enemy
+  - Tower
   layers:
   - Default
   - TransparentFX
