@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         //  카메라의 size를 초기화 
-        gameObject.GetComponent<Camera>().orthographicSize = 14;
+        gameObject.GetComponent<Camera>().orthographicSize = 14f;
     }
     private void Start()
     {
