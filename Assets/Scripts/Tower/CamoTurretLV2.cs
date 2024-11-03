@@ -220,11 +220,11 @@ public class CamoTurretLV2 : MonoBehaviour
     {
         animator.enabled = true; // 발사할 때 애니메이션 시작
         GameObject bulletObj1 = Instantiate(bulletPrefab, bulletSpawnPoint1.position, Quaternion.identity);
-        Bullet bulletScript1 = bulletObj1.GetComponent<Bullet>();
-        bulletScript1.SetTarget(bulletFireDirection1);
+        TowerBullet towerBulletScript1 = bulletObj1.GetComponent<TowerBullet>();
+        towerBulletScript1.SetTarget(bulletFireDirection1);
         GameObject bulletObj2 = Instantiate(bulletPrefab, bulletSpawnPoint2.position, Quaternion.identity);
-        Bullet bulletScript2 = bulletObj2.GetComponent<Bullet>();
-        bulletScript2.SetTarget(bulletFireDirection2);
+        TowerBullet towerBulletScript2 = bulletObj2.GetComponent<TowerBullet>();
+        towerBulletScript2.SetTarget(bulletFireDirection2);
         // 애니메이션을 짧은 시간 뒤에 종료
         // StartCoroutine(StopAnimation());
     }

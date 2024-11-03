@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class TowerBullet : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Rigidbody2D rb;
