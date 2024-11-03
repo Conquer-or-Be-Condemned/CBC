@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
+    public TMP_Text towerInfo;
+    
     //  혹시 모를 관리의 용이성을 위해 배열로 하지 않고 List로 구현
     [SerializeField] private List<GameObject> towerList;
     [SerializeField] private String towerTag = "Tower";
@@ -25,6 +28,7 @@ public class TowerManager : MonoBehaviour
     private void FixedUpdate()
     {
         FindActiveTower();
+        SetUITowerInfo();
     }
 
     private void FindActiveTower()
@@ -42,5 +46,10 @@ public class TowerManager : MonoBehaviour
                 activeTowers--;
             }
         }
+    }
+
+    private void SetUITowerInfo()
+    {
+        towerInfo.SetText("Active Tower : " + activeTowers+" / "+ totalTowers);
     }
 }
