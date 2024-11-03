@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2009005005601722383}
   - component: {fileID: 8393642055129256422}
   - component: {fileID: 6586736406847272343}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Treant
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4009334584712422631}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.3, y: 0.63, z: -0.1298829}
+  m_LocalPosition: {x: -5.3, y: 0.63, z: -2}
   m_LocalScale: {x: 0.5994, y: 0.5994, z: 0.5994}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -179,7 +179,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.571429, y: 6.571429}
+  m_Size: {x: 0.35, y: 0.56}
   m_EdgeRadius: 0
 --- !u!114 &6586736406847272343
 MonoBehaviour:

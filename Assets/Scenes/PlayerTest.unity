@@ -184,7 +184,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 12.25769
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 30010386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 0.62, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11656,7 +11656,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &405688194
+--- !u!1 &224785990
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11664,8 +11664,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 405688196}
-  - component: {fileID: 405688195}
+  - component: {fileID: 224785992}
+  - component: {fileID: 224785991}
   m_Layer: 0
   m_Name: MonsterSpawner (1)
   m_TagString: Untagged
@@ -11673,20 +11673,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &405688195
+--- !u!114 &224785991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405688194}
+  m_GameObject: {fileID: 224785990}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648402a9528b94a94810f4c0cd9b777f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defaultMonster:
-    monsterPrefab: {fileID: 3813330295990498104, guid: e3abb6d8e992e4e618e32121a322204c, type: 3}
+    monsterPrefab: {fileID: 4009334584712422631, guid: ddcf10839973644c699b092499c808fd, type: 3}
     spawnCount: 1
   tankerMonster:
     monsterPrefab: {fileID: 2450248044583108019, guid: 2e44ecb052ab247cfa2b5bb10bbc950d, type: 3}
@@ -11698,19 +11698,18 @@ MonoBehaviour:
     monsterPrefab: {fileID: 7120672423417967212, guid: 8581ca1c4af4d4518a37c42fad332d2b, type: 3}
     spawnCount: 0
   spawnInterval: 10
-  spawnAngle: 90
   spawnRadius: 1
-  moveSpeed: 5
---- !u!4 &405688196
+  spawnZPosition: -2
+--- !u!4 &224785992
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405688194}
+  m_GameObject: {fileID: 224785990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.72, y: -9.35, z: -0.12697503}
+  m_LocalPosition: {x: 19.3, y: -9.3, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11911,7 +11910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultMonster:
-    monsterPrefab: {fileID: 3813330295990498104, guid: e3abb6d8e992e4e618e32121a322204c, type: 3}
+    monsterPrefab: {fileID: 4009334584712422631, guid: ddcf10839973644c699b092499c808fd, type: 3}
     spawnCount: 1
   tankerMonster:
     monsterPrefab: {fileID: 2450248044583108019, guid: 2e44ecb052ab247cfa2b5bb10bbc950d, type: 3}
@@ -11923,9 +11922,8 @@ MonoBehaviour:
     monsterPrefab: {fileID: 7120672423417967212, guid: 8581ca1c4af4d4518a37c42fad332d2b, type: 3}
     spawnCount: 0
   spawnInterval: 10
-  spawnAngle: 270
   spawnRadius: 1
-  moveSpeed: 5
+  spawnZPosition: -2
 --- !u!4 &1573195607
 Transform:
   m_ObjectHideFlags: 0
@@ -11935,7 +11933,7 @@ Transform:
   m_GameObject: {fileID: 1573195605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.65, y: 10.3, z: -0.12697503}
+  m_LocalPosition: {x: -21.02, y: 9.3, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12021,5 +12019,5 @@ SceneRoots:
   - {fileID: 605961156}
   - {fileID: 1010637181}
   - {fileID: 1573195607}
-  - {fileID: 405688196}
+  - {fileID: 224785992}
   - {fileID: 1633122317}
