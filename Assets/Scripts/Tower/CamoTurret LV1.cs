@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Events;
 
 public class CamoTurretLV1 : MonoBehaviour
 {   
@@ -264,4 +265,16 @@ public class CamoTurretLV1 : MonoBehaviour
     //     yield return new WaitForSeconds(3f); // 애니메이션 지속 시간 설정 (조정 가능)
     //     animator.enabled = false; // 애니메이션 종료
     // }
+    
+    //  UI와 연동하기 위한 함수  ->  미완성 !!!
+    public UnityEvent<int> onActivateChange = new UnityEvent<int>();
+    public void SetIsActivated(bool activated)
+    {
+        _previousIsActivated = isActivated;
+        
+        isActivated = activated;
+        Debug.Log("Now activated: " + activated);
+        
+        onActivateChange.Invoke(3);
+    }
 }

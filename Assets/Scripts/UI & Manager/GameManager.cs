@@ -5,6 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
+/*
+ *  게임 전체를 관할하는 GameManager입니다.
+ *  오브젝트로써의 역할도 필요하지만 static으로 선언해야 하는 method도 많으니 참고바랍니다.
+ */
 public class GameManager : MonoBehaviour
 {
     public GameObject player;

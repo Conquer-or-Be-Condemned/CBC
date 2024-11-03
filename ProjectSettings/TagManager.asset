@@ -10,6 +10,9 @@ TagManager:
   - AlertBox
   - AlertInfo
   - Enemy
+  - Tower
+  - CU
+  - CUHpText
   layers:
   - Default
   - TransparentFX
