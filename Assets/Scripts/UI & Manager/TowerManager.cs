@@ -13,6 +13,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private String towerTag = "Tower";
     [SerializeField] private int totalTowers;
     [SerializeField] private int activeTowers;
+    
     private void Start()
     {
         //  리스트 초기화
@@ -33,15 +34,12 @@ public class TowerManager : MonoBehaviour
 
     private void FindActiveTower()
     {
+        activeTowers = totalTowers;
         foreach (var e in towerList)
         {
             //  추후에 타워가 추가되면 판정 기준을 바꿔야 함.
             //  그리고 나중에 타워 코드랑 연계해서 타워 수가 바뀌면 Event 걸도록 하는 것도 괜찮을 듯
-            if (e.GetComponent<CamoTurretLV1>().isActivated)
-            {
-                activeTowers++;
-            }
-            else
+            if (!e.GetComponent<CamoTurretLV1>().isActivated)
             {
                 activeTowers--;
             }
