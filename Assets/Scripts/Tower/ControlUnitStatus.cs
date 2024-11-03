@@ -3,14 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+
 public class ControlUnitStatus : MonoBehaviour
 {
     [Header("Attributes")]
-    [SerializeField] private int MaxPower = 100;
-    [SerializeField] private int CurrentPower = 100;
+    [SerializeField] private int maxPower = 100;
+    [SerializeField] private int currentPower = 100;
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int curHealth = 100;
     
     private GameObject[] units;//현재 가동 중인 타워 배열
     List<GameObject> unitsList = new List<GameObject>();
+    
+    //  UI와의 Event 연결
+    public UnityEvent<int, int> OnCUHpChange = new UnityEvent<int, int>();
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -25,17 +34,40 @@ public class ControlUnitStatus : MonoBehaviour
 
     public void AddUnit(int power)
     {
-        CurrentPower = CurrentPower - power;
+        currentPower = currentPower - power;
     }
 
     public void RemoveUnit(int power)
     {
-        CurrentPower = CurrentPower + power;
+        currentPower = currentPower + power;
         
     }
 
     public int getCurrentPower()
     {
-        return CurrentPower;
+        return currentPower;
+    }
+
+    //  여기부터 UI 테스트용 임시 코드입니다. - 양현석
+    private void Die()
+    {
+        Debug.Log("Control Unit was Destroyed!!!");
+        SceneController.ChangeScene("GameOver");
+    }
+
+    public void GetDamage(int damage)
+    {
+        currentPower -= damage;
+        OnCUHpChange.Invoke(curHealth, maxHealth);
+        if (curHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void GetRepair(int repair)
+    {   
+        curHealth += repair;
+        OnCUHpChange.Invoke(curHealth, maxHealth);
     }
 }
