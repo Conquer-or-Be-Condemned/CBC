@@ -23,7 +23,7 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
     [SerializeField] private float rotationSpeed = 400f;// 타워 회전 속도
     [SerializeField] private float fireRate = 5f;       // 발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
     [SerializeField] private int power = 1;            //타워 사용 전력량
-    [SerializeField]private float overHeatTime = 5f;    //~초 격발시 과열
+    [SerializeField]private int overHeatMissileCount = 10;    //~초 격발시 과열
     [SerializeField]private float coolTime = 5f;        //~초 지나면 냉각
     
     // [SerializeField] private float damage; // 공격력
@@ -38,8 +38,8 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
     private ControlUnitStatus _cus;     //_cus = _OriginPower.GetComponent<ControlUnitStatus>();
     // private Bullet _bulletScript;
     private float _timeTilFire;         //다음 발사까지의 시간
-    private float _angleThreshold = 10f; // 타워와 적의 각도 차이 허용 범위 (조정 가능)
-    private float _fireTime = 0f;       //과열시 중지 위한 변수
+    private float _angleThreshold = 360f; // 타워와 적의 각도 차이 허용 범위 (조정 가능)
+    private float _curMissileCount = 0f;       //과열시 중지 위한 변수
     private float _totCoolTime;         //냉각시 누적 냉각시간
     //-------------------------------------------------------
     
@@ -131,14 +131,14 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
     }
     private void OverHeatAnimationController()//설정시간 도달 시 과열(TowerIsActivatedNow에서 수행)
     {
-        gunRenderer.color = new Color(1f,(255f-255f* (_fireTime / overHeatTime))/255f,(255f-255f*
-            (_fireTime / overHeatTime))/255f);
+        gunRenderer.color = new Color(1f,(255f-255f* (_curMissileCount / overHeatMissileCount))/255f,(255f-255f*
+            (_curMissileCount / overHeatMissileCount))/255f);
 
         if (IsTargetInSight())//적이 사격 시야에 있음
         {
                 
-            _fireTime += Time.deltaTime;
-            if (_fireTime >= overHeatTime)//터렛 과열
+            
+            if (_curMissileCount >= overHeatMissileCount)//터렛 과열
             {
                 isActivated = false;
                 _previousIsActivated = false;
@@ -174,7 +174,7 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
                 // gunRenderer.color = Color.white;
                 _previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
                 StartCoroutine(DeactivateProcess());
-                _fireTime = 0f;
+                // _curMissileCount = 0;
 
                 //Debug.Log("DeActivated");
                 DeleteTurret();
@@ -185,28 +185,30 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
 
     private IEnumerator DeactivateProcess()
     {
-        _totCoolTime = _fireTime;
-        while (_totCoolTime <= coolTime)
+        // _totCoolTime = _fireTime;
+        while (_curMissileCount>=0)
         {
-            gunRenderer.color = new Color(1f,(_totCoolTime / coolTime),(_totCoolTime / coolTime));
-            _totCoolTime += Time.deltaTime;
+            gunRenderer.color = new Color(1f,(255f-255f* (_curMissileCount / overHeatMissileCount))/255f,(255f-255f*
+                (_curMissileCount / overHeatMissileCount))/255f);
+            _curMissileCount -= Time.deltaTime;
             yield return null;
         }
 
     }
     private IEnumerator OverHeat()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
     {
-        _totCoolTime = 0f;
-        while (_totCoolTime <= coolTime)
+        
+        while (_curMissileCount>=0)
         {
-            gunRenderer.color = new Color(1f,(_totCoolTime / coolTime),(_totCoolTime / coolTime));
-            _totCoolTime += Time.deltaTime;
+            gunRenderer.color = new Color(1f,(255f-255f* (_curMissileCount / overHeatMissileCount))/255f,(255f-255f*
+                (_curMissileCount / overHeatMissileCount))/255f);
+            _curMissileCount -= Time.deltaTime;
             yield return null;
         }
         animator.SetBool("isShoot", false);
         //yield return new WaitForSeconds(5f);
         gunRenderer.color = Color.white;
-        _fireTime = 0f;
+        _curMissileCount = 0f;
         isActivated = true;
         _previousIsActivated = true;
     }
@@ -229,6 +231,7 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
     }
     private void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
     {
+        _curMissileCount += 1;
         StartCoroutine(ShootAnimation());
         // animator.enabled = true; // 발사할 때 애니메이션 시작
         GameObject missileObj1 = Instantiate(bulletPrefab, missileSpawnPoint.position, Quaternion.identity);
@@ -257,14 +260,24 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
     private void FindTarget()//raycast를 이용한 적 타워 반경 접근 확인 후 배열 추가(NoTargetInRange에서 적을 찾기위해 수행)
     {
         //Debug.Log("FindTarget");
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, Vector2.zero, 0f, enemyMask);
-        if (hits.Length > 0)
+        // RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, Vector2.zero, 0f, enemyMask);
+        // if (hits.Length > 0)
+        // {
+        //     _target1 = hits[0].transform;
+        // }
+        // if (hits.Length > 1)
+        // {
+        //     _target2 = hits[1].transform;
+        // }
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range);
+        foreach (var monster in hits)
         {
-            _target1 = hits[0].transform;
-        }
-        if (hits.Length > 1)
-        {
-            _target2 = hits[1].transform;
+            if (monster.CompareTag("Enemy"))
+            {
+                if(!_target1)_target1 = monster.transform;
+                else if (!_target2) _target2 = monster.transform;
+                else return;
+            }
         }
     }
 
@@ -275,9 +288,22 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
 
     private void RotateTowardsTarget()//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
     {
-        float angle = Mathf.Atan2(_target1.position.y - transform.position.y, _target1.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if (_target1 == null) return;
+        if (_target2 != null)
+        {
+            float angle = Mathf.Atan2((_target1.position.y + _target2.position.y)/2 - transform.position.y, (_target1.position.x + _target2.position.x)/2  - transform.position.x) * Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            float angle =
+                Mathf.Atan2(_target1.position.y - transform.position.y, _target1.position.x - transform.position.x) *
+                Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation,
+                rotationSpeed * Time.deltaTime);
+        }
     }
 
     private bool IsTargetInSight()//적이 시야각에 있는지 확인(FireRateController, OverHeatAnimationController에서 수행)
