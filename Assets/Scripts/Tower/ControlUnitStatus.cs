@@ -9,10 +9,10 @@ using UnityEngine.SceneManagement;
 public class ControlUnitStatus : MonoBehaviour
 {
     [Header("Attributes")]
-    [SerializeField] private int maxPower = 100;
-    [SerializeField] private int currentPower = 100;
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int curHealth = 100;
+    [SerializeField] private int maxPower;
+    [SerializeField] private int currentPower;
+    [SerializeField] private int maxHealth;
+    [SerializeField] private int curHealth;
     
     private GameObject[] units;//현재 가동 중인 타워 배열
     List<GameObject> unitsList = new List<GameObject>();

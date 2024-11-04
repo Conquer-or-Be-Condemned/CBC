@@ -40,10 +40,10 @@ public class TowerManager : MonoBehaviour
         {
             //  추후에 타워가 추가되면 판정 기준을 바꿔야 함.
             //  그리고 나중에 타워 코드랑 연계해서 타워 수가 바뀌면 Event 걸도록 하는 것도 괜찮을 듯
-            if (!e.GetComponent<CamoTurretLV1>().isActivated)
-            {
-                activeTowers--;
-            }
+            // if (!e.GetComponent<CamoTurretLV1>().isActivated)
+            // {
+            //     activeTowers--;
+            // }
         }
     }
 
