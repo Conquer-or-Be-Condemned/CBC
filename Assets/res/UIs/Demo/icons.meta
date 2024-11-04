@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/res/UIs/Demo/icons.meta
 guid: 7defe07c67b244b20b7f208c588cd8f3
+========
+guid: 984f3ee20e8884a07985775547b0a12f
+>>>>>>>> main:Assets/res/UIs/icons.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

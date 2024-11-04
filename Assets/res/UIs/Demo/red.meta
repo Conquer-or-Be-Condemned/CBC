@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/res/UIs/Demo/red.meta
 guid: a8eb93a8a609644959d9a67f10a549ba
+========
+guid: fcebc69bcca4e4dd28eee44ac5eb0c43
+>>>>>>>> main:Assets/res/UIs/red.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

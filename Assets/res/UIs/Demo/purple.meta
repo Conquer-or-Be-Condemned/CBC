@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/res/UIs/Demo/purple.meta
 guid: 53a24d9f01b9a40c28316831cb5448be
+========
+guid: 1f8930f2690274813857ba60a215c3a9
+>>>>>>>> main:Assets/res/UIs/purple.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

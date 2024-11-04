@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/res/UIs/Demo/brown.meta
 guid: 32437b30ebfba46eb8ab713a730877a4
+========
+guid: f47c39eba095a423a822a193272bfcda
+>>>>>>>> main:Assets/res/UIs/brown.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
