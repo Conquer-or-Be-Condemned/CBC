@@ -45,7 +45,7 @@ public class AlertManager : MonoBehaviour
         alertAnimator = alertBox.GetComponent<Animator>();
         
         //  Active 체크 Event
-        _camoTurretLV1.onActivateChange.AddListener(Show);
+        //_camoTurretLV1.onActivateChange.AddListener(Show);
     }
     
     //  원하는 메시지 쓰고 싶을 때 사용
