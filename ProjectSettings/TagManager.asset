@@ -14,6 +14,7 @@ TagManager:
   - CU
   - CUHpText
   - MiniMap
+  - TowerMenu
   layers:
   - Default
   - TransparentFX

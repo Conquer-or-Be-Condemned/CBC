@@ -338,7 +338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &113123473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -140240,8 +140240,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -21.66}
-  m_SizeDelta: {x: 44.28, y: 0}
+  m_AnchoredPosition: {x: 0, y: -19.42}
+  m_SizeDelta: {x: 37.96, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &279331426
 MonoBehaviour:
@@ -140304,8 +140304,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7
-  m_fontSizeBase: 7
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -140671,7 +140671,7 @@ MonoBehaviour:
   adMonster:
     monsterPrefab: {fileID: 7120672423417967212, guid: 8581ca1c4af4d4518a37c42fad332d2b, type: 3}
     spawnCount: 0
-  spawnInterval: 2
+  spawnInterval: 10
   spawnRadius: 1
   spawnZPosition: -2
 --- !u!4 &405688196
@@ -142676,6 +142676,155 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120352780}
   m_CullTransparentMesh: 1
+--- !u!1 &1153174297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1153174298}
+  - component: {fileID: 1153174301}
+  - component: {fileID: 1153174300}
+  - component: {fileID: 1153174299}
+  m_Layer: 5
+  m_Name: TowerInfoRpm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1153174298
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153174297}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1419514123}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -29.130001}
+  m_SizeDelta: {x: 28.33, y: 0}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1153174299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153174297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
+--- !u!114 &1153174300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153174297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'RPM : 000'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 6
+  m_fontSizeBase: 6
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1153174301
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153174297}
+  m_CullTransparentMesh: 1
 --- !u!1 &1156673714
 GameObject:
   m_ObjectHideFlags: 0
@@ -142712,7 +142861,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -0}
-  m_SizeDelta: {x: 13.27, y: 0}
+  m_SizeDelta: {x: 11.38, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1156673716
 MonoBehaviour:
@@ -142775,8 +142924,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7
-  m_fontSizeBase: 7
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -143169,9 +143318,10 @@ GameObject:
   - component: {fileID: 1187008939}
   - component: {fileID: 1187008941}
   - component: {fileID: 1187008940}
+  - component: {fileID: 1187008942}
   m_Layer: 5
   m_Name: MenuBox
-  m_TagString: Untagged
+  m_TagString: TowerMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143195,7 +143345,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1187008940
@@ -143236,6 +143386,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187008938}
   m_CullTransparentMesh: 1
+--- !u!95 &1187008942
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187008938}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6cf30b6850229ca40aab348b61b0595a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1264436235
 GameObject:
   m_ObjectHideFlags: 0
@@ -143699,8 +143870,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10.83}
-  m_SizeDelta: {x: 33.46, y: 0}
+  m_AnchoredPosition: {x: 0, y: -9.71}
+  m_SizeDelta: {x: 28.68, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1391131740
 MonoBehaviour:
@@ -143763,8 +143934,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7
-  m_fontSizeBase: 7
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -144070,11 +144241,12 @@ RectTransform:
   - {fileID: 1156673715}
   - {fileID: 1391131739}
   - {fileID: 279331425}
+  - {fileID: 1153174298}
   m_Father: {fileID: 136126179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 12, y: -5}
+  m_AnchoredPosition: {x: 12, y: -3}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419514124
@@ -144621,7 +144793,7 @@ MonoBehaviour:
   adMonster:
     monsterPrefab: {fileID: 7120672423417967212, guid: 8581ca1c4af4d4518a37c42fad332d2b, type: 3}
     spawnCount: 0
-  spawnInterval: 2
+  spawnInterval: 10
   spawnRadius: 1
   spawnZPosition: -2
 --- !u!4 &1573195607
@@ -145484,9 +145656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cce4784487675e4e9bc437205f8cf48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camoTurretLV1: {fileID: 0}
-  alertBox: {fileID: 0}
-  alertInfo: {fileID: 0}
+  alertBox: {fileID: 1906246450}
+  alertInfo: {fileID: 515834037}
   alertAnimator: {fileID: 0}
 --- !u!114 &1969188395
 MonoBehaviour:
@@ -145540,11 +145711,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd585ff8b659d4e44a25dcedb3a24ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerMenu: {fileID: 1187008938}
   towerInfo: {fileID: 1185280638}
   towerList: []
   towerTag: Tower
   totalTowers: 0
   activeTowers: 0
+  nameText: {fileID: 136126181}
+  activateButton: {fileID: 1938216476}
+  activateText: {fileID: 1988881598}
+  levelText: {fileID: 1156673717}
+  powerText: {fileID: 1391131741}
+  damageText: {fileID: 279331427}
+  rmp: {fileID: 1153174300}
 --- !u!1 &1988881595
 GameObject:
   m_ObjectHideFlags: 0
@@ -145712,7 +145891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2080184574
 RectTransform:
   m_ObjectHideFlags: 0
@@ -146184,9 +146363,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 606566693059604570, guid: ce8f555115c36764f9bcf27045ae3eca, type: 3}
+      propertyPath: isActivated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4123022178784212104, guid: ce8f555115c36764f9bcf27045ae3eca, type: 3}
       propertyPath: m_Name
       value: CamoTurret LV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123022178784212104, guid: ce8f555115c36764f9bcf27045ae3eca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7675709431030360027, guid: ce8f555115c36764f9bcf27045ae3eca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -146244,6 +146431,14 @@ PrefabInstance:
     - target: {fileID: 902058826028526045, guid: 4a7219af0f7df8c4a93d6f1c6c6df205, type: 3}
       propertyPath: m_Name
       value: MissileTurret LV1
+      objectReference: {fileID: 0}
+    - target: {fileID: 902058826028526045, guid: 4a7219af0f7df8c4a93d6f1c6c6df205, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 926028117751114865, guid: 4a7219af0f7df8c4a93d6f1c6c6df205, type: 3}
+      propertyPath: isActivated
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7413918033804390522, guid: 4a7219af0f7df8c4a93d6f1c6c6df205, type: 3}
       propertyPath: m_LocalPosition.x
@@ -146403,6 +146598,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CamoTurret LV1
       objectReference: {fileID: 0}
+    - target: {fileID: 5783547875485721570, guid: 5eb68f217119c824c876727e30645bbe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -146456,9 +146655,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008800555324563582, guid: abaf40d6bcefc4b4ea48f7cc5f7ab160, type: 3}
+      propertyPath: isActivated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6618038356304352742, guid: abaf40d6bcefc4b4ea48f7cc5f7ab160, type: 3}
       propertyPath: m_Name
       value: CamoTurret LV3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6618038356304352742, guid: abaf40d6bcefc4b4ea48f7cc5f7ab160, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

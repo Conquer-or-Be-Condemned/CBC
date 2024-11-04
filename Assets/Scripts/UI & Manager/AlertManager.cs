@@ -11,7 +11,6 @@ using UnityEngine;
 
 public class AlertManager : MonoBehaviour
 {
-    public CamoTurretLV1 _camoTurretLV1;
     
     [SerializeField] private GameObject alertBox;
     [SerializeField] private TMP_Text alertInfo;
