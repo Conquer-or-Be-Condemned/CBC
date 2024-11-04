@@ -18,7 +18,8 @@ public class ControlUnitStatus : MonoBehaviour
     List<GameObject> unitsList = new List<GameObject>();
     
     //  UI와의 Event 연결
-    public UnityEvent<int, int> OnCUHpChange = new UnityEvent<int, int>();
+    public UnityEvent<int, int> onCUHpChange = new UnityEvent<int, int>();
+    public UnityEvent<int, int> onCUPowerChange = new UnityEvent<int, int>();
     
     // Start is called before the first frame update
     void Start()
@@ -35,12 +36,13 @@ public class ControlUnitStatus : MonoBehaviour
     public void AddUnit(int power)
     {
         currentPower = currentPower - power;
+        onCUPowerChange.Invoke(currentPower, maxPower);
     }
 
     public void RemoveUnit(int power)
     {
         currentPower = currentPower + power;
-        
+        onCUPowerChange.Invoke(currentPower, maxPower);
     }
 
     public int getCurrentPower()
@@ -57,8 +59,8 @@ public class ControlUnitStatus : MonoBehaviour
 
     public void GetDamage(int damage)
     {
-        currentPower -= damage;
-        OnCUHpChange.Invoke(curHealth, maxHealth);
+        curHealth -= damage;
+        onCUHpChange.Invoke(curHealth, maxHealth);
         if (curHealth <= 0)
         {
             Die();
@@ -68,6 +70,6 @@ public class ControlUnitStatus : MonoBehaviour
     public void GetRepair(int repair)
     {   
         curHealth += repair;
-        OnCUHpChange.Invoke(curHealth, maxHealth);
+        onCUHpChange.Invoke(curHealth, maxHealth);
     }
 }

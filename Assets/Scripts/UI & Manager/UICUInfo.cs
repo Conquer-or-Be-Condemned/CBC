@@ -6,15 +6,15 @@ using UnityEngine;
 /*
  *  UI 중 Control Unit에 대한 체력바 등을 관리하는 스크립트입니다.
  *  Control Unit의 태그는 CU, TMP는 CUHpText로 지정되어 있습니다.
+ *  (본 스크립트 CU Power Object에만 연결되어 있습니다.)
  */
 
 public class UICUInfo : MonoBehaviour
 {
     private GameObject controlUnit;
     private ControlUnitStatus status;
-    private RectTransform hpRect;
+    public TMP_Text powerText;
     public TMP_Text hpText;
-    public float maxWidth;
 
     private void Awake()
     {
@@ -36,20 +36,23 @@ public class UICUInfo : MonoBehaviour
             }
         }
         
-        //  본래의 이미지 Width 저장
-        hpRect = gameObject.GetComponent<RectTransform>();
-        maxWidth = hpRect.sizeDelta.x;
         
         //  Control Unit Status의 Event와 연결
-        status.OnCUHpChange.AddListener(SetUICUHpInfo);
+        status.onCUHpChange.AddListener(SetUICUHpInfo);
+        status.onCUPowerChange.AddListener(SetUICUPowerInfo);
     }
     
     //  Hp에 대한 변동사항이 있을 때 호출됩니다.
     public void SetUICUHpInfo(int curHp, int maxHp)
     {
-        float ratio = curHp / (float)maxHp;
-        hpRect.sizeDelta = new Vector2(maxWidth * ratio, hpRect.sizeDelta.y);
-        hpText.SetText("Health " + curHp + " / " + maxHp);
+        int ratio = (int)((curHp / (float)maxHp) * 100);
+        hpText.SetText(ratio + "%");
+    }
+    
+    public void SetUICUPowerInfo(int curPower, int maxPower)
+    {
+        int ratio = (int)((curPower / (float)maxPower) * 100);
+        powerText.SetText(ratio + "%");
     }
     
 }
