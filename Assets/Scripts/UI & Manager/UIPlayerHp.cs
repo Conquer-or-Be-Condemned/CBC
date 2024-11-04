@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /*
+ *  Player와 관련된 UI에 대한 스크립트입니다.
  *  HpBar의 Tag는 정해져있습니다.(HpBar)
  */
 public class UIPlayerHp : MonoBehaviour
@@ -43,6 +44,7 @@ public class UIPlayerHp : MonoBehaviour
     }
     
 
+    //  Player의 체력이 변동되었을 때만 호출
     public void SetUIPlayerHp(int curHp, int maxHp)
     {
         float ratio = curHp / (float)maxHp;
