@@ -13,6 +13,7 @@ TagManager:
   - Tower
   - CU
   - CUHpText
+  - MiniMap
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - 
   - 
   - MiniMap
-  - 
-  - 
+  - CU
+  - Tower
   - 
   - 
   - 

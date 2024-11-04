@@ -73,3 +73,4 @@ public class ControlUnitStatus : MonoBehaviour
         onCUHpChange.Invoke(curHealth, maxHealth);
     }
 }
+

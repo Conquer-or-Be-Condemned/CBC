@@ -14,7 +14,8 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private String towerTag = "Tower";
     [SerializeField] private int totalTowers;
     [SerializeField] private int activeTowers;
-    
+
+    private RaycastHit2D hit;
     private void Start()
     {
         //  리스트 초기화
@@ -29,6 +30,7 @@ public class TowerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //  기존 기능
         FindActiveTower();
         SetUITowerInfo();
     }
@@ -50,5 +52,24 @@ public class TowerManager : MonoBehaviour
     private void SetUITowerInfo()
     {
         towerInfo.SetText("Active Tower : " + activeTowers+" / "+ totalTowers);
+    }
+    
+    //  UI 마우스 클릭 시! - RayCast2D로 짬
+    private void ClickProcess()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            hit = Physics2D.Raycast(mousePoint, Vector2.zero);
+
+            // if (hit.collider.GetComponent<())
+            // {
+            // }
+        }
+    }
+
+    private void CheckSelected()
+    {
+        
     }
 }
