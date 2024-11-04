@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tower;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
 
-public class MissileTurretLV1 : MonoBehaviour
+public class MissileTurretLV1 : MonoBehaviour, ActivateTower
 {   
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint; // 타워 회전 각도
@@ -293,7 +294,14 @@ public class MissileTurretLV1 : MonoBehaviour
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, range);
     }
-    
+    public void ActivateTurret()
+    {
+        isActivated = true;
+    }
+    public void DeactivateTurret()
+    {
+        isActivated = false;
+    }
     // private IEnumerator StopAnimation()
     // {
     //     yield return new WaitForSeconds(3f); // 애니메이션 지속 시간 설정 (조정 가능)
