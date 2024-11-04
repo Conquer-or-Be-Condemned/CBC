@@ -154,7 +154,7 @@ MonoBehaviour:
   currentHealth: 150
   attackDamage: 15
   moveSpeed: 3
-  attackRange: 1.5
+  attackRange: 6.5
   player: {fileID: 0}
 --- !u!70 &8027999870702425149
 CapsuleCollider2D:
