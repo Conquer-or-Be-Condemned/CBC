@@ -21,11 +21,10 @@ public class Treant : Monster
     protected override void Start()
     {
         monsterName = "Treant";
-        maxHealth = 150f;
-        attackDamage = 15f;
-        moveSpeed = 3f;
-        attackRange = 1.5f;
-        
+        // maxHealth = 150f;
+        // attackDamage = 15f;
+        // moveSpeed = 3f;
+        // attackRange = 1.5f;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         

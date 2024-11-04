@@ -11915,6 +11915,18 @@ PrefabInstance:
       propertyPath: map
       value: 
       objectReference: {fileID: 136641011}
+    - target: {fileID: 2469203523516871191, guid: db66c7594231c4a33a505e1f7d0b1356, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469203523516871191, guid: db66c7594231c4a33a505e1f7d0b1356, type: 3}
+      propertyPath: m_Simulated
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469203523516871191, guid: db66c7594231c4a33a505e1f7d0b1356, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5369298898549314971, guid: db66c7594231c4a33a505e1f7d0b1356, type: 3}
       propertyPath: m_Name
       value: Player
