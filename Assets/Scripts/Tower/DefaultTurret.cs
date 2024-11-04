@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tower;
@@ -5,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
 
-abstract public class DefaultTurret : MonoBehaviour, ActivateTower
+public abstract class DefaultTurret : MonoBehaviour, ActivateTower
 {   
     
     protected Transform turretRotationPoint; // 타워 회전 각도
@@ -29,14 +30,16 @@ abstract public class DefaultTurret : MonoBehaviour, ActivateTower
     protected float overHeatTime;    //~초 격발시 과열
     protected float coolTime;        //~초 지나면 냉각
     protected Transform _target;          //target of bullets
+    protected int Level;
+    protected String name;
     
     // [SerializeField] private float damage; // 공격력
     
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
-    private bool _previousIsActivated = false;//버퍼(토글 확인)
+    public bool _previousIsActivated = false;//버퍼(토글 확인)
     //-------------------------------------------------------
-    private GameObject _OriginPower;    //ControlUnitStatus Script의 함수사용
+    private GameObject _originPower;    //ControlUnitStatus Script의 함수사용
     private ControlUnitStatus _cus;     //_cus = _OriginPower.GetComponent<ControlUnitStatus>();
     // private Bullet _bulletScript;
     private float _timeTilFire;         //다음 발사까지의 시간
@@ -59,10 +62,10 @@ abstract public class DefaultTurret : MonoBehaviour, ActivateTower
     // }
     
     
-    private void Start()
+    private void Awake()
     {
-        _OriginPower = GameObject.Find("ControlUnit");
-        _cus = _OriginPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
+        _originPower = GameObject.Find("ControlUnit");
+        _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
         // GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         // _bulletScript = bulletObj.GetComponent<Bullet>();
     }
@@ -94,7 +97,7 @@ abstract public class DefaultTurret : MonoBehaviour, ActivateTower
             _fireTime -= Time.deltaTime;
             if(_fireTime <= 0f) _fireTime = 0f;
             animator.SetBool("isShoot", false);
-            FindTarget();//(raycast 사용)
+            FindTarget();//(Overlap 사용)
             return;
         }
     }
@@ -223,27 +226,39 @@ abstract public class DefaultTurret : MonoBehaviour, ActivateTower
 
     private void FindTarget()//raycast를 이용한 적 타워 반경 접근 확인 후 배열 추가(NoTargetInRange에서 적을 찾기위해 수행)
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, Vector2.zero, 0f, enemyMask);
-        if (hits.Length > 0)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range);
+        foreach (var monster in hits)
         {
-            _target = hits[0].transform;
+            if (monster.CompareTag("Enemy"))
+            {
+                if(!_target)_target = monster.transform;
+                else return;
+            }
         }
     }
 
     private bool CheckTargetIsInRange()//적이 사거리에 있는지 확인(FireRateController에서 수행)
     {
+        if (_target == null) return false;
         return Vector2.Distance(_target.position, transform.position) <= range;
     }
 
     private void RotateTowardsTarget()//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
     {
-        float angle = Mathf.Atan2(_target.position.y - transform.position.y, _target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if (_target != null)
+        {
+            float angle =
+                Mathf.Atan2(_target.position.y - transform.position.y, _target.position.x - transform.position.x) *
+                Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation,
+                rotationSpeed * Time.deltaTime);
+        }
     }
 
     private bool IsTargetInSight()//적이 시야각에 있는지 확인(FireRateController, OverHeatAnimationController에서 수행)
     {
+        if (_target == null) return false;
         float angleToTarget = Mathf.Atan2(_target.position.y - transform.position.y, _target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
         float turretAngle = turretRotationPoint.eulerAngles.z;
         float angleDifference = Mathf.DeltaAngle(turretAngle, angleToTarget);

@@ -26,7 +26,8 @@ public class Missile : MonoBehaviour
     public void SetTarget(Transform target)
     {
         this._target = target;
-        StartCoroutine(destroyObjectIfNotHit());
+        // StartCoroutine(destroyObjectIfNotHit());
+        StartCoroutine(ExplodeMissileifNotHit());
     }
 
     private void FixedUpdate()
@@ -62,7 +63,15 @@ public class Missile : MonoBehaviour
         
         
     }
-    
+
+    private IEnumerator ExplodeMissileifNotHit()
+    {
+        yield return new WaitForSeconds(10f);
+        StartCoroutine(DestroyObject());
+        GameObject explosion = Instantiate(explodePrefab, explosionPosition.position, Quaternion.identity);
+        Explode ee = explosion.GetComponent<Explode>();
+        ee.TriggerExplosion();
+    }
     private IEnumerator DestroyObject()
     {
         yield return new WaitForSeconds(0.1f);
