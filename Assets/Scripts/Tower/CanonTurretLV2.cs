@@ -5,20 +5,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
 
-public class CamoTurretLV3 : DefaultTurret
+public class CanonTurretLV2 : DefaultTurret
 {   
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint; // 타워 회전 각도
     [SerializeField] private LayerMask enemyMask;           //raycast 감지 Layer
     [SerializeField] private Animator animator;             //타워 부분 Animator
+    [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
     [SerializeField] private GameObject bulletPrefab;       //총알 오브젝트 생성 위한 변수
     [SerializeField] private Transform bulletSpawnPoint1;    //총알 스폰 지점
     [SerializeField] private Transform bulletSpawnPoint2;    //총알 스폰 지점
-    [SerializeField] private Transform bulletSpawnPoint3;    //총알 스폰 지점
     [SerializeField] private Transform bulletFireDirection1;    //총 격발 방향
     [SerializeField] private Transform bulletFireDirection2;    //총 격발 방향
-    [SerializeField] private Transform bulletFireDirection3;    //총 격발 방향
-    [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
     
     //[SerializeField] private GameObject towerPrefab;
     
@@ -29,7 +27,6 @@ public class CamoTurretLV3 : DefaultTurret
     [SerializeField] private new int power;            //타워 사용 전력량
     [SerializeField] private new float overHeatTime;    //~초 격발시 과열
     [SerializeField] private new float coolTime;        //~초 지나면 냉각
-
     private void Start()
     {
         base.gunRenderer = this.gunRenderer;
@@ -42,28 +39,28 @@ public class CamoTurretLV3 : DefaultTurret
         base.power = this.power;            //타워 사용 전력량
         base.overHeatTime = overHeatTime;    //~초 격발시 과열
         base.coolTime = coolTime; //~초 지나면 냉각
-    } 
-    protected override void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
+        base.Level = 2;
+        base.name = "Canon Turret";
+        
+    }
+    override 
+    protected void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
     {
         animator.enabled = true; // 발사할 때 애니메이션 시작
         GameObject bulletObj1 = Instantiate(bulletPrefab, bulletSpawnPoint1.position, Quaternion.identity);
         TowerBullet towerBulletScript1 = bulletObj1.GetComponent<TowerBullet>();
         towerBulletScript1.SetTarget(bulletFireDirection1);
-        
         GameObject bulletObj2 = Instantiate(bulletPrefab, bulletSpawnPoint2.position, Quaternion.identity);
         TowerBullet towerBulletScript2 = bulletObj2.GetComponent<TowerBullet>();
         towerBulletScript2.SetTarget(bulletFireDirection2);
-        
-        GameObject bulletObj3 = Instantiate(bulletPrefab, bulletSpawnPoint3.position, Quaternion.identity);
-        TowerBullet towerBulletScript3 = bulletObj3.GetComponent<TowerBullet>();
-        towerBulletScript3.SetTarget(bulletFireDirection3);
-        
         // 애니메이션을 짧은 시간 뒤에 종료
         // StartCoroutine(StopAnimation());
     }
+    // private void Update()
     
+
     // [SerializeField] private float damage; // 공격력
-    //
+    
     // //-------------------------------------------------------
     // public bool isActivated = false;//타워 가동 여부
     // private bool _previousIsActivated = false;//버퍼(토글 확인)
@@ -78,7 +75,7 @@ public class CamoTurretLV3 : DefaultTurret
     // private float _totCoolTime;         //냉각시 누적 냉각시간
     // //-------------------------------------------------------
     //
-    
+    //
     
     // private GameObject _gunPrefab;
     // private SpriteRenderer _gunSprite;
@@ -92,14 +89,6 @@ public class CamoTurretLV3 : DefaultTurret
     // }
     
     
-    // private void Start()
-    // {
-    //     _OriginPower = GameObject.Find("ControlUnit");
-    //     _cus = _OriginPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
-    //     // GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-    //     // _bulletScript = bulletObj.GetComponent<Bullet>();
-    // }
-    // private void Update()
     // {
     //     CheckToggle();//사용자에 의한 타워 가동 토글 확인
     //     TowerIsActivatedNow();//사용자에 의해 타워가 가동 됐다면 역할 수행
@@ -252,7 +241,6 @@ public class CamoTurretLV3 : DefaultTurret
     // }
     //
     //
-    //
     // private void FindTarget()//raycast를 이용한 적 타워 반경 접근 확인 후 배열 추가(NoTargetInRange에서 적을 찾기위해 수행)
     // {
     //     RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, Vector2.zero, 0f, enemyMask);
@@ -286,11 +274,5 @@ public class CamoTurretLV3 : DefaultTurret
     // {
     //     Handles.color = Color.cyan;
     //     Handles.DrawWireDisc(transform.position, transform.forward, range);
-    // }
-    //
-    // private IEnumerator StopAnimation()
-    // {
-    //     yield return new WaitForSeconds(3f); // 애니메이션 지속 시간 설정 (조정 가능)
-    //     animator.enabled = false; // 애니메이션 종료
     // }
 }

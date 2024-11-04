@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
 
-public class CamoTurretLV1 : DefaultTurret
+public class CanonTurretLV1 : DefaultTurret
 {   
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint; // 타워 회전 각도
@@ -48,6 +48,8 @@ public class CamoTurretLV1 : DefaultTurret
         base.power = this.power;            //타워 사용 전력량
         base.overHeatTime = overHeatTime;    //~초 격발시 과열
         base.coolTime = coolTime; //~초 지나면 냉각
+        base.Level = 1;
+        base.name = "Canon Turret";
     }
     // [SerializeField] private float damage; // 공격력
     

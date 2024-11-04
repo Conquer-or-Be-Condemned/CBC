@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tower;
@@ -29,6 +30,8 @@ public abstract class DefaultTurret : MonoBehaviour, ActivateTower
     protected float overHeatTime;    //~초 격발시 과열
     protected float coolTime;        //~초 지나면 냉각
     protected Transform _target;          //target of bullets
+    protected int Level;
+    protected String name;
     
     // [SerializeField] private float damage; // 공격력
     
