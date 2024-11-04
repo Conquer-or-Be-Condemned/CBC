@@ -283,4 +283,22 @@ public abstract class DefaultTurret : MonoBehaviour, ActivateTower
     //     yield return new WaitForSeconds(3f); // 애니메이션 지속 시간 설정 (조정 가능)
     //     animator.enabled = false; // 애니메이션 종료
     // }
+    
+    //  For UI -> Getter
+    public String GetName()
+    {
+        return name;
+    }
+
+    public int GetLevel()
+    {
+        return Level;
+    }
+
+    public int GetPower()
+    {
+        return power;
+    }
+    
+    //  getDamage와 getRPM도 만들어야 합니다.
 }
