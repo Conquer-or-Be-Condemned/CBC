@@ -17,8 +17,8 @@ public class AlertManager : MonoBehaviour
     
     public Animator alertAnimator;
 
-    private WaitForSeconds _UIDelay1 = new WaitForSeconds(2.0f);
-    private WaitForSeconds _UIDelay2 = new WaitForSeconds(0.3f);
+    private WaitForSeconds _UIDelay1 = new WaitForSeconds(3.0f);
+    private WaitForSeconds _UIDelay2 = new WaitForSeconds(3.0f);
     
     //  Alert Text 배열입니다. 사용에 주의하세요.
     private List<String> alertTexts = new List<String>();
@@ -45,6 +45,9 @@ public class AlertManager : MonoBehaviour
         
         //  Active 체크 Event
         //_camoTurretLV1.onActivateChange.AddListener(Show);
+        
+        //  시작 시 알림 등장
+        Show("Annihilate the incoming enemies,\n and guard the controls.");
     }
     
     //  원하는 메시지 쓰고 싶을 때 사용
