@@ -12,10 +12,13 @@ using UnityEngine.UI;
  */
 public class UIPlayerHp : MonoBehaviour
 {
-    private GameObject player;
-    private float maxWidth;
-    private RectTransform hpRect;
-    public TMP_Text hpText;
+    [SerializeField] private GameObject [] cells;
+    [SerializeField] private int maxCell;
+    [SerializeField] private int curCell;
+    
+    [SerializeField] private GameObject player;
+    
+    
 
     private void Awake()
     {
@@ -25,30 +28,31 @@ public class UIPlayerHp : MonoBehaviour
             Debug.Log("UI - Player Object가 연결되었습니다.");
         }
 
-        if (hpText == null)
+        if (cells.Length == 0)
         {
-            hpText = GameObject.FindWithTag("HpText").GetComponent<TMP_Text>();
-            if (hpText == null)
-            {
-                Debug.LogError("UI ERROR : Hp Text를 반드시 연결해주어야 합니다.");
-                SceneController.ExitProgram();
-            }
+            cells = GameObject.FindGameObjectsWithTag("HpBar");
         }
         
         //  플레이어와 UI 연결
         player.GetComponent<PlayerInfo>().onHpChange.AddListener(SetUIPlayerHp);
         
-        //  본래의 이미지 Width 저장
-        hpRect = gameObject.GetComponent<RectTransform>();
-        maxWidth = hpRect.sizeDelta.x;
+        maxCell = cells.Length;
     }
     
 
     //  Player의 체력이 변동되었을 때만 호출
     public void SetUIPlayerHp(int curHp, int maxHp)
     {
-        float ratio = curHp / (float)maxHp;
-        hpRect.sizeDelta = new Vector2(maxWidth * ratio, hpRect.sizeDelta.y);
-        hpText.SetText("Health " + curHp + " / " + maxHp);
+        float cellRatio = 1f - curHp / (float)maxHp;
+        
+        int cellNum = (int)(cells.Length*cellRatio);
+        curCell = maxCell - cellNum;
+        
+        for (int i = 0; i < cellNum; i++)
+        {
+            cells[i].SetActive(false);
+        }
+        
+        // Debug.Log(cellNum);
     }
 }

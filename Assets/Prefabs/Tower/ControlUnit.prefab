@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7207124623560223479}
   - component: {fileID: 4802212369433405662}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_RIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 5217983604423362671}
   - component: {fileID: 8410638605953615744}
   - component: {fileID: 3673990858002493944}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ControlUnit
-  m_TagString: Untagged
+  m_TagString: CU
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,10 @@ MonoBehaviour:
   currentPower: 100
   maxHealth: 100
   curHealth: 100
-  OnCUHpChange:
+  onCUHpChange:
+    m_PersistentCalls:
+      m_Calls: []
+  onCUPowerChange:
     m_PersistentCalls:
       m_Calls: []
 --- !u!212 &8410638605953615744
@@ -229,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2526849332522214749}
   - component: {fileID: 3976572109659030956}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_DOWN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +318,7 @@ GameObject:
   - component: {fileID: 4337899493936173719}
   - component: {fileID: 469274601649993134}
   - component: {fileID: 8477086161060408526}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9209676287020101834}
   - component: {fileID: 5059685892422367080}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_LEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 785507863612131631}
   - component: {fileID: 3289352031227329289}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_DOWN_RIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232173911428993793}
   - component: {fileID: 719219029595639083}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_UP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3121199734970055755}
   - component: {fileID: 4049995477777254058}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_UP_LEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7146258474436995489}
   - component: {fileID: 1957533185809263266}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_UP_RIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,7 +912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7506699160037249297}
   - component: {fileID: 2142760825276512655}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_DOWN_LEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}

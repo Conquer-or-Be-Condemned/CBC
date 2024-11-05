@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActivated: 0
+  _previousIsActivated: 0
   turretRotationPoint: {fileID: 3548754198345696240}
   enemyMask:
     serializedVersion: 2
@@ -55,6 +56,12 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5527518119625726090, guid: d68bdf48dc0984e30ba45c78cad3a501, type: 3}
   bulletSpawnPoint: {fileID: 2507728091312912131}
   gunRenderer: {fileID: 6527699945478672250}
+  range: 20
+  rotationSpeed: 400
+  fireRate: 10
+  power: 20
+  overHeatTime: 10
+  coolTime: 5
 --- !u!1 &456259767885050650
 GameObject:
   m_ObjectHideFlags: 0
