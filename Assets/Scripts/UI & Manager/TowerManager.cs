@@ -31,7 +31,8 @@ public class TowerManager : MonoBehaviour
     private RaycastHit2D hit;
     private Animator _animator;
     private bool isVisible;
-    private DefaultTurret curTower;
+    private DefaultTurret curTowerScript;
+    private Transform curTower;
     
     private void Start()
     {
@@ -58,6 +59,7 @@ public class TowerManager : MonoBehaviour
         //  Tower Menu Animation 관련
         _animator = towerMenu.GetComponent<Animator>();
         isVisible = false;
+        curTowerScript = null;
         curTower = null;
 
         activateButton.GetComponent<Button>().onClick.AddListener(SetTowerActive);
@@ -118,7 +120,9 @@ public class TowerManager : MonoBehaviour
             else if (hit.collider!=null && 
                 hit.collider.GetComponentInParent<DefaultTurret>() != null)
             {
-                curTower = hit.collider.GetComponentInParent<DefaultTurret>();
+                curTowerScript = hit.collider.GetComponentInParent<DefaultTurret>();
+                // curTower = hit.collider.GetComponentInParent<Transform>();
+                
                 Debug.Log("Tower is detected.");
                 SetTowerInfo();
                 isVisible = true;
@@ -140,16 +144,16 @@ public class TowerManager : MonoBehaviour
 
     private void SetTowerInfo()
     {
-        if (curTower == null)
+        if (curTowerScript == null)
         {
             Debug.LogError("Tower is Null");
             return;
         }
-        nameText.SetText(curTower.GetName());
-        levelText.SetText("Lv " + curTower.GetLevel());
-        powerText.SetText("Power : " + curTower.GetPower());
+        nameText.SetText(curTowerScript.GetName());
+        levelText.SetText("Lv " + curTowerScript.GetLevel());
+        powerText.SetText("Power : " + curTowerScript.GetPower());
 
-        if (curTower.isActivated)
+        if (curTowerScript.isActivated)
         {
             activateText.SetText("Activate");
             activateText.color = Color.green;
@@ -165,21 +169,43 @@ public class TowerManager : MonoBehaviour
 
     public void SetTowerActive()
     {
-        if (curTower == null)
+        if (curTowerScript == null)
         {
             Debug.LogError("Tower is Null");
             return;
         }
 
-        if (curTower.isActivated)
+        if (curTowerScript.isActivated)
         {
-            curTower.DeactivateTurret();
+            curTowerScript.DeactivateTurret();
+
+            GameObject[] childs = GameObject.FindGameObjectsWithTag("MapElement");
+
+            foreach (var child in childs)
+            {
+                if (child.transform.IsChildOf(curTowerScript.transform))
+                {
+                    child.GetComponent<SpriteRenderer>().color = Color.yellow;
+                    SetTowerInfo();
+                    return;
+                }
+            }
         }
         else
         {
-            curTower.ActivateTurret();
+            curTowerScript.ActivateTurret();
+            
+            GameObject[] childs = GameObject.FindGameObjectsWithTag("MapElement");
+
+            foreach (var child in childs)
+            {
+                if (child.transform.IsChildOf(curTowerScript.transform))
+                {
+                    child.GetComponent<SpriteRenderer>().color = Color.green;
+                    SetTowerInfo();
+                    return;
+                }
+            }
         }
-        
-        SetTowerInfo();
     }
 }

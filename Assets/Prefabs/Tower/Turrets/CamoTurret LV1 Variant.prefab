@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3034290615448762543
+--- !u!1 &4812666361737177443
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1241792343293000705}
-  - component: {fileID: 7462697110466626982}
+  - component: {fileID: 7223677850864395009}
+  - component: {fileID: 165993191875593014}
   m_Layer: 11
   m_Name: MiniMapCTLV1
-  m_TagString: Untagged
+  m_TagString: MapElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1241792343293000705
+--- !u!4 &7223677850864395009
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3034290615448762543}
+  m_GameObject: {fileID: 4812666361737177443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 859999132456897461}
+  m_Father: {fileID: 8463725860292681805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7462697110466626982
+--- !u!212 &165993191875593014
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3034290615448762543}
+  m_GameObject: {fileID: 4812666361737177443}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.065324545, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9215687, b: 0.015686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &6024050580137698067
+--- !u!1001 &3243681767363922155
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -92,17 +92,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: MapElement
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.r
+      value: 0.92176676
+      objectReference: {fileID: 0}
     - target: {fileID: 277798431183683825, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       propertyPath: m_Name
       value: CamoTurret LV1 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 277798431183683825, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6374544772860422310, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 7.67
       objectReference: {fileID: 0}
     - target: {fileID: 6374544772860422310, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8
+      value: -12.14
       objectReference: {fileID: 0}
     - target: {fileID: 6374544772860422310, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -141,11 +157,11 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6374544772860422310, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1241792343293000705}
+      addedObject: {fileID: 7223677850864395009}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
---- !u!4 &859999132456897461 stripped
+--- !u!4 &8463725860292681805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6374544772860422310, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
-  m_PrefabInstance: {fileID: 6024050580137698067}
+  m_PrefabInstance: {fileID: 3243681767363922155}
   m_PrefabAsset: {fileID: 0}
