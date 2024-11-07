@@ -10,6 +10,12 @@ TagManager:
   - AlertBox
   - AlertInfo
   - Enemy
+  - Tower
+  - CU
+  - CUHpText
+  - MiniMap
+  - TowerMenu
+  - MapElement
   layers:
   - Default
   - TransparentFX
@@ -22,9 +28,9 @@ TagManager:
   - Bullet
   - 
   - 
-  - 
-  - 
-  - 
+  - MiniMap
+  - CU
+  - Tower
   - 
   - 
   - 

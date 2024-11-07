@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7207124623560223479}
   - component: {fileID: 4802212369433405662}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_RIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 5217983604423362671}
   - component: {fileID: 8410638605953615744}
   - component: {fileID: 3673990858002493944}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ControlUnit
-  m_TagString: Untagged
+  m_TagString: CU
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,8 +139,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c355b3b635e540c3997a89d22e91fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPower: 100
-  CurrentPower: 100
+  maxPower: 100
+  currentPower: 100
+  maxHealth: 100
+  curHealth: 100
+  onCUHpChange:
+    m_PersistentCalls:
+      m_Calls: []
+  onCUPowerChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &8410638605953615744
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -224,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2526849332522214749}
   - component: {fileID: 3976572109659030956}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_DOWN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,9 +316,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1744049009949569818}
   - component: {fileID: 4337899493936173719}
-  - component: {fileID: 9205295638882949586}
   - component: {fileID: 469274601649993134}
-  m_Layer: 0
+  - component: {fileID: 8477086161060408526}
+  m_Layer: 12
   m_Name: STATION1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +392,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &9205295638882949586
+--- !u!50 &469274601649993134
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150638677136147710}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!60 &8477086161060408526
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -428,61 +463,25 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 13.74482, y: 12.200115}
-      - {x: 12.573322, y: 14.954807}
-      - {x: 6.860859, y: 19.407871}
-      - {x: 3.8537521, y: 19.714241}
-      - {x: -4.708412, y: 19.578823}
-      - {x: -8.672165, y: 18.851913}
-      - {x: -15.539659, y: 15.1399}
-      - {x: -18.041418, y: 10.3156595}
-      - {x: -19.68431, y: 3.94423}
-      - {x: -19.763124, y: -4.2253647}
-      - {x: -18.707754, y: -5.2034225}
-      - {x: -16.215513, y: -8.777985}
-      - {x: -11.004092, y: -14.309468}
-      - {x: -4.87075, y: -19.115604}
-      - {x: 4.971433, y: -19.35506}
-      - {x: 7.114849, y: -16.279877}
-      - {x: 14.148834, y: -18.132027}
-      - {x: 16.5262, y: -16.070518}
-      - {x: 18.314613, y: -13.973373}
-      - {x: 18.559166, y: -8.078836}
-      - {x: 18.647503, y: -6.8366394}
-      - {x: 18.820255, y: -4.9236755}
-      - {x: 19.747189, y: -4.094307}
-      - {x: 19.900936, y: 0.19813919}
-      - {x: 19.834904, y: 3.4739609}
-      - {x: 19.182827, y: 7.1908264}
-      - {x: 17.559155, y: 10.01902}
+    - - {x: 6.8423157, y: 19.223923}
+      - {x: 4.6461945, y: 19.787102}
+      - {x: -4.7809067, y: 19.655384}
+      - {x: -8.540871, y: 18.749126}
+      - {x: -13.840668, y: 16.662128}
+      - {x: -15.404121, y: 15.134953}
+      - {x: -18.265125, y: 10.210454}
+      - {x: -18.984222, y: 7.163559}
+      - {x: -19.773338, y: 4.016014}
+      - {x: -19.85257, y: -4.2548065}
+      - {x: -16.539295, y: -8.943418}
+      - {x: -10.062004, y: -15.361076}
+      - {x: -4.768543, y: -19.559498}
+      - {x: 4.90625, y: -19.359947}
+      - {x: 11.256891, y: -17.210453}
+      - {x: 17.450161, y: -10.873369}
+      - {x: 19.917099, y: -4.985634}
+      - {x: 19.367733, y: 7.0696483}
   m_UseDelaunayMesh: 0
---- !u!50 &469274601649993134
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150638677136147710}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &2135681642179865673
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9209676287020101834}
   - component: {fileID: 5059685892422367080}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_LEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 785507863612131631}
   - component: {fileID: 3289352031227329289}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_DOWN_RIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,7 +660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232173911428993793}
   - component: {fileID: 719219029595639083}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_UP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3121199734970055755}
   - component: {fileID: 4049995477777254058}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_UP_LEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -829,7 +828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7146258474436995489}
   - component: {fileID: 1957533185809263266}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_UP_RIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7506699160037249297}
   - component: {fileID: 2142760825276512655}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: STATION2_DOWN_LEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}

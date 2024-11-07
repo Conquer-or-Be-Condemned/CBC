@@ -8,14 +8,14 @@ public class Explode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("ExplodeisCalled");
-        Animator _animator = GetComponent<Animator>();
+        // Debug.Log("ExplodeisCalled");
+        _animator = GetComponent<Animator>();
         StartCoroutine(DestroyExplosion());
     }
 
     public void TriggerExplosion()
     {
-        Debug.Log("ExplodeisTriggered");
+        // Debug.Log("ExplodeisTriggered");
         _animator.SetBool("isExplode",true);
         // Invoke("DestroyExplosion",0.1f);
         // StartCoroutine(DestroyExplosion());

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6374544772860422310}
-  - component: {fileID: 2568200883554554709}
+  - component: {fileID: 1460110075310235936}
   m_Layer: 0
   m_Name: CamoTurret LV1
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 3548754198345696240}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2568200883554554709
+--- !u!114 &1460110075310235936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,9 +43,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 277798431183683825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 463467f4a02be42a38d700f2b72797bb, type: 3}
+  m_Script: {fileID: 11500000, guid: b1bd8bb9366149bab62297b29550d748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActivated: 0
+  _previousIsActivated: 0
   turretRotationPoint: {fileID: 3548754198345696240}
   enemyMask:
     serializedVersion: 2
@@ -56,11 +58,10 @@ MonoBehaviour:
   gunRenderer: {fileID: 6527699945478672250}
   range: 20
   rotationSpeed: 400
-  fireRate: 5
-  power: 1
-  overHeatTime: 7
-  coolTime: 3
-  isActivated: 0
+  fireRate: 10
+  power: 20
+  overHeatTime: 10
+  coolTime: 5
 --- !u!1 &456259767885050650
 GameObject:
   m_ObjectHideFlags: 0
