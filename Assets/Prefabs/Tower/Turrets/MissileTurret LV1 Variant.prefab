@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1961305748095262383}
   - component: {fileID: 1539542432924656837}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: MiniMapMTLV1
   m_TagString: MapElement
   m_Icon: {fileID: 0}
@@ -92,29 +92,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Color.b
-      value: 0.015686275
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Color.g
-      value: 0.9215687
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_TagString
-      value: MapElement
-      objectReference: {fileID: 0}
     - target: {fileID: 845453686062864816, guid: 6d4e199667620441c81281e0eda5a6a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.63
+      value: 3.6916447
       objectReference: {fileID: 0}
     - target: {fileID: 845453686062864816, guid: 6d4e199667620441c81281e0eda5a6a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.15
+      value: -40.309387
       objectReference: {fileID: 0}
     - target: {fileID: 845453686062864816, guid: 6d4e199667620441c81281e0eda5a6a6, type: 3}
       propertyPath: m_LocalPosition.z
