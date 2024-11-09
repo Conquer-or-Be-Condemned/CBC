@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
 
-public class CanonTurretLV1 : DefaultTurret
+public class CanonTurretLv1 : DefaultCanonTurret
 {   
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint; // 타워 회전 각도

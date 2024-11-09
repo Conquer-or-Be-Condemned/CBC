@@ -16,7 +16,10 @@ public class Explode : MonoBehaviour
     public void TriggerExplosion()
     {
         // Debug.Log("ExplodeisTriggered");
-        _animator.SetBool("isExplode",true);
+        if (_animator != null)
+        {
+            _animator.SetBool("isExplode", true);
+        }
         // Invoke("DestroyExplosion",0.1f);
         // StartCoroutine(DestroyExplosion());
     }

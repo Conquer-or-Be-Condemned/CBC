@@ -31,7 +31,7 @@ public class TowerManager : MonoBehaviour
     private RaycastHit2D hit;
     private Animator _animator;
     private bool isVisible;
-    private DefaultTurret curTowerScript;
+    private DefaultCanonTurret curTowerScript;
     private Transform curTower;
     
     private void Start()
@@ -118,9 +118,9 @@ public class TowerManager : MonoBehaviour
             
             //  만일 부모 오브젝트에 DefaultTurret 스크립트가 존재한다면
             else if (hit.collider!=null && 
-                hit.collider.GetComponentInParent<DefaultTurret>() != null)
+                hit.collider.GetComponentInParent<DefaultCanonTurret>() != null)
             {
-                curTowerScript = hit.collider.GetComponentInParent<DefaultTurret>();
+                curTowerScript = hit.collider.GetComponentInParent<DefaultCanonTurret>();
                 // curTower = hit.collider.GetComponentInParent<Transform>();
                 
                 Debug.Log("Tower is detected.");
