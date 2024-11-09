@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
 
-public abstract class DefaultTurret : MonoBehaviour, ActivateTower
+public abstract class DefaultCanonTurret : MonoBehaviour, ActivateTower
 {   
     
     protected Transform turretRotationPoint; // 타워 회전 각도
@@ -76,7 +76,7 @@ public abstract class DefaultTurret : MonoBehaviour, ActivateTower
         
     }
 
-    protected void TowerIsActivatedNow()//사용자에 의해 타워가 가동 됐다면 역할 수행(Update에서 수행)
+    private void TowerIsActivatedNow()//사용자에 의해 타워가 가동 됐다면 역할 수행(Update에서 수행)
     {
         if (isActivated)
         {
