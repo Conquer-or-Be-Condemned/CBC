@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
 
-public class MissileTurretLV1 : MonoBehaviour, ActivateTower
+public class MissileTurretLV1 : DefaultMissileTurret
 {   
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint; // 타워 회전 각도
@@ -19,318 +19,130 @@ public class MissileTurretLV1 : MonoBehaviour, ActivateTower
     //[SerializeField] private GameObject towerPrefab;
     
     [Header("Attributes")]
-    [SerializeField] private float range = 10f;         // 타워 사거리
-    [SerializeField] private float rotationSpeed = 400f;// 타워 회전 속도
-    [SerializeField] private float fireRate = 5f;       // 발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
-    [SerializeField] private int power = 1;            //타워 사용 전력량
-    [SerializeField]private int overHeatMissileCount = 10;    //~초 격발시 과열
-    [SerializeField]private float coolTime = 5f;        //~초 지나면 냉각
-    
-    // [SerializeField] private float damage; // 공격력
-    
-    //-------------------------------------------------------
-    public bool isActivated = false;//타워 가동 여부
-    private bool _previousIsActivated = false;//버퍼(토글 확인)
-    //-------------------------------------------------------
-    private GameObject _OriginPower;    //ControlUnitStatus Script의 함수사용
-    private Transform _target1;          //target of missile1
-    private Transform _target2;          //target of missile2
-    private ControlUnitStatus _cus;     //_cus = _OriginPower.GetComponent<ControlUnitStatus>();
-    // private Bullet _bulletScript;
-    private float _timeTilFire;         //다음 발사까지의 시간
-    private float _angleThreshold = 360f; // 타워와 적의 각도 차이 허용 범위 (조정 가능)
-    private float _curMissileCount = 0f;       //과열시 중지 위한 변수
-    private float _totCoolTime;         //냉각시 누적 냉각시간
-    //-------------------------------------------------------
-    
-    
-    
-    // private GameObject _gunPrefab;
-    // private SpriteRenderer _gunSprite;
-    // private bool isActivated = false;
-    // private bool _previousIsActivated = false;
-    // private void Awake()
-    // {
-    //     OriginPower = GameObject.Find("ControlUnit");
-    //     ControlUnitStatus cus = OriginPower.GetComponent<ControlUnitStatus>();
-    //     
-    // }
-    
+    [SerializeField] private float range;         // 타워 사거리
+    [SerializeField] private float rotationSpeed;// 타워 회전 속도
+    [SerializeField] private float fireRate;       // 발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
+    [SerializeField] private int power;            //타워 사용 전력량
+    [SerializeField]private int overHeatMissileCount;    //~초 격발시 과열
+    [SerializeField]private float coolTime;        //~초 지나면 냉각
     
     private void Start()
     {
-        _OriginPower = GameObject.Find("ControlUnit");
-        _cus = _OriginPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
-        // GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-        // _bulletScript = bulletObj.GetComponent<Bullet>();
+        base.TurretRotationPoint = this.turretRotationPoint;
+        base.EnemyMask = this.enemyMask;
+        base.Animator = this.animator;
+        base.GunRenderer = this.gunRenderer;
+        base.Range = this.range;
+        base.RotationSpeed = this.rotationSpeed;
+        base.FireRate = this.fireRate;
+        base.Power = this.power;
+        base.OverHeatMissileCount = this.overHeatMissileCount;
+        base.Level = 1;
+        base.Name = "Missile Turret";
     }
-    private void Update()
+    override
+    protected void Shoot()
     {
-        CheckToggle();//사용자에 의한 타워 가동 토글 확인
-        TowerIsActivatedNow();//사용자에 의해 타워가 가동 됐다면 역할 수행
-        
-    }
-
-    private void TowerIsActivatedNow()//사용자에 의해 타워가 가동 됐다면 역할 수행(Update에서 수행)
-    {
-        if (isActivated)
-        {
-            
-            NoTargetInRange();//적이 타워 범위에 없을 때 탐색(raycast 사용)
-            RotateTowardsTarget();//적 발견시 적을 향해 타워 돌리기
-            FireRateController();//총알 객체화 후 발사 동작 수행
-            OverHeatAnimationController();//설정시간 도달 시 과열
-            
-            
-        }
-    }
-
-    private void NoTargetInRange()//적이 타워 범위에 없을 때 탐색(TowerIsActivatedNow에서 수행)
-    {
-        if (_target1 == null)
-        {
-            Debug.Log("Target is null");
-            // _fireTime -= Time.deltaTime;
-            // if(_fireTime <= 0f) _fireTime = 0f;
-            //animator.SetBool("isShoot", false);
-            FindTarget();//(raycast 사용)
-            return;
-        }
-    }
-
-    private void FireRateController()//총알 객체화 후 발사 동작 수행(TowerIsActivatedNow에서 수행)
-    {
-        if (!CheckTargetIsInRange())//적이 범위에 없음
-        {
-            // _fireTime -= Time.deltaTime;
-            // if(_fireTime <= 0f) _fireTime = 0f;
-            //animator.SetBool("isShoot", false);
-            _target1 = null;
-            _target2 = null;
-            _timeTilFire = 0f;
-        }
-        else//적이 범위에 있음
-        {
-            _timeTilFire += Time.deltaTime;
-            if (_timeTilFire >= (1f / fireRate) && IsTargetInSight())//적이 타워의 시야각에 있고 RPS만큼 발사
-            {
-                Shoot();
-                _timeTilFire = 0f;
-
-            }
-
-        }
-    }
-
-    private IEnumerator ShootAnimation()
-    {
-        animator.SetBool("isShoot",true);
-        yield return new WaitForSeconds(0.6f);
-        animator.SetBool("isShoot",false);
-
-    }
-    private void OverHeatAnimationController()//설정시간 도달 시 과열(TowerIsActivatedNow에서 수행)
-    {
-        gunRenderer.color = new Color(1f,(255f-255f* (_curMissileCount / overHeatMissileCount))/255f,(255f-255f*
-            (_curMissileCount / overHeatMissileCount))/255f);
-
-        if (IsTargetInSight())//적이 사격 시야에 있음
-        {
-                
-            
-            if (_curMissileCount >= overHeatMissileCount)//터렛 과열
-            {
-                isActivated = false;
-                _previousIsActivated = false;
-                //animator.SetBool("isShoot", false);
-                StartCoroutine(OverHeat());
-            }
-            else
-            {
-                //animator.SetBool("isShoot", true); 
-            }
-        }
-        else//적이 사격 시야에 없음
-        {
-            // _fireTime -= Time.deltaTime;
-            // if(_fireTime <= 0f) _fireTime = 0f;
-            //animator.SetBool("isShoot", false);
-        }
-    }
-    private void CheckToggle()//Checks toggle of isActivated
-    {
-        if (isActivated != _previousIsActivated)//toggle check
-        {
-            if (isActivated)
-            {
-                _previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
-
-                //Debug.Log("Activated");
-                AddTurret();
-            }
-            else if (isActivated == false)
-            {
-                animator.SetBool("isShoot", false);
-                // gunRenderer.color = Color.white;
-                _previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
-                StartCoroutine(DeactivateProcess());
-                // _curMissileCount = 0;
-
-                //Debug.Log("DeActivated");
-                DeleteTurret();
-            }
-            
-        }
-    }
-
-    private IEnumerator DeactivateProcess()
-    {
-        // _totCoolTime = _fireTime;
-        while (_curMissileCount>=0)
-        {
-            gunRenderer.color = new Color(1f,(255f-255f* (_curMissileCount / overHeatMissileCount))/255f,(255f-255f*
-                (_curMissileCount / overHeatMissileCount))/255f);
-            _curMissileCount -= Time.deltaTime;
-            yield return null;
-        }
-
-    }
-    private IEnumerator OverHeat()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
-    {
-        
-        while (_curMissileCount>=0)
-        {
-            gunRenderer.color = new Color(1f,(255f-255f* (_curMissileCount / overHeatMissileCount))/255f,(255f-255f*
-                (_curMissileCount / overHeatMissileCount))/255f);
-            _curMissileCount -= Time.deltaTime;
-            yield return null;
-        }
-        animator.SetBool("isShoot", false);
-        //yield return new WaitForSeconds(5f);
-        gunRenderer.color = Color.white;
-        _curMissileCount = 0f;
-        isActivated = true;
-        _previousIsActivated = true;
-    }
-   
-    private void AddTurret()//ControlUnitStatus script 사용(CheckToggle에서 수행)
-    {
-        if (_cus.getCurrentPower() >= power)
-        {
-            _cus.AddUnit(power);
-        }
-        else
-        {
-            isActivated = false;
-            _previousIsActivated = false;
-        }
-    }
-    private void DeleteTurret()//ControlUnitStatus script 사용(CheckToggle에서 수행)
-    {
-        _cus.RemoveUnit(power);
-    }
-    private void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
-    {
-        _curMissileCount += 1;
+        CurMissileCount += 1;
         StartCoroutine(ShootAnimation());
-        // animator.enabled = true; // 발사할 때 애니메이션 시작
-        GameObject missileObj1 = Instantiate(bulletPrefab, missileSpawnPoint.position, Quaternion.identity);
-        
-        Missile missileScript = missileObj1.GetComponent<Missile>();
-        
-        missileScript.SetTarget(_target1);
-        if (_target2 != null)
+    
+        // 첫 번째 미사일 생성 - 터렛 회전값 적용
+        GameObject missileObj1 = Instantiate(bulletPrefab, missileSpawnPoint.position, turretRotationPoint.rotation);
+        TowerMissile missileScript = missileObj1.GetComponent<TowerMissile>();
+        missileScript.SetTarget(Target1);
+    
+        // 두 번째 미사일 생성
+        GameObject missileObj2 = Instantiate(bulletPrefab, missileSpawnPoint2.position, turretRotationPoint.rotation);
+        TowerMissile missileScript2 = missileObj2.GetComponent<TowerMissile>();
+    
+        if (Target2 != null)
         {
-            GameObject missileObj2 = Instantiate(bulletPrefab, missileSpawnPoint2.position, Quaternion.identity);
-            Missile missileScript2 = missileObj2.GetComponent<Missile>();
-            missileScript2.SetTarget(_target2);
+            missileScript2.SetTarget(Target2);
         }
         else
         {
-            GameObject missileObj2 = Instantiate(bulletPrefab, missileSpawnPoint2.position, Quaternion.identity);
-            Missile missileScript2 = missileObj2.GetComponent<Missile>();
-            missileScript2.SetTarget(_target1);
+            missileScript2.SetTarget(Target1);
         }
-
-        // 애니메이션을 짧은 시간 뒤에 종료
-        // StartCoroutine(StopAnimation());
+    
+        Target1 = null;
+        Target2 = null;
     }
 
 
-    private void FindTarget()//raycast를 이용한 적 타워 반경 접근 확인 후 배열 추가(NoTargetInRange에서 적을 찾기위해 수행)
+    protected override void FindTarget()
     {
-        //Debug.Log("FindTarget");
-        // RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, Vector2.zero, 0f, enemyMask);
-        // if (hits.Length > 0)
-        // {
-        //     _target1 = hits[0].transform;
-        // }
-        // if (hits.Length > 1)
-        // {
-        //     _target2 = hits[1].transform;
-        // }
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range);
-        foreach (var monster in hits)
+        // OverlapCircleAll을 사용하여 범위 내의 모든 적 탐지
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
+    
+        // 탐지된 적이 없으면 종료
+        if (hits.Length == 0) return;
+    
+        // 거리에 따라 정렬하기 위한 리스트 생성
+        List<(Collider2D collider, float distance)> sortedTargets = new List<(Collider2D, float)>();
+    
+        foreach (var hit in hits)
         {
-            if (monster.CompareTag("Enemy"))
+            float distance = Vector2.Distance(transform.position, hit.transform.position);
+            sortedTargets.Add((hit, distance));
+        }
+    
+        // 거리순으로 정렬
+        sortedTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
+    
+        // 가장 가까운 적을 첫 번째 타겟으로
+        if (sortedTargets.Count > 0)
+        {
+            Target2 = sortedTargets[0].collider.transform;
+        }
+    
+        // 두 번째로 가까운 적을 두 번째 타겟으로
+        if (sortedTargets.Count > 1)
+        {
+            // 첫 번째 타겟과 비슷한 거리에 있는 다른 적을 찾기
+            for (int i = 1; i < sortedTargets.Count; i++)
             {
-                if(!_target1)_target1 = monster.transform;
-                else if (!_target2) _target2 = monster.transform;
-                else return;
+                float distanceDiff = Mathf.Abs(sortedTargets[i].distance - sortedTargets[0].distance);
+            
+                // 첫 번째 타겟과 거리 차이가 일정 범위 이상이면 두 번째 타겟으로 설정
+                if (distanceDiff > 1f) // 이 값은 조정 가능
+                {
+                    Target1 = sortedTargets[i].collider.transform;
+                    break;
+                }
+            }
+            if (Target1 == null)
+            {
+                Target1 = sortedTargets[1].collider.transform;
             }
         }
-    }
-
-    private bool CheckTargetIsInRange()//적이 사거리에 있는지 확인(FireRateController에서 수행)
-    {
-        return Vector2.Distance(_target1.position, transform.position) <= range;
-    }
-
-    private void RotateTowardsTarget()//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
-    {
-        if (_target1 == null) return;
-        if (_target2 != null)
+    
+        if (Target2 != null)
         {
-            float angle = Mathf.Atan2((_target1.position.y + _target2.position.y)/2 - transform.position.y, (_target1.position.x + _target2.position.x)/2  - transform.position.x) * Mathf.Rad2Deg - 90f;
+            Debug.DrawLine(transform.position, Target2.position, Color.red, 0.1f);
+        }
+        if (Target1 != null)
+        {
+            Debug.DrawLine(transform.position, Target1.position, Color.blue, 0.1f);
+        }
+    }
+    
+    protected override void RotateTowardsTarget()//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
+    {
+        if (Target1 == null) return;
+        if (Target2 != null)
+        {
+            float angle = Mathf.Atan2((Target1.position.y + Target2.position.y)/2 - transform.position.y, (Target1.position.x + Target2.position.x)/2  - transform.position.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
         else
         {
             float angle =
-                Mathf.Atan2(_target1.position.y - transform.position.y, _target1.position.x - transform.position.x) *
+                Mathf.Atan2(Target1.position.y - transform.position.y, Target1.position.x - transform.position.x) *
                 Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation,
                 rotationSpeed * Time.deltaTime);
         }
     }
-
-    private bool IsTargetInSight()//적이 시야각에 있는지 확인(FireRateController, OverHeatAnimationController에서 수행)
-    {
-        float angleToTarget = Mathf.Atan2(_target1.position.y - transform.position.y, _target1.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
-        float turretAngle = turretRotationPoint.eulerAngles.z;
-        float angleDifference = Mathf.DeltaAngle(turretAngle, angleToTarget);
-        return Mathf.Abs(angleDifference) <= _angleThreshold;
-    }
-
-    private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
-    {
-        // Debug.Log(transform.position);
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, range);
-    }
-    public void ActivateTurret()
-    {
-        isActivated = true;
-    }
-    public void DeactivateTurret()
-    {
-        isActivated = false;
-    }
-    // private IEnumerator StopAnimation()
-    // {
-    //     yield return new WaitForSeconds(3f); // 애니메이션 지속 시간 설정 (조정 가능)
-    //     animator.enabled = false; // 애니메이션 종료
-    // }
 }

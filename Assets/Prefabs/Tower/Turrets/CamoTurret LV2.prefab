@@ -209,6 +209,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7186327088226671743}
   - component: {fileID: 96152668569603070}
+  - component: {fileID: 2806711547938002879}
+  - component: {fileID: 7287696145171918455}
   m_Layer: 0
   m_Name: CamoTurret LV2
   m_TagString: Tower
@@ -245,24 +247,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57f87900fb9e489cb683ab9f65049f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActivated: 1
+  _previousIsActivated: 0
   turretRotationPoint: {fileID: 3462848262513527642}
   enemyMask:
     serializedVersion: 2
     m_Bits: 128
   animator: {fileID: 1972164384450242624}
+  gunRenderer: {fileID: 1930348044581907678}
   bulletPrefab: {fileID: 5527518119625726090, guid: d68bdf48dc0984e30ba45c78cad3a501, type: 3}
   bulletSpawnPoint1: {fileID: 2078840314037253850}
   bulletSpawnPoint2: {fileID: 5878873751710588169}
   bulletFireDirection1: {fileID: 1027811007681589100}
   bulletFireDirection2: {fileID: 731181939951158206}
-  gunRenderer: {fileID: 1930348044581907678}
   range: 20
   rotationSpeed: 400
   fireRate: 5
-  power: 1
+  power: 30
   overHeatTime: 7
   coolTime: 3
-  isActivated: 1
+--- !u!58 &2806711547938002879
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3461163328374034220}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5.5
+--- !u!50 &7287696145171918455
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3461163328374034220}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1000000
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5099103131662513101
 GameObject:
   m_ObjectHideFlags: 0

@@ -114,7 +114,7 @@ public class Treant : Monster
         
         if (debugTimer < 0.1f)
         {
-            Debug.Log($"Direction changed to: {GetDirectionName(direction)}");
+            // Debug.Log($"Direction changed to: {GetDirectionName(direction)}");
         }
     }
 
@@ -161,7 +161,7 @@ public class Treant : Monster
     {
         isAttacking = false;
         UpdateAnimationState();
-        Debug.Log("Attack Finished");
+        // Debug.Log("Attack Finished");
     }
 
     private string GetDirectionName(int direction)
@@ -182,9 +182,9 @@ public class Treant : Monster
         
         if (debugTimer >= debugInterval)
         {
-            Debug.Log($"Position - Monster: {transform.position}, Player: {player.position}");
-            Debug.Log($"Movement Vector3: ({moveDirection.x}, {moveDirection.y}, {moveDirection.z})");
-            Debug.Log($"Current State - Direction: {GetDirectionName(currentDirection)}, Moving: {isMoving}, Attacking: {isAttacking}");
+            // Debug.Log($"Position - Monster: {transform.position}, Player: {player.position}");
+            // Debug.Log($"Movement Vector3: ({moveDirection.x}, {moveDirection.y}, {moveDirection.z})");
+            // Debug.Log($"Current State - Direction: {GetDirectionName(currentDirection)}, Moving: {isMoving}, Attacking: {isAttacking}");
             debugTimer = 0f;
         }
     }
