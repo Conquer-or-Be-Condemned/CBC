@@ -26,15 +26,15 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private TMP_Text powerText;
     [SerializeField] private TMP_Text damageText;
-    [SerializeField] private TMP_Text rmp;
+    [SerializeField] private TMP_Text rpm;
 
     private RaycastHit2D hit;
     private Animator _animator;
     private bool isVisible;
     private DefaultCanonTurret curTowerScript;
     private Transform curTower;
-    
-    private void Start()
+
+    private void InGame()
     {
         //  리스트 초기화
         towerList.Clear();
@@ -55,6 +55,15 @@ public class TowerManager : MonoBehaviour
                 Debug.LogError("Tower Menu가 존재하지 않습니다. MenuBox를 연결해주세요.");
             }
         }
+        
+        //  Menu 요소 찾기
+        // nameText = GameObject.Find("TowerName").GetComponent<TMP_Text>();
+        // activateButton = GameObject.Find("ActivationButton");
+        // activateText = GameObject.Find("TowerInfoAct").GetComponent<TMP_Text>();
+        // levelText = GameObject.Find("TowerInfoLv").GetComponent<TMP_Text>();
+        // powerText = GameObject.Find("TowerInfoPw").GetComponent<TMP_Text>();
+        // damageText = GameObject.Find("TowerInfoDmg").GetComponent<TMP_Text>();
+        // rpm = GameObject.Find("TowerInfoRpm").GetComponent<TMP_Text>();
     
         //  Tower Menu Animation 관련
         _animator = towerMenu.GetComponent<Animator>();
@@ -63,19 +72,36 @@ public class TowerManager : MonoBehaviour
         curTower = null;
 
         activateButton.GetComponent<Button>().onClick.AddListener(SetTowerActive);
+        
+        //  Cursor
+        GameManager.GetInstance().GetComponent<CursorManager>().SetInGameCursor();
+
+        GameManager.InGame = true;
+    }
+
+    private void Awake()
+    {
+        InGame();
+        GameManager.InGameInit = false;
     }
 
     private void FixedUpdate()
     {
-        //  타워 관련 정보 수집
-        FindActiveTower();
-        SetUITowerInfo();
+         // 타워 관련 정보 수집
+        if (GameManager.InGame)
+        {
+            FindActiveTower();
+            // SetUITowerInfo();
+        }
     }
 
     private void Update()
     {
         //  마우스 클릭
-        ClickProcess();
+        if (!GameManager.InGameInit)
+        {
+            ClickProcess();
+        }
     }
 
     private void FindActiveTower()

@@ -25,14 +25,27 @@ public class AlertManager : MonoBehaviour
 
     private void Start()
     {
+        InGame();
+    }
+
+    private void InGame()
+    {
         if (alertBox == null)
         {
             alertBox = GameObject.FindGameObjectWithTag("AlertBox");
+            if (alertBox == null)
+            {
+                Debug.LogError("Alert Box가 없습니다.");
+            }
         }
 
         if (alertInfo == null)
         {
             alertInfo = GameObject.FindGameObjectWithTag("AlertInfo").GetComponent<TMP_Text>();
+            if (alertInfo == null)
+            {
+                Debug.LogError("Alert Info가 없습니다.");
+            }
         }
         
         alertBox.SetActive(false);
@@ -49,7 +62,7 @@ public class AlertManager : MonoBehaviour
         //  시작 시 알림 등장
         Show("Annihilate the incoming enemies,\n and guard the controls.");
     }
-    
+
     //  원하는 메시지 쓰고 싶을 때 사용
     public void Show(String message)
     {

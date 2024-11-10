@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7223677850864395009}
   - component: {fileID: 165993191875593014}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: MiniMapCTLV1
   m_TagString: MapElement
   m_Icon: {fileID: 0}
@@ -92,18 +92,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_TagString
-      value: MapElement
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Color.r
-      value: 0.92176676
-      objectReference: {fileID: 0}
     - target: {fileID: 277798431183683825, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       propertyPath: m_Name
       value: CamoTurret LV1 Variant
@@ -114,11 +102,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6374544772860422310, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.67
+      value: -6.3960752
       objectReference: {fileID: 0}
     - target: {fileID: 6374544772860422310, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.14
+      value: -24.828178
       objectReference: {fileID: 0}
     - target: {fileID: 6374544772860422310, guid: 02c6f238a39bb4fa28a7b2e80bedc53d, type: 3}
       propertyPath: m_LocalPosition.z
