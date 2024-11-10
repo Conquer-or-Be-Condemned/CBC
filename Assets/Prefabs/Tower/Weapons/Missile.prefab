@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 1227950214120432124}
   - component: {fileID: 5152064728928936489}
   - component: {fileID: 6702779975113746937}
-  - component: {fileID: 5912786894610104449}
+  - component: {fileID: 6422879878642016226}
   m_Layer: 8
   m_Name: Missile
   m_TagString: Untagged
@@ -83,7 +83,7 @@ Transform:
   m_GameObject: {fileID: 6223032590839111759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.185, y: -7.53, z: 0}
+  m_LocalPosition: {x: -5.185, y: -7.53, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -161,7 +161,11 @@ MonoBehaviour:
   animator: {fileID: 7265750388774410434}
   explodePrefab: {fileID: 1969113204059454481, guid: 6f350330cacf045bb8ffa65e02f6d63f, type: 3}
   explosionPosition: {fileID: 1343882165474493921}
-  bulletSpeed: 10
+  initialSpeed: 10
+  maxSpeed: 30
+  turnSpeed: 180
+  acceleration: 10
+  initialStraightTime: 1
   bulletDamage: 100
   explosionRange: 5
 --- !u!50 &5152064728928936489
@@ -174,11 +178,11 @@ Rigidbody2D:
   m_GameObject: {fileID: 6223032590839111759}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -190,7 +194,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &6702779975113746937
 Animator:
   serializedVersion: 5
@@ -212,8 +216,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!60 &5912786894610104449
-PolygonCollider2D:
+--- !u!58 &6422879878642016226
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -244,30 +248,6 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.46220016, y: 0.50928843}
-    oldSize: {x: 2.3, y: 5.2}
-    newSize: {x: 1.5333333, y: 3.4666667}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.095222026, y: 1.6558341}
-      - {x: -0.05246383, y: 1.6648935}
-      - {x: -0.30791092, y: 1.3949709}
-      - {x: -0.46436548, y: 1.1495705}
-      - {x: -0.4640895, y: 0.6235238}
-      - {x: -0.53586197, y: 0.16532183}
-      - {x: -0.72507524, y: -0.04336834}
-      - {x: -0.708707, y: -1.0321999}
-      - {x: -0.24204026, y: -1.7655333}
-      - {x: 0.29129308, y: -1.7655333}
-      - {x: 0.82462645, y: -0.96553326}
-      - {x: 0.76755714, y: -0.29444838}
-      - {x: 0.48034954, y: 0.21702862}
-      - {x: 0.4952225, y: 1.0927552}
-  m_UseDelaunayMesh: 0
+  m_Offset: {x: 0.08693957, y: -0.04829979}
+  serializedVersion: 2
+  m_Radius: 1

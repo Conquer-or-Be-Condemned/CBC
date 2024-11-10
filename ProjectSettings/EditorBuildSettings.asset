@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: a6edc5e7e8dbc4360b1b631eef97337a
+  - enabled: 1
+    path: Assets/Scenes/MapTest.unity
+    guid: 2e12d85c44e0ddf44b1dd98a675f07ab
+  - enabled: 1
+    path: Assets/Scenes/StageMenu.unity
+    guid: a0ec2fcbea00d9c4386cc66c6d2cdbd3
   m_configObjects: {}

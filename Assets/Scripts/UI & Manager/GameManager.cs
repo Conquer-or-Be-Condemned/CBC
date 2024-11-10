@@ -12,6 +12,10 @@ using UnityEngine.AI;
 public class GameManager : MonoBehaviour
 {
     public GameObject player;
+    public static int CurStage;
+    public static bool InGame;
+    public static bool InGameInit;
+    public static bool LoadingSkip;
 
     #region SINGLETON
     
@@ -23,9 +27,12 @@ public class GameManager : MonoBehaviour
         {
             _instance = FindObjectOfType<GameManager>();
             if (_instance != null) return _instance;
-
-            _instance = new GameManager().AddComponent<GameManager>();
-            _instance.name = "GameManager";
+            else
+            {
+                Debug.LogError("GameManager가 존재하지 않습니다.");
+            }
+            // _instance = new GameManager().AddComponent<GameManager>();
+            // _instance.name = "GameManager";
         }
 
         return _instance;
@@ -50,14 +57,43 @@ public class GameManager : MonoBehaviour
     {
         //  다음 씬에서도 동일하게 유지하기 위함
         DontDestroyOnLoad(this.gameObject);
-        
-        if (player == null)
+
+        CurStage = 1;
+        InGame = false;
+        InGameInit = false;
+    }
+
+    private void Update()
+    {
+        if (SceneController.NowScene == "Loading" && LoadingSkip)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            CheckSpaceKey();    
+        }
+
+        if (InGame)
+        {
             if (player == null)
             {
-                Debug.LogError("No player found");
+                player = GameObject.FindGameObjectWithTag("Player");
+                if (player == null)
+                {
+                    Debug.LogError("No player found");
+                }
             }
         }
     }
+
+    private void CheckSpaceKey()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Press!");
+            if (SceneController.NowScene == "Loading")
+            {
+                SceneController.LoadNextScene();
+            }
+            else return;
+        }
+    }
+    
 }
