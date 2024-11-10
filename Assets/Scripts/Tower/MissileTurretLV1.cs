@@ -71,58 +71,31 @@ public class MissileTurretLV1 : DefaultMissileTurret
 
     protected override void FindTarget()
     {
-        // OverlapCircleAll을 사용하여 범위 내의 모든 적 탐지
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
-    
-        // 탐지된 적이 없으면 종료
         if (hits.Length == 0) return;
-    
-        // 거리에 따라 정렬하기 위한 리스트 생성
-        List<(Collider2D collider, float distance)> sortedTargets = new List<(Collider2D, float)>();
-    
+
+        // 사용할 수 있는 타겟들의 리스트를 만듭니다
+        List<(Collider2D collider, float distance)> availableTargets = new List<(Collider2D, float)>();
         foreach (var hit in hits)
         {
             float distance = Vector2.Distance(transform.position, hit.transform.position);
-            sortedTargets.Add((hit, distance));
+            availableTargets.Add((hit, distance));
         }
+        availableTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
     
-        // 거리순으로 정렬
-        sortedTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
-    
-        // 가장 가까운 적을 첫 번째 타겟으로
-        if (sortedTargets.Count > 0)
+        // 각 Target에 대해 아직 할당되지 않은 가장 가까운 적을 찾아 할당합니다
+        if (availableTargets.Count > 0)
         {
-            Target2 = sortedTargets[0].collider.transform;
+            Target1 = availableTargets[0].collider.transform;
+            Target2 = availableTargets[0].collider.transform;
+            availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
+            availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
         }
-    
-        // 두 번째로 가까운 적을 두 번째 타겟으로
-        if (sortedTargets.Count > 1)
+        if (availableTargets.Count > 0)
         {
-            // 첫 번째 타겟과 비슷한 거리에 있는 다른 적을 찾기
-            for (int i = 1; i < sortedTargets.Count; i++)
-            {
-                float distanceDiff = Mathf.Abs(sortedTargets[i].distance - sortedTargets[0].distance);
-            
-                // 첫 번째 타겟과 거리 차이가 일정 범위 이상이면 두 번째 타겟으로 설정
-                if (distanceDiff > 1f) // 이 값은 조정 가능
-                {
-                    Target1 = sortedTargets[i].collider.transform;
-                    break;
-                }
-            }
-            if (Target1 == null)
-            {
-                Target1 = sortedTargets[1].collider.transform;
-            }
-        }
-    
-        if (Target2 != null)
-        {
-            Debug.DrawLine(transform.position, Target2.position, Color.red, 0.1f);
-        }
-        if (Target1 != null)
-        {
-            Debug.DrawLine(transform.position, Target1.position, Color.blue, 0.1f);
+            Target2 = availableTargets[0].collider.transform;
+            availableTargets.RemoveAt(0);
+            availableTargets.RemoveAt(0);
         }
     }
     

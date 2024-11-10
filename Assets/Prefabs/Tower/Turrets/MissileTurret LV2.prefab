@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164f21d9ffdd4993af2f0c803cd60dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActivated: 1
   turretRotationPoint: {fileID: 3913239604884711467}
   enemyMask:
     serializedVersion: 2
@@ -295,7 +296,6 @@ MonoBehaviour:
   power: 50
   overHeatMissileCount: 10
   coolTime: 5
-  isActivated: 1
 --- !u!58 &4665351848983348876
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 5.5
 --- !u!50 &5148363670888551460
 Rigidbody2D:
   serializedVersion: 4

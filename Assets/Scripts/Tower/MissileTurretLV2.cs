@@ -94,67 +94,42 @@ public class MissileTurretLV2 : DefaultMissileTurret
 
     protected override void FindTarget()
     {
-        // OverlapCircleAll을 사용하여 범위 내의 모든 적 탐지
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
-    
-        // 탐지된 적이 없으면 종료
         if (hits.Length == 0) return;
-    
-        // 거리에 따라 정렬하기 위한 리스트 생성
-        List<(Collider2D collider, float distance)> sortedTargets = new List<(Collider2D, float)>();
-    
+
+        // 사용할 수 있는 타겟들의 리스트를 만듭니다
+        List<(Collider2D collider, float distance)> availableTargets = new List<(Collider2D, float)>();
         foreach (var hit in hits)
         {
             float distance = Vector2.Distance(transform.position, hit.transform.position);
-            sortedTargets.Add((hit, distance));
+            availableTargets.Add((hit, distance));
+        }
+        availableTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
+    
+        // 각 Target에 대해 아직 할당되지 않은 가장 가까운 적을 찾아 할당합니다
+        if (availableTargets.Count > 0)
+        {
+            Target1 = availableTargets[0].collider.transform;
+            Target4 = availableTargets[0].collider.transform;
+            availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
+            availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
+        }
+        if (availableTargets.Count > 0)
+        {
+            Target4 = availableTargets[0].collider.transform;
+            availableTargets.RemoveAt(0);
+            availableTargets.RemoveAt(0);
         }
     
-        // 거리순으로 정렬
-        sortedTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
-        
-        if (sortedTargets.Count > 0)//1,4,2,3 순서로 표적 설정
+        if (availableTargets.Count > 0)
         {
-            Target1 = sortedTargets[0].collider.transform;
-            if(sortedTargets.Count<2)
-                Target4 = sortedTargets[0].collider.transform;
+            Target2 = availableTargets[0].collider.transform;
+            availableTargets.RemoveAt(0);
+            availableTargets.RemoveAt(0);
         }
-        if (sortedTargets.Count > 1)
+        if (availableTargets.Count > 0)
         {
-            if (Target4 == null)
-            {
-                Target4 = sortedTargets[1].collider.transform;
-            }
-        }
-        if (sortedTargets.Count > 2)
-        {
-            if (Target2 == null)
-            {
-                Target2 = sortedTargets[2].collider.transform;
-            }
-        }
-        if (sortedTargets.Count > 3)
-        {
-            if (Target3 == null)
-            {
-                Target3 = sortedTargets[3].collider.transform;
-            }
-        }
-    
-        if (Target1 != null)
-        {
-            Debug.DrawLine(transform.position, Target1.position, Color.red, 0.1f);
-        }
-        if (Target4 != null)
-        {
-            Debug.DrawLine(transform.position, Target2.position, Color.blue, 0.1f);
-        }
-        if (Target2 != null)
-        {
-            Debug.DrawLine(transform.position, Target3.position, Color.blue, 0.1f);
-        }
-        if (Target3 != null)
-        {
-            Debug.DrawLine(transform.position, Target4.position, Color.blue, 0.1f);
+            Target3 = availableTargets[0].collider.transform;
         }
     }
     protected override void RotateTowardsTarget()//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
