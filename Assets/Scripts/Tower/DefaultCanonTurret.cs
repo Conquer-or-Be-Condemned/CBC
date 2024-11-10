@@ -300,5 +300,5 @@ public abstract class DefaultCanonTurret : MonoBehaviour, ActivateTower
         return power;
     }
     
-    //  getDamage와 getRPM도 만들어야 합니다.
+    //  TODO : Rpm과 데미지 정보를 만들어야 함.
 }

@@ -17,8 +17,8 @@ public class AlertManager : MonoBehaviour
     
     public Animator alertAnimator;
 
-    private WaitForSeconds _UIDelay1 = new WaitForSeconds(3.0f);
-    private WaitForSeconds _UIDelay2 = new WaitForSeconds(3.0f);
+    private WaitForSeconds _UIDelay1 = new WaitForSeconds(2.0f);
+    private WaitForSeconds _UIDelay2 = new WaitForSeconds(2.0f);
     
     //  Alert Text 배열입니다. 사용에 주의하세요.
     private List<String> alertTexts = new List<String>();
