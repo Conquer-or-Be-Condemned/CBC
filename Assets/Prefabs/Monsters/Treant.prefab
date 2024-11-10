@@ -156,7 +156,7 @@ MonoBehaviour:
   moveSpeed: 3
   attackRange: 6.5
   player: {fileID: 0}
-  healthBarPrefab: {fileID: 5964518026133871507, guid: 79df859777fec42dbab27acc44b83fe6, type: 3}
+  healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: -20
 --- !u!70 &8027999870702425149
 CapsuleCollider2D:

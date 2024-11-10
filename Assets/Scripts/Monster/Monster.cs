@@ -17,12 +17,12 @@ public abstract class Monster : MonoBehaviour
 
     [Header("UI Elements")]
     public GameObject healthBarPrefab;
-    private Slider healthBarSlider;
+    private Image healthBarCurrentImage; // Current 이미지를 참조
     private Transform healthBarTransform;
 
     [Header("Health Bar Settings")]
     [Tooltip("체력바의 Y 위치 오프셋을 설정합니다.")]
-    public float healthBarYOffset = 2f; // 기본값을 2f로 설정
+    public float healthBarYOffset = 2f;
 
     protected virtual void Start()
     {
@@ -31,19 +31,19 @@ public abstract class Monster : MonoBehaviour
         // 체력바 프리팹 인스턴스화
         if (healthBarPrefab != null)
         {
-            GameObject healthBarInstance = Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
+            GameObject healthBarInstance = Instantiate(healthBarPrefab);
             healthBarTransform = healthBarInstance.transform;
-            healthBarSlider = healthBarInstance.GetComponentInChildren<Slider>();
 
-            // 체력바의 최대값 설정
-            healthBarSlider.maxValue = maxHealth;
-            healthBarSlider.value = currentHealth;
+            // Current 이미지를 찾아서 참조
+            healthBarCurrentImage = healthBarInstance.transform.Find("Current").GetComponent<Image>();
 
             // 체력바를 몬스터의 자식으로 설정
             healthBarTransform.SetParent(transform, false);
 
             // 로컬 위치를 조정하여 몬스터 위에 표시
-            healthBarTransform.localPosition = new Vector3(0, healthBarYOffset, 0); // Y 값을 변수로 설정
+            RectTransform healthBarRect = healthBarTransform.GetComponent<RectTransform>();
+            healthBarRect.localPosition = Vector3.zero;
+            healthBarRect.anchoredPosition = new Vector2(0, healthBarYOffset);
 
             // 체력바가 항상 카메라를 향하도록 설정
             healthBarInstance.AddComponent<Billboard>();
@@ -59,9 +59,10 @@ public abstract class Monster : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        if (healthBarSlider != null)
+        if (healthBarCurrentImage != null)
         {
-            healthBarSlider.value = currentHealth;
+            float fillAmount = currentHealth / maxHealth;
+            healthBarCurrentImage.fillAmount = fillAmount;
         }
 
         if (currentHealth <= 0)

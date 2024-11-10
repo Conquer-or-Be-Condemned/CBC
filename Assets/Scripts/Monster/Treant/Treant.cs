@@ -21,6 +21,7 @@ public class Treant : Monster
     protected override void Start()
     {
         monsterName = "Treant";
+
         // 필요한 스탯 설정
         if (maxHealth == 0) maxHealth = 150f;
         if (attackDamage == 0) attackDamage = 15f;
@@ -28,8 +29,9 @@ public class Treant : Monster
         if (attackRange == 0) attackRange = 1.5f;
 
         // Treant의 체력바 Y 오프셋 설정
-        healthBarYOffset = 8f; // Treant의 경우 3f로 설정
+        healthBarYOffset = 9f;
 
+        // Animator 및 SpriteRenderer 설정
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -39,7 +41,6 @@ public class Treant : Monster
 
         base.Start();
     }
-
     private void Update()
     {
         if (player == null) return;
