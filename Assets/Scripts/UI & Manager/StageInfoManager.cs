@@ -4,17 +4,22 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class StageInfoManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text planetName;
     [SerializeField] private TMP_Text planetStory;
     [SerializeField] private TMP_Text planetInfo;
+    [SerializeField] private GameObject planetSet;
+    [SerializeField] private Animator animator;
+    
+    [SerializeField] private GameObject warpButton;
     
     public List<String> nameList;
     public List<String> storyList;
     public List<String> infoList;
-
+    
     private int curStage;
     
     private void Start()
@@ -33,6 +38,38 @@ public class StageInfoManager : MonoBehaviour
         planetStory.SetText("");
         planetInfo.SetText("");
 
+        if (planetSet == null)
+        {
+            planetSet = GameObject.Find("PlanetSet");
+        }
+
+        if (warpButton == null)
+        {
+            warpButton = GameObject.Find("ToGame");
+        }
+        warpButton.SetActive(false);
+
+        animator = planetSet.GetComponent<Animator>();
+        
+        StartCoroutine(WaitShowCoroutine());
+    }
+
+    public void SetStageMenuHide()
+    {
+        animator.SetBool("isWarp", true);
+        warpButton.SetActive(false);
+    }
+
+    private IEnumerator WaitShowCoroutine()
+    {
+        yield return new WaitForSeconds(1.05f);
+        
+        warpButton.SetActive(true);
+        Show();
+    }
+
+    private void Show()
+    {
         StartCoroutine(NameCoroutine());
     }
     

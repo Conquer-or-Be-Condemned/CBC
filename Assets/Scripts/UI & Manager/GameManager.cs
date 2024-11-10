@@ -27,9 +27,12 @@ public class GameManager : MonoBehaviour
         {
             _instance = FindObjectOfType<GameManager>();
             if (_instance != null) return _instance;
-
-            _instance = new GameManager().AddComponent<GameManager>();
-            _instance.name = "GameManager";
+            else
+            {
+                Debug.LogError("GameManager가 존재하지 않습니다.");
+            }
+            // _instance = new GameManager().AddComponent<GameManager>();
+            // _instance.name = "GameManager";
         }
 
         return _instance;
