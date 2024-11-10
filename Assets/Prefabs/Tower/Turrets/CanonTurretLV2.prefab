@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 2806711547938002879}
   - component: {fileID: 7287696145171918455}
   m_Layer: 0
-  m_Name: CamoTurret LV2
+  m_Name: CanonTurretLV2
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

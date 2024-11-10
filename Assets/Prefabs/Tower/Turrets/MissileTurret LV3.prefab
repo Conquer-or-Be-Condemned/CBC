@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 552770660771901961}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.53, y: 1.03, z: 0.1}
+  m_LocalPosition: {x: -2.28, y: 1.03, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 2963187665672379197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.54, y: 1.01, z: 0.1}
+  m_LocalPosition: {x: 5.04, y: 1.01, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -255,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 3588727797641168289}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.27, y: 1.04, z: 0.1}
+  m_LocalPosition: {x: 2.29, y: 1.04, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -324,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 5101844986473440329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.25, y: 1.01, z: 0.1}
+  m_LocalPosition: {x: 3.75, y: 1.01, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -461,7 +461,7 @@ Transform:
   m_GameObject: {fileID: 7225325983469342069}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.81, y: 1.04, z: 0.1}
+  m_LocalPosition: {x: -3.48, y: 1.04, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -515,6 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfb6e7bb6814ef58c63a73b00738798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActivated: 1
   turretRotationPoint: {fileID: 858969232775871051}
   enemyMask:
     serializedVersion: 2
@@ -534,7 +535,6 @@ MonoBehaviour:
   power: 5
   overHeatMissileCount: 10
   coolTime: 5
-  isActivated: 1
 --- !u!58 &5975951976129630125
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -569,7 +569,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 6.8
 --- !u!50 &1963368194955897969
 Rigidbody2D:
   serializedVersion: 4

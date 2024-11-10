@@ -16,7 +16,7 @@ public class TowerMissile : MonoBehaviour
     [SerializeField] private float maxSpeed = 15f;         // 최대 속도
     [SerializeField] private float turnSpeed = 180f;       // 회전 속도 (도/초)
     [SerializeField] private float acceleration = 5f;      // 가속도
-    [SerializeField] private float initialStraightTime = 1f; // 초기 직진 시간
+    [SerializeField] private float initialStraightTime =2f; // 초기 직진 시간
     
     [Header("Combat Settings")]
     [SerializeField] private float bulletDamage = 10f;
@@ -46,6 +46,8 @@ public class TowerMissile : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(_target != null)
+            Debug.DrawLine(transform.position, _target.position, Color.blue, 0.1f);
         if (_target == null || !_isHoming) return;
 
         // 현재 진행 방향과 목표 방향 사이의 각도 계산
@@ -122,4 +124,7 @@ public class TowerMissile : MonoBehaviour
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, explosionRange);
     }
+    
+    
+    
 }
