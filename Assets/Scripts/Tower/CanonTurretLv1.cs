@@ -50,6 +50,7 @@ public class CanonTurretLv1 : DefaultCanonTurret
         base.coolTime = coolTime; //~초 지나면 냉각
         base.Level = 1;
         base.name = "Canon Turret";
+        gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
     }
     // [SerializeField] private float damage; // 공격력
     

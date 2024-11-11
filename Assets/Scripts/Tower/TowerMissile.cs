@@ -48,7 +48,19 @@ public class TowerMissile : MonoBehaviour
     {
         if(_target != null)
             Debug.DrawLine(transform.position, _target.position, Color.blue, 0.1f);
-        if (_target == null || !_isHoming) return;
+        if (_target == null)
+        {
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 100);
+            foreach (var monster in hits)
+            {
+                if (monster.CompareTag("Enemy"))
+                {
+                    if(_target==null)_target = monster.transform;
+                    else return;
+                }
+            }
+        }
+        if (!_isHoming) return;
 
         // 현재 진행 방향과 목표 방향 사이의 각도 계산
         Vector2 directionToTarget = ((Vector2)_target.position - rb.position).normalized;

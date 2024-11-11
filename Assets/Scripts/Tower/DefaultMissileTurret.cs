@@ -39,8 +39,14 @@ public abstract class DefaultMissileTurret : MonoBehaviour, ActivateTower
     public bool isActivated = false;//타워 가동 여부
     private bool _previousIsActivated = false;//버퍼(토글 확인)
     //-------------------------------------------------------
+    private void Start()
+    {
+        
+    }
+
     private void Awake()
     {
+        // GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
         _originPower = GameObject.Find("ControlUnit");
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
         // GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
@@ -134,6 +140,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, ActivateTower
             }
             else if (isActivated == false)
             {
+                
                 Animator.SetBool("isShoot", false);
                 _previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
                 StartCoroutine(DeactivateProcess());
@@ -150,6 +157,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, ActivateTower
             CurMissileCount -= Time.deltaTime;
             yield return null;
         }
+        GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
 
     }
     private IEnumerator OverHeat()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
