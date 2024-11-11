@@ -17,6 +17,10 @@ public class ControlUnitStatus : MonoBehaviour
     private GameObject[] units;//현재 가동 중인 타워 배열
     List<GameObject> unitsList = new List<GameObject>();
     
+    // 몬스터가 공격할 제어 장치 접근 포인트들
+    [Header("Access Points")]
+    public Transform[] accessPoints; 
+
     //  UI와의 Event 연결
     public UnityEvent<int, int> onCUHpChange = new UnityEvent<int, int>();
     public UnityEvent<int, int> onCUPowerChange = new UnityEvent<int, int>();
