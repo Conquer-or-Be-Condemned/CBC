@@ -36,7 +36,6 @@ public abstract class Monster : MonoBehaviour
         currentHealth = maxHealth;
 
         // 체력바 프리팹 인스턴스화
-        // 체력바 프리팹 인스턴스화
         if (healthBarPrefab != null)
         {
             GameObject healthBarInstance = Instantiate(healthBarPrefab);
@@ -50,9 +49,8 @@ public abstract class Monster : MonoBehaviour
 
             // 로컬 위치를 조정하여 몬스터 위에 표시
             RectTransform healthBarRect = healthBarTransform.GetComponent<RectTransform>();
-        
-            // 위치 조정
-            healthBarRect.localPosition = new Vector3(0, healthBarYOffset, 0);
+            healthBarRect.localPosition = Vector3.zero;
+            healthBarRect.anchoredPosition = new Vector2(0, healthBarYOffset);
 
             // 체력바가 항상 카메라를 향하도록 설정
             healthBarInstance.AddComponent<Billboard>();
