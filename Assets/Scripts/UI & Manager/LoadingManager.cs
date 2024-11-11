@@ -8,18 +8,24 @@ using Random = UnityEngine.Random;
 
 public class LoadingManager : MonoBehaviour
 {
-    public GameObject loadingSet;
+    public GameObject skip;
+    public GameObject loading;
     public TMP_Text tips;
 
     public List<String> tipList;
     private void Start()
     {
-        if (loadingSet == null)
+        if (skip == null)
         {
-            loadingSet = GameObject.Find("LoadingSet");
+            skip = GameObject.Find("Skip");
+        }
+
+        if (loading == null)
+        {
+            loading = GameObject.Find("Loading");
         }
         
-        loadingSet.SetActive(false);
+        skip.SetActive(false);
         GameManager.LoadingSkip = false;
         
         SetTipList();
@@ -31,7 +37,8 @@ public class LoadingManager : MonoBehaviour
     private IEnumerator LoadingCoroutine()
     {
         yield return new WaitForSeconds(3f);
-        loadingSet.SetActive(true);
+        loading.SetActive(false);
+        skip.SetActive(true);
         GameManager.LoadingSkip = true;
     }
 

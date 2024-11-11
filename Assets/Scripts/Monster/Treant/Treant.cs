@@ -11,7 +11,7 @@ public class Treant : Monster
     private float debugTimer = 0f;
     private float debugInterval = 0.5f;
     private int currentDirection = 0;
-
+    
     // 방향 상수 정의
     private const int DIRECTION_DOWN = 0;
     private const int DIRECTION_UP = 1;
@@ -21,17 +21,26 @@ public class Treant : Monster
     protected override void Start()
     {
         monsterName = "Treant";
-        // maxHealth = 150f;
-        // attackDamage = 15f;
-        // moveSpeed = 3f;
-        // attackRange = 1.5f;
+
+        // 필요한 스탯 설정
+        if (maxHealth == 0) maxHealth = 150f;
+        if (attackDamage == 0) attackDamage = 15f;
+        if (moveSpeed == 0) moveSpeed = 3f;
+        if (attackRange == 0) attackRange = 1.5f;
+
+        // Treant의 체력바 Y 오프셋 설정
+        healthBarYOffset = 9f;
+
+        // Animator 및 SpriteRenderer 설정
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
         SetDirection(DIRECTION_DOWN);
+
+        // 필요한 경우 player 및 healthBarPrefab 할당
+
         base.Start();
     }
-
     private void Update()
     {
         if (player == null) return;

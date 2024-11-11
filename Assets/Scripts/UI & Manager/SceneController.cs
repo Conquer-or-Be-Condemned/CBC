@@ -55,6 +55,7 @@ public class SceneController : MonoBehaviour
     
     //  For Map Select
     public Button warpButton;
+    private StageInfoManager stageMenu;
 
     private String[] stageList = { "MapTest" };
 
@@ -71,9 +72,16 @@ public class SceneController : MonoBehaviour
             Debug.Log("Boom!");
             warpButton = GameObject.Find("ToGame").GetComponent<Button>();
 
+            stageMenu = GameObject.Find("PlanetInfo").GetComponent<StageInfoManager>();
+
             if (warpButton == null)
             {
-                Debug.Log("버튼이 없습니다.");
+                Debug.LogError("버튼이 없습니다.");
+            }
+
+            if (stageMenu == null)
+            {
+                Debug.LogError("스테이지 애니메이션 오류 발생");
             }
             
             warpButton.onClick.AddListener(GoToGame);
@@ -83,6 +91,14 @@ public class SceneController : MonoBehaviour
 
     public void GoToGame()
     {
+        StartCoroutine(PreGoToGameCoroutine());
+    }
+
+    private IEnumerator PreGoToGameCoroutine()
+    {
+        stageMenu.SetStageMenuHide();
+        yield return new WaitForSeconds(1.1f);
+        
         ChangeScene("Loading");
         StartCoroutine(GoToGameCoroutine());
     }

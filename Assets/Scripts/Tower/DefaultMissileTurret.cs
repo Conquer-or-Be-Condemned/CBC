@@ -39,7 +39,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, ActivateTower
     public bool isActivated = false;//타워 가동 여부
     private bool _previousIsActivated = false;//버퍼(토글 확인)
     //-------------------------------------------------------
-    private void Start()
+    private void Awake()
     {
         _originPower = GameObject.Find("ControlUnit");
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
@@ -220,5 +220,23 @@ public abstract class DefaultMissileTurret : MonoBehaviour, ActivateTower
     {
         isActivated = false;
     }
+    
+    //  For UI -> Getter
+    public String GetName()
+    {
+        return Name;
+    }
+
+    public int GetLevel()
+    {
+        return Level;
+    }
+
+    public int GetPower()
+    {
+        return Power;
+    }
+    
+    //  TODO : Rpm과 데미지 정보를 만들어야 함.
    
 }
