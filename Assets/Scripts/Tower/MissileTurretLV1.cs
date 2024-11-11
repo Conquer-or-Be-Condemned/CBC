@@ -39,6 +39,7 @@ public class MissileTurretLV1 : DefaultMissileTurret
         base.OverHeatMissileCount = this.overHeatMissileCount;
         base.Level = 1;
         base.Name = "Missile Turret";
+        gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
     }
     override
     protected void Shoot()

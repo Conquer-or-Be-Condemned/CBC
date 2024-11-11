@@ -44,6 +44,7 @@ public class CanonTurretLv3 : DefaultCanonTurret
         base.coolTime = coolTime; //~초 지나면 냉각
         base.Level = 3;
         base.name = "Canon Turret";
+        gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
         
     } 
     protected override void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)

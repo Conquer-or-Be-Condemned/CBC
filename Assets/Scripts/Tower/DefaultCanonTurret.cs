@@ -186,6 +186,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, ActivateTower
             _fireTime -= Time.deltaTime;
             yield return null;
         }
+        gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
     }
     private IEnumerator OverHeat()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
     {
