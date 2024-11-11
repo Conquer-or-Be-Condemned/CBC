@@ -12,14 +12,14 @@ public abstract class Monster : MonoBehaviour
     public float attackRange;
 
     [Header("Detection Settings")]
-    [Tooltip("플레이어를 감지할 범위입니다.")]
+    [Tooltip("플레이어를 감지할 범위")]
     public float detectionRange; // 기본값 설정
 
     [Header("References")]
-    [Tooltip("플레이어의 Transform을 할당하세요.")]
+    [Tooltip("플레이어 Transform 할당")]
     public Transform player;
 
-    [Tooltip("제어 장치의 ControlUnitStatus를 할당하세요.")]
+    [Tooltip("제어 장치의 ControlUnitStatus를 할당")]
     public ControlUnitStatus controlUnitStatus;
 
     [Header("UI Elements")]
@@ -28,7 +28,7 @@ public abstract class Monster : MonoBehaviour
     private Transform healthBarTransform;
 
     [Header("Health Bar Settings")]
-    [Tooltip("체력바의 Y 위치 오프셋을 설정합니다.")]
+    [Tooltip("체력바의 Y 위치 오프셋을 설정")]
     public float healthBarYOffset = 2f;
 
     protected virtual void Start()
