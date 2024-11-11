@@ -34,9 +34,6 @@ public class Treant : Monster
         if (attackRange == 0) attackRange = 1.5f;
         if (detectionRange == 0) detectionRange = 5f; // 기본값 설정
 
-        // Treant의 체력바 Y 오프셋 설정
-        healthBarYOffset = 9f;
-
         // Animator 및 SpriteRenderer 설정
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();

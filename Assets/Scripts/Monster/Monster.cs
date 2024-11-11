@@ -29,12 +29,13 @@ public abstract class Monster : MonoBehaviour
 
     [Header("Health Bar Settings")]
     [Tooltip("체력바의 Y 위치 오프셋을 설정")]
-    public float healthBarYOffset = 2f;
+    public float healthBarYOffset;
 
     protected virtual void Start()
     {
         currentHealth = maxHealth;
 
+        // 체력바 프리팹 인스턴스화
         // 체력바 프리팹 인스턴스화
         if (healthBarPrefab != null)
         {
@@ -49,8 +50,9 @@ public abstract class Monster : MonoBehaviour
 
             // 로컬 위치를 조정하여 몬스터 위에 표시
             RectTransform healthBarRect = healthBarTransform.GetComponent<RectTransform>();
-            healthBarRect.localPosition = Vector3.zero;
-            healthBarRect.anchoredPosition = new Vector2(0, healthBarYOffset);
+        
+            // 위치 조정
+            healthBarRect.localPosition = new Vector3(0, healthBarYOffset, 0);
 
             // 체력바가 항상 카메라를 향하도록 설정
             healthBarInstance.AddComponent<Billboard>();
