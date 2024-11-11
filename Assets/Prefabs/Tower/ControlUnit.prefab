@@ -143,12 +143,23 @@ MonoBehaviour:
   currentPower: 100
   maxHealth: 100
   curHealth: 100
+  accessPoints:
+  - {fileID: 2526849332522214749}
+  - {fileID: 7506699160037249297}
+  - {fileID: 785507863612131631}
+  - {fileID: 9209676287020101834}
+  - {fileID: 7207124623560223479}
+  - {fileID: 1232173911428993793}
+  - {fileID: 3121199734970055755}
+  - {fileID: 7146258474436995489}
   onCUHpChange:
     m_PersistentCalls:
       m_Calls: []
   onCUPowerChange:
     m_PersistentCalls:
       m_Calls: []
+  powerOffset: 1
+  recoverSpeed: 0.5
 --- !u!212 &8410638605953615744
 SpriteRenderer:
   m_ObjectHideFlags: 0
