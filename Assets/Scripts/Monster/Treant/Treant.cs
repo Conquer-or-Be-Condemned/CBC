@@ -5,7 +5,7 @@ public class Treant : Monster
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private float attackTimer = 0f;
-    private float attackCooldown = 2f;
+    private float attackCooldown = 1f;
     private bool isAttacking = false;
     private bool isMoving = false;
     private float debugTimer = 0f;
@@ -18,52 +18,91 @@ public class Treant : Monster
     private const int DIRECTION_LEFT = 2;
     private const int DIRECTION_RIGHT = 3;
 
+    // 현재 타겟을 추적하기 위한 변수
+    private Transform currentTarget;
+
     protected override void Start()
     {
+        base.Start();
+
         monsterName = "Treant";
-        // maxHealth = 150f;
-        // attackDamage = 15f;
-        // moveSpeed = 3f;
-        // attackRange = 1.5f;
+
+        // 필요한 스탯 설정
+        if (maxHealth == 0) maxHealth = 150f;
+        if (attackDamage == 0) attackDamage = 15f;
+        if (moveSpeed == 0) moveSpeed = 3f;
+        if (attackRange == 0) attackRange = 1.5f;
+        if (detectionRange == 0) detectionRange = 5f; // 기본값 설정
+
+        // Animator 및 SpriteRenderer 설정
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
         SetDirection(DIRECTION_DOWN);
-        base.Start();
+
+        // ControlUnitStatus가 Monster.cs에서 자동 할당되었는지 확인
+        if (controlUnitStatus == null)
+        {
+            Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
+        }
     }
 
     private void Update()
     {
-        if (player == null) return;
+        if (player == null || controlUnitStatus == null) return;
 
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        // MonsterMovement 관련 코드 제거
+        // 플레이어가 탐지 범위 내에 있는 경우 플레이어를 타겟으로 설정
+        if (distanceToPlayer <= detectionRange)
+        {
+            currentTarget = player;
+        }
+        else
+        {
+            // ControlUnit의 접근 포인트 중 가장 가까운 포인트를 찾기
+            currentTarget = FindClosestAccessPoint();
+        }
 
-        UpdateState(distanceToPlayer, directionToPlayer);
+        Vector2 directionToTarget = (currentTarget.position - transform.position).normalized;
+        float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
+
+        UpdateState(distanceToTarget, directionToTarget);
 
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
         }
-
-        UpdateDebugInfo(directionToPlayer);
     }
-    
-    
-    private void UpdateState(float distanceToPlayer, Vector3 directionToPlayer)
-    {
-        // 방향 업데이트
-        UpdateDirection(directionToPlayer);
 
-        // 상태 업데이트
-        if (distanceToPlayer <= attackRange)
+    private Transform FindClosestAccessPoint()
+    {
+        Transform closestPoint = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (Transform accessPoint in controlUnitStatus.accessPoints)
+        {
+            float distance = Vector2.Distance(transform.position, accessPoint.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPoint = accessPoint;
+            }
+        }
+
+        return closestPoint;
+    }
+
+    private void UpdateState(float distanceToTarget, Vector2 directionToTarget)
+    {
+        UpdateDirection(directionToTarget);
+
+        if (distanceToTarget <= attackRange)
         {
             SetMoving(false);
             if (attackTimer <= 0 && !isAttacking)
             {
-                StartAttack(directionToPlayer);
+                StartAttack(directionToTarget);
             }
         }
         else
@@ -71,15 +110,14 @@ public class Treant : Monster
             SetMoving(true);
             if (!isAttacking)
             {
-                Move();
+                MoveTowards(currentTarget.position);
             }
         }
 
-        // 애니메이션 상태 업데이트
         UpdateAnimationState();
     }
 
-    private void UpdateDirection(Vector3 moveDirection)
+    private void UpdateDirection(Vector2 moveDirection)
     {
         float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
 
@@ -111,11 +149,6 @@ public class Treant : Monster
     {
         currentDirection = direction;
         animator.SetInteger("direction", direction);
-        
-        if (debugTimer < 0.1f)
-        {
-            Debug.Log($"Direction changed to: {GetDirectionName(direction)}");
-        }
     }
 
     private void SetMoving(bool moving)
@@ -130,28 +163,40 @@ public class Treant : Monster
         animator.SetBool("isAttacking", isAttacking);
     }
 
-    protected override void Move()
+    private void Move(Vector2 targetPosition)
     {
-        if (player == null || isAttacking) return;
-
-        Vector3 direction = (player.position - transform.position).normalized;
-        Vector3 movement = direction * (moveSpeed * Time.deltaTime);
-        transform.position += movement;
+        base.Move(targetPosition);
     }
 
-    private void StartAttack(Vector3 attackDirection)
+    private void MoveTowards(Vector2 targetPosition)
+    {
+        Move(targetPosition);
+    }
+
+    private void StartAttack(Vector2 attackDirection)
     {
         isAttacking = true;
         SetMoving(false);
         attackTimer = attackCooldown;
-        
+
         UpdateAnimationState();
-        
-        // 플레이어에게 데미지
-        PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
-        if (playerInfo != null)
+
+        // 플레이어 또는 제어 장치에게 데미지
+        if (currentTarget.CompareTag("Player"))
         {
-            playerInfo.TakeDamage((int)attackDamage);
+            PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
+            if (playerInfo != null)
+            {
+                playerInfo.TakeDamage((int)attackDamage);
+            }
+        }
+        else if (currentTarget.CompareTag("CU"))
+        {
+            ControlUnitStatus controlUnit = controlUnitStatus;
+            if (controlUnit != null)
+            {
+                controlUnit.GetDamage((int)attackDamage);
+            }
         }
 
         Invoke(nameof(FinishAttack), 1f);
@@ -161,43 +206,26 @@ public class Treant : Monster
     {
         isAttacking = false;
         UpdateAnimationState();
-        Debug.Log("Attack Finished");
-    }
-
-    private string GetDirectionName(int direction)
-    {
-        return direction switch
-        {
-            DIRECTION_DOWN => "Down",
-            DIRECTION_UP => "Up",
-            DIRECTION_LEFT => "Left",
-            DIRECTION_RIGHT => "Right",
-            _ => "Unknown"
-        };
-    }
-
-    private void UpdateDebugInfo(Vector3 moveDirection)
-    {
-        debugTimer += Time.deltaTime;
-        
-        if (debugTimer >= debugInterval)
-        {
-            Debug.Log($"Position - Monster: {transform.position}, Player: {player.position}");
-            Debug.Log($"Movement Vector3: ({moveDirection.x}, {moveDirection.y}, {moveDirection.z})");
-            Debug.Log($"Current State - Direction: {GetDirectionName(currentDirection)}, Moving: {isMoving}, Attacking: {isAttacking}");
-            debugTimer = 0f;
-        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
         if (player != null)
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(transform.position, player.position);
+        }
+
+        // 현재 타겟이 설정되어 있는 경우, 타겟으로 가는 선 생성
+        if (currentTarget != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, currentTarget.position);
         }
     }
 }

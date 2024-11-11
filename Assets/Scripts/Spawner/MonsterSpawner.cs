@@ -24,7 +24,7 @@ public class MonsterSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnRoutine());
-        Debug.Log($"MonsterSpawner starting at position: {transform.position}");
+        // Debug.Log($"MonsterSpawner starting at position: {transform.position}");
     }
 
     private IEnumerator SpawnRoutine()
@@ -52,7 +52,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (monsterData.monsterPrefab == null)
         {
-            Debug.LogWarning("Monster prefab is null!");
+            // Debug.LogWarning("Monster prefab is null!");
             return;
         }
 
@@ -72,7 +72,7 @@ public class MonsterSpawner : MonoBehaviour
         monster.transform.localScale = desiredScale;
     
         // 디버그 로그 추가
-        Debug.Log($"Monster spawned with scale: {monster.transform.localScale}");
+        // Debug.Log($"Monster spawned with scale: {monster.transform.localScale}");
     
         // 플레이어 찾아서 할당
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -82,7 +82,7 @@ public class MonsterSpawner : MonoBehaviour
             if (monsterComponent != null)
             {
                 monsterComponent.player = player.transform;
-                Debug.Log($"Player reference set for monster at {monster.transform.position}");
+                // Debug.Log($"Player reference set for monster at {monster.transform.position}");
             }
         }
     }

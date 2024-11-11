@@ -17,22 +17,14 @@ public class ControlUnitStatus : MonoBehaviour
     private GameObject[] units;//현재 가동 중인 타워 배열
     List<GameObject> unitsList = new List<GameObject>();
     
+    // 몬스터가 공격할 제어 장치 접근 포인트들
+    [Header("Access Points")]
+    public Transform[] accessPoints; 
+
     //  UI와의 Event 연결
     public UnityEvent<int, int> onCUHpChange = new UnityEvent<int, int>();
     public UnityEvent<int, int> onCUPowerChange = new UnityEvent<int, int>();
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // CurrentPower++;//debug
-    }
-
     public void AddUnit(int power)
     {
         currentPower = currentPower - power;
@@ -41,7 +33,8 @@ public class ControlUnitStatus : MonoBehaviour
 
     public void RemoveUnit(int power)
     {
-        currentPower = currentPower + power;
+        //  반드시 이 Method를 거쳐야 합니다. (천천히 파워가 올라감)
+        RecoverPower(power);
         onCUPowerChange.Invoke(currentPower, maxPower);
     }
 
@@ -71,6 +64,55 @@ public class ControlUnitStatus : MonoBehaviour
     {   
         curHealth += repair;
         onCUHpChange.Invoke(curHealth, maxHealth);
+    }
+
+    public int GetMaxHp()
+    {
+        return maxHealth;
+    }
+    public int GetCurHp()
+    {
+        return curHealth;
+    }
+    public int GetMaxPower()
+    {
+        return maxPower;
+    }
+    public int GetCurPower()
+    {
+        return currentPower;
+    }
+
+    public bool CheckEnoughPower(int offset)
+    {
+        int diff = currentPower - offset;
+
+        return (diff >= 0 ? true : false);
+    }
+
+    //  파워 회복량, 속도
+    [SerializeField] private int powerOffset = 1;
+    [SerializeField] private float recoverSpeed = 0.5f;
+
+    private void RecoverPower(int power)
+    {
+        StartCoroutine(RecoverCoroutine(power));
+    }
+
+    private IEnumerator RecoverCoroutine(int power)
+    {
+        //  tmp는 혹시 몰라 만들어 놓는다.(실제 회복량은 다를 수 있기에 복원을 위해)
+        int tmp = power;
+        while (true)
+        {
+            if (tmp <= 0) yield break;
+            
+            tmp--;
+            currentPower += powerOffset;
+            
+            onCUPowerChange.Invoke(currentPower,maxPower);
+            yield return new WaitForSeconds(recoverSpeed);
+        }
     }
 }
 
