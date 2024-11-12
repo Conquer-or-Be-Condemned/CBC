@@ -9,7 +9,6 @@ public class TowerBullet : MonoBehaviour
     [Header("References")]
     [SerializeField] Rigidbody2D rb;
     
-
     [Header("Attributes")] 
     [SerializeField] private float bulletSpeed = 5f;
     [SerializeField] private float bulletDamage = 10f;
@@ -20,17 +19,14 @@ public class TowerBullet : MonoBehaviour
     public void SetTarget(Transform target)
     {
         this._target = target;
-        StartCoroutine(destroyObjectIfNotHit());
+        StartCoroutine(DestroyObjectIfNotHit());
         direction = (_target.position - transform.position).normalized;
     }
 
     private void FixedUpdate()
     {
-        if (!_target) return; // 타겟이 없으면 아무 것도 하지 않음
-
-        // 타겟을 향하는 방향 벡터 계산
+        if (_target==null) return; // 타겟이 없으면 아무 것도 하지 않음
         
-
         // Rigidbody2D의 속도를 방향과 속도에 맞게 설정
         rb.velocity = direction * bulletSpeed;
 
@@ -38,8 +34,7 @@ public class TowerBullet : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
-
-    private IEnumerator destroyObjectIfNotHit()
+    private IEnumerator DestroyObjectIfNotHit()
     {
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);

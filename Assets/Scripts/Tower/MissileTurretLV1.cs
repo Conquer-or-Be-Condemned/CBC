@@ -16,8 +16,6 @@ public class MissileTurretLV1 : DefaultMissileTurret
     [SerializeField] private Transform missileSpawnPoint2;    //미사일 스폰 지점
     [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
     
-    //[SerializeField] private GameObject towerPrefab;
-    
     [Header("Attributes")]
     [SerializeField] private float range;         // 타워 사거리
     [SerializeField] private float rotationSpeed;// 타워 회전 속도
@@ -29,11 +27,9 @@ public class MissileTurretLV1 : DefaultMissileTurret
     private void Start()
     {
         base.TurretRotationPoint = this.turretRotationPoint;
-        base.EnemyMask = this.enemyMask;
         base.Animator = this.animator;
         base.GunRenderer = this.gunRenderer;
         base.Range = this.range;
-        base.RotationSpeed = this.rotationSpeed;
         base.FireRate = this.fireRate;
         base.Power = this.power;
         base.OverHeatMissileCount = this.overHeatMissileCount;
@@ -64,7 +60,6 @@ public class MissileTurretLV1 : DefaultMissileTurret
         {
             missileScript2.SetTarget(Target1);
         }
-    
         Target1 = null;
         Target2 = null;
     }

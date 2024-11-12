@@ -63,6 +63,7 @@ public class SceneController : MonoBehaviour
     {
         NowScene = SceneManager.GetActiveScene().name;
         StageInit = false;
+        AudioManager.instance.PlayBGM(AudioManager.Bgm.StartingScene);
     }
 
     public void FixedUpdate()

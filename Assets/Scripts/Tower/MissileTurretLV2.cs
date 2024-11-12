@@ -31,17 +31,14 @@ public class MissileTurretLV2 : DefaultMissileTurret
     private void Start()
     {
         base.TurretRotationPoint = this.turretRotationPoint;
-        base.EnemyMask = this.enemyMask;
         base.Animator = this.animator;
         base.GunRenderer = this.gunRenderer;
         base.Range = this.range;
-        base.RotationSpeed = this.rotationSpeed;
         base.FireRate = this.fireRate;
         base.Power = this.power;
         base.OverHeatMissileCount = this.overHeatMissileCount;
         base.Level = 2;
-        base.Name = "Missile Turret";
-        gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+        GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
     }
     
     protected override void Shoot()
@@ -135,10 +132,10 @@ public class MissileTurretLV2 : DefaultMissileTurret
     }
     protected override void RotateTowardsTarget()//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
     {
-        if (Target1 == null) return;
+        if (Target1 == null||Target4 == null||transform == null) return;
         if (Target4 != null)
         {
-            float angle = Mathf.Atan2((Target1.position.y + Target4.position.y)/2 - transform.position.y, (Target1.position.x + Target2.position.x)/2  - transform.position.x) * Mathf.Rad2Deg - 90f;
+            float angle = Mathf.Atan2((Target1.position.y + Target4.position.y)/2 - transform.position.y, (Target1.position.x + Target4.position.x)/2  - transform.position.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }

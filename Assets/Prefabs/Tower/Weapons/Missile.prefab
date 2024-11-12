@@ -162,10 +162,10 @@ MonoBehaviour:
   explodePrefab: {fileID: 1969113204059454481, guid: 6f350330cacf045bb8ffa65e02f6d63f, type: 3}
   explosionPosition: {fileID: 1343882165474493921}
   initialSpeed: 10
-  maxSpeed: 30
-  turnSpeed: 180
-  acceleration: 10
-  initialStraightTime: 1
+  maxSpeed: 35
+  turnSpeed: 140
+  acceleration: 20
+  initialStraightTime: 1.5
   bulletDamage: 100
   explosionRange: 5
 --- !u!50 &5152064728928936489
