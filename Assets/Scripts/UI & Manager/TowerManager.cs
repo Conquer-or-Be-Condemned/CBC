@@ -11,6 +11,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+/*
+ *  타워 메뉴와 타워 전체를 관리하는 스크립트입니다.
+ *  인 게임 내에서 UI의 핵심적인 기능들을 사용할 수 있게 해주니,
+ *  코드 수정에 각별히 조심해야 합니다.
+ */
+
 public class TowerManager : MonoBehaviour
 {
     public GameObject towerMenu;
@@ -39,6 +45,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private TMP_Text damageText;
     [SerializeField] private TMP_Text rpm;
 
+    //  클릭과 관련된 인스턴스
     private RaycastHit2D hit;
     private Animator _animator;
     private bool isVisible;
@@ -46,30 +53,18 @@ public class TowerManager : MonoBehaviour
     private DefaultMissileTurret curMissileTower;
     private Transform curTower;
     
-
+    //  게임 시작 시 초기화
     private void InGame()
     {
-        //  리스트 초기화
+        //  리스트 초기화 및 타워 관련 정보 초기화
         towerList.Clear();
-
         GameObject[] towerObjects = GameObject.FindGameObjectsWithTag(towerTag);
         towerList.AddRange(towerObjects);
-        
         totalTowers = towerList.Count;
         activeTowers = 0;
         
-        //  만일 TowerMenu가 비어있다면 -> Object : MenuBox, Tag : TowerMenu
-        if (towerMenu == null)
-        {
-            towerMenu = GameObject.FindGameObjectWithTag("TowerMenu");
-            
-            if (towerMenu == null)
-            {
-                Debug.LogError("Tower Menu가 존재하지 않습니다. MenuBox를 연결해주세요.");
-            }
-        }
-        
-        //  Menu 요소 찾기
+        //  Menu 요소 자동 찾기
+        //  현재는 사용하지 않는 코드
         // nameText = GameObject.Find("TowerName").GetComponent<TMP_Text>();
         // activateButton = GameObject.Find("ActivationButton");
         // activateText = GameObject.Find("TowerInfoAct").GetComponent<TMP_Text>();
@@ -84,34 +79,46 @@ public class TowerManager : MonoBehaviour
         curCanonTower = null;
         curTower = null;
 
+        //  타워 메뉴의 Activate 버튼 연결
         activateButton.GetComponent<Button>().onClick.AddListener(SetTowerActive);
         
-        //  Cursor
+        //  Cursor 변경
         GameManager.GetInstance().GetComponent<CursorManager>().SetInGameCursor();
         
-        //  ControlUnit
+        //  자동 찾기 목록
         if (controlUnit == null)
         {
             controlUnit = GameObject.Find("ControlUnit").GetComponent<ControlUnitStatus>();
         }
-
-        //  AlertManager
         if (alertManager == null)
         {
             alertManager = GameObject.Find("AlertManager").GetComponent<AlertManager>();
         }
+        if (towerMenu == null)
+        {
+            towerMenu = GameObject.FindGameObjectWithTag("TowerMenu");
+            
+            if (towerMenu == null)
+            {
+                Debug.LogError("Tower Menu가 존재하지 않습니다. MenuBox를 연결해주세요.");
+            }
+        }
 
+        //  게임 시작
         GameManager.InGame = true;
     }
-
+    
     private void Awake()
     {
         InGame();
+        //  초기화 완료
         GameManager.InGameInit = false;
 
+        //  메뉴 내의 폰트 사이즈    ->  현재는 의미 없음
         defaultFontSize = 14f;
         missileFontSize = 14f;
-
+        
+        //  메뉴의 기본 위치
         menuOriginalPos = towerMenu.GetComponent<RectTransform>().anchoredPosition;
     }
 
@@ -127,13 +134,14 @@ public class TowerManager : MonoBehaviour
 
     private void Update()
     {
-        //  마우스 클릭
+        //  마우스 클릭 감지
         if (!GameManager.InGameInit)
         {
             ClickProcess();
         }
     }
 
+    //  현재는 사용하지 않는 코드
     private void FindActiveTower()
     {
         activeTowers = totalTowers;
@@ -148,12 +156,13 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    //  활성화 된 타워의 수를 확인할 수 있음(디버깅 용)
     private void SetUITowerInfo()
     {
         towerInfo.SetText("Active Tower : " + activeTowers+" / "+ totalTowers);
     }
     
-    //  UI 마우스 클릭 시! - RayCast2D
+    //  마우스 클릭 시 타워를 클릭했는지 확인
     private void ClickProcess()
     {
         if (Input.GetMouseButtonDown(0))
@@ -161,34 +170,34 @@ public class TowerManager : MonoBehaviour
             Vector2 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             hit = Physics2D.Raycast(mousePoint, Vector2.zero);
             
-            //  UI 클릭 감지    ->  이해하기 어려울거임
+            //  UI 클릭 감지을 위한 변수
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
             {
                 position = Input.mousePosition
             };
             
-            //  Ui 클릭
+            //  Ui 클릭 시
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 Debug.Log("UI is Clicked.");
             }
             
-            //  DefaultCanonTower
+            //  DefaultCanonTower을 클릭 시
             else if (hit.collider!=null && 
                 hit.collider.GetComponentInParent<DefaultCanonTurret>() != null)
             {
-                //  Missile 타워 해제
+                //  Missile 타워 해제 (반드시)
                 curMissileTower = null;
                 
-                //  같은 애를 다시 클릭했다면 무시
+                //  동일 오브젝트를 다시 클릭했다면 무시
                 if (curCanonTower == hit.collider.GetComponentInParent<DefaultCanonTurret>())
                 {
                     return;
                 }
                 
                 curCanonTower = hit.collider.GetComponentInParent<DefaultCanonTurret>();
-                // curTower = hit.collider.GetComponentInParent<Transform>();
 
+                //  이미 UI가 보여지고 있다면, 메뉴에 햅틱
                 if (isVisible)
                 {
                     StartCoroutine(ShakeMenuCoroutine());
@@ -202,14 +211,14 @@ public class TowerManager : MonoBehaviour
                 }
             }
             
-            //  DefaultMissleTower
+            //  DefaultMissleTower을 클릭 시
             else if (hit.collider != null &&
                      hit.collider.GetComponentInParent<DefaultMissileTurret>() != null)
             {
-                //  Canon Tower 해제
+                //  Canon Tower 해제 (반드시)
                 curCanonTower = null;
                 
-                //  같은 애를 다시 클릭했다면 무시
+                //  동일 오브젝트를 다시 클릭했다면 무시
                 if (curMissileTower == hit.collider.GetComponentInParent<DefaultMissileTurret>())
                 {
                     return;
@@ -217,6 +226,7 @@ public class TowerManager : MonoBehaviour
                 
                 curMissileTower = hit.collider.GetComponentInParent<DefaultMissileTurret>();
 
+                //  이미 UI가 보여지고 있다면, 메뉴에 햅틱
                 if (isVisible)
                 {
                     StartCoroutine(ShakeMenuCoroutine());
@@ -229,6 +239,7 @@ public class TowerManager : MonoBehaviour
                     isVisible = true;
                 }
             }
+            //  타워와 UI가 클릭되지 않은 경우(메뉴를 집어 넣음)
             else
             {
                 Debug.Log("Tower is not detected.");
@@ -241,13 +252,16 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    //  isVisible을 확인하고 애니메이션 상태 변경
     private void SetVisible()
     {
         _animator.SetBool("isVisible", isVisible);
     }
 
+    //  메뉴에 클릭한 CanonTower 정보를 Display
     private void SetCanonTowerInfo()
     {
+        //  디버깅 용
         if (curCanonTower == null)
         {
             Debug.LogError("Tower is Null");
@@ -259,7 +273,7 @@ public class TowerManager : MonoBehaviour
         nameText.SetText(curCanonTower.GetName());
         levelText.SetText("Lv " + curCanonTower.GetLevel());
         powerText.SetText("Power : " + curCanonTower.GetPower());
-
+        
         if (curCanonTower.isActivated)
         {
             activateText.SetText("Activate");
@@ -274,6 +288,7 @@ public class TowerManager : MonoBehaviour
         //  Damage와 RPM은 메소드가 준비되지 않음.
     }
     
+    //  메뉴에 클릭한 MissileTower 정보를 Display
     private void SetMissileTowerInfo()
     {
         if (curMissileTower == null)
@@ -302,11 +317,12 @@ public class TowerManager : MonoBehaviour
         //  Damage와 RPM은 메소드가 준비되지 않음.
     }
     
-
+    //  타워의 활성화 상태를 변경할 수 있음 또한 미니맵에 표시되는 색상을 변경
     public void SetTowerActive()
     {
         if (curCanonTower != null)
         {
+            //  이미 활성화 상태
             if (curCanonTower.isActivated)
             {
                 curCanonTower.DeactivateTurret();
@@ -323,6 +339,7 @@ public class TowerManager : MonoBehaviour
                     }
                 }
             }
+            //  비활성화 상태
             else
             {
                 if (controlUnit.CheckEnoughPower(curCanonTower.GetPower()))
@@ -349,6 +366,7 @@ public class TowerManager : MonoBehaviour
         }
         else if (curMissileTower != null)
         {
+            //  이미 활성화 상태
             if (curMissileTower.isActivated)
             {
                 curMissileTower.DeactivateTurret();
@@ -365,6 +383,7 @@ public class TowerManager : MonoBehaviour
                     }
                 }
             }
+            //  비활성화 상태
             else
             {
                 if (controlUnit.CheckEnoughPower(curMissileTower.GetPower()))
@@ -390,6 +409,7 @@ public class TowerManager : MonoBehaviour
                 }
             }
         }
+        //  디버깅 용
         else
         {
             Debug.LogError("Tower is null");
