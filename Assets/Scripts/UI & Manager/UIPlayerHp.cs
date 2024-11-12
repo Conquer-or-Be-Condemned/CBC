@@ -18,8 +18,6 @@ public class UIPlayerHp : MonoBehaviour
     
     [SerializeField] private GameObject player;
     
-    
-
     private void Awake()
     {
         if (player == null)

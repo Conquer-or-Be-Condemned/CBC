@@ -49,6 +49,7 @@ public class UICUInfo : MonoBehaviour
         hpText.SetText(ratio + "%");
     }
     
+    //  Power에 대한 변동사항이 있을 때 호출됩니다.
     public void SetUICUPowerInfo(int curPower, int maxPower)
     {
         int ratio = (int)((curPower / (float)maxPower) * 100);

@@ -11,7 +11,6 @@ using UnityEngine;
 
 public class AlertManager : MonoBehaviour
 {
-    
     [SerializeField] private GameObject alertBox;
     [SerializeField] private TMP_Text alertInfo;
     
@@ -23,11 +22,13 @@ public class AlertManager : MonoBehaviour
     //  Alert Text 배열입니다. 사용에 주의하세요.
     private List<String> alertTexts = new List<String>();
 
+    //  게임 내에서만 실행 됨
     private void Start()
     {
         InGame();
     }
 
+    //  인 게임에서 필요한 변수들과 세팅들을 초기화 시킴
     private void InGame()
     {
         if (alertBox == null)
@@ -87,6 +88,7 @@ public class AlertManager : MonoBehaviour
         StartCoroutine(SubDelay());
     }
 
+    //  알림창 애니메이션
     private IEnumerator SubDelay()
     {
         alertBox.SetActive(true);
@@ -99,6 +101,7 @@ public class AlertManager : MonoBehaviour
     }
 
     //  Alert 관련 추가는 여기서 하면 됩니다.
+    //  Notion의 데이터 베이트 참고 바랍니다.
     private void SetAlertText()
     {
         alertTexts.Clear();
