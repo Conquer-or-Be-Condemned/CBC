@@ -41,7 +41,7 @@ public class LoadingManager : MonoBehaviour
         
         SetTipList();
         SetTip();
-        
+
         StartCoroutine(LoadingCoroutine());
     }
 
@@ -65,14 +65,15 @@ public class LoadingManager : MonoBehaviour
     {
         tipList.Clear();
         
-        tipList.Add("[Tips] Turning on the tower is good before the wave starts.");
+        tipList.Add("[Tips] Recommend turning on towers before the wave starts.");
         tipList.Add("[Tips] Hello, World!");
         tipList.Add("[Tips] It's very useful.");
         tipList.Add("[Tips] Please save electricity.");
         tipList.Add("[Tips] When you cook ramen, put the soup first.");
-        tipList.Add("[Tips] Sponsorship is always welcome.");
+        tipList.Add("[Tips] We always welcome sponsorship.");
         tipList.Add("[Tips] Why is the team name HJD? Well, ask Jae-dong.");
         tipList.Add("[Tips] I'm sorry. Actually, I don't have much to give you.");
+        tipList.Add("[Tips] Minimap is a very useful map...");
     }
 
     //  랜덤 Seed를 통해서 팁 하나를 리턴

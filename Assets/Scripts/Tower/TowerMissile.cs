@@ -23,11 +23,13 @@ public class TowerMissile : MonoBehaviour
     [SerializeField] private float explosionRange = 5f;
     
     private Transform _target;
-    private bool _isHoming = false;
     private Vector2 _initialDirection;
+    private SpriteRenderer _sr;
+    private int _maxReassign;
     private float _currentSpeed;
+    private bool _isHoming = false;
 
-    public void SetTarget(Transform target)
+    public void SetTarget(Transform target)//각 미사일 터렛에서 호출됨
     {
         _target = target;
         _initialDirection = transform.up;
@@ -37,20 +39,21 @@ public class TowerMissile : MonoBehaviour
         StartCoroutine(InitialStraightMovement());
         StartCoroutine(ExplodeMissileIfNotHit());
     }
-
-    private IEnumerator InitialStraightMovement()
+    private void Awake()
     {
-        yield return new WaitForSeconds(initialStraightTime);
-        _isHoming = true;
+        _sr = gameObject.GetComponent<SpriteRenderer>();
     }
-
     private void FixedUpdate()
     {
-        if(_target != null)
-            Debug.DrawLine(transform.position, _target.position, Color.blue, 0.1f);
+        DrawTargetLineToTarget();
+        SearchForNewTarget();
+        AccelerateToTarget();
+    }
+    private void SearchForNewTarget()//목표하던 목표가 사라지면 호출
+    {
         if (_target == null)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 100);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 50);
             foreach (var monster in hits)
             {
                 if (monster.CompareTag("Enemy"))
@@ -60,8 +63,10 @@ public class TowerMissile : MonoBehaviour
                 }
             }
         }
-        if (!_isHoming) return;
-
+    }
+    private void AccelerateToTarget()
+    {
+        if (!_isHoming||!_target) return;
         // 현재 진행 방향과 목표 방향 사이의 각도 계산
         Vector2 directionToTarget = ((Vector2)_target.position - rb.position).normalized;
         Vector2 currentDirection = rb.velocity.normalized;
@@ -85,38 +90,27 @@ public class TowerMissile : MonoBehaviour
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
-
-
-    // ... (나머지 코드는 동일)
-
-    // 벡터를 특정 각도만큼 회전시키는 헬퍼 함수
-    private Vector2 RotateVector2(Vector2 vector, float angle)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        float radian = angle * Mathf.Deg2Rad;
-        float cos = Mathf.Cos(radian);
-        float sin = Mathf.Sin(radian);
-        
-        return new Vector2(
-            vector.x * cos - vector.y * sin,
-            vector.x * sin + vector.y * cos
-        );
+        _sr.enabled = false;
+        StartCoroutine(DestroyObject());
+        GameObject explosion = Instantiate(explodePrefab, explosionPosition.position, Quaternion.identity);
+        explosion.GetComponent<Explode>().TriggerExplosion();
+    }
+    //for Coroutine Methods------------------------------------------------------------
+    private IEnumerator InitialStraightMovement()//일정시간 직진 후 목표를 향해 가속
+    {
+        yield return new WaitForSeconds(initialStraightTime);
+        _isHoming = true;
     }
 
-    private IEnumerator ExplodeMissileIfNotHit()
+    private IEnumerator ExplodeMissileIfNotHit()//미사일 임무 시간 내에 
     {
         yield return new WaitForSeconds(10f);
         StartCoroutine(DestroyObject());
         GameObject explosion = Instantiate(explodePrefab, explosionPosition.position, Quaternion.identity);
         explosion.GetComponent<Explode>().TriggerExplosion();
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        StartCoroutine(DestroyObject());
-        GameObject explosion = Instantiate(explodePrefab, explosionPosition.position, Quaternion.identity);
-        explosion.GetComponent<Explode>().TriggerExplosion();
-    }
-
     private IEnumerator DestroyObject()
     {
         yield return new WaitForSeconds(0.1f);
@@ -130,13 +124,26 @@ public class TowerMissile : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
+    //for debug-------------------------------------------------------------
     private void OnDrawGizmosSelected()
     {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, explosionRange);
     }
-    
-    
-    
+    private void DrawTargetLineToTarget()
+    {
+        if(_target != null)
+            Debug.DrawLine(transform.position, _target.position, Color.blue, 0.1f);
+    }
+    // private Vector2 RotateVector2(Vector2 vector, float angle)
+    // {
+    //     float radian = angle * Mathf.Deg2Rad;
+    //     float cos = Mathf.Cos(radian);
+    //     float sin = Mathf.Sin(radian);
+    //     
+    //     return new Vector2(
+    //         vector.x * cos - vector.y * sin,
+    //         vector.x * sin + vector.y * cos
+    //     );
+    // }
 }

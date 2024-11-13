@@ -30,6 +30,7 @@ public class StageInfoManager : MonoBehaviour
     
     private void Start()
     {
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,true);
         curStage = GameManager.CurStage;
 
         //  For Debugging
@@ -126,11 +127,11 @@ public class StageInfoManager : MonoBehaviour
     {
         nameList.Add("HJD-1029X2");
         
-        storyList.Add("This planet is our first destination. It has a very similar environment " +
-                      "to the Earth, but it turns out that the enemy force is not large. " +
-                      "It is the planet our vanguard tried to capture the most. " +
-                      "But we can't find any more traces of them. " +
-                      "Let's expand our colonies from this planet. Good luck, developer.");
+        storyList.Add("  This planet will be our first destination. It has similar environment with Earth" +
+                      ", but has strong enemy forces defending it.\n\n" +
+                      "  Our vanguard tried their best to conquer, " +
+                      "but now we can't find traces of them anymore. " +
+                      "Let's colonize this Planet.\nTake care and Focus Developer.....\nGood Luck.....");
         
         infoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
     }

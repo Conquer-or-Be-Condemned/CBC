@@ -61,7 +61,7 @@ public class AlertManager : MonoBehaviour
         //_camoTurretLV1.onActivateChange.AddListener(Show);
         
         //  시작 시 알림 등장
-        Show("Annihilate the incoming enemies,\n and guard the controls.");
+        Show("Watch out next wave is coming!\nTry your best Developer");
     }
 
     //  원하는 메시지 쓰고 싶을 때 사용
@@ -106,8 +106,8 @@ public class AlertManager : MonoBehaviour
     {
         alertTexts.Clear();
         
-        alertTexts.Add("You've not Enough Power");
-        alertTexts.Add("Tower has been disabled.");
+        alertTexts.Add("You are out of power!!!");
+        alertTexts.Add("Tower has been deactivated.");
         alertTexts.Add("Tower has been activated.");
     }
 }

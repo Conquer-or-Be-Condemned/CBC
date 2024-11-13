@@ -17,7 +17,7 @@ public class CursorManager : MonoBehaviour
 
     //  인게임에서 커서를 바꿈
     public void SetInGameCursor()
-    {
+    { 
         Cursor.SetCursor(inGameCursor,Vector2.zero, CursorMode.Auto);
     }
 

@@ -38,7 +38,7 @@ public class ControlUnitStatus : MonoBehaviour
         onCUPowerChange.Invoke(currentPower, maxPower);
     }
 
-    public int getCurrentPower()
+    public int GetCurrentPower()
     {
         return currentPower;
     }
