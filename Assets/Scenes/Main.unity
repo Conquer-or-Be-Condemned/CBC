@@ -1124,7 +1124,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 988a36379972ab4419593ee644b786ef, type: 3}
   - {fileID: 8300000, guid: ce8f3b950a159fb4782fff71edccdaae, type: 3}
   bgmVolume: 0.7
-  bgmChannels: 16
+  bgmChannels: 3
   sfxClips: []
   sfxVolume: 0.5
   sfxChannels: 16

@@ -24,6 +24,7 @@ public class StageInfoManager : MonoBehaviour
     
     private void Start()
     {
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,true);
         curStage = GameManager.CurStage;
 
         //  For Debugging

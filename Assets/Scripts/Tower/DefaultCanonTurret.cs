@@ -207,7 +207,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     //for Control Unit----------------------------------------------------------
     private void AddTurret()//ControlUnitStatus script 사용(CheckToggle에서 수행)
     {
-        if (_cus.getCurrentPower() >= Power)
+        if (_cus.GetCurrentPower() >= Power)
         {
             _cus.AddUnit(Power);
         }

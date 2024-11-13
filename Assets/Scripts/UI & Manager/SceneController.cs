@@ -7,6 +7,7 @@ using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 /*
  *  Scene을 String으로 인해 변하게 할 수 있게 하는 스크립트입니다.
@@ -63,7 +64,7 @@ public class SceneController : MonoBehaviour
     {
         NowScene = SceneManager.GetActiveScene().name;
         StageInit = false;
-        AudioManager.instance.PlayBGM(AudioManager.Bgm.StartingScene);
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,true);
     }
 
     public void FixedUpdate()
@@ -109,6 +110,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(2.8f);
         ChangeScene(stageList[GameManager.CurStage - 1]);
         GameManager.InGameInit = true;
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
     }
 
     public void SetStageInitTrue()
@@ -118,6 +120,7 @@ public class SceneController : MonoBehaviour
 
     public static void ChangeScene(string sceneName)
     {
+        
         Debug.Log("Go to " + sceneName);
         SceneManager.LoadScene(sceneName);
         NowScene = sceneName;

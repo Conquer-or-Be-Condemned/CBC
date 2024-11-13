@@ -30,7 +30,8 @@ public class LoadingManager : MonoBehaviour
         
         SetTipList();
         SetTip();
-
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,false);
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,false);
         StartCoroutine(LoadingCoroutine());
     }
 

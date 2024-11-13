@@ -9,14 +9,12 @@ public class CanonTurretLv2 : DefaultCanonTurret
 {   
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint; // 타워 회전 각도
+    [SerializeField] private Transform[] bulletSpawnPoint;    //총알 스폰 지점
+    [SerializeField] private Transform []bulletFireDirection;    //총 격발 방향
     [SerializeField] private LayerMask enemyMask;           //raycast 감지 Layer
     [SerializeField] private Animator animator;             //타워 부분 Animator
     [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
     [SerializeField] private GameObject bulletPrefab;       //총알 오브젝트 생성 위한 변수
-    [SerializeField] private Transform bulletSpawnPoint1;    //총알 스폰 지점
-    [SerializeField] private Transform bulletSpawnPoint2;    //총알 스폰 지점
-    [SerializeField] private Transform bulletFireDirection1;    //총 격발 방향
-    [SerializeField] private Transform bulletFireDirection2;    //총 격발 방향
     
     [Header("Attributes")] 
     [SerializeField] private new float range;        // 타워 사거리
@@ -25,8 +23,11 @@ public class CanonTurretLv2 : DefaultCanonTurret
     [SerializeField] private new int power;            //타워 사용 전력량
     [SerializeField] private new float overHeatTime;    //~초 격발시 과열
     [SerializeField] private new float coolTime;        //~초 지나면 냉각
+    
+    private GameObject []_bulletObj;
     private void Start()
     {
+        _bulletObj = new GameObject[bulletSpawnPoint.Length];
         base.GunRenderer = this.gunRenderer;
         base.EnemyMask = this.enemyMask;
         base.Animator = this.animator;
@@ -43,15 +44,17 @@ public class CanonTurretLv2 : DefaultCanonTurret
     override 
     protected void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
     {
+        Debug.Log(bulletSpawnPoint.Length);
+        Debug.Log(bulletFireDirection.Length);
+
         animator.enabled = true; // 발사할 때 애니메이션 시작
-        GameObject bulletObj1 = Instantiate(bulletPrefab, bulletSpawnPoint1.position, Quaternion.identity);
-        TowerBullet towerBulletScript1 = bulletObj1.GetComponent<TowerBullet>();
-        towerBulletScript1.SetTarget(bulletFireDirection1);
-        GameObject bulletObj2 = Instantiate(bulletPrefab, bulletSpawnPoint2.position, Quaternion.identity);
-        TowerBullet towerBulletScript2 = bulletObj2.GetComponent<TowerBullet>();
-        towerBulletScript2.SetTarget(bulletFireDirection2);
-        // 애니메이션을 짧은 시간 뒤에 종료
-        // StartCoroutine(StopAnimation());
+        for (int i = 0; i < 2; i++)
+        {
+            _bulletObj[i] = Instantiate(bulletPrefab, bulletSpawnPoint[i].position, Quaternion.identity);
+            TowerBullet towerBulletScript = _bulletObj[i].GetComponent<TowerBullet>();
+            towerBulletScript.SetTarget(bulletFireDirection[i]);
+        }
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.fire);
     }
     
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)

@@ -85,13 +85,15 @@ public class MissileTurretLV1 : DefaultMissileTurret
             Target1 = availableTargets[0].collider.transform;
             Target2 = availableTargets[0].collider.transform;
             availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
-            availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
+            if(availableTargets.Count !=0)
+                availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
         }
         if (availableTargets.Count > 0)
         {
             Target2 = availableTargets[0].collider.transform;
             availableTargets.RemoveAt(0);
-            availableTargets.RemoveAt(0);
+            if(availableTargets.Count !=0)
+                availableTargets.RemoveAt(0);
         }
     }
     

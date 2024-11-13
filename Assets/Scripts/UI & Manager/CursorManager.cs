@@ -14,7 +14,7 @@ public class CursorManager : MonoBehaviour
     }
 
     public void SetInGameCursor()
-    {
+    { 
         Cursor.SetCursor(inGameCursor,Vector2.zero, CursorMode.Auto);
     }
 
