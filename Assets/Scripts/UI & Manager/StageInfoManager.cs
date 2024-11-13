@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 /*
  *  Stage 선택 창에서 Stage에 대한 정보를 출력하고 저장하는 스크립트입니다.
  */
+
 public class StageInfoManager : MonoBehaviour
 {
     
@@ -27,6 +28,9 @@ public class StageInfoManager : MonoBehaviour
     public List<string> infoList = new List<string>();
 
     public static bool StageInit;
+    
+    //  각 스테이지의 웨이브 정보를 저장하는 클래스 타입
+    public static List<int> WaveInfoes = new List<int>();
     
     //  현재 Display되고 있는 스테이지
     private void Awake()
@@ -133,5 +137,15 @@ public class StageInfoManager : MonoBehaviour
                       "Let's colonize this Planet.\nTake care and Focus Developer.....\nGood Luck.....");
         
         infoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
+    }
+    
+    //  웨이브 저장을 위한 Method
+    public static void SetWaveInfo()
+    {
+        WaveInfoes.Add(9);
+    }
+    public static int GetWaveInfo()
+    {
+        return WaveInfoes[GameManager.CurStage - 1];
     }
 }
