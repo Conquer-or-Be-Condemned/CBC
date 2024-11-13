@@ -22,6 +22,7 @@ public class GeneralManager : Singleton<GeneralManager>
     public MiniMapController minimapController;
     public AlertManager alertManager;
     public TowerManager towerManager;
+    public InGameManager inGameManager;
     
     //  UI Managements
     public UICUInfo uiCUInfo;
@@ -76,11 +77,13 @@ public class GeneralManager : Singleton<GeneralManager>
         minimapController = GameObject.Find("UIMiniMap").GetComponent<MiniMapController>();
         alertManager = GameObject.Find("AlertManager").GetComponent<AlertManager>();
         towerManager = GameObject.Find("TowerManager").GetComponent<TowerManager>();
+        inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
         
         if(cameraController == null) Debug.LogError("Camera Controller 스크립트 오류");
         if(minimapController == null) Debug.LogError("MiniMap Controller 스크립트 오류");
         if(alertManager == null) Debug.LogError("Alert Manager 스크립트 오류");
         if(towerManager == null) Debug.LogError("Tower Manager 스크립트 오류");
+        if(inGameManager == null) Debug.LogError("InGame Manager 스크립트 오류");
     }
 
     private void DeallocateInGameManagers()
