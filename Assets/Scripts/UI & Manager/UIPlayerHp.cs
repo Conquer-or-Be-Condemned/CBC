@@ -16,27 +16,26 @@ public class UIPlayerHp : MonoBehaviour
     [SerializeField] private int maxCell;
     [SerializeField] private int curCell;
     
-    [SerializeField] private GameObject player;
-    
-    private void Awake()
+    private void Start()
     {
-        if (player == null)
-        {
-            player = GameObject.FindWithTag("Player");
-            Debug.Log("UI - Player Object가 연결되었습니다.");
-        }
 
         if (cells.Length == 0)
         {
             cells = GameObject.FindGameObjectsWithTag("HpBar");
         }
         
-        //  플레이어와 UI 연결
-        player.GetComponent<PlayerInfo>().onHpChange.AddListener(SetUIPlayerHp);
-        
         maxCell = cells.Length;
     }
-    
+
+    private void FixedUpdate()
+    {
+        //  플레이어와 UI 연결 -> 시간 차 오류로 인해 Start에 넣지 않음
+        if (GameManager.Instance.player == null)
+        {
+            GameManager.Instance.player.GetComponent<PlayerInfo>().onHpChange.AddListener(SetUIPlayerHp);
+        }
+    }
+
 
     //  Player의 체력이 변동되었을 때만 호출
     public void SetUIPlayerHp(int curHp, int maxHp)
