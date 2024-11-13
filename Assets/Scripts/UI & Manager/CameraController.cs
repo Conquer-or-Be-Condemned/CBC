@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
     public GameObject target;
     public Tilemap map;
     
+    //  카메라의 부드러움의 정도
     [SerializeField] private float smoothSpeed = 0.125f;
     
     private float _cameraHalfHeight;
@@ -28,6 +29,7 @@ public class CameraController : MonoBehaviour
         //  항상 맵의 크기가 최적화되도록 추가한 코드
         map.CompressBounds();
     }
+    
     private void Start()
     {
         if (target == null)
@@ -35,6 +37,8 @@ public class CameraController : MonoBehaviour
             //  tag로 재 검색
             target = GameObject.FindGameObjectWithTag("Player");
         }
+        
+        //  카메라의 가로 세로의 절반 계산
         _cameraHalfHeight = Camera.main.orthographicSize;
         _cameraHalfWidth = Camera.main.aspect * Camera.main.orthographicSize;
     }

@@ -6,8 +6,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/*
+ *  Stage 선택 창에서 Stage에 대한 정보를 출력하고 저장하는 스크립트입니다.
+ */
 public class StageInfoManager : MonoBehaviour
 {
+    //  UI의 정보들
     [SerializeField] private TMP_Text planetName;
     [SerializeField] private TMP_Text planetStory;
     [SerializeField] private TMP_Text planetInfo;
@@ -16,10 +20,12 @@ public class StageInfoManager : MonoBehaviour
     
     [SerializeField] private GameObject warpButton;
     
+    //  정보 저장을 위한 List
     public List<String> nameList;
     public List<String> storyList;
     public List<String> infoList;
     
+    //  현재 Display되고 있는 스테이지
     private int curStage;
     
     private void Start()
@@ -28,13 +34,14 @@ public class StageInfoManager : MonoBehaviour
         curStage = GameManager.CurStage;
 
         //  For Debugging
-        if (curStage <= 0)
-        {
-            curStage = 1;
-        }
+        // if (curStage <= 0)
+        // {
+        //     curStage = 1;
+        // }
         
         SetPlanet();
        
+        //  모든 정보를 공백으로 초기화
         planetName.SetText("");
         planetStory.SetText("");
         planetInfo.SetText("");
@@ -55,12 +62,14 @@ public class StageInfoManager : MonoBehaviour
         StartCoroutine(WaitShowCoroutine());
     }
 
+    //  Stage 정보 메뉴를 숨기는 함수
     public void SetStageMenuHide()
     {
         animator.SetBool("isWarp", true);
         warpButton.SetActive(false);
     }
 
+    //  씬 전환 직후 애니메이션과 워프 버튼에 딜레이 부여
     private IEnumerator WaitShowCoroutine()
     {
         yield return new WaitForSeconds(1.05f);
@@ -69,6 +78,7 @@ public class StageInfoManager : MonoBehaviour
         Show();
     }
 
+    //  String Builder를 사용하기 위한 코루틴
     private void Show()
     {
         StartCoroutine(NameCoroutine());
@@ -86,6 +96,7 @@ public class StageInfoManager : MonoBehaviour
         }
         StartCoroutine(StoryCoroutine());
     }
+    //  NameCoroutine 다음에 연달아 실행
     private IEnumerator StoryCoroutine()
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -98,6 +109,7 @@ public class StageInfoManager : MonoBehaviour
         }
         StartCoroutine(InfoCoroutine());
     }
+    //  마찬가지로 연달아 실행
     private IEnumerator InfoCoroutine()
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -110,6 +122,7 @@ public class StageInfoManager : MonoBehaviour
         }
     }
 
+    //  정보 저장을 위한 Method
     private void SetPlanet()
     {
         nameList.Add("HJD-1029X2");

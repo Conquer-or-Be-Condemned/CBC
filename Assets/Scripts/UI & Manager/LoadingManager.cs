@@ -6,13 +6,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+/*
+ *  사용자의 경험을 증진하기 위한 Loading 창에 대한 스크립트입니다.
+ *  모든 Loading 씬은 이 스크립트를 동일하게 사용합니다.
+ */
 public class LoadingManager : MonoBehaviour
 {
+    //  스킵 버튼
     public GameObject skip;
+    //  로딩 애니메이션 이미지
     public GameObject loading;
+    //  Tip Text
     public TMP_Text tips;
 
+    //  Tip List
     public List<String> tipList;
+    
+    //  Loading 창에서만 작동 (모든 로딩씬은 이것으로 통일)
     private void Start()
     {
         if (skip == null)
@@ -25,16 +35,18 @@ public class LoadingManager : MonoBehaviour
             loading = GameObject.Find("Loading");
         }
         
+        //  Skip이 처음에는 불가
         skip.SetActive(false);
         GameManager.LoadingSkip = false;
         
         SetTipList();
         SetTip();
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,false);
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,false);
+
         StartCoroutine(LoadingCoroutine());
     }
 
+    //  로딩 시간의 기본 값은 3초
+    //  게임 입장 전의 Loading은 SceneController에서 관리함
     private IEnumerator LoadingCoroutine()
     {
         yield return new WaitForSeconds(3f);
@@ -43,6 +55,7 @@ public class LoadingManager : MonoBehaviour
         GameManager.LoadingSkip = true;
     }
 
+    //  Tip을 랜덤으로 보여줌
     private void SetTip()
     {
         tips.SetText(GetRandomTip());
@@ -63,6 +76,7 @@ public class LoadingManager : MonoBehaviour
         tipList.Add("[Tips] Minimap is a very useful map...");
     }
 
+    //  랜덤 Seed를 통해서 팁 하나를 리턴
     private String GetRandomTip()
     {
         return tipList[Random.Range(0, tipList.Count)];
