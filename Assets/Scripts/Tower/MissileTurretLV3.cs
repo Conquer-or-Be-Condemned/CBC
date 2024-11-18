@@ -12,39 +12,36 @@ public class MissileTurretLV3 : DefaultMissileTurret
     [SerializeField] private LayerMask enemyMask;           //raycast 감지 Layer
     [SerializeField] private Animator animator;             //타워 부분 Animator
     [SerializeField] private GameObject bulletPrefab;       //총알 오브젝트 생성 위한 변수
-    [SerializeField] private Transform missileSpawnPoint;    //미사일 스폰 지점
-    [SerializeField] private Transform missileSpawnPoint2;    //미사일 스폰 지점
-    [SerializeField] private Transform missileSpawnPoint3;    //미사일 스폰 지점
-    [SerializeField] private Transform missileSpawnPoint4;    //미사일 스폰 지점
-    [SerializeField] private Transform missileSpawnPoint5;    //미사일 스폰 지점
-    [SerializeField] private Transform missileSpawnPoint6;    //미사일 스폰 지점
+    [SerializeField] private Transform missileSpawnPoint;   //미사일 스폰 지점
+    [SerializeField] private Transform missileSpawnPoint2;  //미사일 스폰 지점
+    [SerializeField] private Transform missileSpawnPoint3;  //미사일 스폰 지점
+    [SerializeField] private Transform missileSpawnPoint4;  //미사일 스폰 지점
+    [SerializeField] private Transform missileSpawnPoint5;  //미사일 스폰 지점
+    [SerializeField] private Transform missileSpawnPoint6;  //미사일 스폰 지점
     [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
     
-    
-    
     [Header("Attributes")]
-    [SerializeField] private float range;         // 타워 사거리
-    [SerializeField] private float rotationSpeed;// 타워 회전 속도
-    [SerializeField] private float fireRate;       // 발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
-    [SerializeField] private int power;            //타워 사용 전력량
-    [SerializeField]private int overHeatMissileCount;    //~초 격발시 과열
-    [SerializeField]private float coolTime;        //~초 지나면 냉각
-    
+    [SerializeField] private float range;               //타워 사거리
+    [SerializeField] private float rotationSpeed;       //타워 회전 속도
+    [SerializeField] private float fireRate;            //발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
+    [SerializeField] private int power;                 //타워 사용 전력량
+    [SerializeField]private int overHeatMissileCount;   //~초 격발시 과열
+    [SerializeField]private float coolTime;             //~초 지나면 냉각
     
     private void Start()
     {
-        base.TurretRotationPoint = this.turretRotationPoint;
-        base.EnemyMask = this.enemyMask;
-        base.Animator = this.animator;
-        base.GunRenderer = this.gunRenderer;
-        base.Range = this.range;
-        base.RotationSpeed = this.rotationSpeed;
-        base.FireRate = this.fireRate;
-        base.Power = this.power;
-        base.OverHeatMissileCount = this.overHeatMissileCount;
-        base.Level = 3;
-        base.Name = "Missile Turret";
+        TurretRotationPoint = turretRotationPoint;
+        Animator = animator;
+        GunRenderer = gunRenderer;
+        Range = range;
+        FireRate = fireRate;
+        Power = power;
+        OverHeatMissileCount = overHeatMissileCount;
+        Level = 3;
+        Name = "Missile Turret";
         gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+        RPM = 60 / (int)(1 / fireRate);
+        Damage = 30;
     }
     protected override void Shoot()
     {
@@ -108,7 +105,6 @@ public class MissileTurretLV3 : DefaultMissileTurret
             missileScript5.SetTarget(Target5);
             missileScript4.SetTarget(Target4);
         }
-    
         Target1 = null;
         Target2 = null;
         Target3 = null;
@@ -138,33 +134,38 @@ public class MissileTurretLV3 : DefaultMissileTurret
             Target1 = availableTargets[0].collider.transform;
             Target6 = availableTargets[0].collider.transform;
             availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
-            availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
+            if(availableTargets.Count !=0)
+                availableTargets.RemoveAt(0);
         }
         if (availableTargets.Count > 0)
         {
             Target6 = availableTargets[0].collider.transform;
             availableTargets.RemoveAt(0);
-            availableTargets.RemoveAt(0);
+            if(availableTargets.Count !=0)
+                availableTargets.RemoveAt(0);
         }
     
         if (availableTargets.Count > 0)
         {
             Target2 = availableTargets[0].collider.transform;
             availableTargets.RemoveAt(0);
-            availableTargets.RemoveAt(0);
+            if(availableTargets.Count !=0)
+                availableTargets.RemoveAt(0);
         }
         if (availableTargets.Count > 0)
         {
             Target5 = availableTargets[0].collider.transform;
             availableTargets.RemoveAt(0);
-            availableTargets.RemoveAt(0);
+            if(availableTargets.Count !=0)
+                availableTargets.RemoveAt(0);
         }
 
         if (availableTargets.Count > 0)
         {
             Target3 = availableTargets[0].collider.transform;
             availableTargets.RemoveAt(0);
-            availableTargets.RemoveAt(0);
+            if(availableTargets.Count !=0)
+                availableTargets.RemoveAt(0);
         }
 
         if (availableTargets.Count > 0)
