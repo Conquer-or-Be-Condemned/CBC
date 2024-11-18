@@ -73,6 +73,8 @@ public class GameManager : Singleton<GameManager>
         //  인게임인지 확인
         if (InGame)
         {
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
+
             //  플레이어 재검색 (혹시 모를 오류 대비)
             if (player == null)
             {
@@ -90,6 +92,9 @@ public class GameManager : Singleton<GameManager>
         //  지속해서 현재 씬이 Loading인지 확인 (또한 스킵이 가능한지 확인)
         if (SceneController.NowScene == "Loading" && LoadingSkip)
         {
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,false);
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,false);
+
             CheckSpaceKey();    
         }
     }

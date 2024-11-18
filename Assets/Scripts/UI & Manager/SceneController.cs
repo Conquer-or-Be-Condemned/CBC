@@ -73,7 +73,8 @@ public class SceneController : Singleton<SceneController>
         if (NowScene == "StageMenu" && StageInfoManager.StageInit)
         {
             Debug.Log("Boom!");
-            
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,true);
+
             //  버튼과 게임 시작 함수를 연동
             GeneralManager.Instance.stageInfoManager.warpButton.GetComponent<Button>().onClick.AddListener(GoToGame);
             StageInfoManager.StageInit = false;
