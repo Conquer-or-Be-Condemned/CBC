@@ -68,8 +68,8 @@ public class MonsterSpawner : MonoBehaviour
         GameObject monster = Instantiate(monsterData.monsterPrefab, spawnPosition, Quaternion.identity);
     
         // 스케일 명시적으로 설정 (프리팹에서 보이는 0.5994 값 사용)
-        Vector3 desiredScale = new Vector3(0.5994f, 0.5994f, 0.5994f);
-        monster.transform.localScale = desiredScale;
+        // Vector3 desiredScale = new Vector3(0.5994f, 0.5994f, 0.5994f);
+        // monster.transform.localScale = desiredScale;
     
         // 디버그 로그 추가
         // Debug.Log($"Monster spawned with scale: {monster.transform.localScale}");
