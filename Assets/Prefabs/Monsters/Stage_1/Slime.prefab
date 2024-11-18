@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3727076148842209913}
   - component: {fileID: 2009005005601722383}
   - component: {fileID: 8027999870702425149}
-  - component: {fileID: 2203891524037465660}
   - component: {fileID: -7792215644566802799}
+  - component: {fileID: 7553824960772183692}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Enemy
@@ -172,7 +172,30 @@ CapsuleCollider2D:
   m_Offset: {x: -0.00000016078921, y: -3}
   m_Size: {x: 4.5000005, y: 1.1291552}
   m_Direction: 1
---- !u!60 &2203891524037465660
+--- !u!114 &-7792215644566802799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009334584712422631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd6e0f5f7fe345919986e8dd4feaa72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterName: Slime
+  maxHealth: 100
+  currentHealth: 100
+  attackDamage: 5
+  moveSpeed: 2
+  attackRange: 3
+  detectionRange: 15
+  player: {fileID: 0}
+  controlUnitStatus: {fileID: 0}
+  healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
+  healthBarYOffset: 5
+--- !u!60 &7553824960772183692
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,39 +239,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2, y: 7.666667}
-      - {x: 1, y: 7.3333335}
-      - {x: -0.6666667, y: 7.666667}
-      - {x: -4.3333335, y: 7.666667}
-      - {x: -4.666667, y: 6}
-      - {x: -5.3333335, y: 3.3333335}
-      - {x: -5.3333335, y: -5.666667}
-      - {x: -4.3333335, y: -7.666667}
-      - {x: 5, y: -7.666667}
-      - {x: 5.3333335, y: -6}
-      - {x: 5.3333335, y: 4.666667}
-      - {x: 4.3333335, y: 7.666667}
+    - - {x: -1, y: 1.1666667}
+      - {x: -1.3333334, y: 0.8333334}
+      - {x: -1.3333334, y: -0.8333334}
+      - {x: -1, y: -1.1666667}
+      - {x: 1, y: -1.1666667}
+      - {x: 1.3333334, y: -0.8333334}
+      - {x: 1.3333334, y: 0.8333334}
+      - {x: 1, y: 1.1666667}
   m_UseDelaunayMesh: 0
---- !u!114 &-7792215644566802799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4009334584712422631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fd6e0f5f7fe345919986e8dd4feaa72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterName: Slime
-  maxHealth: 100
-  currentHealth: 100
-  attackDamage: 5
-  moveSpeed: 2
-  attackRange: 3
-  detectionRange: 3
-  player: {fileID: 0}
-  controlUnitStatus: {fileID: 0}
-  healthBarPrefab: {fileID: 0}
-  healthBarYOffset: 5
