@@ -245,5 +245,10 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     {
         return Power;
     }
+
+    public int GetRpm()
+    {
+        return RPM;
+    }
     //  TODO : Rpm과 데미지 정보를 만들어야 함.
 }

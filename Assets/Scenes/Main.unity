@@ -571,7 +571,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120170495}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 767d4c015c430e84094d5ededcd91ab5, type: 3}
@@ -1340,7 +1340,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 1488935625}
+=======
+>>>>>>> Stashed changes
   - {fileID: 1705363527}
   - {fileID: 1664803238}
   m_Father: {fileID: 1524665539}
@@ -2477,3 +2480,5 @@ SceneRoots:
   - {fileID: 1524665539}
   - {fileID: 574493902}
   - {fileID: 47018891}
+  - {fileID: 356129844}
+  - {fileID: 1866617392}
