@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -95,7 +95,511 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_0
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 430
+        width: 11
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d121be29ab67419c9028e2dc5f2c311
+      internalID: 1236537721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_1
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 430
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8bc84c8f3696467b84d175d8441e852
+      internalID: 747288537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_2
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 429
+        width: 10
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b89d93d1fca514444abeb35e4f5aa7a9
+      internalID: -82487712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_3
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 429
+        width: 10
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 952d77b5e2d994782accf4f08908e6bd
+      internalID: 1036252081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_4
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 430
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c0de573952c845d78c21f4d52b123ff
+      internalID: -918424292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_5
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 431
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c704d6bcd8da4d93b835c8338d3fb27
+      internalID: 571276895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_6
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 304
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94588a3685d04476399eff756db41a34
+      internalID: 1300059140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_7
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 304
+        width: 36
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc78bfa3781d94c70b81c8d6a8905393
+      internalID: -2082415516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_8
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 304
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b906941bfd50d488eb363d0279bdfd22
+      internalID: 1962581937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_9
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 304
+        width: 36
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da9eea1b7234340bf99dc416be87120e
+      internalID: -44802530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_10
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 304
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd7c23f3687a45d7be7088529fc0c20
+      internalID: -1999543466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_11
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 304
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f467f0f64e11f49f29ef981f3578b35d
+      internalID: 1102366406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_12
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 176
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8e228a33397e41cd94cdb3c9ac39c82
+      internalID: -381500411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_13
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 176
+        width: 36
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea13032185014eeb8d581202b7e0a33
+      internalID: 385479320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_14
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 176
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdf3900aaec26421bacd4c7a8ec42b3a
+      internalID: -1700670967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_15
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 176
+        width: 36
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40bc1f604eb3f4021b04c5c084a547d9
+      internalID: 330772837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_16
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 176
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba58fc3733037446bb14ad86a277ac8a
+      internalID: 385535553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_17
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 176
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0342fe66bb194ffa8b371b75732a448
+      internalID: -585108105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_18
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 38
+        width: 12
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f73c74ae40f548faa11786a1226a518
+      internalID: -1887555387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_19
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 37
+        width: 10
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c53c801e9cb5b419d9c6f9a7ac0b9a6b
+      internalID: 571429830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_20
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 37
+        width: 10
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba158f121508d4628883a81ece006a9a
+      internalID: 1858332410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_21
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 38
+        width: 10
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36ea26b27299c4a92bfc826096671985
+      internalID: 1705029891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_22
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 37
+        width: 10
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b69a55b592cbb4285855f341d0a85538
+      internalID: 967512450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake_Alien_Move_Loop_23
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 37
+        width: 10
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7859fbad2850e4d1f947b6b4a2d0a4d9
+      internalID: -2147379592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +610,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Snake_Alien_Move_Loop_0: 1236537721
+      Snake_Alien_Move_Loop_1: 747288537
+      Snake_Alien_Move_Loop_10: -1999543466
+      Snake_Alien_Move_Loop_11: 1102366406
+      Snake_Alien_Move_Loop_12: -381500411
+      Snake_Alien_Move_Loop_13: 385479320
+      Snake_Alien_Move_Loop_14: -1700670967
+      Snake_Alien_Move_Loop_15: 330772837
+      Snake_Alien_Move_Loop_16: 385535553
+      Snake_Alien_Move_Loop_17: -585108105
+      Snake_Alien_Move_Loop_18: -1887555387
+      Snake_Alien_Move_Loop_19: 571429830
+      Snake_Alien_Move_Loop_2: -82487712
+      Snake_Alien_Move_Loop_20: 1858332410
+      Snake_Alien_Move_Loop_21: 1705029891
+      Snake_Alien_Move_Loop_22: 967512450
+      Snake_Alien_Move_Loop_23: -2147379592
+      Snake_Alien_Move_Loop_3: 1036252081
+      Snake_Alien_Move_Loop_4: -918424292
+      Snake_Alien_Move_Loop_5: 571276895
+      Snake_Alien_Move_Loop_6: 1300059140
+      Snake_Alien_Move_Loop_7: -2082415516
+      Snake_Alien_Move_Loop_8: 1962581937
+      Snake_Alien_Move_Loop_9: -44802530
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
