@@ -12,10 +12,11 @@ public class MissileTurretLV2 : DefaultMissileTurret
     [SerializeField] private LayerMask enemyMask;           //raycast 감지 Layer
     [SerializeField] private Animator animator;             //타워 부분 Animator
     [SerializeField] private GameObject bulletPrefab;       //총알 오브젝트 생성 위한 변수
-    [SerializeField] private Transform missileSpawnPoint;    //미사일 스폰 지점
-    [SerializeField] private Transform missileSpawnPoint2;    //미사일 스폰 지점
-    [SerializeField] private Transform missileSpawnPoint3;    //미사일 스폰 지점
-    [SerializeField] private Transform missileSpawnPoint4;    //미사일 스폰 지점
+    // [SerializeField] private Transform missileSpawnPoint;    //미사일 스폰 지점
+    // [SerializeField] private Transform missileSpawnPoint2;    //미사일 스폰 지점
+    // [SerializeField] private Transform missileSpawnPoint3;    //미사일 스폰 지점
+    [SerializeField] protected Transform []missileSpawnPoint;    //미사일 스폰 지점
+    
     [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
     
     //[SerializeField] private GameObject towerPrefab;
@@ -27,7 +28,7 @@ public class MissileTurretLV2 : DefaultMissileTurret
     [SerializeField] private int power;            //타워 사용 전력량
     [SerializeField]private int overHeatMissileCount;    //~초 격발시 과열
     [SerializeField]private float coolTime;        //~초 지나면 냉각
-    
+    private GameObject[] _missileObj;
     private void Start()
     {
         TurretRotationPoint = turretRotationPoint;
@@ -37,122 +38,36 @@ public class MissileTurretLV2 : DefaultMissileTurret
         FireRate = fireRate;
         Power = power;
         OverHeatMissileCount = overHeatMissileCount;
+        RotationSpeed = rotationSpeed;
+        EnemyMask = enemyMask;
         Level = 2;
-        Name = "Missile Turret";
+        
         gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+        _missileObj = new GameObject[missileSpawnPoint.Length];
+        Targets = new Transform[4];
+
         RPM = 60 / (int)(1 / fireRate);
         Damage = 20;
     }
-    
     protected override void Shoot()
     {
         CurMissileCount += 1;
         StartCoroutine(ShootAnimation());
-    
-        // 첫 번째 미사일 생성 - 터렛 회전값 적용
-        GameObject missileObj1 = Instantiate(bulletPrefab, missileSpawnPoint.position, turretRotationPoint.rotation);
-        TowerMissile missileScript = missileObj1.GetComponent<TowerMissile>();
-        missileScript.SetTarget(Target1);
-    
-        // 두 번째 미사일 생성
-        GameObject missileObj2 = Instantiate(bulletPrefab, missileSpawnPoint2.position, turretRotationPoint.rotation);
-        TowerMissile missileScript2 = missileObj2.GetComponent<TowerMissile>();
-        
-        // 세번째 미사일 생성
-        GameObject missileObj3 = Instantiate(bulletPrefab, missileSpawnPoint3.position, turretRotationPoint.rotation);
-        TowerMissile missileScript3 = missileObj3.GetComponent<TowerMissile>();
-
-        // 네번째 미사일 생성
-        GameObject missileObj4 = Instantiate(bulletPrefab, missileSpawnPoint4.position, turretRotationPoint.rotation);
-        TowerMissile missileScript4 = missileObj4.GetComponent<TowerMissile>();
-
-        if (Target2 == null)
+        for (int i = 0; i < _missileObj.Length; i++)
         {
-            missileScript2.SetTarget(Target1);
-            missileScript3.SetTarget(Target4);
-            missileScript4.SetTarget(Target4);
+            _missileObj[i] = Instantiate(bulletPrefab, missileSpawnPoint[i].position, turretRotationPoint.rotation);
+            TowerMissile missileScript = _missileObj[i].GetComponent<TowerMissile>();
+            if (Targets[i] != null) missileScript.SetTarget(Targets[i]);
+            else if((Targets[i] != null) && (i > 1))
+            {
+                if (Targets[i - 2] != null) missileScript.SetTarget(Targets[i - 2]);
+                else missileScript.SetTarget(Targets[i - 4]);
+            }
+            
         }
-        else if(Target3 == null)
+        for (var i = 0; i < _missileObj.Length; i++)
         {
-            missileScript2.SetTarget(Target2);
-            missileScript3.SetTarget(Target4);
-            missileScript4.SetTarget(Target4);
-
-        }
-        else
-        {
-            missileScript2.SetTarget(Target2);
-            missileScript3.SetTarget(Target3);
-            missileScript4.SetTarget(Target4);
-        }
-    
-        Target1 = null;
-        Target2 = null;
-        Target3 = null;
-        Target4 = null;
-    }
-
-
-    protected override void FindTarget()
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
-        if (hits.Length == 0) return;
-
-        // 사용할 수 있는 타겟들의 리스트를 만듭니다
-        List<(Collider2D collider, float distance)> availableTargets = new List<(Collider2D, float)>();
-        foreach (var hit in hits)
-        {
-            float distance = Vector2.Distance(transform.position, hit.transform.position);
-            availableTargets.Add((hit, distance));
-        }
-        availableTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
-    
-        // 각 Target에 대해 아직 할당되지 않은 가장 가까운 적을 찾아 할당합니다
-        if (availableTargets.Count > 0)
-        {
-            Target1 = availableTargets[0].collider.transform;
-            Target4 = availableTargets[0].collider.transform;
-            availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
-            if(availableTargets.Count !=0)
-                availableTargets.RemoveAt(0);
-        }
-        if (availableTargets.Count > 0)
-        {
-            Target4 = availableTargets[0].collider.transform;
-            availableTargets.RemoveAt(0);
-            if(availableTargets.Count !=0)
-                availableTargets.RemoveAt(0);
-        }
-    
-        if (availableTargets.Count > 0)
-        {
-            Target2 = availableTargets[0].collider.transform;
-            availableTargets.RemoveAt(0);
-            if(availableTargets.Count !=0)
-                availableTargets.RemoveAt(0);
-        }
-        if (availableTargets.Count > 0)
-        {
-            Target3 = availableTargets[0].collider.transform;
-        }
-    }
-    protected override void RotateTowardsTarget()//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
-    {
-        if (Target1 == null||Target4 == null||transform == null) return;
-        if (Target4 != null)
-        {
-            float angle = Mathf.Atan2((Target1.position.y + Target4.position.y)/2 - transform.position.y, (Target1.position.x + Target4.position.x)/2  - transform.position.x) * Mathf.Rad2Deg - 90f;
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-            turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-        else
-        {
-            float angle =
-                Mathf.Atan2(Target1.position.y - transform.position.y, Target1.position.x - transform.position.x) *
-                Mathf.Rad2Deg - 90f;
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-            turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation,
-                rotationSpeed * Time.deltaTime);
+            Targets[i] = null;
         }
     }
 }
