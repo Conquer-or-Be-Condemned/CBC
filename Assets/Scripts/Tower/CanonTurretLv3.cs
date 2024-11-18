@@ -27,18 +27,20 @@ public class CanonTurretLv3 : DefaultCanonTurret
     private void Start()
     {
         _bulletObj = new GameObject[bulletSpawnPoint.Length];
-        base.GunRenderer = this.gunRenderer;
-        base.EnemyMask = this.enemyMask;
-        base.Animator = this.animator;
-        base.TurretRotationPoint = this.turretRotationPoint;
-        base.Range = this.range;       
-        base.RotationSpeed = this.rotationSpeed;
-        base.FireRate = this.fireRate;       
-        base.Power = this.power;            
-        base.OverHeatTime = overHeatTime;    
-        base.CoolTime = coolTime; 
-        base.Level = 3;
+        GunRenderer = gunRenderer;
+        EnemyMask = enemyMask;
+        Animator = animator;
+        TurretRotationPoint = turretRotationPoint;
+        Range = range;         // 타워 사거리
+        RotationSpeed = rotationSpeed;// 타워 회전 속도
+        FireRate = fireRate;       // 발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
+        Power = power;            //타워 사용 전력량
+        OverHeatTime = overHeatTime;    //~초 격발시 과열
+        CoolTime = coolTime; //~초 지나면 냉각
+        Level = 3;
         GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+        RPM = 60 / (int)(1 / fireRate);
+        Damage = 30;
     } 
     protected override void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
     {

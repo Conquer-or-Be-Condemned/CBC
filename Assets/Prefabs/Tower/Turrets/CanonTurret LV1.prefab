@@ -59,7 +59,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5527518119625726090, guid: d68bdf48dc0984e30ba45c78cad3a501, type: 3}
   bulletSpawnPoint: {fileID: 3577476696653598682}
   gunRenderer: {fileID: 9039057381650263844}
-  range: 20
+  range: 45
   rotationSpeed: 400
   fireRate: 10
   power: 20

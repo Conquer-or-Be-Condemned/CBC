@@ -30,15 +30,18 @@ public class MissileTurretLV2 : DefaultMissileTurret
     
     private void Start()
     {
-        base.TurretRotationPoint = this.turretRotationPoint;
-        base.Animator = this.animator;
-        base.GunRenderer = this.gunRenderer;
-        base.Range = this.range;
-        base.FireRate = this.fireRate;
-        base.Power = this.power;
-        base.OverHeatMissileCount = this.overHeatMissileCount;
-        base.Level = 2;
-        GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+        TurretRotationPoint = turretRotationPoint;
+        Animator = animator;
+        GunRenderer = gunRenderer;
+        Range = range;
+        FireRate = fireRate;
+        Power = power;
+        OverHeatMissileCount = overHeatMissileCount;
+        Level = 2;
+        Name = "Missile Turret";
+        gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+        RPM = 60 / (int)(1 / fireRate);
+        Damage = 20;
     }
     
     protected override void Shoot()

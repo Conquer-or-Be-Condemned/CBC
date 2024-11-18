@@ -226,6 +226,10 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     {
         return Damage;
     }
-    //  TODO : Rpm과 데미지 정보를 만들어야 함.
+    public int GetRpm()
+    {
+        return RPM;
+    }
+    //  TODO : 데미지 정보를 만들어야 함.
    
 }
