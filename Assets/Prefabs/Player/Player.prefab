@@ -136,6 +136,8 @@ MonoBehaviour:
   moveSpeed: 0.3
   bulletPrefab: {fileID: 5527518119625726090, guid: 71d691117f0b648c0ba428ef30cd6bba, type: 3}
   bulletSpawnPoint: {fileID: 1429413951217043725}
+  bulletsPerShot: 5
+  spreadAngle: 15
   map: {fileID: 0}
 --- !u!114 &6538483365708020521
 MonoBehaviour:

@@ -185,12 +185,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: GreenGolem
-  maxHealth: 100
-  currentHealth: 100
-  attackDamage: 5
-  moveSpeed: 2
-  attackRange: 3
-  detectionRange: 3
+  maxHealth: 500
+  currentHealth: 500
+  attackDamage: 50
+  moveSpeed: 5
+  attackRange: 11
+  detectionRange: 20
   player: {fileID: 0}
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
