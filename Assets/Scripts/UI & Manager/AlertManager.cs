@@ -20,7 +20,7 @@ public class AlertManager : MonoBehaviour
     private WaitForSeconds _UIDelay2 = new WaitForSeconds(2.0f);
     
     //  Alert Text 배열입니다. 사용에 주의하세요.
-    private List<String> alertTexts = new List<String>();
+    public List<string> alertTexts = new List<string>();
 
     //  게임 내에서만 실행 됨
     private void Start()
@@ -57,15 +57,12 @@ public class AlertManager : MonoBehaviour
         //  Set Animator
         alertAnimator = alertBox.GetComponent<Animator>();
         
-        //  Active 체크 Event
-        //_camoTurretLV1.onActivateChange.AddListener(Show);
-        
         //  시작 시 알림 등장
         Show("Watch out next wave is coming!\nTry your best Developer");
     }
 
     //  원하는 메시지 쓰고 싶을 때 사용
-    public void Show(String message)
+    public void Show(string message)
     {
         alertInfo.SetText(message);
         alertBox.SetActive(false);

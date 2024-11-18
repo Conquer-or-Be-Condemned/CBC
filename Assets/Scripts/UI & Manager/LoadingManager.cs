@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,20 +21,14 @@ public class LoadingManager : MonoBehaviour
     public TMP_Text tips;
 
     //  Tip List
-    public List<String> tipList;
+    public List<string> tipList = new List<string>();
     
     //  Loading 창에서만 작동 (모든 로딩씬은 이것으로 통일)
     private void Start()
     {
-        if (skip == null)
-        {
-            skip = GameObject.Find("Skip");
-        }
-
-        if (loading == null)
-        {
-            loading = GameObject.Find("Loading");
-        }
+        skip = GameObject.Find("Skip");
+        loading = GameObject.Find("Loading");
+        tips = GameObject.Find("Tips").GetComponent<TMP_Text>();
         
         //  Skip이 처음에는 불가
         skip.SetActive(false);

@@ -23,8 +23,8 @@ public class TowerManager : MonoBehaviour
     public TMP_Text towerInfo;
     
     //  혹시 모를 관리의 용이성을 위해 배열로 하지 않고 List로 구현
-    [SerializeField] private List<GameObject> towerList;
-    [SerializeField] private String towerTag = "Tower";
+    [SerializeField] private List<GameObject> towerList = new List<GameObject>();
+    [SerializeField] private string towerTag = "Tower";
     [SerializeField] private int totalTowers;
     [SerializeField] private int activeTowers;
     
@@ -62,16 +62,6 @@ public class TowerManager : MonoBehaviour
         towerList.AddRange(towerObjects);
         totalTowers = towerList.Count;
         activeTowers = 0;
-        
-        //  Menu 요소 자동 찾기
-        //  현재는 사용하지 않는 코드
-        // nameText = GameObject.Find("TowerName").GetComponent<TMP_Text>();
-        // activateButton = GameObject.Find("ActivationButton");
-        // activateText = GameObject.Find("TowerInfoAct").GetComponent<TMP_Text>();
-        // levelText = GameObject.Find("TowerInfoLv").GetComponent<TMP_Text>();
-        // powerText = GameObject.Find("TowerInfoPw").GetComponent<TMP_Text>();
-        // damageText = GameObject.Find("TowerInfoDmg").GetComponent<TMP_Text>();
-        // rpm = GameObject.Find("TowerInfoRpm").GetComponent<TMP_Text>();
     
         //  Tower Menu Animation 관련
         _animator = towerMenu.GetComponent<Animator>();
@@ -83,7 +73,7 @@ public class TowerManager : MonoBehaviour
         activateButton.GetComponent<Button>().onClick.AddListener(SetTowerActive);
         
         //  Cursor 변경
-        GameManager.GetInstance().GetComponent<CursorManager>().SetInGameCursor();
+        GameManager.Instance.GetComponent<CursorManager>().SetInGameCursor();
         
         //  자동 찾기 목록
         if (controlUnit == null)
@@ -111,6 +101,7 @@ public class TowerManager : MonoBehaviour
     private void Awake()
     {
         InGame();
+        
         //  초기화 완료
         GameManager.InGameInit = false;
 

@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -95,7 +95,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Plant_Leafer_Projectile_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 5
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22a54dd793f574ca68b88758ee8e0463
+      internalID: 1611116611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plant_Leafer_Projectile_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 4
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f13a66bca0b634a0a84329bb22f0bdfe
+      internalID: -807966815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plant_Leafer_Projectile_2
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 4
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d220f9aa5d7e14793938129f411971fc
+      internalID: -2130634137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plant_Leafer_Projectile_3
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 4
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b04146af097734e219bfd3c82c13f9cb
+      internalID: 639443928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plant_Leafer_Projectile_4
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 5
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f1ece232bae04f61a993aedd4a43b9d
+      internalID: 1125376562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +211,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Plant_Leafer_Projectile_0: 1611116611
+      Plant_Leafer_Projectile_1: -807966815
+      Plant_Leafer_Projectile_2: -2130634137
+      Plant_Leafer_Projectile_3: 639443928
+      Plant_Leafer_Projectile_4: 1125376562
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
