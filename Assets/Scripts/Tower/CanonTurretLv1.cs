@@ -27,7 +27,6 @@ public class CanonTurretLv1 : DefaultCanonTurret
     private void Start()
     {
         GunRenderer = gunRenderer;
-        EnemyMask = enemyMask;
         Animator = animator;
         TurretRotationPoint = turretRotationPoint;
         Range = range;         // 타워 사거리

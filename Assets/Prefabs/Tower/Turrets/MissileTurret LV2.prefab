@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 733595279292721878}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.45, y: 1.23, z: 0.1}
+  m_LocalPosition: {x: 2.17, y: 0.9, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 3134885545527456946}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.19, y: 1.2, z: 0.1}
+  m_LocalPosition: {x: -1.97, y: 0.9, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 4873322477136626020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.41, y: 1.19, z: 0.1}
+  m_LocalPosition: {x: -3.41, y: 0.9, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -224,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 6581773117969948968}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.09, y: 1.32, z: 0.1}
+  m_LocalPosition: {x: 3.43, y: 0.9, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -287,12 +287,13 @@ MonoBehaviour:
     m_Bits: 128
   animator: {fileID: 1610464386219993359}
   bulletPrefab: {fileID: 6223032590839111759, guid: d66faf99a1ab241cbb368fd9178b0030, type: 3}
-  missileSpawnPoint: {fileID: 5693288934300119009}
-  missileSpawnPoint2: {fileID: 3028729527259506226}
-  missileSpawnPoint3: {fileID: 3738974294831536823}
-  missileSpawnPoint4: {fileID: 2333844838973036701}
+  missileSpawnPoint:
+  - {fileID: 5693288934300119009}
+  - {fileID: 3028729527259506226}
+  - {fileID: 3738974294831536823}
+  - {fileID: 2333844838973036701}
   gunRenderer: {fileID: 2175146551687495156}
-  range: 40
+  range: 200
   rotationSpeed: 100
   fireRate: 0.3
   power: 50

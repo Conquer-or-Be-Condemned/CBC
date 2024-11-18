@@ -427,8 +427,9 @@ MonoBehaviour:
     m_Bits: 128
   animator: {fileID: 5313065893742346819}
   bulletPrefab: {fileID: 6223032590839111759, guid: d66faf99a1ab241cbb368fd9178b0030, type: 3}
-  missileSpawnPoint: {fileID: 1184328089168039883}
-  missileSpawnPoint2: {fileID: 7471881801630609731}
+  missileSpawnPoint:
+  - {fileID: 1184328089168039883}
+  - {fileID: 7471881801630609731}
   gunRenderer: {fileID: 3197493857056620786}
   range: 60
   rotationSpeed: 100
