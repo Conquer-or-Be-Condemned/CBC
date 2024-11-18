@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2009005005601722383}
   - component: {fileID: 8027999870702425149}
   - component: {fileID: -7792215644566802799}
+  - component: {fileID: 7998834415135481032}
   m_Layer: 7
   m_Name: InfectousMushroom
   m_TagString: Enemy
@@ -187,10 +188,62 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   attackDamage: 5
-  moveSpeed: 2
-  attackRange: 3
-  detectionRange: 3
+  moveSpeed: 5
+  attackRange: 5
+  detectionRange: 15
   player: {fileID: 0}
   controlUnitStatus: {fileID: 0}
-  healthBarPrefab: {fileID: 0}
+  healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 5
+--- !u!60 &7998834415135481032
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009334584712422631}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.7142856, y: 5}
+    newSize: {x: 3.84, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.1428572, y: 2.5}
+      - {x: -1.8571429, y: 2.357143}
+      - {x: -1.8571429, y: -2.0714288}
+      - {x: -1.5714287, y: -2.5}
+      - {x: 1.8571429, y: -2.5}
+      - {x: 1.8571429, y: 2.357143}
+      - {x: 1.7142859, y: 2.5}
+  m_UseDelaunayMesh: 0
