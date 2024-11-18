@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 4337899493936173719}
   - component: {fileID: 469274601649993134}
   - component: {fileID: 8477086161060408526}
+  - component: {fileID: 4546850635533796810}
   m_Layer: 12
   m_Name: STATION1
   m_TagString: Untagged
@@ -437,7 +438,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150638677136147710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -493,6 +494,41 @@ PolygonCollider2D:
       - {x: 19.917099, y: -4.985634}
       - {x: 19.367733, y: 7.0696483}
   m_UseDelaunayMesh: 0
+--- !u!58 &4546850635533796810
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150638677136147710}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 21
 --- !u!1 &2135681642179865673
 GameObject:
   m_ObjectHideFlags: 0

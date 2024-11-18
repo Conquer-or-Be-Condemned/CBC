@@ -135,15 +135,4 @@ public class TowerMissile : MonoBehaviour
         if(_target != null)
             Debug.DrawLine(transform.position, _target.position, Color.blue, 0.1f);
     }
-    // private Vector2 RotateVector2(Vector2 vector, float angle)
-    // {
-    //     float radian = angle * Mathf.Deg2Rad;
-    //     float cos = Mathf.Cos(radian);
-    //     float sin = Mathf.Sin(radian);
-    //     
-    //     return new Vector2(
-    //         vector.x * cos - vector.y * sin,
-    //         vector.x * sin + vector.y * cos
-    //     );
-    // }
 }
