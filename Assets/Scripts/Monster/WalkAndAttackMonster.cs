@@ -19,7 +19,7 @@ public class WalkAndAttackMonster : Monster
     private const int DIRECTION_RIGHT = 3;
 
     // 현재 타겟을 추적하기 위한 변수
-    private Transform currentTarget;
+    [SerializeField] private Transform currentTarget;
 
     protected override void Start()
     {
@@ -188,12 +188,36 @@ public class WalkAndAttackMonster : Monster
                 playerInfo.TakeDamage((int)attackDamage);
             }
         }
+        //  아마 이 코드는 사용이 어려울 것 같습니다. - 현석
         else if (currentTarget.CompareTag("CU"))
         {
             ControlUnitStatus controlUnit = controlUnitStatus;
             if (controlUnit != null)
             {
+                Debug.LogError("Attack CU");
                 controlUnit.GetDamage((int)attackDamage);
+            }
+            else
+            {
+                Debug.LogError("Can not attack CU");
+            }
+        }
+        //  요 아래껄로 대체해주세요.
+        else
+        {
+            ControlUnitStatus controlUnit = controlUnitStatus;
+            if (controlUnit == null)
+            {
+                Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
+                return;
+            }
+            foreach (Transform accessPoint in controlUnitStatus.accessPoints)
+            {
+                if (accessPoint == currentTarget)
+                {
+                    controlUnit.GetDamage((int)attackDamage);
+                    break;
+                }
             }
         }
 

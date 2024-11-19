@@ -15,37 +15,6 @@ using UnityEngine.Video;
  */
 public class SceneController : Singleton<SceneController>
 {
-    // #region SINGLETON
-    // private static SceneController _instance;
-    //
-    // public static SceneController GetInstance()
-    // {
-    //     if (_instance == null)
-    //     {
-    //         _instance = FindObjectOfType<SceneController>();
-    //         if (_instance != null) return _instance;
-    //
-    //         _instance = new SceneController().AddComponent<SceneController>();
-    //         _instance.name = "SceneController";
-    //     }
-    //
-    //     return _instance;
-    // }
-    //
-    // private void Awake()
-    // {
-    //     if (_instance == null)
-    //     {
-    //         _instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //     }
-    //     else if (_instance != this)
-    //     {
-    //         Destroy(this);
-    //     }
-    // }
-    // #endregion
-    
     
     //  딜레이가 필요한 경우를 위한 변수
     private float delay = 3f;
@@ -142,9 +111,6 @@ public class SceneController : Singleton<SceneController>
     {
         ChangeScene(NextScene);
     }
-
-    
-    
     
     //  현재는 사용하지 않는 코드
     //  딜레이를 주는 함수만 Instance를 만들어야 실행이 가능합니다.
