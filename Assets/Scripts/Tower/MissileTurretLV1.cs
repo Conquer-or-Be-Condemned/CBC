@@ -21,7 +21,7 @@ public class MissileTurretLV1 : DefaultMissileTurret
     [SerializeField] private float range;           // 타워 사거리
     [SerializeField] private float rotationSpeed;   // 타워 회전 속도
     [SerializeField] private float fireRate;        // 발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
-    [SerializeField] private int power;             //타워 사용 전력량
+    [SerializeField] private int power;             //타워 사용 전력량gi
     [SerializeField] private int overHeatMissileCount;    //~초 격발시 과열
     [SerializeField] private float coolTime;         //~초 지나면 냉각
     private GameObject []_missileObj;
