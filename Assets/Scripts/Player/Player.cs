@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,16 @@ public class Player : MonoBehaviour
     [SerializeField] private int bulletsPerShot; // 한 번에 발사할 총알 수
     [SerializeField] private float spreadAngle = 15f; // 총알 퍼짐 각도
     public Tilemap map;
+    public float attackDelay;
+    public bool attackable;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private Vector2 _mouse;
     private Vector3 sumVector;
     private Transform _mouseTransform;
+    
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -29,12 +34,13 @@ public class Player : MonoBehaviour
         {
             map = FindObjectOfType<Tilemap>();
         }
+
+        attackable = true;
     }
 
     private void FixedUpdate()
     {
         PlayerMove2();
-        
     }
 
     private void Update()
@@ -47,6 +53,8 @@ public class Player : MonoBehaviour
         {
             CheckDirectionToMouse();
         }
+        
+        PlayerAttack();
     }
    
     private void PlayerMove2()
@@ -63,7 +71,15 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) sumVector += Vector3.down * moveSpeed;
         if (Input.GetKey(KeyCode.D)) sumVector += Vector3.right * moveSpeed;
         
-        if (Input.GetKeyDown(KeyCode.Space))
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x + sumVector.x, map.localBounds.min.x + transform.localScale.x / 2, map.localBounds.max.x - transform.localScale.x / 2),
+            Mathf.Clamp(transform.position.y + sumVector.y, map.localBounds.min.y + transform.localScale.y / 2, map.localBounds.max.y - transform.localScale.y / 2),
+            transform.position.z);
+    }
+
+    private void PlayerAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && attackable)
         {
             Vector2 baseDirection = (_mouse - (Vector2)bulletSpawnPoint.position).normalized;
             float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
@@ -84,11 +100,15 @@ public class Player : MonoBehaviour
                 playerBulletScript.SetDirection(bulletDirection);
             }
         }
+        
+        StartCoroutine(PlayerAttackCoroutine());
+    }
 
-        transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x + sumVector.x, map.localBounds.min.x + transform.localScale.x / 2, map.localBounds.max.x - transform.localScale.x / 2),
-            Mathf.Clamp(transform.position.y + sumVector.y, map.localBounds.min.y + transform.localScale.y / 2, map.localBounds.max.y - transform.localScale.y / 2),
-            transform.position.z);
+    private IEnumerator PlayerAttackCoroutine()
+    {
+        attackable = false;
+        yield return new WaitForSeconds(attackDelay);
+        attackable = true;
     }
 
     private void CheckDirectionToMouse()

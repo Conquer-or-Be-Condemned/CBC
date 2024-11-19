@@ -52,6 +52,7 @@ public class ControlUnitStatus : MonoBehaviour
 
     public void GetDamage(int damage)
     {
+        Debug.LogError("We are under attack");
         curHealth -= damage;
         onCUHpChange.Invoke(curHealth, maxHealth);
         if (curHealth <= 0)

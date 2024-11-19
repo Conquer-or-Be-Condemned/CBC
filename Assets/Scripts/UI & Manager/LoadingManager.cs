@@ -26,6 +26,8 @@ public class LoadingManager : MonoBehaviour
     //  Loading 창에서만 작동 (모든 로딩씬은 이것으로 통일)
     private void Start()
     {
+        //  TODO : 아예 브금을 안나오게 하는 Method 있으면 좋을 듯
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,false);
         skip = GameObject.Find("Skip");
         loading = GameObject.Find("Loading");
         tips = GameObject.Find("Tips").GetComponent<TMP_Text>();

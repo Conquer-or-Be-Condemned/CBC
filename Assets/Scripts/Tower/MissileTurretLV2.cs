@@ -46,7 +46,7 @@ public class MissileTurretLV2 : DefaultMissileTurret
         _missileObj = new GameObject[missileSpawnPoint.Length];
         Targets = new Transform[4];
 
-        RPM = 60 / (int)(1 / fireRate);
+        RPM = (int)(60 / (1 / fireRate));
         Damage = 20;
     }
     protected override void Shoot()

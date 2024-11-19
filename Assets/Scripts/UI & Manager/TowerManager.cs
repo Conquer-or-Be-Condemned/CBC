@@ -264,6 +264,8 @@ public class TowerManager : MonoBehaviour
         nameText.SetText(curCanonTower.GetName());
         levelText.SetText("Lv " + curCanonTower.GetLevel());
         powerText.SetText("Power : " + curCanonTower.GetPower());
+        damageText.SetText("Damage : "+curCanonTower.GetDamage());
+        rpm.SetText("RPM : "+curCanonTower.GetRpm());
         
         if (curCanonTower.isActivated)
         {
@@ -293,6 +295,8 @@ public class TowerManager : MonoBehaviour
         nameText.SetText(curMissileTower.GetName());
         levelText.SetText("Lv " + curMissileTower.GetLevel());
         powerText.SetText("Power : " + curMissileTower.GetPower());
+        damageText.SetText("Damage : "+curMissileTower.GetDamage());
+        rpm.SetText("RPM : "+curMissileTower.GetRPM());
 
         if (curMissileTower.isActivated)
         {

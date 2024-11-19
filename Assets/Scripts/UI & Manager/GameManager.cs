@@ -92,8 +92,8 @@ public class GameManager : Singleton<GameManager>
         //  지속해서 현재 씬이 Loading인지 확인 (또한 스킵이 가능한지 확인)
         if (SceneController.NowScene == "Loading" && LoadingSkip)
         {
-            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,false);
-            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,false);
+            // AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,false);
+            // AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,false);
 
             CheckSpaceKey();    
         }

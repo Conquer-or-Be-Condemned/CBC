@@ -61,6 +61,8 @@ public class AudioManager : Singleton<AudioManager>
             sfxPlayers[i].volume = sfxVolume;
         }
     }
+    
+    //  TODO : 아예 브금을 안나오게 하는 Method 있으면 좋을 듯
 
     public void PlayBGM(Bgm bgm, bool isPlay)
     {
