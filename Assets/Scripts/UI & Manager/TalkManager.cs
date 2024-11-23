@@ -24,21 +24,22 @@ public class TalkManager : MonoBehaviour
         TalkData.Add(101, new string[]
         {
             "Connecting to Headquarters...",
-            "Developer, You Arrived at Planet [행성이름 자리].",
+            $"Developer, You arrived at {StageInfoManager.GetCurStageName()}.",
             "Scanning Hazard Objects Nearby.",
             "Scanning...",
             "Finished Scanning...",
             "Analyzing...",
             "Finished Analyzing...",
-            "Briefing Scanning Results....",
-            "Found [num of turrets] Turrets and One Control Unit",
-            "Manufacturer: [제조사 이름? 넣어도 ㄱㅊ을듯]\nAssembled by Vanguard from Earth.",//제조사 이름 빼도 무관
+            "Briefing Scanning Results...",
+            //  터렛 숫자는 지금 넣으려면 조금 빡세서 나중으로 미룸
+            "Found $num of turrets$ Turrets and One Control Unit",
+            "Manufacturer : Von Neumann Industry\nAssembled by Vanguard from Earth.",
             "Finished Briefing Scanning Results...",
-            "Once the Control Unit Activates, You can Conquer the Planet.",
-            "You MUST Protect it from the Enemies until it Activates",
-            "You Can Use the Emergency Power System of the Control Unit\n to Activate Turrets",
-            "Turrets will Support You in Eliminating Enemies",
-            "You Might Face a Lack of Power. Use it Wisely",
+            "Once the Control Unit activates, You can conquer the planet.",
+            "You MUST protect it from the enemies until it activates.",
+            "You can use the emergency power system of the Control Unit to activate turrets.",
+            "Turrets will support You in eliminating enemies.",
+            "You can face a lack of power. Use it wisely.",
             "Connection Lost..."
         });
     }

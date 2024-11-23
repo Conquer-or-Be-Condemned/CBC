@@ -103,8 +103,9 @@ public class AlertManager : MonoBehaviour
     {
         alertTexts.Clear();
         
-        alertTexts.Add("You are out of power!!!");
+        alertTexts.Add("You are out of power.");
         alertTexts.Add("Tower has been deactivated.");
         alertTexts.Add("Tower has been activated.");
+        alertTexts.Add("Control Unit is under attack.");
     }
 }
