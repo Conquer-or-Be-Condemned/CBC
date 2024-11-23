@@ -12,8 +12,8 @@ using UnityEngine.AI;
 public class GameManager : Singleton<GameManager>
 {
     [Header("Management")] 
-    public static bool isNewGame;
-    public static bool tutorialEnd;
+    public static bool IsNewGame;
+    public static bool TutorialEnd;
     
     [Header("Game")]
     public GameObject player;
@@ -86,8 +86,8 @@ public class GameManager : Singleton<GameManager>
 
     public void NewGame()
     {
-        isNewGame = true;
-        tutorialEnd = false;
+        IsNewGame = true;
+        TutorialEnd = false;
     }
     
 }
