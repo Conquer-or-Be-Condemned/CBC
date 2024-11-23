@@ -25,7 +25,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected void Awake()
     {
-        Debug.Log("dontdestroycalled");
         if (transform.parent != null && transform.root != null)
         {
             DontDestroyOnLoad(this.transform.root.gameObject);

@@ -12,12 +12,14 @@ using UnityEngine;
 public class GeneralManager : Singleton<GeneralManager>
 {
     //  Global Managers ->  모두 GameManager가 가지고 있는 Components
+    [Header("Global Manager")]
     public GameManager gameManager;
     public SceneController sceneController;
     public CursorManager cursorManager;
     public AudioManager audioManager;
 
     //  InGame Managers (Local)
+    [Header("In Game Manager")]
     public CameraController cameraController;
     public MiniMapController minimapController;
     public AlertManager alertManager;
@@ -25,10 +27,12 @@ public class GeneralManager : Singleton<GeneralManager>
     public InGameManager inGameManager;
     
     //  UI Managements
+    [Header("UI Managements")]
     public UICUInfo uiCUInfo;
     public UIPlayerHp uiPlayerHp;
     
     //  부가기능 Managers (Local)
+    [Header("Local Manager")]
     public LoadingManager loadingManager;
     public SiteManager siteManager;
     public StageInfoManager stageInfoManager;
@@ -48,6 +52,9 @@ public class GeneralManager : Singleton<GeneralManager>
         if (sceneController == null) Debug.LogError("SceneController 스크립트 오류");
         if (cursorManager == null) Debug.LogError("CursorManager 스크립트 오류");
         if (audioManager == null) Debug.LogError("AudioManager 스크립트 오류");
+        
+        //  TalkManager
+        TalkManager.SetTalkData();
     }
     
     private void FixedUpdate()

@@ -58,7 +58,7 @@ public class AlertManager : MonoBehaviour
         alertAnimator = alertBox.GetComponent<Animator>();
         
         //  시작 시 알림 등장
-        Show("Watch out next wave is coming!\nTry your best Developer");
+        // Show("Watch out next wave is coming!\nTry your best Developer");
     }
 
     //  원하는 메시지 쓰고 싶을 때 사용
