@@ -66,7 +66,6 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayBGM(Bgm bgm, bool isPlay)
     {
-        Debug.Log(bgmPlayers.Length);
         for (int i = 0; i < bgmPlayers.Length; i++)
         {
             int loopIndex = (i + bgmChannelIndex) % bgmPlayers.Length;
@@ -82,7 +81,6 @@ public class AudioManager : Singleton<AudioManager>
             {
                 bgmPlayers[loopIndex].Stop();
             }
-            Debug.Log(bgm);
             // break;
         }
 

@@ -14,6 +14,7 @@ public class StageInfoManager : MonoBehaviour
 {
     
     //  UI의 정보들
+    [Header("UI Instance")]
     [SerializeField] private TMP_Text planetName;
     [SerializeField] private TMP_Text planetStory;
     [SerializeField] private TMP_Text planetInfo;
@@ -23,6 +24,7 @@ public class StageInfoManager : MonoBehaviour
     public GameObject warpButton;
     
     //  정보 저장을 위한 List
+    [Header("Planet Info List")]
     public List<string> nameList = new List<string>();
     public List<string> storyList= new List<string>();
     public List<string> infoList = new List<string>();
@@ -30,7 +32,9 @@ public class StageInfoManager : MonoBehaviour
     public static bool StageInit;
     
     //  각 스테이지의 웨이브 정보를 저장하는 클래스 타입
-    public static List<int> WaveInfoes = new List<int>();
+    [Header("Wave Info")]
+    public static List<int> StageInfo = new List<int>();
+    public static List<List<int>> WaveInfo = new List<List<int>>();
     
     //  현재 Display되고 있는 스테이지
     private void Awake()
@@ -59,6 +63,7 @@ public class StageInfoManager : MonoBehaviour
         
         StageInit = false; 
         
+        warpButton.SetActive(false);
         StartCoroutine(WaitShowCoroutine());
     }
 
@@ -72,7 +77,6 @@ public class StageInfoManager : MonoBehaviour
     //  씬 전환 직후 애니메이션과 워프 버튼에 딜레이 부여
     private IEnumerator WaitShowCoroutine()
     {
-        warpButton.SetActive(false);
         yield return new WaitForSeconds(1.05f);
         
         warpButton.SetActive(true);
@@ -140,12 +144,24 @@ public class StageInfoManager : MonoBehaviour
     }
     
     //  웨이브 저장을 위한 Method
+    public static void SetStageInfo()
+    {
+        StageInfo.Add(3);
+    }
+
     public static void SetWaveInfo()
     {
-        WaveInfoes.Add(9);
+        //  Stage 1 - Wave 9개 (임시 3개)
+        WaveInfo.Add(new List<int> {30,30,30,30,30,30,30,30,30});
     }
-    public static int GetWaveInfo()
+    
+    public static int GetStageInfo()
     {
-        return WaveInfoes[GameManager.CurStage - 1];
+        return StageInfo[GameManager.CurStage - 1];
+    }
+
+    public static int GetWaveInfo(int curWave)
+    {
+        return WaveInfo[GameManager.CurStage - 1][curWave - 1];
     }
 }
