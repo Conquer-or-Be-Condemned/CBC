@@ -23,11 +23,23 @@ public class TalkManager : MonoBehaviour
         
         TalkData.Add(101, new string[]
         {
-            "개발자님, 목적지 행성에 도착했습니다.",
-            "주변 환경 분석 결과, 선봉대가 설치했던 터렛들을 발견했습니다.",
-            "전력 수급에 한계가 있겠지만 우리의 제어 장치에 있는 전력을 사용한다면,\n터렛들을 활성화 시킬 수 있을 것입니다.",
-            "제어 장치 활성화까지 적들을 부디 막아주세요.",
-            "(통신 종료)"
+            "Connecting to Headquarters...",
+            "Developer, You Arrived at Planet [행성이름 자리].",
+            "Scanning Hazard Objects Nearby.",
+            "Scanning...",
+            "Finished Scanning...",
+            "Analyzing...",
+            "Finished Analyzing...",
+            "Briefing Scanning Results....",
+            "Found [num of turrets] Turrets and One Control Unit",
+            "Manufacturer: [제조사 이름? 넣어도 ㄱㅊ을듯]\nAssembled by Vanguard from Earth.",//제조사 이름 빼도 무관
+            "Finished Briefing Scanning Results...",
+            "Once the Control Unit Activates, You can Conquer the Planet.",
+            "You MUST Protect it from the Enemies until it Activates",
+            "You Can Use the Emergency Power System of the Control Unit\n to Activate Turrets",
+            "Turrets will Support You in Eliminating Enemies",
+            "You Might Face a Lack of Power. Use it Wisely",
+            "Connection Lost..."
         });
     }
 
