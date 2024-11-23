@@ -56,8 +56,11 @@ public class Player : MonoBehaviour
         {
             CheckDirectionToMouse();
         }
-        
-        PlayerAttack();
+
+        if (!GeneralManager.Instance.inGameManager.isTalking)
+        {
+            PlayerAttack();
+        }
     }
    
     private void PlayerMove2()

@@ -54,6 +54,7 @@ public class GeneralManager : Singleton<GeneralManager>
         if (audioManager == null) Debug.LogError("AudioManager 스크립트 오류");
         
         //  TalkManager
+        StageInfoManager.SetPlanet();
         TalkManager.SetTalkData();
     }
     
