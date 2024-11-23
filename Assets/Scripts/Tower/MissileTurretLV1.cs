@@ -41,7 +41,7 @@ public class MissileTurretLV1 : DefaultMissileTurret
         Level = 1;
         
         gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
-        RPM = 60 / (int)(1 / fireRate);
+        RPM = (int)(60 / (1 / fireRate));
         Damage = 10;
         
         _missileObj = new GameObject[missileSpawnPoint.Length];

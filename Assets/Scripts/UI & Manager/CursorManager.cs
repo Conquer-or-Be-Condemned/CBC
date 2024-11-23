@@ -16,6 +16,7 @@ public class CursorManager : MonoBehaviour
     }
 
     //  인게임에서 커서를 바꿈
+    //  인게임 전용 커서에 문제가 있어서 잠시 변경 
     public void SetInGameCursor()
     { 
         Cursor.SetCursor(inGameCursor,Vector2.zero, CursorMode.Auto);

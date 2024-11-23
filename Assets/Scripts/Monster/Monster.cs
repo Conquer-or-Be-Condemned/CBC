@@ -10,6 +10,7 @@ public abstract class Monster : MonoBehaviour
     public float attackDamage;
     public float moveSpeed;
     public float attackRange;
+    public bool isDead;
 
     [Header("Detection Settings")]
     [Tooltip("플레이어를 감지할 범위")]
@@ -91,6 +92,9 @@ public abstract class Monster : MonoBehaviour
                 Debug.LogWarning("Player not found in the scene. Please assign it manually.");
             }
         }
+
+        //  For In Game
+        isDead = false;
     }
 
     public virtual void TakeDamage(float damage)
@@ -104,14 +108,17 @@ public abstract class Monster : MonoBehaviour
             healthBarCurrentImage.fillAmount = fillAmount;
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
+            isDead = true;
             Die();
         }
     }
 
     protected virtual void Die()
     {
+        GeneralManager.Instance.inGameManager.ListenMonsterDie();
+        
         // 체력바 제거
         if (healthBarTransform != null)
         {

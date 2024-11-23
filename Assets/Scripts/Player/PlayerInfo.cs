@@ -17,11 +17,6 @@ public class PlayerInfo : MonoBehaviour
         curHp = maxHp;
     }
 
-    private void Start()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         onHpChange.Invoke(curHp, maxHp);
@@ -47,8 +42,23 @@ public class PlayerInfo : MonoBehaviour
 
     public void RecoverHp()
     {
-        curHp = maxHp;
+        StartCoroutine(RecoverCoroutine());
     }
-    
+
+    private IEnumerator RecoverCoroutine()
+    {
+        while (true)
+        {
+            if (curHp >= maxHp)
+            {
+                curHp = maxHp;
+                yield break;
+            }
+
+            curHp++;
+            onHpChange.Invoke(curHp, maxHp);
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
     
 }

@@ -61,10 +61,11 @@ public class AudioManager : Singleton<AudioManager>
             sfxPlayers[i].volume = sfxVolume;
         }
     }
+    
+    //  TODO : 아예 브금을 안나오게 하는 Method 있으면 좋을 듯
 
     public void PlayBGM(Bgm bgm, bool isPlay)
     {
-        Debug.Log(bgmPlayers.Length);
         for (int i = 0; i < bgmPlayers.Length; i++)
         {
             int loopIndex = (i + bgmChannelIndex) % bgmPlayers.Length;
@@ -80,7 +81,6 @@ public class AudioManager : Singleton<AudioManager>
             {
                 bgmPlayers[loopIndex].Stop();
             }
-            Debug.Log(bgm);
             // break;
         }
 

@@ -37,7 +37,7 @@ public class CanonTurretLv1 : DefaultCanonTurret
         CoolTime = coolTime; //~초 지나면 냉각
         Level = 1;
         GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
-        RPM = 60 / (int)(1 / fireRate);
+        RPM = (int)(60 / (1 / fireRate));
         Damage = 10;
     }
     override 
