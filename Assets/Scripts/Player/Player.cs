@@ -40,7 +40,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        PlayerMove2();
+        if (!GeneralManager.Instance.inGameManager.isTalking)
+        {
+            PlayerMove2();
+        }
     }
 
     private void Update()
