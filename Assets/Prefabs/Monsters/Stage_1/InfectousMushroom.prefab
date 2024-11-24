@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.3, y: 0.63, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8928679974486987018}
@@ -191,11 +191,13 @@ MonoBehaviour:
   attackDamage: 5
   moveSpeed: 5
   attackRange: 5
+  isDead: 0
   detectionRange: 15
   player: {fileID: 0}
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 5
+  currentTarget: {fileID: 0}
 --- !u!60 &7998834415135481032
 PolygonCollider2D:
   m_ObjectHideFlags: 0

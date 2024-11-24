@@ -20,16 +20,14 @@ public class TalkManager : MonoBehaviour
     public static void SetTalkData()
     {
         TalkData = new Dictionary<int, string[]>();
-        
+
         TalkData.Add(101, new string[]
         {
             "Connecting to Headquarters...",
             $"Developer, You arrived at {StageInfoManager.GetCurStageName()}.",
             "Scanning Hazard Objects Nearby.",
             "Scanning...",
-            "Finished Scanning...",
             "Analyzing...",
-            "Finished Analyzing...",
             "Briefing Scanning Results...",
             //  터렛 숫자는 지금 넣으려면 조금 빡세서 나중으로 미룸
             "Found $num of turrets$ Turrets and One Control Unit",
