@@ -26,7 +26,7 @@ public class SceneController : Singleton<SceneController>
     public static string NextScene;
     
     //  스테이지 정보
-    private string[] stageList = { "MapTest" };
+    public static string[] stageList = { "Stage_1" };
 
     public void Start()
     {
