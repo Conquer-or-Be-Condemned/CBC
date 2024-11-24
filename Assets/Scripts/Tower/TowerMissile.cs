@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class TowerMissile : MonoBehaviour
 {
@@ -127,8 +130,11 @@ public class TowerMissile : MonoBehaviour
     //for debug-------------------------------------------------------------
     private void OnDrawGizmosSelected()
     {
+#if UNITY_EDITOR
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, explosionRange);
+#endif
+
     }
     private void DrawTargetLineToTarget()
     {
