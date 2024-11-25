@@ -77,7 +77,7 @@ public class ControlUnitStatus : MonoBehaviour
     private IEnumerator AttackCoolCoroutine()
     {
         attackCool = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         attackCool = false;
     }
 
@@ -113,7 +113,7 @@ public class ControlUnitStatus : MonoBehaviour
     }
 
     //  파워 회복량, 속도
-    [SerializeField] private int powerOffset = 1;
+    [SerializeField] private int powerOffset = 3;
     [SerializeField] private float recoverSpeed = 0.5f;
 
     private void RecoverPower(int power)
