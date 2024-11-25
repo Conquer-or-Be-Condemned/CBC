@@ -56,7 +56,7 @@ public class TowerMissile : MonoBehaviour
     {
         if (_target == null)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 50);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 300);
             foreach (var monster in hits)
             {
                 if (monster.CompareTag("Enemy"))
