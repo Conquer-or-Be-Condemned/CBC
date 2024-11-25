@@ -60,11 +60,11 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 3577476696653598682}
   gunRenderer: {fileID: 9039057381650263844}
   range: 45
-  rotationSpeed: 400
+  rotationSpeed: 500
   fireRate: 10
-  power: 20
+  power: 15
   overHeatTime: 10
-  coolTime: 5
+  coolTime: 2.5
 --- !u!58 &7130774518783448330
 CircleCollider2D:
   m_ObjectHideFlags: 0

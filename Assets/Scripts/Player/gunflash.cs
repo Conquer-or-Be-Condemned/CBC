@@ -8,10 +8,19 @@ public class gunflash : MonoBehaviour
     public float flashDelay = 0.1f; // 공격 제한 시간
     public float flashDuration = 0.05f; // 플래시 활성화 시간
     public bool attackAble = true; // 공격 가능 여부
-    private bool isFlashing = false; // 플래시 활성화 여부
-
-    // Start is called before the first frame update
+    public bool isFlashing; // 플래시 활성화 여부
+    
     void Start()
+    {
+        Initialize();
+    }
+
+    void OnEnable()
+    {
+        Initialize();
+    }
+
+    private void Initialize()
     {
         attackAble = true;
         isFlashing = false;
@@ -23,10 +32,12 @@ public class gunflash : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        GunFlash();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GunFlash();    
+        }
     }
 
     private void GunFlash()
@@ -34,7 +45,7 @@ public class gunflash : MonoBehaviour
         // 스페이스바 입력 시 플래시 동작
         if (!GeneralManager.Instance.inGameManager.isTalking)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && attackAble && !isFlashing)
+            if (attackAble && !isFlashing)
             {
                 StartCoroutine(GunFlashCoroutine());
             }

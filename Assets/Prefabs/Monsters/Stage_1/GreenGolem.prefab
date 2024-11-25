@@ -186,9 +186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: GreenGolem
-  maxHealth: 500
-  currentHealth: 500
-  attackDamage: 50
+  maxHealth: 750
+  currentHealth: 750
+  attackDamage: 35
   moveSpeed: 5
   attackRange: 11
   isDead: 0

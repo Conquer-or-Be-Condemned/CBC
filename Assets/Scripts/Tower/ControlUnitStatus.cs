@@ -113,7 +113,7 @@ public class ControlUnitStatus : MonoBehaviour
     }
 
     //  파워 회복량, 속도
-    [SerializeField] private int powerOffset = 3;
+    [SerializeField] private int powerOffset = 5;
     [SerializeField] private float recoverSpeed = 0.5f;
 
     private void RecoverPower(int power)

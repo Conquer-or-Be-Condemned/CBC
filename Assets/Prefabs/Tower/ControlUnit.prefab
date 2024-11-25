@@ -139,10 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c355b3b635e540c3997a89d22e91fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 100
-  currentPower: 100
-  maxHealth: 100
-  curHealth: 100
+  maxPower: 225
+  currentPower: 225
+  maxHealth: 1500
+  curHealth: 1500
   accessPoints:
   - {fileID: 2526849332522214749}
   - {fileID: 7506699160037249297}
