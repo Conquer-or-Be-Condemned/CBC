@@ -49,7 +49,6 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     {
         CheckToggle();//사용자에 의한 타워 가동 토글 확인
         TowerIsActivatedNow();//사용자에 의해 타워가 가동 됐다면 역할 수행
-        
     }
     private void CheckToggle()//Checks toggle of isActivated
     {
@@ -64,8 +63,8 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
             {
                 
                 Animator.SetBool("isShoot", false);
-                previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
                 StartCoroutine(DeactivateProcess());
+                previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
                 DeleteTurret();
             }
         }
@@ -85,6 +84,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     {
         if (Targets[0] == null)
         {
+            CurMissileCount -= Time.deltaTime*2;
             // Debug.Log("finding target");
             FindTarget();//(raycast 사용)
         }
@@ -221,6 +221,8 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
             CurMissileCount -= Time.deltaTime;
             yield return null;
         }
+
+        CurMissileCount = 0;
         GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
     }
     private IEnumerator OverHeat()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)

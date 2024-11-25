@@ -14,6 +14,7 @@ public class MissileTurretLV3 : DefaultMissileTurret
     [SerializeField] private Animator animator; //타워 부분 Animator
     [SerializeField] private GameObject bulletPrefab; //총알 오브젝트 생성 위한 변수
     [SerializeField] private Transform[] missileSpawnPoint; //미사일 스폰 지점
+    [SerializeField] private Transform[] missileTargetPoint; //미사일 스폰 지점
     [SerializeField] private SpriteRenderer gunRenderer; //과열시 색 변화
 
     [Header("Attributes")] [SerializeField]
@@ -51,15 +52,19 @@ public class MissileTurretLV3 : DefaultMissileTurret
         StartCoroutine(ShootAnimation());
         for (int i = 0; i < _missileObj.Length; i++)
         {
-            _missileObj[i] = Instantiate(bulletPrefab, missileSpawnPoint[i].position, turretRotationPoint.rotation);
-            TowerMissile missileScript = _missileObj[i].GetComponent<TowerMissile>();
-
-            if (Targets[i] != null) missileScript.SetTarget(Targets[i]);
-            else if((Targets[i] != null) && (i > 1))
+            if (Targets[i] != null)
             {
-                if (Targets[i - 2] != null) missileScript.SetTarget(Targets[i - 2]);
-                else missileScript.SetTarget(Targets[i - 4]);
+                _missileObj[i] = Instantiate(bulletPrefab, missileSpawnPoint[i].position, turretRotationPoint.rotation);
+                TowerMissile missileScript = _missileObj[i].GetComponent<TowerMissile>();
+                missileScript.SetTarget(Targets[i]);
             }
+
+            // if (Targets[i] != null) missileScript.SetTarget(Targets[i]);
+            // else if((Targets[i] != null) && (i > 1))
+            // {
+            //     if (Targets[i - 2] != null) missileScript.SetTarget(Targets[i - 2]);
+            //     else missileScript.SetTarget(Targets[i - 4]);
+            // }
         }
 
         for (var i = 0; i < _missileObj.Length; i++)
