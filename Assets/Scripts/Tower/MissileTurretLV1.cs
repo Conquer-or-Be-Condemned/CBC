@@ -53,9 +53,12 @@ public class MissileTurretLV1 : DefaultMissileTurret
         StartCoroutine(ShootAnimation());
         for (int i = 0; i < _missileObj.Length; i++)
         {
-            _missileObj[i] = Instantiate(bulletPrefab, missileSpawnPoint[i].position, turretRotationPoint.rotation);
-            TowerMissile missileScript = _missileObj[i].GetComponent<TowerMissile>();
-            missileScript.SetTarget(Targets[i]);
+            if (Targets[i] != null)
+            {
+                _missileObj[i] = Instantiate(bulletPrefab, missileSpawnPoint[i].position, turretRotationPoint.rotation);
+                TowerMissile missileScript = _missileObj[i].GetComponent<TowerMissile>();
+                missileScript.SetTarget(Targets[i]);
+            }
         }
         for (var i = 0; i < _missileObj.Length; i++)
         {
