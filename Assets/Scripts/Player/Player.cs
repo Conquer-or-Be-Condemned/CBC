@@ -135,11 +135,13 @@ public class Player : MonoBehaviour
         {
             if (!GeneralManager.Instance.inGameManager.isTalking)
             {
+                Debug.Log("player attack");
                 PlayerAttack();   
             }
         }
         else
         {
+            Debug.LogError("player error");
             PlayerAttack();   
         }
     }
