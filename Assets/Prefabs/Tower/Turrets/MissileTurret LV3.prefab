@@ -731,11 +731,11 @@ MonoBehaviour:
   - {fileID: 5653386092189873409}
   - {fileID: 259624671159686732}
   gunRenderer: {fileID: 3423592564341140463}
-  range: 300
-  rotationSpeed: 100
+  range: 100
+  rotationSpeed: 175
   fireRate: 0.5
-  power: 5
-  overHeatMissileCount: 10
+  power: 45
+  overHeatMissileCount: 7
   coolTime: 5
 --- !u!58 &5975951976129630125
 CircleCollider2D:

@@ -47,6 +47,7 @@ public class MiniMapController : MonoBehaviour
         {
             return;
         }
+        
         Debug.Log("Toggled!");
         isVisible = status;
         mapInvisible.SetActive(isVisible);

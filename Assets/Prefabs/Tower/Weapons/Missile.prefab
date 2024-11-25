@@ -166,8 +166,8 @@ MonoBehaviour:
   turnSpeed: 140
   acceleration: 20
   initialStraightTime: 1.5
-  bulletDamage: 10
-  explosionRange: 5
+  bulletDamage: 15
+  explosionRange: 7
 --- !u!50 &5152064728928936489
 Rigidbody2D:
   serializedVersion: 4

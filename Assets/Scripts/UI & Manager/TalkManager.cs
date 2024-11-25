@@ -30,8 +30,8 @@ public class TalkManager : MonoBehaviour
             "Analyzing...",
             "Briefing Scanning Results...",
             //  터렛 숫자는 지금 넣으려면 조금 빡세서 나중으로 미룸
-            "Found $num of turrets$ Turrets and One Control Unit",
-            "Manufacturer : Von Neumann Industry\nAssembled by Vanguard from Earth.",
+            "Found some Turrets and One Control Unit",
+            "[Manufacturer : Von Neumann Industry]\nAssembled by Vanguard from Earth.",
             "Finished Briefing Scanning Results...",
             "Once the Control Unit activates, You can conquer the planet.",
             "You MUST protect it from the enemies until it activates.",

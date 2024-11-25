@@ -416,13 +416,14 @@ MonoBehaviour:
   - {fileID: 3028729527259506226}
   - {fileID: 3738974294831536823}
   - {fileID: 2333844838973036701}
+  missileTargetPoint: []
   gunRenderer: {fileID: 2175146551687495156}
-  range: 200
-  rotationSpeed: 100
+  range: 90
+  rotationSpeed: 200
   fireRate: 0.3
-  power: 50
-  overHeatMissileCount: 10
-  coolTime: 5
+  power: 35
+  overHeatMissileCount: 8
+  coolTime: 4
 --- !u!58 &4665351848983348876
 CircleCollider2D:
   m_ObjectHideFlags: 0
