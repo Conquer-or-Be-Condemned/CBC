@@ -60,6 +60,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 3577476696653598682}
   gunRenderer: {fileID: 9039057381650263844}
   range: 45
+
   rotationSpeed: 500
   fireRate: 10
   power: 15
