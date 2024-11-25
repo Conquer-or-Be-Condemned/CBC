@@ -14,18 +14,14 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;//타워 회전 각도
-    protected Transform Target1;            //target of missile1
-    protected Transform Target2;            //target of missile2
-    protected Transform Target3;            //target of missile3
-    protected Transform Target4;            //target of missile4
-    protected Transform Target5;            //target of missile5
-    protected Transform Target6;            //target of missile6
+    protected LayerMask EnemyMask;
+    protected Transform[] Targets;
     protected Animator Animator;            //타워 부분 Animator
     protected SpriteRenderer GunRenderer;   //과열시 색 변화
-    protected String Name;                  //타워이름
     
     protected float Range;                  //타워 사거리
     protected float FireRate;               //발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
+    protected float RotationSpeed;
     protected int Power;                    //타워 사용 전력량
     protected int OverHeatMissileCount;     //~초 격발시 과열
     protected int Level;
@@ -35,19 +31,19 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     
     private GameObject _originPower;        //ControlUnitStatus Script의 함수사용
     private ControlUnitStatus _cus;         //_cus = _OriginPower.GetComponent<ControlUnitStatus>();
+    private String _name;                  //타워이름
     private float _timeTilFire;             //다음 발사까지의 시간
     private float _angleThreshold = 360f;   // 타워와 적의 각도 차이 허용 범위 (조정 가능)
     private float _totCoolTime;             //냉각시 누적 냉각시간
     
     //Override Methods---------------------------
     protected abstract void Shoot();
-    protected abstract void FindTarget();
-    protected abstract void RotateTowardsTarget();//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
     //--------------------------------------------
     private void Awake()
     {
         _originPower = GameObject.Find("ControlUnit");
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
+        _name = "Missile Turret";
     }
     private void Update()
     {
@@ -87,27 +83,83 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
 
     private void NoTargetInRange()//적이 타워 범위에 없을 때 탐색(TowerIsActivatedNow에서 수행)
     {
-        if (Target1 == null)
+        if (Targets[0] == null)
         {
+            // Debug.Log("finding target");
             FindTarget();//(raycast 사용)
+        }
+    }
+    private void FindTarget()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, Range, EnemyMask);
+        if (hits.Length == 0) return;
+
+        // 사용할 수 있는 타겟들의 리스트를 만듭니다
+        List<(Collider2D collider, float distance)> availableTargets = new List<(Collider2D, float)>();
+        foreach (var hit in hits)
+        {
+            float distance = Vector2.Distance(transform.position, hit.transform.position);
+            availableTargets.Add((hit, distance));
+        }
+        availableTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
+
+        for (int i = 0; i < Targets.Length; i++)
+        {
+            if (availableTargets.Count == 0)
+            {
+                break;
+            }
+            if (availableTargets.Count > 0)
+            {
+                Targets[i] = availableTargets[0].collider.transform;
+                availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
+                if(availableTargets.Count !=0)
+                    availableTargets.RemoveAt(0);
+            }
+        }
+        if (Targets[1] == null) Targets[1] = Targets[0];
+    }
+    private void RotateTowardsTarget() //적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)
+    {
+        if (Targets[0] == null) return;
+        if (Targets[1] != null)
+        {
+            float angle =
+                Mathf.Atan2(
+                    (Targets[0].position.y + Targets[1].position.y) / 2 -
+                    transform.position.y,
+                    (Targets[0].position.x + Targets[1].position.x) / 2 -
+                    transform.position.x) * Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            TurretRotationPoint.rotation = Quaternion.RotateTowards(TurretRotationPoint.rotation, targetRotation,
+                RotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            float angle =
+                Mathf.Atan2(Targets[0].position.y - transform.position.y,
+                    Targets[0].position.x - transform.position.x) *
+                Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            TurretRotationPoint.rotation = Quaternion.RotateTowards(TurretRotationPoint.rotation, targetRotation,
+                RotationSpeed * Time.deltaTime);
         }
     }
     private void FireRateController()//총알 객체화 후 발사 동작 수행(TowerIsActivatedNow에서 수행)
     {
         if (!CheckTargetIsInRange())//적이 범위에 없음
         {
-            Target1 = null;
-            Target2 = null;
-            Target3 = null;
-            Target4 = null;
-            Target5 = null;
-            Target6 = null;
+            // for (int i = 0; i < Targets.Length; i++)
+            // {
+            //     Targets[i] = null;
+            // }
             _timeTilFire = 0f;
         }
         else//적이 범위에 있음
         {
+            // Debug.Log("Target is in the range");
             _timeTilFire += Time.deltaTime;
-            if (_timeTilFire >= (1f / FireRate) && IsTargetInSight())//적이 타워의 시야각에 있고 RPS만큼 발사
+            if (_timeTilFire >= (1f / FireRate))// && IsTargetInSight())//적이 타워의 시야각에 있고 RPS만큼 발사
             {
                 Shoot();
                 _timeTilFire = 0f;
@@ -130,13 +182,13 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     }
     private bool CheckTargetIsInRange()//적이 사거리에 있는지 확인(FireRateController에서 수행)
     {
-        if (Target1 == null) return false;
-        return Vector2.Distance(Target1.position, transform.position) <= Range;
+        if (Targets[0] == null) return false;
+        return Vector2.Distance(Targets[0].position, transform.position) <= Range;
     }
     private bool IsTargetInSight()//적이 시야각에 있는지 확인(FireRateController, OverHeatAnimationController에서 수행)
     {
-        if(Target1==null) return false;
-        float angleToTarget = Mathf.Atan2(Target1.position.y - transform.position.y, Target1.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        if(Targets[0]==null) return false;
+        float angleToTarget = Mathf.Atan2(Targets[0].position.y - transform.position.y, Targets[0].position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
         float turretAngle = TurretRotationPoint.eulerAngles.z;
         float angleDifference = Mathf.DeltaAngle(turretAngle, angleToTarget);
         return Mathf.Abs(angleDifference) <= _angleThreshold;
@@ -206,7 +258,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     //Getter
     public String GetName()
     {
-        return Name;
+        return _name;
     }
 
     public int GetLevel()
@@ -226,10 +278,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     {
         return Damage;
     }
-    public int GetRpm()
-    {
-        return RPM;
-    }
+
     //  TODO : 데미지 정보를 만들어야 함.
    
 }

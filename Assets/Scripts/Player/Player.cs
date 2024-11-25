@@ -1,69 +1,131 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 0.3f;
+    [SerializeField] private float pushAmount = 0.02f; // 충돌 시 밀어내는 크기
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private int bulletsPerShot; // 한 번에 발사할 총알 수
     [SerializeField] private float spreadAngle = 15f; // 총알 퍼짐 각도
     public Tilemap map;
+    public float attackDelay;
+    public bool attackable;
+
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private Vector2 _mouse;
     private Vector3 sumVector;
     private Transform _mouseTransform;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        if (_rb)
+        {
+            _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Continuous로 설정
+        }
+        
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // 타일맵 객체가 없다면 타일맵 객체를 찾음
         if (map == null)
         {
             map = FindObjectOfType<Tilemap>();
         }
+
+        attackable = true;
     }
 
     private void FixedUpdate()
     {
-        PlayerMove2();
-        
+        if (!GeneralManager.Instance.inGameManager.isTalking)
+        {
+            PlayerMove();
+        }
+    }
+
+    private void PlayerMove()
+    {
+        sumVector = Vector3.zero;
+
+        // 키 입력 처리
+        if (Input.GetKey(KeyCode.UpArrow)) sumVector += Vector3.up * moveSpeed;
+        if (Input.GetKey(KeyCode.LeftArrow)) sumVector += Vector3.left * moveSpeed;
+        if (Input.GetKey(KeyCode.DownArrow)) sumVector += Vector3.down * moveSpeed;
+        if (Input.GetKey(KeyCode.RightArrow)) sumVector += Vector3.right * moveSpeed;
+        if (Input.GetKey(KeyCode.W)) sumVector += Vector3.up * moveSpeed;
+        if (Input.GetKey(KeyCode.A)) sumVector += Vector3.left * moveSpeed;
+        if (Input.GetKey(KeyCode.S)) sumVector += Vector3.down * moveSpeed;
+        if (Input.GetKey(KeyCode.D)) sumVector += Vector3.right * moveSpeed;
+
+        // 이동 처리
+        transform.position += sumVector * Time.fixedDeltaTime;
+
+        // 경계 내에서 위치 클램프
+        Bounds tilemapBounds = map.GetComponent<Renderer>().bounds;
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, tilemapBounds.min.x, tilemapBounds.max.x),
+            Mathf.Clamp(transform.position.y, tilemapBounds.min.y, tilemapBounds.max.y),
+            transform.position.z
+        );
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            // 충돌 방향 계산
+            Vector3 pushDirection = collision.contacts[0].normal;
+
+            // 플레이어를 충돌 방향 반대쪽으로 밀어냄
+            transform.position += pushDirection * pushAmount;
+
+            Debug.Log($"Collision Enter: Push Direction = {pushDirection}");
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            // 충돌 방향 계산
+            Vector3 pushDirection = collision.contacts[0].normal;
+
+            // 충돌 지속 시에도 플레이어를 충돌 반대쪽으로 계속 밀어냄
+            transform.position += pushDirection * pushAmount;
+
+            Debug.Log($"Collision Stay: Push Direction = {pushDirection}");
+        }
     }
 
     private void Update()
     {
         // 마우스의 월드 좌표를 가져옴
         _mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
+
         // 방향에 따라 애니메이션 파라미터를 설정
         if (_animator != null)
         {
-            CheckDirectionToMouse();
+            if (!GeneralManager.Instance.inGameManager.pauseVisible)
+            {
+                CheckDirectionToMouse();
+            }
+        }
+
+        if (!GeneralManager.Instance.inGameManager.isTalking)
+        {
+            PlayerAttack();
         }
     }
-   
-    private void PlayerMove2()
+
+    private void PlayerAttack()
     {
-        sumVector = Vector3.zero;
-        
-        if (Input.GetKey(KeyCode.UpArrow)) sumVector += Vector3.up * moveSpeed;
-        if (Input.GetKey(KeyCode.LeftArrow)) sumVector += Vector3.left * moveSpeed;
-        if (Input.GetKey(KeyCode.DownArrow)) sumVector += Vector3.down * moveSpeed;
-        if (Input.GetKey(KeyCode.RightArrow)) sumVector += Vector3.right * moveSpeed;
-        
-        if (Input.GetKey(KeyCode.W)) sumVector += Vector3.up * moveSpeed;
-        if (Input.GetKey(KeyCode.A)) sumVector += Vector3.left * moveSpeed;
-        if (Input.GetKey(KeyCode.S)) sumVector += Vector3.down * moveSpeed;
-        if (Input.GetKey(KeyCode.D)) sumVector += Vector3.right * moveSpeed;
-        
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && attackable)
         {
             Vector2 baseDirection = (_mouse - (Vector2)bulletSpawnPoint.position).normalized;
             float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
@@ -85,42 +147,43 @@ public class Player : MonoBehaviour
             }
         }
 
-        transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x + sumVector.x, map.localBounds.min.x + transform.localScale.x / 2, map.localBounds.max.x - transform.localScale.x / 2),
-            Mathf.Clamp(transform.position.y + sumVector.y, map.localBounds.min.y + transform.localScale.y / 2, map.localBounds.max.y - transform.localScale.y / 2),
-            transform.position.z);
+        StartCoroutine(PlayerAttackCoroutine());
+    }
+
+    private IEnumerator PlayerAttackCoroutine()
+    {
+        attackable = false;
+        yield return new WaitForSeconds(attackDelay);
+        attackable = true;
     }
 
     private void CheckDirectionToMouse()
     {
-        // 마우스와 플레이어 사이의 각도 계산
         Vector2 direction = _mouse - (Vector2)transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // 각도에 따라 애니메이션 설정
-        if (angle > -45 && angle <= 45) // 오른쪽
+        if (angle > -45 && angle <= 45)
         {
             SetAnimationState("isSide", true, false, false);
             _spriteRenderer.flipX = true;
         }
-        else if (angle > 45 && angle <= 135) // 위쪽
+        else if (angle > 45 && angle <= 135)
         {
             SetAnimationState("isUp", false, false, true);
             _spriteRenderer.flipX = false;
         }
-        else if (angle > -135 && angle <= -45) // 아래쪽
+        else if (angle > -135 && angle <= -45)
         {
             SetAnimationState("isIdle", false, true, false);
             _spriteRenderer.flipX = false;
         }
-        else // 왼쪽
+        else
         {
             SetAnimationState("isSide", true, false, false);
             _spriteRenderer.flipX = false;
         }
     }
 
-    // 애니메이션 파라미터 설정 함수
     private void SetAnimationState(string activeState, bool side, bool idle, bool up)
     {
         _animator.SetBool("isSide", side);

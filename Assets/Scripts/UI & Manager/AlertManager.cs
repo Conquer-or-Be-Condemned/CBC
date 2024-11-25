@@ -13,12 +13,12 @@ public class AlertManager : MonoBehaviour
 {
     [SerializeField] private GameObject alertBox;
     [SerializeField] private TMP_Text alertInfo;
-    
+
     public Animator alertAnimator;
 
     private WaitForSeconds _UIDelay1 = new WaitForSeconds(2.0f);
     private WaitForSeconds _UIDelay2 = new WaitForSeconds(2.0f);
-    
+
     //  Alert Text 배열입니다. 사용에 주의하세요.
     public List<string> alertTexts = new List<string>();
 
@@ -48,17 +48,17 @@ public class AlertManager : MonoBehaviour
                 Debug.LogError("Alert Info가 없습니다.");
             }
         }
-        
+
         alertBox.SetActive(false);
-        
+
         //  Alert Text init.
         SetAlertText();
-        
+
         //  Set Animator
         alertAnimator = alertBox.GetComponent<Animator>();
-        
+
         //  시작 시 알림 등장
-        Show("Watch out next wave is coming!\nTry your best Developer");
+        // Show("Watch out next wave is coming!\nTry your best Developer");
     }
 
     //  원하는 메시지 쓰고 싶을 때 사용
@@ -78,7 +78,7 @@ public class AlertManager : MonoBehaviour
             Debug.LogError("Alert Box의 Index 값이 잘못되었습니다.");
             return;
         }
-        
+
         alertInfo.SetText(alertTexts[i - 1]);
         alertBox.SetActive(false);
         StopAllCoroutines();
@@ -89,10 +89,10 @@ public class AlertManager : MonoBehaviour
     private IEnumerator SubDelay()
     {
         alertBox.SetActive(true);
-        alertAnimator.SetBool("show",true);
+        alertAnimator.SetBool("show", true);
         yield return _UIDelay1;
-        
-        alertAnimator.SetBool("show",false);
+
+        alertAnimator.SetBool("show", false);
         yield return _UIDelay2;
         alertBox.SetActive(false);
     }
@@ -102,9 +102,10 @@ public class AlertManager : MonoBehaviour
     private void SetAlertText()
     {
         alertTexts.Clear();
-        
-        alertTexts.Add("You are out of power!!!");
+
+        alertTexts.Add("You are out of power.");
         alertTexts.Add("Tower has been deactivated.");
         alertTexts.Add("Tower has been activated.");
+        alertTexts.Add("Control Unit is under attack.");
     }
 }

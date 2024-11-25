@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
 public class MonsterSpawnData
@@ -20,11 +23,30 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private float spawnRadius = 1f;   // 스폰 범위
     [SerializeField] private float spawnZPosition = -2f;  // Z축 고정값 추가
-
+    
+    //  For InGame
+    [Header("For In Game")]
+    public bool isWork;
+    private Coroutine spawnCoroutine;
+    
     private void Start()
     {
-        StartCoroutine(SpawnRoutine());
+        isWork = false;
         // Debug.Log($"MonsterSpawner starting at position: {transform.position}");
+    }
+
+    //  For InGame -> 일단 Listener로 구현하지는 않음
+    private void FixedUpdate()
+    {
+        if (GeneralManager.Instance.inGameManager.isWave 
+            && !GeneralManager.Instance.inGameManager.spawnEnd)
+        {
+            if (!isWork)
+            {
+                spawnCoroutine = StartCoroutine(SpawnRoutine());
+                isWork = true;
+            }
+        }
     }
 
     private IEnumerator SpawnRoutine()
@@ -43,8 +65,18 @@ public class MonsterSpawner : MonoBehaviour
             
             for (int i = 0; i < adMonster.spawnCount; i++)
                 SpawnMonster(adMonster);
-
+            
             yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
+    private void CheckTotalSpawn()
+    {
+        if (GeneralManager.Instance.inGameManager.AddAndCheckCurSpawn(1))
+        {
+            Debug.LogError("Spawner Off");
+            StopCoroutine(spawnCoroutine);
+            isWork = false;
         }
     }
 
@@ -55,6 +87,9 @@ public class MonsterSpawner : MonoBehaviour
             // Debug.LogWarning("Monster prefab is null!");
             return;
         }
+        
+        //  For In Game
+        CheckTotalSpawn();
 
         // 스폰 위치 계산
         float randomOffset = Random.Range(-spawnRadius, spawnRadius);

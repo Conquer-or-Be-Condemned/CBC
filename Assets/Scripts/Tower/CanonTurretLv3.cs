@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using Tower;
 using Unity.VisualScripting;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class CanonTurretLv3 : DefaultCanonTurret
 {   
@@ -14,21 +17,20 @@ public class CanonTurretLv3 : DefaultCanonTurret
     [SerializeField] private LayerMask enemyMask;           //raycast 감지 Layer
     [SerializeField] private Animator animator;             //타워 부분 Animator
     [SerializeField] private GameObject bulletPrefab;           //총알 오브젝트 생성 위한 변수
-    [SerializeField] private new SpriteRenderer gunRenderer;    //과열시 색 변화
+    [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
     
     [Header("Attributes")] 
-    [SerializeField] private new float range;                   // 타워 사거리
-    [SerializeField] private new float rotationSpeed;           // 타워 회전 속도
-    [SerializeField] private new float fireRate;                // 발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
-    [SerializeField] private new int power;                     //타워 사용 전력량
-    [SerializeField] private new float overHeatTime;            //~초 격발시 과열
-    [SerializeField] private new float coolTime;                //~초 지나면 냉각
+    [SerializeField] private float range;                   // 타워 사거리
+    [SerializeField] private float rotationSpeed;           // 타워 회전 속도
+    [SerializeField] private float fireRate;                // 발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
+    [SerializeField] private int power;                     //타워 사용 전력량
+    [SerializeField] private float overHeatTime;            //~초 격발시 과열
+    [SerializeField] private float coolTime;                //~초 지나면 냉각
     private GameObject []_bulletObj;
     private void Start()
     {
         _bulletObj = new GameObject[bulletSpawnPoint.Length];
         GunRenderer = gunRenderer;
-        EnemyMask = enemyMask;
         Animator = animator;
         TurretRotationPoint = turretRotationPoint;
         Range = range;         // 타워 사거리
@@ -39,7 +41,7 @@ public class CanonTurretLv3 : DefaultCanonTurret
         CoolTime = coolTime; //~초 지나면 냉각
         Level = 3;
         GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
-        RPM = 60 / (int)(1 / fireRate);
+        RPM = (int)(60 / (1 / fireRate));
         Damage = 30;
     } 
     protected override void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
@@ -55,7 +57,9 @@ public class CanonTurretLv3 : DefaultCanonTurret
     }
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
     {
+#if UNITY_EDITOR
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, range);
+#endif
     }
 }

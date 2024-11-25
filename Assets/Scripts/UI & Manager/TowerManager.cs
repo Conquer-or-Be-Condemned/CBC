@@ -19,9 +19,7 @@ using Random = UnityEngine.Random;
 
 public class TowerManager : MonoBehaviour
 {
-    public GameObject towerMenu;
-    public TMP_Text towerInfo;
-    
+    [Header("Tower Info")]
     //  혹시 모를 관리의 용이성을 위해 배열로 하지 않고 List로 구현
     [SerializeField] private List<GameObject> towerList = new List<GameObject>();
     [SerializeField] private string towerTag = "Tower";
@@ -29,12 +27,17 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private int activeTowers;
     
     //  CU
+    [Header("Control Unit")]
     [SerializeField] private ControlUnitStatus controlUnit;
     
     //  AlertManager
+    [Header("AlertManager")]
     [SerializeField] private AlertManager alertManager;
     
     //  Tower Menu 요소들
+    [Header("Tower Menu")]
+    public GameObject towerMenu;
+    public TMP_Text towerInfo;
     [SerializeField] private float defaultFontSize;
     [SerializeField] private float missileFontSize;
     [SerializeField] private TMP_Text nameText;
@@ -46,6 +49,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private TMP_Text rpm;
 
     //  클릭과 관련된 인스턴스
+    [Header("Click Management")]
     private RaycastHit2D hit;
     private Animator _animator;
     private bool isVisible;
@@ -73,7 +77,8 @@ public class TowerManager : MonoBehaviour
         activateButton.GetComponent<Button>().onClick.AddListener(SetTowerActive);
         
         //  Cursor 변경
-        GameManager.Instance.GetComponent<CursorManager>().SetInGameCursor();
+        //  커서 오류가 있어서 잠시 대기
+        // GameManager.Instance.GetComponent<CursorManager>().SetInGameCursor();
         
         //  자동 찾기 목록
         if (controlUnit == null)
@@ -128,7 +133,11 @@ public class TowerManager : MonoBehaviour
         //  마우스 클릭 감지
         if (!GameManager.InGameInit)
         {
-            ClickProcess();
+            //  대화 중에는 타워 클릭 불가
+            if (!GeneralManager.Instance.inGameManager.isTalking)
+            {
+                ClickProcess();
+            }
         }
     }
 
@@ -196,7 +205,6 @@ public class TowerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Tower is detected.");
                     SetCanonTowerInfo();
                     isVisible = true;
                 }
@@ -225,7 +233,6 @@ public class TowerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Tower is detected.");
                     SetMissileTowerInfo();
                     isVisible = true;
                 }
@@ -233,7 +240,6 @@ public class TowerManager : MonoBehaviour
             //  타워와 UI가 클릭되지 않은 경우(메뉴를 집어 넣음)
             else
             {
-                Debug.Log("Tower is not detected.");
                 isVisible = false;
                 curCanonTower = null;
                 curMissileTower = null;
@@ -264,6 +270,8 @@ public class TowerManager : MonoBehaviour
         nameText.SetText(curCanonTower.GetName());
         levelText.SetText("Lv " + curCanonTower.GetLevel());
         powerText.SetText("Power : " + curCanonTower.GetPower());
+        damageText.SetText("Damage : "+curCanonTower.GetDamage());
+        rpm.SetText("RPM : "+curCanonTower.GetRpm());
         
         if (curCanonTower.isActivated)
         {
@@ -293,6 +301,8 @@ public class TowerManager : MonoBehaviour
         nameText.SetText(curMissileTower.GetName());
         levelText.SetText("Lv " + curMissileTower.GetLevel());
         powerText.SetText("Power : " + curMissileTower.GetPower());
+        damageText.SetText("Damage : "+curMissileTower.GetDamage());
+        rpm.SetText("RPM : "+curMissileTower.GetRPM());
 
         if (curMissileTower.isActivated)
         {

@@ -14,10 +14,10 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;// 타워 회전 각도
     protected Transform Target;             //target of bullets
-    protected LayerMask EnemyMask;          //raycast 감지 Layer
     protected Animator Animator;            //타워 부분 Animator
     protected SpriteRenderer GunRenderer;   //과열시 색 변화
     protected String Name;                  //타워 이름
+    
     protected float Range;                  //타워 사거리
     protected float RotationSpeed;          //타워 회전 속도
     protected float FireRate;               //발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
@@ -249,6 +249,11 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     public int GetRpm()
     {
         return RPM;
+    }
+
+    public int GetDamage()
+    {
+        return Damage;
     }
     //  TODO : Rpm과 데미지 정보를 만들어야 함.
 }

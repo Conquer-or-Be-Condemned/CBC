@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 /*
@@ -14,6 +15,7 @@ public class StageInfoManager : MonoBehaviour
 {
     
     //  UI의 정보들
+    [Header("UI Instance")]
     [SerializeField] private TMP_Text planetName;
     [SerializeField] private TMP_Text planetStory;
     [SerializeField] private TMP_Text planetInfo;
@@ -23,21 +25,24 @@ public class StageInfoManager : MonoBehaviour
     public GameObject warpButton;
     
     //  정보 저장을 위한 List
-    public List<string> nameList = new List<string>();
-    public List<string> storyList= new List<string>();
-    public List<string> infoList = new List<string>();
+    [Header("Planet Info List")]
+    public static List<string> NameList = new List<string>();
+    public static List<string> StoryList= new List<string>();
+    public static List<string> InfoList = new List<string>();
 
     public static bool StageInit;
     
     //  각 스테이지의 웨이브 정보를 저장하는 클래스 타입
-    public static List<int> WaveInfoes = new List<int>();
+    [Header("Wave Info")]
+    public static List<int> StageInfo = new List<int>();
+    public static List<List<int>> WaveInfo = new List<List<int>>();
     
     //  현재 Display되고 있는 스테이지
     private void Awake()
     {
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,true);
         
-        SetPlanet();
+        //  Static 초기화는 GameManager에서 진행합니다.
 
         if (planetName == null) planetName = GameObject.Find("PlanetName").GetComponent<TMP_Text>();
         if (planetStory == null) planetStory = GameObject.Find("PlanetStory").GetComponent<TMP_Text>();
@@ -48,6 +53,7 @@ public class StageInfoManager : MonoBehaviour
         if (warpButton == null) Debug.LogError("이거 오류뜨는건 어쩔 수 없습니다. 신경 쓰지마세요.");
         animator = planetSet.GetComponent<Animator>();
         
+        warpButton.SetActive(false);
     }
 
     private void Start()
@@ -58,7 +64,6 @@ public class StageInfoManager : MonoBehaviour
         planetInfo.SetText("");
         
         StageInit = false; 
-        
         StartCoroutine(WaitShowCoroutine());
     }
 
@@ -72,7 +77,6 @@ public class StageInfoManager : MonoBehaviour
     //  씬 전환 직후 애니메이션과 워프 버튼에 딜레이 부여
     private IEnumerator WaitShowCoroutine()
     {
-        warpButton.SetActive(false);
         yield return new WaitForSeconds(1.05f);
         
         warpButton.SetActive(true);
@@ -90,9 +94,9 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (var i = 0; i < nameList[GameManager.CurStage-1].Length; i++)
+        for (var i = 0; i < NameList[GameManager.CurStage-1].Length; i++)
         {
-            stringBuilder.Append(nameList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(NameList[GameManager.CurStage - 1][i]);
             planetName.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.05f);
         }
@@ -104,9 +108,9 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (var i = 0; i < storyList[GameManager.CurStage-1].Length; i++)
+        for (var i = 0; i < StoryList[GameManager.CurStage-1].Length; i++)
         {
-            stringBuilder.Append(storyList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(StoryList[GameManager.CurStage - 1][i]);
             planetStory.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.005f);
         }
@@ -117,35 +121,52 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (int i = 0; i < infoList[GameManager.CurStage-1].Length; i++)
+        for (int i = 0; i < InfoList[GameManager.CurStage-1].Length; i++)
         {
-            stringBuilder.Append(infoList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(InfoList[GameManager.CurStage - 1][i]);
             planetInfo.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.005f);
         }
     }
 
     //  정보 저장을 위한 Method
-    private void SetPlanet()
+    public static void SetPlanet()
     {
-        nameList.Add("HJD-1029X2");
+        NameList.Add("HJD-1029X2");
         
-        storyList.Add("  This planet will be our first destination. It has similar environment with Earth" +
+        StoryList.Add("  This planet will be our first destination. It has similar environment with Earth" +
                       ", but has strong enemy forces defending it.\n\n" +
                       "  Our vanguard tried their best to conquer, " +
                       "but now we can't find traces of them anymore. " +
                       "Let's colonize this Planet.\nTake care and Focus Developer.....\nGood Luck.....");
         
-        infoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
+        InfoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
+    }
+    
+    public static string GetCurStageName()
+    {
+        return NameList[GameManager.CurStage - 1];
     }
     
     //  웨이브 저장을 위한 Method
+    public static void SetStageInfo()
+    {
+        StageInfo.Add(4);
+    }
+
     public static void SetWaveInfo()
     {
-        WaveInfoes.Add(9);
+        //  Stage 1 - Wave 9개 (임시 3개)
+        WaveInfo.Add(new List<int> {200,200,200,200,200,200,200,200,200});
     }
-    public static int GetWaveInfo()
+    
+    public static int GetStageInfo()
     {
-        return WaveInfoes[GameManager.CurStage - 1];
+        return StageInfo[GameManager.CurStage - 1];
+    }
+
+    public static int GetWaveInfo(int curWave)
+    {
+        return WaveInfo[GameManager.CurStage - 1][curWave - 1];
     }
 }

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using Tower;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.Events;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class CanonTurretLv1 : DefaultCanonTurret
 {   
@@ -27,7 +30,6 @@ public class CanonTurretLv1 : DefaultCanonTurret
     private void Start()
     {
         GunRenderer = gunRenderer;
-        EnemyMask = enemyMask;
         Animator = animator;
         TurretRotationPoint = turretRotationPoint;
         Range = range;         // 타워 사거리
@@ -38,7 +40,7 @@ public class CanonTurretLv1 : DefaultCanonTurret
         CoolTime = coolTime; //~초 지나면 냉각
         Level = 1;
         GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
-        RPM = 60 / (int)(1 / fireRate);
+        RPM = (int)(60 / (1 / fireRate));
         Damage = 10;
     }
     override 
@@ -52,7 +54,9 @@ public class CanonTurretLv1 : DefaultCanonTurret
     }
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
     {
+#if UNITY_EDITOR
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, range);
+#endif
     }
 }
