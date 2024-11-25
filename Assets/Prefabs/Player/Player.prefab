@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28189991e0f808649a48dc7fc6439053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerpoint: {fileID: 0}
+  playerpoint: {fileID: 5513808030836162447}
 --- !u!1 &4842808037945612809
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +870,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 428416400, guid: 21503a1d34a324ec2b34bc15ef1b6bf3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -894,8 +894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc75d156a3901547af5081e769b025c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  pushAmount: 0.02
+  moveSpeed: 10
+  pushAmount: 0.2
   bulletPrefab: {fileID: 5527518119625726090, guid: 71d691117f0b648c0ba428ef30cd6bba, type: 3}
   bulletSpawnPoint: {fileID: 1429413951217043725}
   bulletsPerShot: 5
