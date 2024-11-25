@@ -43,9 +43,16 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GeneralManager.Instance.inGameManager.isTalking)
+        if (GeneralManager.Instance.inGameManager != null)
         {
-            PlayerMove();
+            if (!GeneralManager.Instance.inGameManager.isTalking)
+            {
+                PlayerMove();   
+            }
+        }
+        else
+        {
+            PlayerMove();   
         }
     }
 
@@ -111,15 +118,29 @@ public class Player : MonoBehaviour
         // 방향에 따라 애니메이션 파라미터를 설정
         if (_animator != null)
         {
-            if (!GeneralManager.Instance.inGameManager.pauseVisible)
+            if (GeneralManager.Instance.inGameManager != null)
+            {
+                if (!GeneralManager.Instance.inGameManager.pauseVisible)
+                {
+                    CheckDirectionToMouse();
+                }
+            }
+            else
             {
                 CheckDirectionToMouse();
             }
         }
 
-        if (!GeneralManager.Instance.inGameManager.isTalking)
+        if (GeneralManager.Instance.inGameManager != null)
         {
-            PlayerAttack();
+            if (!GeneralManager.Instance.inGameManager.isTalking)
+            {
+                PlayerAttack();   
+            }
+        }
+        else
+        {
+            PlayerAttack();   
         }
     }
 
