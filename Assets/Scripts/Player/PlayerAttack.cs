@@ -6,18 +6,10 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform pos;
     public GameObject bullet;
-
-
-
+    
     public float cooltime;
     private float curtime;
     private Transform _target;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

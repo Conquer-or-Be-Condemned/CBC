@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float spreadAngle = 15f; // 총알 퍼짐 각도
     public Tilemap map;
     public float attackDelay;
-    public bool attackable;
+    public bool attackAble;
 
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
@@ -38,17 +38,15 @@ public class Player : MonoBehaviour
             map = FindObjectOfType<Tilemap>();
         }
 
-        attackable = true;
+        attackAble = true;
     }
 
     private void FixedUpdate()
     {
-
         if (!GeneralManager.Instance.inGameManager.isTalking)
         {
             PlayerMove();
         }
-
     }
 
     private void PlayerMove()
@@ -131,7 +129,7 @@ public class Player : MonoBehaviour
 
     private void PlayerAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && attackable)
+        if (Input.GetKeyDown(KeyCode.Space) && attackAble)
         {
             Vector2 baseDirection = (_mouse - (Vector2)bulletSpawnPoint.position).normalized;
             float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
@@ -158,9 +156,9 @@ public class Player : MonoBehaviour
 
     private IEnumerator PlayerAttackCoroutine()
     {
-        attackable = false;
+        attackAble = false;
         yield return new WaitForSeconds(attackDelay);
-        attackable = true;
+        attackAble = true;
     }
 
     private void CheckDirectionToMouse()

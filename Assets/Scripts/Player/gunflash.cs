@@ -7,13 +7,13 @@ public class gunflash : MonoBehaviour
     public GameObject flashObject; // 플래시 오브젝트
     public float flashDelay = 0.1f; // 공격 제한 시간
     public float flashDuration = 0.05f; // 플래시 활성화 시간
-    public bool attackable = true; // 공격 가능 여부
+    public bool attackAble = true; // 공격 가능 여부
     private bool isFlashing = false; // 플래시 활성화 여부
 
     // Start is called before the first frame update
     void Start()
     {
-        attackable = true;
+        attackAble = true;
         isFlashing = false;
 
         // 플래시 오브젝트 비활성화
@@ -32,15 +32,18 @@ public class gunflash : MonoBehaviour
     private void GunFlash()
     {
         // 스페이스바 입력 시 플래시 동작
-        if (Input.GetKeyDown(KeyCode.Space) && attackable && !isFlashing)
+        if (!GeneralManager.Instance.inGameManager.isTalking)
         {
-            StartCoroutine(GunFlashCoroutine());
+            if (Input.GetKeyDown(KeyCode.Space) && attackAble && !isFlashing)
+            {
+                StartCoroutine(GunFlashCoroutine());
+            }
         }
     }
 
     private IEnumerator GunFlashCoroutine()
     {
-        attackable = false; // 공격 제한
+        attackAble = false; // 공격 제한
         isFlashing = true; // 플래시 활성화 중
 
         // 플래시 오브젝트 활성화
@@ -61,6 +64,6 @@ public class gunflash : MonoBehaviour
         isFlashing = false; // 플래시 비활성화
         yield return new WaitForSeconds(flashDelay - flashDuration);
 
-        attackable = true; // 공격 가능 상태로 복원
+        attackAble = true; // 공격 가능 상태로 복원
     }
 }
