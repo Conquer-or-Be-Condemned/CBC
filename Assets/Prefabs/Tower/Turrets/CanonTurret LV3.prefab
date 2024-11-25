@@ -99,7 +99,7 @@ MonoBehaviour:
   gunRenderer: {fileID: 4948167733929469205}
   range: 40
   rotationSpeed: 400
-  fireRate: 5
+  fireRate: 8
   power: 40
   overHeatTime: 7
   coolTime: 3
