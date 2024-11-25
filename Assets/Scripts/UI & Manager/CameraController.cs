@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -24,7 +23,7 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         //  카메라의 size를 초기화 
-        gameObject.GetComponent<Camera>().orthographicSize = 20f;
+        gameObject.GetComponent<Camera>().orthographicSize = 18f;
         
         //  항상 맵의 크기가 최적화되도록 추가한 코드
         map.CompressBounds();
@@ -47,18 +46,23 @@ public class CameraController : MonoBehaviour
     {
         CameraMove();
     }
-
+    
     private void CameraMove()
     {
         //  영역 지정
         //  Clamp는 구간 내의 범위에서만 수를 허용하는 함수
         //  Tilemap의 지정범위 내에서만 작동하도록 합니다.
-        Vector3 desiredPosition = new Vector3(
-            Mathf.Clamp(target.transform.position.x,  map.localBounds.min.x+ _cameraHalfWidth, map.localBounds.max.x - _cameraHalfWidth),
-            Mathf.Clamp(target.transform.position.y, map.localBounds.min.y + _cameraHalfHeight, map.localBounds.max.y - _cameraHalfHeight),
-            transform.position.z);
+        //  Scale 값이 조정되어 인식을 하지 못하므로 Bounds를 이용합니다.
         
-        //  부드러운 움직임
+        Bounds tilemapBounds = map.GetComponent<Renderer>().bounds;
+        
+        Vector3 desiredPosition = new Vector3(
+            Mathf.Clamp(target.transform.position.x, tilemapBounds.min.x + _cameraHalfWidth, tilemapBounds.max.x - _cameraHalfWidth),
+            Mathf.Clamp(target.transform.position.y, tilemapBounds.min.y + _cameraHalfHeight, tilemapBounds.max.y - _cameraHalfHeight),
+            transform.position.z
+        );
+        
         transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
     }
+
 }

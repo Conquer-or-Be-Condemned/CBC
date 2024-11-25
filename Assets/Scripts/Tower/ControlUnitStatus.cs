@@ -24,7 +24,14 @@ public class ControlUnitStatus : MonoBehaviour
     //  UI와의 Event 연결
     public UnityEvent<int, int> onCUHpChange = new UnityEvent<int, int>();
     public UnityEvent<int, int> onCUPowerChange = new UnityEvent<int, int>();
-    
+
+    private bool attackCool;
+
+    private void Start()
+    {
+        attackCool = false;
+    }
+
     public void AddUnit(int power)
     {
         currentPower = currentPower - power;
@@ -42,8 +49,7 @@ public class ControlUnitStatus : MonoBehaviour
     {
         return currentPower;
     }
-
-    //  여기부터 UI 테스트용 임시 코드입니다. - 양현석
+    
     private void Die()
     {
         Debug.Log("Control Unit was Destroyed!!!");
@@ -52,20 +58,35 @@ public class ControlUnitStatus : MonoBehaviour
 
     public void GetDamage(int damage)
     {
-        Debug.LogError("We are under attack");
+        //  계속 보여주지 않기 위함
+        if (!attackCool)
+        {
+            GeneralManager.Instance.alertManager.Show(4);
+            StartCoroutine(AttackCoolCoroutine());
+        }
+        
         curHealth -= damage;
         onCUHpChange.Invoke(curHealth, maxHealth);
+        
         if (curHealth <= 0)
         {
             Die();
         }
     }
 
-    public void GetRepair(int repair)
-    {   
-        curHealth += repair;
-        onCUHpChange.Invoke(curHealth, maxHealth);
+    private IEnumerator AttackCoolCoroutine()
+    {
+        attackCool = true;
+        yield return new WaitForSeconds(5f);
+        attackCool = false;
     }
+
+    //  사용하지 않음.
+    // public void GetRepair(int repair)
+    // {   
+    //     curHealth += repair;
+    //     onCUHpChange.Invoke(curHealth, maxHealth);
+    // }
 
     public int GetMaxHp()
     {

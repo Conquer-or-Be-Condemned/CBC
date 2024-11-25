@@ -12,11 +12,18 @@ public class AudioManager : Singleton<AudioManager>
     public int bgmChannels;
     AudioSource[] bgmPlayers;
     int bgmChannelIndex;
+    
     [Header("SFX")] public AudioClip[] sfxClips;
     public float sfxVolume;
     public int sfxChannels;
     AudioSource[] sfxPlayers;
     int sfxChannelIndex;
+    
+    [Header("Alert")] public AudioClip[] alertClips;
+    public float alertVolume;
+    public int alertChannels;
+    private AudioSource[] alertPlayers;
+    private int alertChannelIndex;
 
     public enum Bgm
     {
@@ -28,6 +35,11 @@ public class AudioManager : Singleton<AudioManager>
     public enum Sfx
     {
         fire
+    }
+
+    public enum Alert
+    {
+        ControlUnitIsUnderAttack
     }
 
     void Awake()
@@ -50,7 +62,7 @@ public class AudioManager : Singleton<AudioManager>
         }
 
 
-        GameObject sfxObject = new GameObject("SFXPLayer");
+        GameObject sfxObject = new GameObject("SFXPlayer");
         sfxObject.transform.parent = transform;
         sfxPlayers = new AudioSource[sfxChannels];
 
@@ -59,6 +71,17 @@ public class AudioManager : Singleton<AudioManager>
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
             sfxPlayers[i].volume = sfxVolume;
+        }
+        
+        GameObject alertObject = new GameObject("ALERTPlayer");
+        alertObject.transform.parent = transform;
+        alertPlayers = new AudioSource[alertChannels];
+
+        for (int i = 0; i < alertPlayers.Length; i++)
+        {
+            alertPlayers[i] = alertObject.AddComponent<AudioSource>();
+            alertPlayers[i].playOnAwake = false;
+            alertPlayers[i].volume = alertVolume;
         }
     }
     
@@ -105,6 +128,19 @@ public class AudioManager : Singleton<AudioManager>
             sfxChannelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
             sfxPlayers[loopIndex].Play();
+            Debug.Log("BGM Play");
+            break;
+        }
+    }
+
+    public void PlayAlert(Alert alert)
+    {
+        for (int i = 0; i < alertPlayers.Length; i++)
+        {
+            int loopIndex = (i + alertChannelIndex) % alertPlayers.Length;
+            alertChannelIndex = loopIndex;
+            alertPlayers[loopIndex].clip = alertClips[(int)alert];
+            alertPlayers[loopIndex].Play();
             Debug.Log("BGM Play");
             break;
         }

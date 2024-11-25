@@ -12,13 +12,13 @@ using UnityEngine.AI;
 public class GameManager : Singleton<GameManager>
 {
     [Header("Management")] 
-    public static bool isNewGame;
-    public static bool tutorialEnd;
+    public static bool IsNewGame;
+    public static bool TutorialEnd;
     
     [Header("Game")]
     public GameObject player;
-    //  현재 플레이 가능한 스테이지 정보
-    public static int CurStage;
+    //  현재 플레이 가능한 스테이지 정보 (오류 방지를 위한 즉시 초기화)
+    public static int CurStage = 1;
     //  인게임 상태인지 확인
     public static bool InGame;
     //  인게임에서 필요한 모든 초기화가 가능한지 확인(true : 초기화 안됨, false : 초기화 됨)
@@ -34,7 +34,6 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(this.gameObject);
         
         //  게임 시작 시 초기화 목록
-        CurStage = 1;
         InGame = false;
         InGameInit = false;
     }
@@ -86,8 +85,8 @@ public class GameManager : Singleton<GameManager>
 
     public void NewGame()
     {
-        isNewGame = true;
-        tutorialEnd = false;
+        IsNewGame = true;
+        TutorialEnd = false;
     }
     
 }

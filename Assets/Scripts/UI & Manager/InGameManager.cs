@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
+using Unity.Properties;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
@@ -16,98 +18,184 @@ using UnityEngine.UI;
 
 public class InGameManager : MonoBehaviour
 {
-    [Header("Status")]
-    public int curWave;
+    [Header("Status")] public int curWave;
     public int maxWave;
+    public int curSceneId;
 
     //  웨이브 중인지 판단하는 변수
-    [Header("Wave")]
-    public bool isWave;
+    [Header("Wave")] public bool isWave;
     public bool spawnEnd;
-    
+
     //  Wave 진행 버튼
     public GameObject waveStart;
     public GameObject startWrapper;
-    
+
     //  Wave 출력 Text
-    [Header("Wave Info")]
-    public TMP_Text waveInfo;
+    [Header("Wave Info")] public TMP_Text waveInfo;
     public GameObject waveWrapper;
-    
+
     //  Wave 몬스터 수
     public int maxSpawn;
     public int dieSpawn;
     public int curSpawn;
 
+    [Header("Talk Management")]
     //  대화창 끝남을 확인
     private bool talkEnd;
+
     //  대화 중 움직임 차단
     public bool isTalking;
+
     //  현재 대화의 진전도
     private int talkIdx;
-    
+
+    [Header("Talk UIs")] public GameObject talkWrapper;
+    public GameObject talkBox;
+    public TMP_Text talkText;
+
+    [Header("Pause and Setting")] public GameObject pauseSet;
+    public bool pauseVisible;
+    public GameObject settings;
+    private bool settingVisible;
+    public GameObject blind;
+
     private void Start()
     {
-        Init();
-        
-        if (GameManager.isNewGame && GameManager.tutorialEnd)
-        {
-            //  진전도 초기화
-            talkIdx = 1;
-            
-            isTalking = true;
-            int curSceneId = 0;
-            int idx = 0;
+        //  Pause, Settings
+        pauseVisible = false;
+        settingVisible = false;
 
-            //  현재 씬 분석
-            switch (SceneController.NowScene)
-            {
-                case "MapText" :
-                    curSceneId = 100;
-                    break;
-            }
-            
-            while (true)
-            {
-                string buff = TalkManager.GetTalk(curSceneId + talkIdx, idx);
-                idx++;
-
-                if (buff == null)
-                {
-                    isTalking = false;
-                    break;
-                }
-                
-                //  TODO : 출력
-            }
-            
-            talkEnd = true;
-            talkIdx++;
-        }
-        
-        ShowButton();
-    }
-
-    private void Init()
-    {
-        //  Wave를 위한 Static 소환
+        //  Wave를 위한 Static 호출
         StageInfoManager.SetStageInfo();
         StageInfoManager.SetWaveInfo();
-        
+
         curWave = 1;
         maxWave = StageInfoManager.GetStageInfo();
         isWave = false;
-        
-        //  필요한 오브젝트 검색
-        waveStart = GameObject.Find("StartButton");
-        startWrapper = GameObject.Find("WaveStart");
-        waveInfo = GameObject.Find("WaveInfo").GetComponent<TMP_Text>();
-        waveWrapper = GameObject.Find("WaveWrapper");
-        
-        waveWrapper.SetActive(false);
-        
+
+        talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
+
         talkEnd = false;
         isTalking = false;
+
+        if (GameManager.IsNewGame && !GameManager.TutorialEnd)
+        {
+            //  진전도 초기화
+            talkIdx = 1;
+
+            StartCoroutine(TalkProcess());
+        }
+        else
+        {
+            ShowButton();
+        }
+    }
+
+    //  대화 중에는 스킵 불가능
+    private void Update()
+    {
+        if (!isTalking)
+        {
+            CheckKeyBoardInput();
+        }
+    }
+
+    //  Blind를 통해 다른 UI 클릭을 방지한다.
+    private void CheckKeyBoardInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (settingVisible)
+            {
+                settingVisible = false;
+                settings.SetActive(settingVisible);
+            }
+            else
+            {
+                pauseVisible = !pauseVisible;
+                pauseSet.SetActive(pauseVisible);
+                blind.SetActive(pauseVisible);
+
+                if (pauseVisible)
+                {
+                    Time.timeScale = 0f;
+                }
+                else
+                {
+                    Time.timeScale = 1f;
+                }
+            }
+        }
+    }
+
+
+    public void ShowSettings()
+    {
+        settingVisible = true;
+        settings.SetActive(settingVisible);
+    }
+
+    private IEnumerator TalkProcess()
+    {
+        CheckSceneId();
+
+        isTalking = true;
+        int idx = 0;
+
+        talkWrapper.SetActive(true);
+
+        while (true)
+        {
+            string buff = TalkManager.GetTalk(curSceneId + talkIdx, idx);
+
+            if (buff == null)
+            {
+                break;
+            }
+
+            //  이 코루틴이 종료될 때까지 대기후 idx++ (연산 오류 발생 방지)
+            yield return StartCoroutine(TalkCoroutine(buff));
+            idx++;
+
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        }
+
+        talkIdx++;
+        talkEnd = true;
+        isTalking = false;
+
+        talkWrapper.GetComponent<Animator>().SetBool("isShow", false);
+
+        ShowButton();
+    }
+
+    private IEnumerator TalkCoroutine(string buff)
+    {
+        talkText.text = "";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < buff.Length; i++)
+        {
+            stringBuilder.Append(buff[i]);
+            talkText.text = stringBuilder.ToString();
+            yield return new WaitForSeconds(0.005f);
+        }
+    }
+
+    private void CheckSceneId()
+    {
+        //  현재 씬 분석
+        int cnt = 1;
+        foreach(var e in SceneController.stageList)
+        {
+            if (SceneController.NowScene == e)
+            {
+                curSceneId = 100 * cnt;
+                break;
+            }
+
+            cnt++;
+        }
     }
 
     private void FixedUpdate()
@@ -126,7 +214,7 @@ public class InGameManager : MonoBehaviour
     public bool AddAndCheckCurSpawn(int offset)
     {
         curSpawn += offset;
-        
+
         if (curSpawn > StageInfoManager.GetWaveInfo(curWave))
         {
             spawnEnd = true;
@@ -138,10 +226,10 @@ public class InGameManager : MonoBehaviour
 
     public void StartWave()
     {
-        Debug.Log("Wave Start!!");
+        Debug.Log("Wave Start");
         isWave = true;
         spawnEnd = false;
-        
+
         InitWave();
         ShowInfo();
         HideButton();
@@ -153,23 +241,22 @@ public class InGameManager : MonoBehaviour
         dieSpawn = 0;
         curSpawn = 0;
     }
-    
-    private void CheckWaveClear(){
-        
+
+    private void CheckWaveClear()
+    {
         if (dieSpawn == curSpawn && spawnEnd)
         {
             isWave = false;
             ShowWaveClear();
-            ShowButton();
-    
+
             curWave++;
             CheckStageClear();
-            
+
             //  Player 회복
             GameManager.Instance.player.GetComponent<PlayerInfo>().RecoverHp();
         }
     }
-    
+
     private void CheckStageClear()
     {
         if (curWave > maxWave)
@@ -179,50 +266,57 @@ public class InGameManager : MonoBehaviour
 
             GameManager.InGame = false;
         }
-        
+
         //  TODO : 이후 스테이지 클리어 화면과 함께 스테이지 선택 씬으로 넘어갈 것.
     }
-    
+
     private void ShowInfo()
     {
         if (curWave == maxWave)
         {
             waveInfo.SetText("Final Wave");
         }
+
         else
         {
             waveInfo.SetText("Wave " + curWave);
         }
-        
+
         waveWrapper.SetActive(true);
-        
-        StartCoroutine(ShowInfoCoroutine());
+
+        StartCoroutine(ShowInfoCoroutine(false));
     }
 
     private void ShowWaveClear()
     {
-        waveInfo.SetText("Wave Clear!");
+        waveInfo.SetText("Wave Clear");
         waveWrapper.SetActive(true);
-        
-        StartCoroutine(ShowInfoCoroutine());
+
+        StartCoroutine(ShowInfoCoroutine(true));
     }
-    
+
     //  Animation은 Alpha값 조정으로 임시 결정
-    private IEnumerator ShowInfoCoroutine()
+    private IEnumerator ShowInfoCoroutine(bool isClear)
     {
         var alpha = 0f;
-        
+
         while (true)
         {
             if (alpha >= 1f)
             {
                 StartCoroutine(HideInfoCoroutine());
-                yield break;
+                break;
             }
 
             alpha += 0.005f;
             waveInfo.color = new Color(waveInfo.color.r, waveInfo.color.g, waveInfo.color.b, alpha);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.006f);
+        }
+
+        //  빠른 버튼 클릭으로 인한 버그 방지
+        if (isClear)
+        {
+            ShowButton();
         }
     }
 
@@ -239,19 +333,19 @@ public class InGameManager : MonoBehaviour
 
             alpha -= 0.005f;
             waveInfo.color = new Color(waveInfo.color.r, waveInfo.color.g, waveInfo.color.b, alpha);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.004f);
         }
     }
-    
+
     private void ShowButton()
     {
         waveStart.GetComponent<Button>().interactable = true;
-        startWrapper.GetComponent<Animator>().SetBool("visible",true);
+        startWrapper.GetComponent<Animator>().SetBool("visible", true);
     }
-    
+
     private void HideButton()
     {
         waveStart.GetComponent<Button>().interactable = false;
-        startWrapper.GetComponent<Animator>().SetBool("visible",false);
+        startWrapper.GetComponent<Animator>().SetBool("visible", false);
     }
 }

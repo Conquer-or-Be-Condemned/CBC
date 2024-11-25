@@ -1,13 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Video;
 
 /*
  *  Scene을 String으로 인해 변하게 할 수 있게 하는 스크립트입니다.
@@ -26,7 +22,7 @@ public class SceneController : Singleton<SceneController>
     public static string NextScene;
     
     //  스테이지 정보
-    private string[] stageList = { "MapTest" };
+    public static string[] stageList = { "Stage_1" };
 
     public void Start()
     {

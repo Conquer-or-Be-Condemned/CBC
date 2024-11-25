@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 /*
@@ -25,9 +26,9 @@ public class StageInfoManager : MonoBehaviour
     
     //  정보 저장을 위한 List
     [Header("Planet Info List")]
-    public List<string> nameList = new List<string>();
-    public List<string> storyList= new List<string>();
-    public List<string> infoList = new List<string>();
+    public static List<string> NameList = new List<string>();
+    public static List<string> StoryList= new List<string>();
+    public static List<string> InfoList = new List<string>();
 
     public static bool StageInit;
     
@@ -41,7 +42,7 @@ public class StageInfoManager : MonoBehaviour
     {
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,true);
         
-        SetPlanet();
+        //  Static 초기화는 GameManager에서 진행합니다.
 
         if (planetName == null) planetName = GameObject.Find("PlanetName").GetComponent<TMP_Text>();
         if (planetStory == null) planetStory = GameObject.Find("PlanetStory").GetComponent<TMP_Text>();
@@ -52,6 +53,7 @@ public class StageInfoManager : MonoBehaviour
         if (warpButton == null) Debug.LogError("이거 오류뜨는건 어쩔 수 없습니다. 신경 쓰지마세요.");
         animator = planetSet.GetComponent<Animator>();
         
+        warpButton.SetActive(false);
     }
 
     private void Start()
@@ -62,8 +64,6 @@ public class StageInfoManager : MonoBehaviour
         planetInfo.SetText("");
         
         StageInit = false; 
-        
-        warpButton.SetActive(false);
         StartCoroutine(WaitShowCoroutine());
     }
 
@@ -94,9 +94,9 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (var i = 0; i < nameList[GameManager.CurStage-1].Length; i++)
+        for (var i = 0; i < NameList[GameManager.CurStage-1].Length; i++)
         {
-            stringBuilder.Append(nameList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(NameList[GameManager.CurStage - 1][i]);
             planetName.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.05f);
         }
@@ -108,9 +108,9 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (var i = 0; i < storyList[GameManager.CurStage-1].Length; i++)
+        for (var i = 0; i < StoryList[GameManager.CurStage-1].Length; i++)
         {
-            stringBuilder.Append(storyList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(StoryList[GameManager.CurStage - 1][i]);
             planetStory.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.005f);
         }
@@ -121,38 +121,43 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (int i = 0; i < infoList[GameManager.CurStage-1].Length; i++)
+        for (int i = 0; i < InfoList[GameManager.CurStage-1].Length; i++)
         {
-            stringBuilder.Append(infoList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(InfoList[GameManager.CurStage - 1][i]);
             planetInfo.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.005f);
         }
     }
 
     //  정보 저장을 위한 Method
-    private void SetPlanet()
+    public static void SetPlanet()
     {
-        nameList.Add("HJD-1029X2");
+        NameList.Add("HJD-1029X2");
         
-        storyList.Add("  This planet will be our first destination. It has similar environment with Earth" +
+        StoryList.Add("  This planet will be our first destination. It has similar environment with Earth" +
                       ", but has strong enemy forces defending it.\n\n" +
                       "  Our vanguard tried their best to conquer, " +
                       "but now we can't find traces of them anymore. " +
                       "Let's colonize this Planet.\nTake care and Focus Developer.....\nGood Luck.....");
         
-        infoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
+        InfoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
+    }
+    
+    public static string GetCurStageName()
+    {
+        return NameList[GameManager.CurStage - 1];
     }
     
     //  웨이브 저장을 위한 Method
     public static void SetStageInfo()
     {
-        StageInfo.Add(3);
+        StageInfo.Add(4);
     }
 
     public static void SetWaveInfo()
     {
         //  Stage 1 - Wave 9개 (임시 3개)
-        WaveInfo.Add(new List<int> {30,30,30,30,30,30,30,30,30});
+        WaveInfo.Add(new List<int> {200,200,200,200,200,200,200,200,200});
     }
     
     public static int GetStageInfo()

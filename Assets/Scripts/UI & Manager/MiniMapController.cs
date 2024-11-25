@@ -12,9 +12,10 @@ using UnityEngine.UI;
  */
 public class MiniMapController : MonoBehaviour
 {
+    public bool isVisible;
+    
     [SerializeField] private GameObject mapInvisible;
     [SerializeField] private GameObject mapVisible;
-    [SerializeField] private bool isVisible;
     [SerializeField] private GameObject miniMap;
     
     private Animator _animator;

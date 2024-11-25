@@ -133,7 +133,11 @@ public class TowerManager : MonoBehaviour
         //  마우스 클릭 감지
         if (!GameManager.InGameInit)
         {
-            ClickProcess();
+            //  대화 중에는 타워 클릭 불가
+            if (!GeneralManager.Instance.inGameManager.isTalking)
+            {
+                ClickProcess();
+            }
         }
     }
 

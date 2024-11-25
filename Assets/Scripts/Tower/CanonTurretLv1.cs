@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using Tower;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.Events;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class CanonTurretLv1 : DefaultCanonTurret
 {   
@@ -51,7 +54,9 @@ public class CanonTurretLv1 : DefaultCanonTurret
     }
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
     {
+#if UNITY_EDITOR
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, range);
+#endif
     }
 }
