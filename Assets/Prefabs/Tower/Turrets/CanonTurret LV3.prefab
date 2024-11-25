@@ -97,12 +97,14 @@ MonoBehaviour:
   animator: {fileID: 2345750238146955978}
   bulletPrefab: {fileID: 5527518119625726090, guid: d68bdf48dc0984e30ba45c78cad3a501, type: 3}
   gunRenderer: {fileID: 4948167733929469205}
-  range: 40
-  rotationSpeed: 400
-  fireRate: 8
-  power: 40
-  overHeatTime: 7
-  coolTime: 3
+
+  range: 45
+  rotationSpeed: 375
+  fireRate: 5
+  power: 35
+  overHeatTime: 10
+  coolTime: 3.5
+
 --- !u!58 &7125781412258440163
 CircleCollider2D:
   m_ObjectHideFlags: 0

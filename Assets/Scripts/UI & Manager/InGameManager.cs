@@ -226,6 +226,12 @@ public class InGameManager : MonoBehaviour
 
     public void StartWave()
     {
+        //  오작동 방지
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return;
+        }
+        
         Debug.Log("Wave Start");
         isWave = true;
         spawnEnd = false;

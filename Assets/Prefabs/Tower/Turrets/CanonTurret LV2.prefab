@@ -101,10 +101,12 @@ MonoBehaviour:
   gunRenderer: {fileID: 8829399613561908817}
   bulletPrefab: {fileID: 5527518119625726090, guid: d68bdf48dc0984e30ba45c78cad3a501, type: 3}
   range: 45
-  rotationSpeed: 300
-  fireRate: 8
-  power: 30
-  overHeatTime: 7
+
+  rotationSpeed: 400
+  fireRate: 5
+  power: 25
+  overHeatTime: 10
+
   coolTime: 3
 --- !u!58 &8337633065169574392
 CircleCollider2D:

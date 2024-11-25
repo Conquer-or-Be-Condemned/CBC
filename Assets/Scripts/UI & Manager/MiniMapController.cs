@@ -42,6 +42,12 @@ public class MiniMapController : MonoBehaviour
     //  함수 재활용을 위한 함수 축약
     public void SetVisible(bool status)
     {
+        //  키보드 입력으로 인해 MiniMap 오작동을 방지함.
+        if (Input.GetKey(KeyCode.Space))
+        {
+            return;
+        }
+        
         Debug.Log("Toggled!");
         isVisible = status;
         mapInvisible.SetActive(isVisible);

@@ -1,10 +1,10 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class Monster : MonoBehaviour
 {
-    [Header("Monster Stats")]
-    public string monsterName;
+    [Header("Monster Stats")] public string monsterName;
     public float maxHealth;
     public float currentHealth;
     public float attackDamage;
@@ -12,25 +12,23 @@ public abstract class Monster : MonoBehaviour
     public float attackRange;
     public bool isDead;
 
-    [Header("Detection Settings")]
-    [Tooltip("플레이어를 감지할 범위")]
+    [Header("Detection Settings")] [Tooltip("플레이어를 감지할 범위")]
     public float detectionRange; // 기본값 설정
 
-    [Header("References")]
-    [Tooltip("플레이어 Transform 할당")]
+    [Header("References")] [Tooltip("플레이어 Transform 할당")]
     public Transform player;
 
     [Tooltip("제어 장치의 ControlUnitStatus를 할당")]
     public ControlUnitStatus controlUnitStatus;
 
-    [Header("UI Elements")]
-    public GameObject healthBarPrefab;
+    [Header("UI Elements")] public GameObject healthBarPrefab;
     private Image healthBarCurrentImage; // Current 이미지를 참조
     private Transform healthBarTransform;
 
-    [Header("Health Bar Settings")]
-    [Tooltip("체력바의 Y 위치 오프셋을 설정")]
+    [Header("Health Bar Settings")] [Tooltip("체력바의 Y 위치 오프셋을 설정")]
     public float healthBarYOffset;
+
+    private Animator animator;
 
     protected virtual void Start()
     {
@@ -93,7 +91,7 @@ public abstract class Monster : MonoBehaviour
             }
         }
 
-        //  For In Game
+        // For In Game
         isDead = false;
     }
 
@@ -118,14 +116,72 @@ public abstract class Monster : MonoBehaviour
     protected virtual void Die()
     {
         GeneralManager.Instance.inGameManager.ListenMonsterDie();
-        
+
         // 체력바 제거
         if (healthBarTransform != null)
         {
             Destroy(healthBarTransform.gameObject);
         }
 
-        // 몬스터 제거
+        moveSpeed = 0;
+
+        Animator[] animators = GetComponentsInChildren<Animator>();
+        foreach (Animator anim in animators)
+        {
+            anim.enabled = false;
+        }
+        // Start the fade-out coroutine
+        StartCoroutine(FadeOutAndDestroy(1.0f));
+    }
+
+    private IEnumerator FadeOutAndDestroy(float duration)
+    {
+        // Get all renderers in the monster and its children
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
+        // Store the original colors
+        Color[][] originalColors = new Color[renderers.Length][];
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            int materialCount = renderers[i].materials.Length;
+            originalColors[i] = new Color[materialCount];
+            for (int j = 0; j < materialCount; j++)
+            {
+                originalColors[i][j] = renderers[i].materials[j].color;
+            }
+        }
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                for (int j = 0; j < renderers[i].materials.Length; j++)
+                {
+                    Color color = originalColors[i][j];
+                    color.a = alpha;
+                    renderers[i].materials[j].color = color;
+                }
+            }
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure alpha is set to 0
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            for (int j = 0; j < renderers[i].materials.Length; j++)
+            {
+                Color color = originalColors[i][j];
+                color.a = 0f;
+                renderers[i].materials[j].color = color;
+            }
+        }
+
+        // Finally, destroy the monster game object
         Destroy(gameObject);
     }
 

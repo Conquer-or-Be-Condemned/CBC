@@ -119,7 +119,6 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySfx(Sfx sfx)
     {
-        Debug.Log(sfxPlayers.Length);
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             int loopIndex = (i + sfxChannelIndex) % sfxPlayers.Length;
@@ -128,7 +127,6 @@ public class AudioManager : Singleton<AudioManager>
             sfxChannelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
             sfxPlayers[loopIndex].Play();
-            Debug.Log("BGM Play");
             break;
         }
     }

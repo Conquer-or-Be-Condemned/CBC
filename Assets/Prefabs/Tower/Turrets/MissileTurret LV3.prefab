@@ -485,7 +485,7 @@ Transform:
   m_GameObject: {fileID: 5101844986473440329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.75, y: 0.9, z: 0.1}
+  m_LocalPosition: {x: 3.56, y: 0.9, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -731,11 +731,11 @@ MonoBehaviour:
   - {fileID: 5653386092189873409}
   - {fileID: 259624671159686732}
   gunRenderer: {fileID: 3423592564341140463}
-  range: 300
-  rotationSpeed: 100
+  range: 100
+  rotationSpeed: 175
   fireRate: 0.5
-  power: 5
-  overHeatMissileCount: 10
+  power: 45
+  overHeatMissileCount: 7
   coolTime: 5
 --- !u!58 &5975951976129630125
 CircleCollider2D:
