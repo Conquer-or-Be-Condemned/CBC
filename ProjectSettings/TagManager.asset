@@ -16,6 +16,7 @@ TagManager:
   - MiniMap
   - TowerMenu
   - MapElement
+  - TargetPoint
   layers:
   - Default
   - TransparentFX
