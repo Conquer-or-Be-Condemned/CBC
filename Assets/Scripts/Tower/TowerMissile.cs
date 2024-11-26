@@ -23,7 +23,7 @@ public class TowerMissile : MonoBehaviour
     
     [Header("Combat Settings")]
     [SerializeField] private float bulletDamage = 10f;
-    [SerializeField] private float explosionRange = 5f;
+    [SerializeField] private float explosionRange = 20f;
     
     private Transform _target;
     private Vector2 _initialDirection;
