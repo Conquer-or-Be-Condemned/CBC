@@ -431,12 +431,12 @@ MonoBehaviour:
   - {fileID: 1184328089168039883}
   - {fileID: 7471881801630609731}
   gunRenderer: {fileID: 3197493857056620786}
-  range: 60
-  rotationSpeed: 100
+  range: 70
+  rotationSpeed: 250
   fireRate: 0.3
-  power: 50
-  overHeatMissileCount: 10
-  coolTime: 5
+  power: 25
+  overHeatMissileCount: 9
+  coolTime: 3
 --- !u!58 &7698492250910479568
 CircleCollider2D:
   m_ObjectHideFlags: 0

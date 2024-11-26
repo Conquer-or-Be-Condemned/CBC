@@ -189,7 +189,7 @@ MonoBehaviour:
   maxHealth: 350
   currentHealth: 350
   attackDamage: 10
-  moveSpeed: 3
+  moveSpeed: 4
   attackRange: 6
   isDead: 0
   detectionRange: 15

@@ -151,10 +151,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: Treant
-  maxHealth: 150
-  currentHealth: 150
+  maxHealth: 300
+  currentHealth: 300
   attackDamage: 15
-  moveSpeed: 3
+  moveSpeed: 4
   attackRange: 6.5
   isDead: 0
   detectionRange: 15
