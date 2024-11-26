@@ -140,6 +140,7 @@ public class Player : MonoBehaviour
 
             for (int i = 0; i < bulletsToFire; i++)
             {
+                Debug.Log("Shot!");
                 float currentAngle = startAngle + angleStep * i;
                 float radianAngle = currentAngle * Mathf.Deg2Rad;
 

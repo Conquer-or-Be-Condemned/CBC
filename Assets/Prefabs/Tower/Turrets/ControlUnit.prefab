@@ -401,16 +401,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c355b3b635e540c3997a89d22e91fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 200
-  currentPower: 200
-  maxHealth: 100
-  curHealth: 100
+  maxPower: 225
+  currentPower: 225
+  maxHealth: 1500
+  curHealth: 1500
+  accessPoints: []
   onCUHpChange:
     m_PersistentCalls:
       m_Calls: []
   onCUPowerChange:
     m_PersistentCalls:
       m_Calls: []
+  powerOffset: 1
+  recoverSpeed: 0.5
 --- !u!212 &5773084164059102932
 SpriteRenderer:
   m_ObjectHideFlags: 0
