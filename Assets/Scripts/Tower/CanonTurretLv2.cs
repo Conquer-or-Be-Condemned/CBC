@@ -32,6 +32,8 @@ public class CanonTurretLv2 : DefaultCanonTurret
     {
         _bulletObj = new GameObject[bulletSpawnPoint.Length];
         GunRenderer = gunRenderer;
+        EnemyMask = enemyMask;
+
         Animator = animator;
         TurretRotationPoint = turretRotationPoint;
         Range = range;         // 타워 사거리

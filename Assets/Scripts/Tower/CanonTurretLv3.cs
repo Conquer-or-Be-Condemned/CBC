@@ -43,6 +43,8 @@ public class CanonTurretLv3 : DefaultCanonTurret
         GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
         RPM = (int)(60 / (1 / fireRate));
         Damage = 30;
+        EnemyMask = enemyMask;
+
     } 
     protected override void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
     {
