@@ -62,6 +62,9 @@ public class InGameManager : MonoBehaviour
     public bool operationKeyVisible;
     public GameObject blind;
 
+    [Header("Pause Buttons")] public GameObject goToMainButton;
+    public GameObject restartButton;
+
     private void Start()
     {
 
@@ -81,7 +84,10 @@ public class InGameManager : MonoBehaviour
 
         talkEnd = false;
         isTalking = false;
-
+        
+        //  Button 연결
+        goToMainButton.GetComponent<Button>().onClick.AddListener(()=>SceneController.ChangeScene("Main"));
+        restartButton.GetComponent<Button>().onClick.AddListener(()=>SceneController.Instance.ReStartGame());
         if (GameManager.IsNewGame && !GameManager.TutorialEnd)
         {
             //  진전도 초기화
@@ -282,7 +288,7 @@ public class InGameManager : MonoBehaviour
         if (curWave > maxWave)
         {
             Debug.Log("Stage Clear");
-            SceneController.ChangeScene("StageMenu");
+            SceneController.ChangeScene("Main");
 
             GameManager.InGame = false;
         }
