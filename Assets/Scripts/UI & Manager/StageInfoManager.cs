@@ -95,6 +95,7 @@ public class StageInfoManager : MonoBehaviour
     
     private IEnumerator NameCoroutine()
     {
+        planetName.SetText("");
         StringBuilder stringBuilder = new StringBuilder();
 
         for (var i = 0; i < NameList[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
@@ -109,6 +110,7 @@ public class StageInfoManager : MonoBehaviour
     //  NameCoroutine 다음에 연달아 실행
     private IEnumerator StoryCoroutine()
     {
+        planetStory.SetText("");
         StringBuilder stringBuilder = new StringBuilder();
 
         for (var i = 0; i < StoryList[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
@@ -122,6 +124,7 @@ public class StageInfoManager : MonoBehaviour
     //  마찬가지로 연달아 실행
     private IEnumerator InfoCoroutine()
     {
+        planetInfo.SetText("");
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < InfoList[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)

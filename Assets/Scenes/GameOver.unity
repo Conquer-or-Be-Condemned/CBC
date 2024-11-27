@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 8359905}
   - component: {fileID: 8359904}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ExitProgram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -564,10 +564,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Thank you for playing our Game!
+  m_text: Thank you for playing our Demo!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
+  m_sharedMaterial: {fileID: 6633813256750574405, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

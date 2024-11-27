@@ -27,6 +27,7 @@ public class SceneController : Singleton<SceneController>
     
     //  게임 시작 여부
     private bool isStart;
+    
 
     public void Start()
     {
@@ -58,6 +59,13 @@ public class SceneController : Singleton<SceneController>
                 StageInfoManager.StageInit = false;
             }
         }
+
+        if (NowScene == "GameOver")
+        {
+            GameObject.Find("ExitProgram").GetComponent<Button>().onClick.AddListener(ExitProgram);
+        }
+
+        
     }
 
     #region ForEnterGame
@@ -75,13 +83,28 @@ public class SceneController : Singleton<SceneController>
             StartCoroutine(PreGoToGameCoroutine());
         }
     }
+    
+    //  Restart Game
+    public void ReStartGame()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("Restart!");
+        isStart = false;
+
+        GameManager.InGame = false;
+        GameManager.InGameInit = false;
+        
+        GoToGame();
+    }
 
     //  게임 시작 전 로딩 창을 임의로 불러옴(Space 키를 사용하지 않게 하기 위함)
     private IEnumerator PreGoToGameCoroutine()
     {
-        GeneralManager.Instance.stageInfoManager.SetStageMenuHide();
-        yield return new WaitForSeconds(1.1f);
-        
+        if (GeneralManager.Instance.stageInfoManager != null)
+        {
+            GeneralManager.Instance.stageInfoManager.SetStageMenuHide();
+            yield return new WaitForSeconds(1.1f);
+        }
         ChangeScene("Loading");
         StartCoroutine(GoToGameCoroutine());
     }
@@ -101,6 +124,7 @@ public class SceneController : Singleton<SceneController>
         
         //  플레이어 할당
         GameManager.Instance.player = GameObject.Find("Player");
+        
         //  추가적인 검증은 하지 않겠음
     }
     #endregion
@@ -109,6 +133,17 @@ public class SceneController : Singleton<SceneController>
     //  Scene을 이동하는 전역 함수
     public static void ChangeScene(string sceneName)
     {
+        if (sceneName == "Main")
+        {
+            Debug.Log("MAIN!!");
+            Time.timeScale = 1f;
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,false);
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,true);
+            
+            GameManager.InGame = false;
+            GameManager.InGameInit = false;
+        }
+        
         Debug.Log("Go to " + sceneName);
         SceneManager.LoadScene(sceneName);
         NowScene = sceneName;
