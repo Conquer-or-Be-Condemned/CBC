@@ -85,8 +85,11 @@ public class StageInfoManager : MonoBehaviour
     }
 
     //  String Builder를 사용하기 위한 코루틴
-    private void Show()
+    public void Show()
     {
+        planetName.SetText("");
+        planetStory.SetText("");
+        planetInfo.SetText("");
         StartCoroutine(NameCoroutine());
     }
     
@@ -94,9 +97,9 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (var i = 0; i < NameList[GameManager.CurStage-1].Length; i++)
+        for (var i = 0; i < NameList[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
         {
-            stringBuilder.Append(NameList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(NameList[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
             planetName.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.05f);
         }
@@ -108,9 +111,9 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (var i = 0; i < StoryList[GameManager.CurStage-1].Length; i++)
+        for (var i = 0; i < StoryList[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
         {
-            stringBuilder.Append(StoryList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(StoryList[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
             planetStory.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.005f);
         }
@@ -121,9 +124,9 @@ public class StageInfoManager : MonoBehaviour
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (int i = 0; i < InfoList[GameManager.CurStage-1].Length; i++)
+        for (int i = 0; i < InfoList[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
         {
-            stringBuilder.Append(InfoList[GameManager.CurStage - 1][i]);
+            stringBuilder.Append(InfoList[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
             planetInfo.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.005f);
         }
@@ -133,14 +136,20 @@ public class StageInfoManager : MonoBehaviour
     public static void SetPlanet()
     {
         NameList.Add("HJD-1029X2");
+        NameList.Add("AJH-4001D2");
+        NameList.Add("JHS-8854xD");
         
         StoryList.Add("  This planet will be our first destination. It has similar environment with Earth" +
                       ", but has strong enemy forces defending it.\n\n" +
                       "  Our vanguard tried their best to conquer, " +
                       "but now we can't find traces of them anymore. " +
                       "Let's colonize this Planet.\nTake care and Focus Developer.....\nGood Luck.....");
+        StoryList.Add(" 미안하지만, 대본 쓰는게 너무 힘들어요 대충 뭐 이런 행성입니다!!!"+" 룰루랄라 신나는 소설기");
+        StoryList.Add(" 지옥행성입니다. 어서오세요 소설기 지옥에!!"+" 매우 유용할 겁니다..");
         
         InfoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
+        InfoList.Add("Average temperature: 0.4\u00b0C\nPlanet diameter: 3,515 km\nBiological Population: 5,558,421\nPlanet type: Ice Planet");
+        InfoList.Add("Average temperature: 41.7\u00b0C\nPlanet diameter: 9,564 km\nBiological Population: 34,512\nPlanet type: Lava Planet");
     }
     
     public static string GetCurStageName()

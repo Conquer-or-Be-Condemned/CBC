@@ -29,6 +29,7 @@ public class InGameManager : MonoBehaviour
     //  Wave 진행 버튼
     public GameObject waveStart;
     public GameObject startWrapper;
+    public GameObject waveStartText;
 
     //  Wave 출력 Text
     [Header("Wave Info")] public TMP_Text waveInfo;
@@ -56,11 +57,14 @@ public class InGameManager : MonoBehaviour
     [Header("Pause and Setting")] public GameObject pauseSet;
     public bool pauseVisible;
     public GameObject settings;
-    private bool settingVisible;
+    public bool settingVisible;
+    public GameObject operationKey;
+    public bool operationKeyVisible;
     public GameObject blind;
 
     private void Start()
     {
+
         //  Pause, Settings
         pauseVisible = false;
         settingVisible = false;
@@ -110,6 +114,11 @@ public class InGameManager : MonoBehaviour
                 settingVisible = false;
                 settings.SetActive(settingVisible);
             }
+            else if (operationKeyVisible)
+            {
+                operationKeyVisible = false;
+                operationKey.SetActive(operationKeyVisible);
+            }
             else
             {
                 pauseVisible = !pauseVisible;
@@ -127,12 +136,17 @@ public class InGameManager : MonoBehaviour
             }
         }
     }
-
-
+    
     public void ShowSettings()
     {
         settingVisible = true;
         settings.SetActive(settingVisible);
+    }
+
+    public void ShowOperationKey()
+    {
+        operationKeyVisible = true;
+        operationKey.SetActive(operationKeyVisible);
     }
 
     private IEnumerator TalkProcess()
@@ -347,6 +361,26 @@ public class InGameManager : MonoBehaviour
     {
         waveStart.GetComponent<Button>().interactable = true;
         startWrapper.GetComponent<Animator>().SetBool("visible", true);
+
+        StartCoroutine(StartTextCoroutine());
+    }
+
+    private IEnumerator StartTextCoroutine()
+    {
+        while (true)
+        {
+            if (!waveStart.GetComponent<Button>().interactable)
+            {
+                Debug.LogError("ENGGGGGG");
+                yield break;
+            }
+            
+            waveStartText.GetComponent<Animator>().SetBool("big", true);
+            yield return new WaitForSeconds(1f);
+            
+            waveStartText.GetComponent<Animator>().SetBool("big", false);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private void HideButton()

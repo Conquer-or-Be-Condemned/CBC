@@ -14,8 +14,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 _instance = (T)FindObjectOfType(typeof(T));
                 if (_instance == null)
                 {
-                    GameObject obj = new GameObject(typeof(T).Name, typeof(T));
-                    _instance = obj.AddComponent<T>();
+                    SetUpInstance();
                 }
             }
 
@@ -23,16 +22,35 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    protected void Awake()
+    //  가상함수
+    public virtual void Awake()
     {
-        if (transform.parent != null && transform.root != null)
+        RemoveDuplicates();
+    }
+
+    private static void SetUpInstance()
+    {
+        _instance = (T)FindObjectOfType(typeof(T));
+
+        if (_instance == null)
         {
-            DontDestroyOnLoad(this.transform.root.gameObject);
+            GameObject obj = new GameObject();
+            obj.name = typeof(T).Name;
+            _instance = obj.AddComponent<T>();
+            DontDestroyOnLoad(obj);
+        }
+    }
+
+    private void RemoveDuplicates()
+    {
+        if (_instance == null)
+        {
+            _instance = this as T;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            DontDestroyOnLoad(this.gameObject);
+            Destroy(gameObject);
         }
-        
     }
 }

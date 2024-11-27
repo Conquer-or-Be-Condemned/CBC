@@ -38,6 +38,18 @@ public class MonsterSpawner : MonoBehaviour
     //  For InGame -> 일단 Listener로 구현하지는 않음
     private void FixedUpdate()
     {
+        //  For Debug
+        if (GeneralManager.Instance.inGameManager == null)
+        {
+            if (!isWork)
+            {
+                spawnCoroutine = StartCoroutine(SpawnRoutine());
+                isWork = true;
+            }
+
+            return;
+        }
+        
         if (GeneralManager.Instance.inGameManager.isWave 
             && !GeneralManager.Instance.inGameManager.spawnEnd)
         {
@@ -87,9 +99,14 @@ public class MonsterSpawner : MonoBehaviour
             // Debug.LogWarning("Monster prefab is null!");
             return;
         }
+
+        //  For Debug
+        if (GeneralManager.Instance.inGameManager != null)
+        {
+            //  For In Game
+            CheckTotalSpawn();
+        }
         
-        //  For In Game
-        CheckTotalSpawn();
 
         // 스폰 위치 계산
         float randomOffset = Random.Range(-spawnRadius, spawnRadius);

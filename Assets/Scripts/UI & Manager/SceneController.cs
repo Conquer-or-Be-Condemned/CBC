@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,12 +24,16 @@ public class SceneController : Singleton<SceneController>
     
     //  스테이지 정보
     public static string[] stageList = { "Stage_1" };
+    
+    //  게임 시작 여부
+    private bool isStart;
 
     public void Start()
     {
         //  Main 씬이 담기게 됨.
         NowScene = SceneManager.GetActiveScene().name;
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,true);
+        isStart = false;
     }
 
     public void FixedUpdate()
@@ -44,6 +49,15 @@ public class SceneController : Singleton<SceneController>
             GeneralManager.Instance.stageInfoManager.warpButton.GetComponent<Button>().onClick.AddListener(GoToGame);
             StageInfoManager.StageInit = false;
         }
+
+        if (NowScene == null)
+        {
+            NowScene = SceneManager.GetActiveScene().name;
+            if (StageInfoManager.StageInit)
+            {
+                StageInfoManager.StageInit = false;
+            }
+        }
     }
 
     #region ForEnterGame
@@ -51,7 +65,15 @@ public class SceneController : Singleton<SceneController>
     //  게임 시작만을 위한 메소드
     public void GoToGame()
     {
-        StartCoroutine(PreGoToGameCoroutine());
+        if (!isStart)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                return;
+            }
+            isStart = true;
+            StartCoroutine(PreGoToGameCoroutine());
+        }
     }
 
     //  게임 시작 전 로딩 창을 임의로 불러옴(Space 키를 사용하지 않게 하기 위함)
@@ -67,6 +89,8 @@ public class SceneController : Singleton<SceneController>
     //  로딩 창이 시작되고 나서 스테이지를 바꿈
     private IEnumerator GoToGameCoroutine()
     {
+        isStart = false;
+        
         yield return new WaitForSeconds(2.8f);
         //  게임 시작 직전 초기화 설정
         ChangeScene(stageList[GameManager.CurStage - 1]);
