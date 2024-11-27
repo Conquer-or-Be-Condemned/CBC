@@ -2145,6 +2145,7 @@ MonoBehaviour:
   loadingManager: {fileID: 0}
   siteManager: {fileID: 0}
   stageInfoManager: {fileID: 0}
+  stageSelectManager: {fileID: 0}
 --- !u!4 &1042493003
 Transform:
   m_ObjectHideFlags: 0
@@ -4334,7 +4335,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Latest Update v.20241125 DEMO by HJD Team Sejong Univ.
+  m_text: Latest Update v.20241128 DEMO by HJD Team Sejong Univ.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
   m_sharedMaterial: {fileID: 6633813256750574405, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
