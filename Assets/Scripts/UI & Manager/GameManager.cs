@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 /*
  *  게임 전체를 관할하는 GameManager입니다.
@@ -40,6 +41,18 @@ public class GameManager : Singleton<GameManager>
 
     private void FixedUpdate()
     {
+        //  For Debug
+        if (!InGame)
+        {
+            foreach (var e in SceneController.stageList)
+            {
+                if (SceneManager.GetActiveScene().name == e)
+                {
+                    InGame = true;
+                }
+            }
+        }
+        
         //  인게임인지 확인
         if (InGame)
         {

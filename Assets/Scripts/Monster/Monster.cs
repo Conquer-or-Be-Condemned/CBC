@@ -115,8 +115,13 @@ public abstract class Monster : MonoBehaviour
 
     protected virtual void Die()
     {
-        GeneralManager.Instance.inGameManager.ListenMonsterDie();
-
+        
+        //  For Debug
+        if (GeneralManager.Instance.inGameManager != null)
+        {
+            GeneralManager.Instance.inGameManager.ListenMonsterDie();
+        }
+        
         // 체력바 제거
         if (healthBarTransform != null)
         {
