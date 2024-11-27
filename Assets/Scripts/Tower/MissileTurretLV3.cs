@@ -72,4 +72,11 @@ public class MissileTurretLV3 : DefaultMissileTurret
             Targets[i] = null;
         }
     }
+    private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
+    {
+#if UNITY_EDITOR
+        Handles.color = Color.cyan;
+        Handles.DrawWireDisc(transform.position, transform.forward, range);
+#endif
+    }
 }

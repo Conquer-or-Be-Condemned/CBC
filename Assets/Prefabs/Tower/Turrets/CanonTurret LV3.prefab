@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 345164141541156621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.005, y: 7, z: 0}
+  m_LocalPosition: {x: -0.005, y: 110, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97,8 +97,8 @@ MonoBehaviour:
   animator: {fileID: 2345750238146955978}
   bulletPrefab: {fileID: 5527518119625726090, guid: d68bdf48dc0984e30ba45c78cad3a501, type: 3}
   gunRenderer: {fileID: 4948167733929469205}
-  range: 45
-  rotationSpeed: 375
+  range: 20
+  rotationSpeed: 500
   fireRate: 8
   power: 35
   overHeatTime: 10
@@ -190,7 +190,7 @@ Transform:
   m_GameObject: {fileID: 1395117838062158369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.99, y: 7, z: 0}
+  m_LocalPosition: {x: 0.993, y: 110, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -511,7 +511,7 @@ Transform:
   m_GameObject: {fileID: 6043697458858132338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.011, y: 7, z: 0}
+  m_LocalPosition: {x: -1, y: 110, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
