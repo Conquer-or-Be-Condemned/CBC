@@ -45,7 +45,6 @@ public class AudioManager : Singleton<AudioManager>
     void Awake()
     {
         base.Awake();
-        // AudioManager.Instance = this;
         Init();
     }
 
