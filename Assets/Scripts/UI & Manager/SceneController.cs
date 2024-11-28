@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,12 +24,17 @@ public class SceneController : Singleton<SceneController>
     
     //  스테이지 정보
     public static string[] stageList = { "Stage_1" };
+    
+    //  게임 시작 여부
+    private bool isStart;
+    
 
     public void Start()
     {
         //  Main 씬이 담기게 됨.
         NowScene = SceneManager.GetActiveScene().name;
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,true);
+        isStart = false;
     }
 
     public void FixedUpdate()
@@ -44,6 +50,22 @@ public class SceneController : Singleton<SceneController>
             GeneralManager.Instance.stageInfoManager.warpButton.GetComponent<Button>().onClick.AddListener(GoToGame);
             StageInfoManager.StageInit = false;
         }
+
+        if (NowScene == null)
+        {
+            NowScene = SceneManager.GetActiveScene().name;
+            if (StageInfoManager.StageInit)
+            {
+                StageInfoManager.StageInit = false;
+            }
+        }
+
+        if (NowScene == "GameOver")
+        {
+            GameObject.Find("ExitProgram").GetComponent<Button>().onClick.AddListener(ExitProgram);
+        }
+
+        
     }
 
     #region ForEnterGame
@@ -51,15 +73,38 @@ public class SceneController : Singleton<SceneController>
     //  게임 시작만을 위한 메소드
     public void GoToGame()
     {
-        StartCoroutine(PreGoToGameCoroutine());
+        if (!isStart)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                return;
+            }
+            isStart = true;
+            StartCoroutine(PreGoToGameCoroutine());
+        }
+    }
+    
+    //  Restart Game
+    public void ReStartGame()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("Restart!");
+        isStart = false;
+
+        GameManager.InGame = false;
+        GameManager.InGameInit = false;
+        
+        GoToGame();
     }
 
     //  게임 시작 전 로딩 창을 임의로 불러옴(Space 키를 사용하지 않게 하기 위함)
     private IEnumerator PreGoToGameCoroutine()
     {
-        GeneralManager.Instance.stageInfoManager.SetStageMenuHide();
-        yield return new WaitForSeconds(1.1f);
-        
+        if (GeneralManager.Instance.stageInfoManager != null)
+        {
+            GeneralManager.Instance.stageInfoManager.SetStageMenuHide();
+            yield return new WaitForSeconds(1.1f);
+        }
         ChangeScene("Loading");
         StartCoroutine(GoToGameCoroutine());
     }
@@ -67,6 +112,8 @@ public class SceneController : Singleton<SceneController>
     //  로딩 창이 시작되고 나서 스테이지를 바꿈
     private IEnumerator GoToGameCoroutine()
     {
+        isStart = false;
+        
         yield return new WaitForSeconds(2.8f);
         //  게임 시작 직전 초기화 설정
         ChangeScene(stageList[GameManager.CurStage - 1]);
@@ -77,6 +124,7 @@ public class SceneController : Singleton<SceneController>
         
         //  플레이어 할당
         GameManager.Instance.player = GameObject.Find("Player");
+        
         //  추가적인 검증은 하지 않겠음
     }
     #endregion
@@ -85,6 +133,17 @@ public class SceneController : Singleton<SceneController>
     //  Scene을 이동하는 전역 함수
     public static void ChangeScene(string sceneName)
     {
+        if (sceneName == "Main")
+        {
+            Debug.Log("MAIN!!");
+            Time.timeScale = 1f;
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,false);
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,true);
+            
+            GameManager.InGame = false;
+            GameManager.InGameInit = false;
+        }
+        
         Debug.Log("Go to " + sceneName);
         SceneManager.LoadScene(sceneName);
         NowScene = sceneName;

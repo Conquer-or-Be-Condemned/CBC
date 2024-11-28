@@ -36,11 +36,11 @@ public class GeneralManager : Singleton<GeneralManager>
     public LoadingManager loadingManager;
     public SiteManager siteManager;
     public StageInfoManager stageInfoManager;
+    public StageSelectManager stageSelectManager;
 
     //  Global Manager들은 프로그램 시작과 함께 할당
     private void Start()
     {
-        base.Awake();
         
         //  GM과 SC는 GetComponent로 할당해도 무방
         gameManager = GameManager.Instance;
@@ -50,8 +50,8 @@ public class GeneralManager : Singleton<GeneralManager>
 
         if (gameManager == null) Debug.LogError("GameManager 스크립트 오류");
         if (sceneController == null) Debug.LogError("SceneController 스크립트 오류");
-        if (cursorManager == null) Debug.LogError("CursorManager 스크립트 오류");
         if (audioManager == null) Debug.LogError("AudioManager 스크립트 오류");
+        if (cursorManager == null) Debug.LogError("CursorManager 스크립트 오류");
         
         //  TalkManager
         StageInfoManager.SetPlanet();
@@ -163,6 +163,19 @@ public class GeneralManager : Singleton<GeneralManager>
             {
                 Destroy(stageInfoManager);
             }
+        }
+        
+        //  얘는 추가가 아니다.
+        if (SceneController.NowScene == "StageMenu")
+        {
+            if (stageSelectManager == null)
+            {
+                stageSelectManager = GameObject.Find("StageSelectManager").GetComponent<StageSelectManager>();
+            }
+        }
+        else
+        {
+            stageInfoManager = null;
         }
     }
     

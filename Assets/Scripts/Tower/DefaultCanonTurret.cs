@@ -17,6 +17,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     protected Animator Animator;            //타워 부분 Animator
     protected SpriteRenderer GunRenderer;   //과열시 색 변화
     protected String Name;                  //타워 이름
+    protected LayerMask EnemyMask;
     
     protected float Range;                  //타워 사거리
     protected float RotationSpeed;          //타워 회전 속도
@@ -152,14 +153,26 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     }
     private void FindTarget()//raycast를 이용한 적 타워 반경 접근 확인 후 배열 추가(NoTargetInRange에서 적을 찾기위해 수행)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, Range);
-        foreach (var monster in hits)
+        
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, Range, EnemyMask);
+        if (hits.Length == 0) return;
+
+        // 사용할 수 있는 타겟들의 리스트를 만듭니다
+        List<(Collider2D collider, float distance)> availableTargets = new List<(Collider2D, float)>();
+        foreach (var hit in hits)
         {
-            if (monster.CompareTag("Enemy"))
+            float distance = Vector2.Distance(transform.position, hit.transform.position);
+            availableTargets.Add((hit, distance));
+        }
+        availableTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
+
+        foreach (var monster in availableTargets)
+        {
+            if (Target == null)
             {
-                if(!Target)Target = monster.transform;
-                else return;
+                Target = monster.collider.transform;
             }
+            else return;
         }
     }
     private bool CheckTargetIsInRange()//적이 사거리에 있는지 확인(FireRateController에서 수행)
