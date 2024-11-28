@@ -10,6 +10,7 @@ public abstract class Monster : MonoBehaviour
     public float attackDamage;
     public float moveSpeed;
     public float attackRange;
+    public float attackCooldown; // Added attackCooldown here
     public bool isDead;
 
     [Header("Detection Settings")] [Tooltip("플레이어를 감지할 범위")]
