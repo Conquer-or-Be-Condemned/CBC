@@ -5,7 +5,6 @@ public class WalkAndAttackMonster : Monster
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private float attackTimer = 0f;
-    private float attackCooldown = 1f;
     private bool isAttacking = false;
     private bool isMoving = false;
     private float debugTimer = 0f;
@@ -31,6 +30,7 @@ public class WalkAndAttackMonster : Monster
         if (moveSpeed == 0) moveSpeed = 3f;
         if (attackRange == 0) attackRange = 1.5f;
         if (detectionRange == 0) detectionRange = 5f; // 기본값 설정
+        if (attackCooldown == 0) attackCooldown = 1f; // Default value for attack cooldown
 
         // Animator 및 SpriteRenderer 설정
         animator = GetComponent<Animator>();
