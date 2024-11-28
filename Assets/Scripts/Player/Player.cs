@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private int bulletsPerShot; // 한 번에 발사할 총알 수
     [SerializeField] private float spreadAngle = 15f; // 총알 퍼짐 각도
+    [SerializeField] private float fireRate;
     public Tilemap map;
     public float attackDelay;
     public bool attackAble;
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour
     private Vector2 _mouse;
     private Vector3 sumVector;
     private Transform _mouseTransform;
-
+    private float _timeTilFire;
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -128,31 +129,37 @@ public class Player : MonoBehaviour
 
     private void PlayerAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && attackAble)
+        _timeTilFire += Time.deltaTime;
+        if (_timeTilFire >= (1f / fireRate))
         {
-            Vector2 baseDirection = (_mouse - (Vector2)bulletSpawnPoint.position).normalized;
-            float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
-
-            int bulletsToFire = bulletsPerShot;
-            float angleStep = spreadAngle / (bulletsToFire - 1);
-            float startAngle = baseAngle - spreadAngle / 2;
-
-            for (int i = 0; i < bulletsToFire; i++)
+            if (Input.GetKey(KeyCode.Space))
             {
-                Debug.Log("Shot!");
-                float currentAngle = startAngle + angleStep * i;
-                float radianAngle = currentAngle * Mathf.Deg2Rad;
+                Vector2 baseDirection = (_mouse - (Vector2)bulletSpawnPoint.position).normalized;
+                float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
 
-                Vector2 bulletDirection = new Vector2(Mathf.Cos(radianAngle), Mathf.Sin(radianAngle));
+                int bulletsToFire = bulletsPerShot;
+                float angleStep = spreadAngle / (bulletsToFire - 1);
+                float startAngle = baseAngle - spreadAngle / 2;
 
-                GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-                PlayerBullet playerBulletScript = bulletObj.GetComponent<PlayerBullet>();
-                playerBulletScript.SetDirection(bulletDirection);
+                for (int i = 0; i < bulletsToFire; i++)
+                {
+                    Debug.Log("Shot!");
+                    float currentAngle = startAngle + angleStep * i;
+                    float radianAngle = currentAngle * Mathf.Deg2Rad;
+
+                    Vector2 bulletDirection = new Vector2(Mathf.Cos(radianAngle), Mathf.Sin(radianAngle));
+
+                    GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                    PlayerBullet playerBulletScript = bulletObj.GetComponent<PlayerBullet>();
+                    playerBulletScript.SetDirection(bulletDirection);
+                }
+                _timeTilFire = 0f;
             }
         }
-
-        StartCoroutine(PlayerAttackCoroutine());
     }
+    // StartCoroutine(PlayerAttackCoroutine());
+        
+    
 
     private IEnumerator PlayerAttackCoroutine()
     {
