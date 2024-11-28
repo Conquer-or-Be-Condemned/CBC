@@ -275,6 +275,7 @@ MonoBehaviour:
   attackDamage: 20
   moveSpeed: 8
   attackRange: 6
+  attackCooldown: 1
   isDead: 0
   detectionRange: 15
   player: {fileID: 0}
