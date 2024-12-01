@@ -33,7 +33,12 @@ public class UICUHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             isHover = true;
             uiInfoWrapper.SetActive(true);
             uiInfo.SetText("HP : " + cuInfo.GetCurHp() + " / " + cuInfo.GetMaxHp());
-            uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position;
+
+            Vector2 size = uiInfoWrapper.GetComponent<RectTransform>().sizeDelta;
+
+            uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position +
+                                                                             new Vector2(
+                                                                                 -size.x, size.y);
         }
         
     }
@@ -51,7 +56,11 @@ public class UICUHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (isHover)
         {
-            uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position;
+            Vector2 size = uiInfoWrapper.GetComponent<RectTransform>().sizeDelta;
+
+            uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position +
+                                                                             new Vector2(
+                                                                                 -size.x, size.y);
         }
     }
 }

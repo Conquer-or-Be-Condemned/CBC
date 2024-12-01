@@ -65,7 +65,7 @@ public class StageSelectManager : MonoBehaviour
 
         if (curSelectStage == planets.Length - 1)
         {
-            rightButton.GetComponent<Button>().interactable = true;
+            rightButton.GetComponent<Button>().interactable = false;
         }
         else
         {
