@@ -146,4 +146,9 @@ public class StageSelectManager : MonoBehaviour
         return planets[curSelectStage];
     }
 
+    public int GetCurSelectStage()
+    {
+        return curSelectStage;
+    }
+
 }
