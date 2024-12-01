@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 /*
  *  Scene을 String으로 인해 변하게 할 수 있게 하는 스크립트입니다.
@@ -23,14 +24,16 @@ public class SceneController : Singleton<SceneController>
     public static string NextScene;
     
     //  스테이지 정보
-    // public static string[] stageList = { "Stage_1" };
+    public static string[] stageList = { "Stage_1", "Stage_2" };
     
     // 보스 테스트
-    public static string[] stageList = { "Stage_Boss" };
+    // public static string[] stageList = { "Stage_Boss" };
     
     //  게임 시작 여부
     private bool isStart;
-    
+
+    [Header("Stage")]
+    private int curSelectStage;
 
     public void Start()
     {
@@ -82,6 +85,9 @@ public class SceneController : Singleton<SceneController>
             {
                 return;
             }
+
+            curSelectStage = GeneralManager.Instance.stageSelectManager.GetCurSelectStage();
+            
             isStart = true;
             StartCoroutine(PreGoToGameCoroutine());
         }
@@ -119,7 +125,7 @@ public class SceneController : Singleton<SceneController>
         
         yield return new WaitForSeconds(2.8f);
         //  게임 시작 직전 초기화 설정
-        ChangeScene(stageList[GameManager.CurStage - 1]);
+        ChangeScene(stageList[curSelectStage]);
         GameManager.InGameInit = true;
         
         //  배경 음악
