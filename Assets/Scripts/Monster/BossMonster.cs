@@ -183,14 +183,16 @@ public class BossMonster : Monster
 
         UpdateAnimationState();
 
-        // 스폰 로직 구현 (예: 새로운 몬스터 생성)
-        SpawnMonster();
 
         Invoke(nameof(FinishSpawn), 1f); // 스폰 애니메이션 길이에 맞춰서 설정
     }
 
     private void FinishSpawn()
     {
+        
+        // 스폰 로직 구현 (예: 새로운 몬스터 생성)
+        SpawnMonster();
+        
         isSpawning = false;
         UpdateAnimationState();
     }
