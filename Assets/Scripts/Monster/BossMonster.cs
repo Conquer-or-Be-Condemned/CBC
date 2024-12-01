@@ -1,0 +1,318 @@
+using UnityEngine;
+
+public class BossMonster : Monster
+{
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private float actionTimer = 0f;
+    private bool isAttacking = false;
+    private bool isMoving = false;
+    private bool isTreading = false;
+    private bool isSpawning = false;
+    private int currentDirection = 0;
+
+    public float treadDamage; // 밟기 데미지 추가
+    public float spawnCooldown; // 스폰 쿨다운 추가
+
+    // 방향 상수 정의
+    private const int DIRECTION_DOWN = 0;
+    private const int DIRECTION_UP = 1;
+    private const int DIRECTION_LEFT = 2;
+    private const int DIRECTION_RIGHT = 3;
+
+    // 현재 타겟을 추적하기 위한 변수
+    [SerializeField] private Transform currentTarget;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        // 필요한 스탯 설정
+        if (maxHealth == 0) maxHealth = 150f;
+        if (attackDamage == 0) attackDamage = 15f;
+        if (treadDamage == 0) treadDamage = 25f; // 밟기 데미지 설정
+        if (moveSpeed == 0) moveSpeed = 3f;
+        if (attackRange == 0) attackRange = 1.5f;
+        if (detectionRange == 0) detectionRange = 5f;
+        if (attackCooldown == 0) attackCooldown = 1f;
+        if (spawnCooldown == 0) spawnCooldown = 5f; // 스폰 쿨다운 설정
+
+        // Animator 및 SpriteRenderer 설정
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        animator.speed = 0.4f; // 원하는 속도로 설정 (예: 0.5f로 설정하면 속도가 절반으로 줄어듭니다)
+
+        SetDirection(DIRECTION_DOWN);
+
+        // ControlUnitStatus가 Monster.cs에서 자동 할당되었는지 확인
+        if (controlUnitStatus == null)
+        {
+            Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
+        }
+    }
+
+    private void Update()
+    {
+        if (player == null || controlUnitStatus == null || isDead) return;
+
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        // 플레이어가 탐지 범위 내에 있는 경우 플레이어를 타겟으로 설정
+        if (distanceToPlayer <= detectionRange)
+        {
+            currentTarget = player;
+        }
+        else
+        {
+            // ControlUnit의 접근 포인트 중 가장 가까운 포인트를 찾기
+            currentTarget = FindClosestAccessPoint();
+        }
+
+        Vector2 directionToTarget = (currentTarget.position - transform.position).normalized;
+        float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
+
+        UpdateState(distanceToTarget, directionToTarget);
+
+        if (actionTimer > 0)
+        {
+            actionTimer -= Time.deltaTime;
+        }
+    }
+
+    private void UpdateState(float distanceToTarget, Vector2 directionToTarget)
+    {
+        UpdateDirection(directionToTarget);
+
+        if (distanceToTarget <= attackRange)
+        {
+            SetMoving(false);
+            if (actionTimer <= 0 && !isAttacking && !isTreading && !isSpawning)
+            {
+                StartRandomAction(directionToTarget);
+            }
+        }
+        else
+        {
+            SetMoving(true);
+            if (!isAttacking && !isTreading && !isSpawning)
+            {
+                MoveTowards(currentTarget.position);
+            }
+        }
+
+        UpdateAnimationState();
+    }
+
+    private void StartRandomAction(Vector2 actionDirection)
+    {
+        int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
+
+        switch (randomAction)
+        {
+            case 0:
+                StartAttack(actionDirection);
+                break;
+            case 1:
+                StartTread(actionDirection);
+                break;
+            case 2:
+                StartSpawn(actionDirection);
+                break;
+        }
+    }
+
+    private void StartAttack(Vector2 attackDirection)
+    {
+        isAttacking = true;
+        SetMoving(false);
+        actionTimer = attackCooldown;
+
+        UpdateAnimationState();
+
+        // 플레이어 또는 제어 장치에게 데미지
+        DealDamageToTarget((int)attackDamage);
+
+        Invoke(nameof(FinishAttack), 1f); // 공격 애니메이션 길이에 맞춰서 설정
+    }
+
+    private void FinishAttack()
+    {
+        isAttacking = false;
+        UpdateAnimationState();
+    }
+
+    private void StartTread(Vector2 treadDirection)
+    {
+        isTreading = true;
+        SetMoving(false);
+        actionTimer = attackCooldown; // 밟기도 쿨다운 공유
+
+        UpdateAnimationState();
+
+        // 플레이어 또는 제어 장치에게 데미지
+        DealDamageToTarget((int)treadDamage);
+
+        Invoke(nameof(FinishTread), 1f); // 밟기 애니메이션 길이에 맞춰서 설정
+    }
+
+    private void FinishTread()
+    {
+        isTreading = false;
+        UpdateAnimationState();
+    }
+
+    private void StartSpawn(Vector2 spawnDirection)
+    {
+        isSpawning = true;
+        SetMoving(false);
+        actionTimer = spawnCooldown;
+
+        UpdateAnimationState();
+
+        // 스폰 로직 구현 (예: 새로운 몬스터 생성)
+        SpawnMonster();
+
+        Invoke(nameof(FinishSpawn), 1f); // 스폰 애니메이션 길이에 맞춰서 설정
+    }
+
+    private void FinishSpawn()
+    {
+        isSpawning = false;
+        UpdateAnimationState();
+    }
+
+    private void SpawnMonster()
+    {
+        // 스폰할 몬스터 프리팹을 설정해야 합니다.
+        // GameObject spawnedMonster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
+        // 필요한 초기화 로직 추가
+    }
+
+    private void DealDamageToTarget(int damage)
+    {
+        if (currentTarget.CompareTag("Player"))
+        {
+            PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
+            if (playerInfo != null)
+            {
+                playerInfo.TakeDamage(damage);
+            }
+        }
+        else
+        {
+            ControlUnitStatus controlUnit = controlUnitStatus;
+            if (controlUnit == null)
+            {
+                Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
+                return;
+            }
+
+            foreach (Transform accessPoint in controlUnitStatus.accessPoints)
+            {
+                if (accessPoint == currentTarget)
+                {
+                    controlUnit.GetDamage(damage);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void UpdateDirection(Vector2 moveDirection)
+    {
+        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+
+        int newDirection;
+        if (angle > -45 && angle <= 45) // 오른쪽
+        {
+            newDirection = DIRECTION_RIGHT;
+        }
+        else if (angle > 45 && angle <= 135) // 위
+        {
+            newDirection = DIRECTION_UP;
+        }
+        else if (angle > -135 && angle <= -45) // 아래
+        {
+            newDirection = DIRECTION_DOWN;
+        }
+        else // 왼쪽
+        {
+            newDirection = DIRECTION_LEFT;
+        }
+
+        if (currentDirection != newDirection)
+        {
+            SetDirection(newDirection);
+        }
+    }
+
+    private void SetDirection(int direction)
+    {
+        currentDirection = direction;
+        animator.SetInteger("direction", direction);
+    }
+
+    private void SetMoving(bool moving)
+    {
+        isMoving = moving;
+        animator.SetBool("isMoving", moving && !isAttacking && !isTreading && !isSpawning);
+    }
+
+    private void UpdateAnimationState()
+    {
+        animator.SetBool("isMoving", isMoving && !isAttacking && !isTreading && !isSpawning);
+        animator.SetBool("isAttacking", isAttacking);
+        animator.SetBool("isTread", isTreading);
+        animator.SetBool("isSpawn", isSpawning);
+    }
+
+    private void Move(Vector2 targetPosition)
+    {
+        base.Move(targetPosition);
+    }
+
+    private void MoveTowards(Vector2 targetPosition)
+    {
+        Move(targetPosition);
+    }
+
+    private Transform FindClosestAccessPoint()
+    {
+        Transform closestPoint = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (Transform accessPoint in controlUnitStatus.accessPoints)
+        {
+            float distance = Vector2.Distance(transform.position, accessPoint.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPoint = accessPoint;
+            }
+        }
+
+        return closestPoint;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        if (player != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, player.position);
+        }
+
+        // 현재 타겟이 설정되어 있는 경우, 타겟으로 가는 선 생성
+        if (currentTarget != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, currentTarget.position);
+        }
+    }
+}
