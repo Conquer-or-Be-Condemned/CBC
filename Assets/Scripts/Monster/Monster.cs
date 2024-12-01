@@ -30,9 +30,13 @@ public abstract class Monster : MonoBehaviour
     public float healthBarYOffset;
 
     private Animator animator;
+    private PolygonCollider2D polygonCollider;
 
     protected virtual void Start()
     {
+
+        polygonCollider = GetComponent<PolygonCollider2D>();
+
         currentHealth = maxHealth;
 
         // 체력바 프리팹 인스턴스화
@@ -128,7 +132,13 @@ public abstract class Monster : MonoBehaviour
         {
             Destroy(healthBarTransform.gameObject);
         }
-
+        
+        if (polygonCollider != null)
+        {
+            Destroy(polygonCollider);
+            Debug.Log("PolygonCollider2D 제거됨");
+        }
+        
         moveSpeed = 0;
 
         Animator[] animators = GetComponentsInChildren<Animator>();
@@ -136,7 +146,8 @@ public abstract class Monster : MonoBehaviour
         {
             anim.enabled = false;
         }
-        // Start the fade-out coroutine
+        
+        
         StartCoroutine(FadeOutAndDestroy(1.0f));
     }
 
