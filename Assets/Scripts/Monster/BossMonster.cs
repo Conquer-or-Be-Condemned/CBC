@@ -112,7 +112,7 @@ public class BossMonster : Monster
     {
         int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
         // 디버깅용
-        // int randomAction = 2;
+        // int randomAction = 1;
 
         switch (randomAction)
         {
@@ -158,12 +158,20 @@ public class BossMonster : Monster
 
         // 플레이어 또는 제어 장치에게 데미지
         DealDamageToTarget((int)treadDamage);
-
-        Invoke(nameof(FinishTread), 1f); // 밟기 애니메이션 길이에 맞춰서 설정
+        
+        Invoke(nameof(FinishTread), 0.6f); // 밟기 애니메이션 길이에 맞춰서 설정
     }
 
     private void FinishTread()
     {
+        
+        // 카메라 흔들림 효과 트리거
+        CameraController cameraController = Camera.main.GetComponent<CameraController>();
+        if (cameraController != null)
+        {
+            StartCoroutine(cameraController.Shake(0.5f, 0.3f)); // 0.5초 동안, 0.3 강도로 흔들림
+        }
+        
         isTreading = false;
         UpdateAnimationState();
     }
