@@ -12,13 +12,18 @@ public class BossMonster : Monster
     private int currentDirection = 0;
 
     public float treadDamage; // 밟기 데미지 추가
-    public float spawnCooldown; // 스폰 쿨다운 추가
 
     // 방향 상수 정의
     private const int DIRECTION_DOWN = 0;
     private const int DIRECTION_UP = 1;
     private const int DIRECTION_LEFT = 2;
     private const int DIRECTION_RIGHT = 3;
+
+    [Header("Spawner Setting")] [SerializeField]
+    private MonsterSpawnData monsterSpawnData;
+
+    // 생성된 스포너 오브젝트를 추적
+    private GameObject spawnerInstance;
 
     // 현재 타겟을 추적하기 위한 변수
     [SerializeField] private Transform currentTarget;
@@ -35,7 +40,6 @@ public class BossMonster : Monster
         if (attackRange == 0) attackRange = 1.5f;
         if (detectionRange == 0) detectionRange = 5f;
         if (attackCooldown == 0) attackCooldown = 1f;
-        if (spawnCooldown == 0) spawnCooldown = 5f; // 스폰 쿨다운 설정
 
         // Animator 및 SpriteRenderer 설정
         animator = GetComponent<Animator>();
@@ -107,6 +111,8 @@ public class BossMonster : Monster
     private void StartRandomAction(Vector2 actionDirection)
     {
         int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
+        // 디버깅용
+        // int randomAction = 2;
 
         switch (randomAction)
         {
@@ -166,7 +172,6 @@ public class BossMonster : Monster
     {
         isSpawning = true;
         SetMoving(false);
-        actionTimer = spawnCooldown;
 
         UpdateAnimationState();
 
@@ -182,12 +187,42 @@ public class BossMonster : Monster
         UpdateAnimationState();
     }
 
+
     private void SpawnMonster()
     {
-        // 스폰할 몬스터 프리팹을 설정해야 합니다.
-        // GameObject spawnedMonster = Instantiate(monsterPrefab, transform.position, Quaternion.identity);
-        // 필요한 초기화 로직 추가
+        // 이미 스폰 중인 상태라면 리턴
+        if (!isSpawning || monsterSpawnData.monsterPrefab == null)
+        {
+            Debug.LogWarning("Spawning is not allowed or Monster prefab is null!");
+            return;
+        }
+
+        // 보스 주변에 스폰 위치 계산
+        float randomOffsetX = Random.Range(-2f, 2f); // X축 랜덤 오프셋
+        float randomOffsetY = Random.Range(-2f, 2f); // Y축 랜덤 오프셋
+        Vector3 spawnPosition = new Vector3(
+            transform.position.x + randomOffsetX,
+            transform.position.y + randomOffsetY,
+            transform.position.z
+        );
+
+        // 몬스터 생성
+        GameObject monster = Instantiate(monsterSpawnData.monsterPrefab, spawnPosition, Quaternion.identity);
+
+        // 생성된 몬스터가 플레이어를 타겟팅하도록 설정
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Monster monsterComponent = monster.GetComponent<Monster>();
+            if (monsterComponent != null)
+            {
+                monsterComponent.player = player.transform;
+            }
+        }
+
+        Destroy(monster, 0.1f); // 1초 후 스포너 오브젝트 제거
     }
+
 
     private void DealDamageToTarget(int damage)
     {
