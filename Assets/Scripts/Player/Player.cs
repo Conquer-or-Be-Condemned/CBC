@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = Unity.Mathematics.Random;
 
 public class Player : MonoBehaviour
 {
@@ -8,8 +10,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float pushAmount = 0.02f; // 충돌 시 밀어내는 크기
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private int bulletsPerShot; // 한 번에 발사할 총알 수
-    [SerializeField] private float spreadAngle = 15f; // 총알 퍼짐 각도
     [SerializeField] private float fireRate;
     public Tilemap map;
     public float attackDelay;
@@ -22,6 +22,16 @@ public class Player : MonoBehaviour
     private Vector3 sumVector;
     private Transform _mouseTransform;
     private float _timeTilFire;
+    private int _bulletsPerShot; // 한 번에 발사할 총알 수
+    private float _spreadAngle; // 총알 퍼짐 각도
+
+    private void Awake()
+    {
+        _bulletsPerShot = DataManager.PlayerBullet;
+        _spreadAngle = _bulletsPerShot * 5;
+
+    }
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -137,9 +147,9 @@ public class Player : MonoBehaviour
                 Vector2 baseDirection = (_mouse - (Vector2)bulletSpawnPoint.position).normalized;
                 float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
 
-                int bulletsToFire = bulletsPerShot;
-                float angleStep = spreadAngle / (bulletsToFire - 1);
-                float startAngle = baseAngle - spreadAngle / 2;
+                int bulletsToFire = _bulletsPerShot;
+                float angleStep = _spreadAngle / (bulletsToFire - 1);
+                float startAngle = baseAngle - _spreadAngle / 2;
 
                 for (int i = 0; i < bulletsToFire; i++)
                 {
