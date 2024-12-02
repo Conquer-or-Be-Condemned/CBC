@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class TowerBullet : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private float bulletSpeed; // 일정한 속도
-    [SerializeField] private float bulletDamage; // 총알 피해량
+    private float _bulletDamage; // 총알 피해량
     private Transform _target;
 
     private Vector3 _direction;
@@ -16,6 +17,11 @@ public class TowerBullet : MonoBehaviour
         this._target = target;
         _direction = (_target.position - transform.position).normalized; // 정규화된 방향 계산
         StartCoroutine(DestroyObjectIfNotHit());
+    }
+
+    private void Awake()
+    {
+        _bulletDamage = DataManager.TurretBullet;
     }
 
     private void Update()
@@ -46,7 +52,7 @@ public class TowerBullet : MonoBehaviour
         Monster monster = collision.gameObject.GetComponent<Monster>();
         if (monster != null)
         {
-            monster.TakeDamage(bulletDamage);
+            monster.TakeDamage(_bulletDamage);
         }
 
         Destroy(gameObject); // 충돌 시 총알 파괴

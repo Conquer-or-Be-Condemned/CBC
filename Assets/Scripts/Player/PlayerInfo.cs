@@ -7,13 +7,14 @@ using UnityEngine.Events;
 public class PlayerInfo : MonoBehaviour
 {
     public int curHp;
-    public int maxHp = 100;
+    public int maxHp;
     
     public UnityEvent onDeath = new UnityEvent();
     public UnityEvent<int,int> onHpChange = new UnityEvent<int, int>();
 
     private void Awake()
     {
+        maxHp = DataManager.PlayerHp;
         curHp = maxHp;
     }
 

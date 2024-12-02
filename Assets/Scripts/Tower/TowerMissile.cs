@@ -22,9 +22,9 @@ public class TowerMissile : MonoBehaviour
     [SerializeField] private float initialStraightTime =2f; // 초기 직진 시간
     
     [Header("Combat Settings")]
-    [SerializeField] private float bulletDamage = 10f;
     [SerializeField] private float explosionRange = 20f;
     
+    private float _bulletDamage;
     private Transform _target;
     private Vector2 _initialDirection;
     private SpriteRenderer _sr;
@@ -45,6 +45,7 @@ public class TowerMissile : MonoBehaviour
     private void Awake()
     {
         _sr = gameObject.GetComponent<SpriteRenderer>();
+        _bulletDamage = DataManager.TurretMissile;
     }
     private void FixedUpdate()
     {
@@ -122,7 +123,7 @@ public class TowerMissile : MonoBehaviour
         {
             if (monster.CompareTag("Enemy"))
             {
-                monster.GetComponent<Monster>().TakeDamage(bulletDamage);
+                monster.GetComponent<Monster>().TakeDamage(_bulletDamage);
             }
         }
         Destroy(gameObject);
