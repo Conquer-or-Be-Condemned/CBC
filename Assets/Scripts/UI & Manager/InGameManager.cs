@@ -66,7 +66,10 @@ public class InGameManager : MonoBehaviour
     public GameObject restartButton;
 
     [Header("Stage Clear")] public GameObject stageClearWrapper;
+    public TMP_Text stageClearText;
+    public TMP_Text stageContentText;
     public TMP_Text stageCoinText;
+    public GameObject stageCoinImage;
     public Button clearGoToMain;
     public Button clearGoToStageSelect;
     public Button clearRestart;
@@ -236,11 +239,6 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     public void ListenMonsterDie()
     {
         dieSpawn++;
@@ -310,6 +308,11 @@ public class InGameManager : MonoBehaviour
             blind.SetActive(true);
             stageClearWrapper.SetActive(true);
             
+            //  다음 스테이지 해금
+            DataManager.CurStage++;
+            //  Synchronize
+            GameManager.CurStage = DataManager.CurStage;
+            
             int reward = CalculateCoin();
             StartCoroutine(CoinCoroutine(reward));
             return true;
@@ -349,6 +352,21 @@ public class InGameManager : MonoBehaviour
         DataManager.Coin += reward;
 
         return reward;
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+        
+        blind.SetActive(true);
+        stageClearWrapper.SetActive(true);
+        
+        stageClearText.SetText("Game Over");
+        stageContentText.SetText("Mission failed.");
+        stageCoinText.SetText("");
+        stageCoinImage.SetActive(false);
+        
+        Time.timeScale = 0f;
     }
 
     private void ShowInfo()

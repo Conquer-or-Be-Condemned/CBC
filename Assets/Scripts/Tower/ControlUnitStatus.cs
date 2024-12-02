@@ -64,7 +64,8 @@ public class ControlUnitStatus : MonoBehaviour
     private void Die()
     {
         Debug.Log("Control Unit was Destroyed!!!");
-        SceneController.ChangeScene("GameOver");
+        
+        GeneralManager.Instance.inGameManager.GameOver();
     }
 
     public void GetDamage(int damage)
@@ -81,7 +82,7 @@ public class ControlUnitStatus : MonoBehaviour
         
         if (curHealth <= 0)
         {
-            Die();
+            Invoke("Die", 1f);
         }
     }
 
