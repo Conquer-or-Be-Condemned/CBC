@@ -36,7 +36,12 @@ public class UIPlayerHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerEx
         isHover = true;
         uiInfoWrapper.SetActive(true);
         uiInfo.SetText("HP : " + player.curHp + " / " + player.maxHp);
-        uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position;
+        
+        Vector2 size = uiInfoWrapper.GetComponent<RectTransform>().sizeDelta;
+
+        uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position +
+                                                                         new Vector2(
+                                                                             -size.x, size.y);
     }
     
     public void OnPointerExit(PointerEventData eventData)
@@ -49,7 +54,11 @@ public class UIPlayerHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         if (isHover)
         {
-            uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position;
+            Vector2 size = uiInfoWrapper.GetComponent<RectTransform>().sizeDelta;
+
+            uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position +
+                                                                             new Vector2(
+                                                                                 -size.x, size.y);
         }
     }
 }

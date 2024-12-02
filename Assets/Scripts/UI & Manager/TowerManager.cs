@@ -30,7 +30,7 @@ public class TowerManager : MonoBehaviour
 
     //  CU
     [Header("Control Unit")] [SerializeField]
-    private ControlUnitStatus controlUnit;
+    public ControlUnitStatus controlUnit;
 
     //  AlertManager
     [Header("AlertManager")] [SerializeField]

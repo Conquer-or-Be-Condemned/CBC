@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class PlayerBullet : MonoBehaviour
         direction = dir.normalized;
         StartCoroutine(destroyObjectIfNotHit());
     }
+
+  
 
     private void FixedUpdate()
     {
