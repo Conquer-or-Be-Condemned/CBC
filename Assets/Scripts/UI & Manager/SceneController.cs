@@ -156,6 +156,11 @@ public class SceneController : Singleton<SceneController>
             GameManager.InGameInit = false;
         }
 
+        if (GameManager.InGame)
+        {
+            GameManager.InGame = false;
+        }
+
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1f;

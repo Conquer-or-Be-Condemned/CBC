@@ -108,7 +108,7 @@ public class InGameManager : MonoBehaviour
         
         //  Stage Clear Button 연결
         clearGoToMain.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
-        clearGoToStageSelect.onClick.AddListener(()=>SceneController.ChangeScene("StageSelect"));
+        clearGoToStageSelect.onClick.AddListener(()=>SceneController.ChangeScene("StageMenu"));
         clearRestart.onClick.AddListener(()=>SceneController.Instance.ReStartGame());
     }
 
@@ -312,8 +312,6 @@ public class InGameManager : MonoBehaviour
             
             int reward = CalculateCoin();
             StartCoroutine(CoinCoroutine(reward));
-            
-            GameManager.InGame = false;
             return true;
         }
 

@@ -182,7 +182,7 @@ public class GeneralManager : Singleton<GeneralManager>
             stageInfoManager = null;
         }
 
-        if (SceneController.NowScene == "StageSelect")
+        if (SceneController.NowScene == "StageMenu")
         {
             if (shopManager == null)
             {
