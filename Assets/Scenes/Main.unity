@@ -2140,6 +2140,7 @@ MonoBehaviour:
   alertManager: {fileID: 0}
   towerManager: {fileID: 0}
   inGameManager: {fileID: 0}
+  shopManager: {fileID: 0}
   uiCUInfo: {fileID: 0}
   uiPlayerHp: {fileID: 0}
   loadingManager: {fileID: 0}
@@ -2255,6 +2256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619123da4fce04f078c8f83ef74bbf88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curSelectStage: 0
 --- !u!4 &1055396293
 Transform:
   m_ObjectHideFlags: 0
@@ -2671,7 +2673,9 @@ MonoBehaviour:
   bgmVolume: 0.5
   bgmChannels: 5
   sfxClips:
-  - {fileID: 8300000, guid: 8602b7d5cd15c1943a50aa53f171c8cf, type: 3}
+  - {fileID: 8300000, guid: 3ae6a6600a6a7409481c896e5a4dd962, type: 3}
+  - {fileID: 8300000, guid: 2bf07c61265af4337996d2bfee626366, type: 3}
+  - {fileID: 8300000, guid: 8b73826c532064f43830247df1cc2a74, type: 3}
   sfxVolume: 0.7
   sfxChannels: 3
   alertClips:
@@ -2985,10 +2989,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1393914855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 25, y: -12.5}
+  m_SizeDelta: {x: 25, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1496547999
 MonoBehaviour:
@@ -3429,10 +3433,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1393914855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 91, y: -12.5}
+  m_SizeDelta: {x: 25, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1664803239
 MonoBehaviour:
@@ -3576,10 +3580,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1393914855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 58, y: -12.5}
+  m_SizeDelta: {x: 25, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1705363528
 MonoBehaviour:
