@@ -78,6 +78,39 @@ public class DataManager : MonoBehaviour
         return true;
     }
 
+    public static int GetCost(int mode)
+    {
+        return CostList[LevelList[mode] - 1];
+    }
+
+    public static int GetMargin(int mode)
+    {
+        int res = 0;
+        switch (mode)
+        {
+            case 0:
+                res = 50;
+                break;
+            case 1:
+                res = 1;
+                break;
+            case 2:
+                res = 5;
+                break;
+            case 3:
+                res = 5;
+                break;
+            case 4:
+                res = 500;
+                break;
+            case 5:
+                res = 45;
+                break;
+        }
+
+        return res;
+    }
+
     public static void ValidateLevelList()
     {
         PlayerHpLv = LevelList[0];
