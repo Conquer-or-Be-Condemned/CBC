@@ -39,7 +39,7 @@ public class SceneController : Singleton<SceneController>
     {
         //  Main 씬이 담기게 됨.
         NowScene = SceneManager.GetActiveScene().name;
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,true);
+        // AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,true);
         isStart = false;
     }
 
