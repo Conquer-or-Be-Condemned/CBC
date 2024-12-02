@@ -151,8 +151,8 @@ public class StageInfoManager : MonoBehaviour
                       "  Our vanguard tried their best to conquer, " +
                       "but now we can't find traces of them anymore. " +
                       "Let's colonize this Planet.\nTake care and Focus Developer.....\nGood Luck.....");
-        StoryList.Add(" 미안하지만, 대본 쓰는게 너무 힘들어요 대충 뭐 이런 행성입니다!!!"+" 룰루랄라 신나는 소설기");
-        StoryList.Add(" 지옥행성입니다. 어서오세요 소설기 지옥에!!"+" 매우 유용할 겁니다..");
+        StoryList.Add("스테이지 2에 해당하는 스토리 라인이 들어갑니다.");
+        StoryList.Add("스테이지 3에 해당하는 스토리 라인이 들어갑니다. <지옥행성>");
         
         InfoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
         InfoList.Add("Average temperature: 0.4\u00b0C\nPlanet diameter: 3,515 km\nBiological Population: 5,558,421\nPlanet type: Ice Planet");

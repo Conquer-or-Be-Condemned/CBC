@@ -30,6 +30,10 @@ public class UIControlUnitHealthHandler : MonoBehaviour, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
+        
         if (!isHover)
         {
             isHover = true;
@@ -45,14 +49,14 @@ public class UIControlUnitHealthHandler : MonoBehaviour, IPointerEnterHandler, I
             //  MAX
             if (DataManager.ControlUnitHpLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.ControlUnitHp + ">");
             }
             else
             {
                 infoNext.SetText(DataManager.ControlUnitHp + " -> " +
-                                 (DataManager.ControlUnitHp + DataManager.GetMargin(5)) + "(+ " +
-                                 DataManager.GetMargin(5) + ")");
-                infoCost.SetText("Cost : " + DataManager.GetCost(5));
+                                 (DataManager.ControlUnitHp + DataManager.GetMargin(4)) + "(+ " +
+                                 DataManager.GetMargin(4) + ")");
+                infoCost.SetText("Cost : " + DataManager.GetCost(4));
             }
 
             RectTransform rectTransform = upgradeInfoBox.GetComponent<RectTransform>();

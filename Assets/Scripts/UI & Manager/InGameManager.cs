@@ -450,7 +450,6 @@ public class InGameManager : MonoBehaviour
         {
             if (!waveStart.GetComponent<Button>().interactable)
             {
-                Debug.LogError("ENGGGGGG");
                 yield break;
             }
             

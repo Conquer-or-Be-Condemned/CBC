@@ -29,6 +29,9 @@ public class UIPlayerBulletHandler : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
         if (!isHover)
         {
             isHover = true;
@@ -44,7 +47,7 @@ public class UIPlayerBulletHandler : MonoBehaviour, IPointerEnterHandler, IPoint
             //  MAX
             if (DataManager.PlayerBulletLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.PlayerBullet + ">");
             }
             else
             {
