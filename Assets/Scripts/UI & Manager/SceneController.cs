@@ -33,7 +33,7 @@ public class SceneController : Singleton<SceneController>
     private bool isStart;
 
     [Header("Stage")]
-    private int curSelectStage;
+    public int curSelectStage;
 
     public void Start()
     {
@@ -70,7 +70,6 @@ public class SceneController : Singleton<SceneController>
         {
             GameObject.Find("ExitProgram").GetComponent<Button>().onClick.AddListener(ExitProgram);
         }
-
         
     }
 
@@ -86,7 +85,11 @@ public class SceneController : Singleton<SceneController>
                 return;
             }
 
-            curSelectStage = GeneralManager.Instance.stageSelectManager.GetCurSelectStage();
+            //  Stage Menu일 때
+            if (GeneralManager.Instance.stageInfoManager != null)
+            {
+                curSelectStage = GeneralManager.Instance.stageSelectManager.GetCurSelectStage();    
+            }
             
             isStart = true;
             StartCoroutine(PreGoToGameCoroutine());
@@ -151,6 +154,11 @@ public class SceneController : Singleton<SceneController>
             
             GameManager.InGame = false;
             GameManager.InGameInit = false;
+        }
+
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1f;
         }
         
         Debug.Log("Go to " + sceneName);

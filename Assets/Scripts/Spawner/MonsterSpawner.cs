@@ -31,8 +31,17 @@ public class MonsterSpawner : MonoBehaviour
         // 게임 상태와 관련된 로직이 필요할 경우 GeneralManager와 연동 가능
         if (!isWorking)
         {
-            spawnCoroutine = StartCoroutine(SpawnRoutine());
-            isWorking = true;
+            if (GeneralManager.Instance.inGameManager.isWave && !GeneralManager.Instance.inGameManager.spawnEnd)
+            {
+                spawnCoroutine = StartCoroutine(SpawnRoutine());
+                isWorking = true;
+            }
+        }
+
+        if (GeneralManager.Instance.inGameManager.spawnEnd)
+        {
+            isWorking = false;
+            StopCoroutine(spawnCoroutine);
         }
     }
 

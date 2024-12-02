@@ -65,6 +65,12 @@ public class InGameManager : MonoBehaviour
     [Header("Pause Buttons")] public GameObject goToMainButton;
     public GameObject restartButton;
 
+    [Header("Stage Clear")] public GameObject stageClearWrapper;
+    public TMP_Text stageCoinText;
+    public Button clearGoToMain;
+    public Button clearGoToStageSelect;
+    public Button clearRestart;
+
     private void Start()
     {
 
@@ -99,6 +105,11 @@ public class InGameManager : MonoBehaviour
         {
             ShowButton();
         }
+        
+        //  Stage Clear Button 연결
+        clearGoToMain.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
+        clearGoToStageSelect.onClick.AddListener(()=>SceneController.ChangeScene("StageSelect"));
+        clearRestart.onClick.AddListener(()=>SceneController.Instance.ReStartGame());
     }
 
     //  대화 중에는 스킵 불가능
@@ -108,6 +119,13 @@ public class InGameManager : MonoBehaviour
         {
             CheckKeyBoardInput();
         }
+        
+        if (isWave)
+        {
+            CheckWaveClear();
+        }
+        
+        CheckCurSpawn();
     }
 
     //  Blind를 통해 다른 UI 클릭을 방지한다.
@@ -220,10 +238,7 @@ public class InGameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isWave)
-        {
-            CheckWaveClear();
-        }
+        
     }
 
     public void ListenMonsterDie()
@@ -231,17 +246,17 @@ public class InGameManager : MonoBehaviour
         dieSpawn++;
     }
 
-    public bool AddAndCheckCurSpawn(int offset)
+    public void ListenMonsterSpawn()
     {
-        curSpawn += offset;
+        curSpawn++;
+    }
 
+    public void CheckCurSpawn()
+    {
         if (curSpawn > StageInfoManager.GetWaveInfo(curWave))
         {
             spawnEnd = true;
-            return true;
         }
-
-        return false;
     }
 
     public void StartWave()
@@ -272,28 +287,70 @@ public class InGameManager : MonoBehaviour
     {
         if (dieSpawn == curSpawn && spawnEnd)
         {
-            isWave = false;
-            ShowWaveClear();
-
             curWave++;
-            CheckStageClear();
+            isWave = false;
+            
+            if (!CheckStageClear())
+            {
+                ShowWaveClear();
+                CheckStageClear();
 
-            //  Player 회복
-            GameManager.Instance.player.GetComponent<PlayerInfo>().RecoverHp();
+                //  Player 회복
+                GameManager.Instance.player.GetComponent<PlayerInfo>().RecoverHp();
+            }
         }
     }
 
-    private void CheckStageClear()
+    private bool CheckStageClear()
     {
         if (curWave > maxWave)
         {
             Debug.Log("Stage Clear");
-            SceneController.ChangeScene("Main");
-
+            
+            blind.SetActive(true);
+            stageClearWrapper.SetActive(true);
+            
+            int reward = CalculateCoin();
+            StartCoroutine(CoinCoroutine(reward));
+            
             GameManager.InGame = false;
+            return true;
         }
 
+        return false;
         //  TODO : 이후 스테이지 클리어 화면과 함께 스테이지 선택 씬으로 넘어갈 것.
+    }
+
+    private IEnumerator CoinCoroutine(int reward)
+    {
+        int cnt = 0;
+        while (true)
+        {
+            if (reward == cnt)
+            {
+                Time.timeScale = 0f;
+                yield break;
+            }
+            
+            yield return new WaitForSeconds(0.02f);
+            cnt++;
+            stageCoinText.SetText("+ " + cnt);
+        }
+    }
+
+    private int CalculateCoin()
+    {
+        int curCUHp = GeneralManager.Instance.towerManager.controlUnit.GetCurHp();
+        int maxCUHp = GeneralManager.Instance.towerManager.controlUnit.GetMaxHp();
+        
+        float ratio = (float)curCUHp / maxCUHp;
+        int reward = (int)(ratio * StageInfoManager.GetReward());
+        
+        Debug.Log("Reward : "+ reward);
+
+        DataManager.Coin += reward;
+
+        return reward;
     }
 
     private void ShowInfo()
