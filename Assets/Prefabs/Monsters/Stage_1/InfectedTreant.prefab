@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 1681059103846683528}
   - component: {fileID: 3727076148842209913}
   - component: {fileID: 2009005005601722383}
-  - component: {fileID: -7792215644566802799}
-  - component: {fileID: 8122048526506599524}
+  - component: {fileID: -2084431905485033598}
+  - component: {fileID: 3647052627845986042}
   m_Layer: 7
   m_Name: InfectedTreant
   m_TagString: Enemy
@@ -183,7 +183,7 @@ Animator:
   m_GameObject: {fileID: 4009334584712422631}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 8d0756470d051437ebd3a8ea95ccbc5a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 35a673900404a4239830405fd4ffd7dc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -221,7 +221,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-7792215644566802799
+--- !u!114 &-2084431905485033598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,24 +230,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 4009334584712422631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fd6e0f5f7fe345919986e8dd4feaa72, type: 3}
+  m_Script: {fileID: 11500000, guid: 67135770c515494294e529163666e842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: TreantMushroom
-  maxHealth: 250
-  currentHealth: 250
-  attackDamage: 20
-  moveSpeed: 8
-  attackRange: 6
-  attackCooldown: 1
+  maxHealth: 1000
+  currentHealth: 1000
+  attackDamage: 40
+  moveSpeed: 2
+  attackRange: 12
+  attackCooldown: 5
   isDead: 0
-  detectionRange: 15
+  detectionRange: 30
   player: {fileID: 0}
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
-  healthBarYOffset: 5
+  healthBarYOffset: 10
+  treadDamage: 80
+  monsterSpawnData:
+    monsterPrefab: {fileID: 1084871462846035899, guid: 2afc40aedefe746c78920a9523650646, type: 3}
+    spawnCount: 1
   currentTarget: {fileID: 0}
---- !u!60 &8122048526506599524
+--- !u!60 &3647052627845986042
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,7 +287,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.3333335, y: 7.8333335}
+    oldSize: {x: 16, y: 23.5}
     newSize: {x: 3.84, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -291,14 +295,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2, y: 3.9166667}
-      - {x: -2.3333335, y: 3.9166667}
-      - {x: -2.6666667, y: 3.25}
-      - {x: -2.6666667, y: -1.4166667}
-      - {x: -2.1666667, y: -2.9166667}
-      - {x: -1.3333334, y: -3.9166667}
-      - {x: 1.6666667, y: -3.9166667}
-      - {x: 2.6666667, y: -2.5833335}
-      - {x: 2.6666667, y: 1.75}
-      - {x: 2.3333335, y: 3.75}
+    - - {x: 6, y: 11.75}
+      - {x: -7, y: 11.75}
+      - {x: -8, y: 9.75}
+      - {x: -8, y: -4.25}
+      - {x: -6.5, y: -8.75}
+      - {x: -4, y: -11.75}
+      - {x: 5, y: -11.75}
+      - {x: 8, y: -7.75}
+      - {x: 8, y: 5.25}
+      - {x: 7, y: 11.25}
   m_UseDelaunayMesh: 0

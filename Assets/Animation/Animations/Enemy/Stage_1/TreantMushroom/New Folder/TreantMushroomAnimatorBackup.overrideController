@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TreantMushroomAnimator
+  m_Name: TreantMushroomAnimatorBackup
   m_Controller: {fileID: 9100000, guid: 3d7abfea2d285467a9f9d374ddabd9a0, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: e44356811dc11478bb5b191a1682e753, type: 2}
