@@ -98,6 +98,7 @@ public abstract class Monster : MonoBehaviour
 
         // For In Game
         isDead = false;
+        GeneralManager.Instance.inGameManager.ListenMonsterSpawn();
     }
 
     public virtual void TakeDamage(float damage)

@@ -73,7 +73,7 @@ public class StageSelectManager : MonoBehaviour
         }
         
         //  Warp Button
-        if (curSelectStage == GameManager.CurStage - 1)
+        if (curSelectStage <= GameManager.CurStage - 1)
         {
             warpButton.GetComponent<Button>().interactable = true;
         }

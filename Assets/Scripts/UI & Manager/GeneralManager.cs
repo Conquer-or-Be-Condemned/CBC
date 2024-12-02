@@ -26,6 +26,10 @@ public class GeneralManager : Singleton<GeneralManager>
     public TowerManager towerManager;
     public InGameManager inGameManager;
     
+    //  Shop Manager (Local)
+    [Header("Shop Manager")]
+    public ShopManager shopManager;
+    
     //  UI Managements
     [Header("UI Managements")]
     public UICUInfo uiCUInfo;
@@ -176,6 +180,18 @@ public class GeneralManager : Singleton<GeneralManager>
         else
         {
             stageInfoManager = null;
+        }
+
+        if (SceneController.NowScene == "StageSelect")
+        {
+            if (shopManager == null)
+            {
+                shopManager = GameObject.Find("ShopManager").GetComponent<ShopManager>();
+            }
+        }
+        else
+        {
+            shopManager = null;
         }
     }
     
