@@ -310,6 +310,11 @@ public class InGameManager : MonoBehaviour
             blind.SetActive(true);
             stageClearWrapper.SetActive(true);
             
+            //  다음 스테이지 해금
+            DataManager.CurStage++;
+            //  Synchronize
+            GameManager.CurStage = DataManager.CurStage;
+            
             int reward = CalculateCoin();
             StartCoroutine(CoinCoroutine(reward));
             return true;
