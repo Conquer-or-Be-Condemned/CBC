@@ -1,8 +1,5 @@
-using System;
-using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
-using Random = UnityEngine.Random;
+using UnityEngine;
 
 [System.Serializable]
 public class MonsterSpawnData
@@ -14,50 +11,37 @@ public class MonsterSpawnData
 public class MonsterSpawner : MonoBehaviour
 {
     [Header("Monster Prefabs")]
-    [SerializeField] private MonsterSpawnData defaultMonster;
-    [SerializeField] private MonsterSpawnData tankerMonster;
-    [SerializeField] private MonsterSpawnData assassinMonster;
-    [SerializeField] private MonsterSpawnData adMonster;
+    [SerializeField] private MonsterSpawnData[] monsterSpawnDataArray; // 여러 몬스터 데이터를 관리할 배열
 
     [Header("Spawn Settings")]
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private float spawnRadius = 1f;   // 스폰 범위
     [SerializeField] private float spawnZPosition = -2f;  // Z축 고정값 추가
-    
-    //  For InGame
-    [Header("For In Game")]
-    public bool isWork;
+
+    public bool isWorking = false;
     private Coroutine spawnCoroutine;
-    
+
     private void Start()
     {
-        isWork = false;
-        // Debug.Log($"MonsterSpawner starting at position: {transform.position}");
+        isWorking = false;
     }
 
-    //  For InGame -> 일단 Listener로 구현하지는 않음
     private void FixedUpdate()
     {
-        //  For Debug
-        if (GeneralManager.Instance.inGameManager == null)
+        // 게임 상태와 관련된 로직이 필요할 경우 GeneralManager와 연동 가능
+        if (!isWorking)
         {
-            if (!isWork)
+            if (GeneralManager.Instance.inGameManager.isWave && !GeneralManager.Instance.inGameManager.spawnEnd)
             {
                 spawnCoroutine = StartCoroutine(SpawnRoutine());
-                isWork = true;
+                isWorking = true;
             }
-
-            return;
         }
-        
-        if (GeneralManager.Instance.inGameManager.isWave 
-            && !GeneralManager.Instance.inGameManager.spawnEnd)
+
+        if (GeneralManager.Instance.inGameManager.spawnEnd)
         {
-            if (!isWork)
-            {
-                spawnCoroutine = StartCoroutine(SpawnRoutine());
-                isWork = true;
-            }
+            isWorking = false;
+            StopCoroutine(spawnCoroutine);
         }
     }
 
@@ -65,48 +49,26 @@ public class MonsterSpawner : MonoBehaviour
     {
         while (true)
         {
-            // 각 몬스터 타입별로 스폰
-            for (int i = 0; i < defaultMonster.spawnCount; i++)
-                SpawnMonster(defaultMonster);
-            
-            for (int i = 0; i < tankerMonster.spawnCount; i++)
-                SpawnMonster(tankerMonster);
-            
-            for (int i = 0; i < assassinMonster.spawnCount; i++)
-                SpawnMonster(assassinMonster);
-            
-            for (int i = 0; i < adMonster.spawnCount; i++)
-                SpawnMonster(adMonster);
-            
+            // 스폰 배열에서 무작위로 선택하여 몬스터를 스폰
+            foreach (var spawnData in monsterSpawnDataArray)
+            {
+                for (int i = 0; i < spawnData.spawnCount; i++)
+                {
+                    SpawnMonster(spawnData);
+                }
+            }
+
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    private void CheckTotalSpawn()
+    private void SpawnMonster(MonsterSpawnData spawnData)
     {
-        if (GeneralManager.Instance.inGameManager.AddAndCheckCurSpawn(1))
+        if (spawnData.monsterPrefab == null)
         {
-            Debug.LogError("Spawner Off");
-            StopCoroutine(spawnCoroutine);
-            isWork = false;
-        }
-    }
-
-    private void SpawnMonster(MonsterSpawnData monsterData)
-    {
-        if (monsterData.monsterPrefab == null)
-        {
-            // Debug.LogWarning("Monster prefab is null!");
+            Debug.LogWarning("Monster prefab is null!");
             return;
         }
-
-        //  For Debug
-        if (GeneralManager.Instance.inGameManager != null)
-        {
-            //  For In Game
-            CheckTotalSpawn();
-        }
-        
 
         // 스폰 위치 계산
         float randomOffset = Random.Range(-spawnRadius, spawnRadius);
@@ -117,16 +79,9 @@ public class MonsterSpawner : MonoBehaviour
         );
 
         // 몬스터 생성
-        GameObject monster = Instantiate(monsterData.monsterPrefab, spawnPosition, Quaternion.identity);
-    
-        // 스케일 명시적으로 설정 (프리팹에서 보이는 0.5994 값 사용)
-        // Vector3 desiredScale = new Vector3(0.5994f, 0.5994f, 0.5994f);
-        // monster.transform.localScale = desiredScale;
-    
-        // 디버그 로그 추가
-        // Debug.Log($"Monster spawned with scale: {monster.transform.localScale}");
-    
-        // 플레이어 찾아서 할당
+        GameObject monster = Instantiate(spawnData.monsterPrefab, spawnPosition, Quaternion.identity);
+
+        // 몬스터에 플레이어 참조 연결
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -134,20 +89,14 @@ public class MonsterSpawner : MonoBehaviour
             if (monsterComponent != null)
             {
                 monsterComponent.player = player.transform;
-                // Debug.Log($"Player reference set for monster at {monster.transform.position}");
             }
         }
     }
 
     private void OnDrawGizmosSelected()
     {
+        // 스폰 영역 시각화
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
-        
-        // 스폰 영역 시각화
-        Vector3 spawnAreaStart = new Vector3(transform.position.x - spawnRadius, transform.position.y, spawnZPosition);
-        Vector3 spawnAreaEnd = new Vector3(transform.position.x + spawnRadius, transform.position.y, spawnZPosition);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(spawnAreaStart, spawnAreaEnd);
     }
 }

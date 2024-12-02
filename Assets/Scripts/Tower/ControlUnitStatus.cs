@@ -30,6 +30,17 @@ public class ControlUnitStatus : MonoBehaviour
     private void Start()
     {
         attackCool = false;
+        
+        ValidateData();
+    }
+
+    private void ValidateData()
+    {
+        maxHealth = DataManager.ControlUnitHp;
+        curHealth = DataManager.ControlUnitHp;
+
+        maxPower = DataManager.ControlUnitPower;
+        currentPower = DataManager.ControlUnitPower;
     }
 
     public void AddUnit(int power)

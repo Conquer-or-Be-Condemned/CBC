@@ -19,7 +19,10 @@ public class GameManager : Singleton<GameManager>
     [Header("Game")]
     public GameObject player;
     //  현재 플레이 가능한 스테이지 정보 (오류 방지를 위한 즉시 초기화)
-    public static int CurStage = 1;
+    public static int CurStage;
+    //  현재 선택하고 플레이 중인 스테이지 정보
+    // public static int CurSelectedStage = 0;
+    
     //  인게임 상태인지 확인
     public static bool InGame;
     //  인게임에서 필요한 모든 초기화가 가능한지 확인(true : 초기화 안됨, false : 초기화 됨)
@@ -37,6 +40,8 @@ public class GameManager : Singleton<GameManager>
         //  게임 시작 시 초기화 목록
         InGame = false;
         InGameInit = false;
+        
+        CurStage = DataManager.CurStage;
     }
 
     private void FixedUpdate()

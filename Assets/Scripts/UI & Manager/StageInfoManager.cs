@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 /*
@@ -36,6 +38,8 @@ public class StageInfoManager : MonoBehaviour
     [Header("Wave Info")]
     public static List<int> StageInfo = new List<int>();
     public static List<List<int>> WaveInfo = new List<List<int>>();
+
+    [Header("Stage Rewards")] public static int[] StageRewards = { 100,100,100 };
     
     //  현재 Display되고 있는 스테이지
     private void Awake()
@@ -157,28 +161,35 @@ public class StageInfoManager : MonoBehaviour
     
     public static string GetCurStageName()
     {
-        return NameList[GameManager.CurStage - 1];
+        return NameList[SceneController.Instance.curSelectStage];
     }
     
     //  웨이브 저장을 위한 Method
     public static void SetStageInfo()
     {
-        StageInfo.Add(3);
+        StageInfo.Add(1);
+        StageInfo.Add(1);
     }
 
     public static void SetWaveInfo()
     {
         //  Stage 1 - Wave 9개 (임시 3개)
-        WaveInfo.Add(new List<int> {200,275,350,0,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {20,275,350,0,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {100,275,350,0,0,0,0,0,0,0});
     }
     
     public static int GetStageInfo()
     {
-        return StageInfo[GameManager.CurStage - 1];
+        return StageInfo[SceneController.Instance.curSelectStage];
     }
 
     public static int GetWaveInfo(int curWave)
     {
-        return WaveInfo[GameManager.CurStage - 1][curWave - 1];
+        return WaveInfo[SceneController.Instance.curSelectStage][curWave - 1];
+    }
+
+    public static int GetReward()
+    {
+        return StageRewards[SceneController.Instance.curSelectStage];
     }
 }
