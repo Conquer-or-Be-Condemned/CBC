@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class UICUHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler
 {
-    
     public GameObject uiInfoWrapper;
     public TMP_Text uiInfo;
     
@@ -34,11 +33,18 @@ public class UICUHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             uiInfoWrapper.SetActive(true);
             uiInfo.SetText("HP : " + cuInfo.GetCurHp() + " / " + cuInfo.GetMaxHp());
 
-            Vector2 size = uiInfoWrapper.GetComponent<RectTransform>().sizeDelta;
+            RectTransform rectTransform = uiInfoWrapper.GetComponent<RectTransform>();
 
-            uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position +
-                                                                             new Vector2(
-                                                                                 -size.x, size.y);
+// RectTransform의 World Space 크기 계산
+            Vector3[] worldCorners = new Vector3[4];
+            rectTransform.GetWorldCorners(worldCorners);
+
+            float width = worldCorners[2].x - worldCorners[0].x; // 우측 상단 - 좌측 하단 (World Space 기준 너비)
+            float height = worldCorners[2].y - worldCorners[0].y; // 우측 상단 - 좌측 하단 (World Space 기준 높이)
+
+// 위치 설정
+            uiInfoWrapper.GetComponent<RectTransform>().position = eventData.position + 
+                                                                        new Vector2(-width/2 - 1, height/2 +1);
         }
         
     }
@@ -56,11 +62,18 @@ public class UICUHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (isHover)
         {
-            Vector2 size = uiInfoWrapper.GetComponent<RectTransform>().sizeDelta;
+            RectTransform rectTransform = uiInfoWrapper.GetComponent<RectTransform>();
 
-            uiInfoWrapper.GetComponent<RectTransform>().transform.position = eventData.position +
-                                                                             new Vector2(
-                                                                                 -size.x, size.y);
+// RectTransform의 World Space 크기 계산
+            Vector3[] worldCorners = new Vector3[4];
+            rectTransform.GetWorldCorners(worldCorners);
+
+            float width = worldCorners[2].x - worldCorners[0].x; // 우측 상단 - 좌측 하단 (World Space 기준 너비)
+            float height = worldCorners[2].y - worldCorners[0].y; // 우측 상단 - 좌측 하단 (World Space 기준 높이)
+
+// 위치 설정
+            uiInfoWrapper.GetComponent<RectTransform>().position = eventData.position + 
+                                                                   new Vector2(-width/2 - 1, height/2 +1);
         }
     }
 }
