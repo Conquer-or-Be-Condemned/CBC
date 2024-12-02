@@ -146,17 +146,28 @@ public class StageInfoManager : MonoBehaviour
         NameList.Add("AJH-4001D2");
         NameList.Add("JHS-8854xD");
         
-        StoryList.Add("  This planet will be our first destination. It has similar environment with Earth" +
+        StoryList.Add("This planet will be our first destination. It has similar environment with the Earth" +
                       ", but has strong enemy forces defending it.\n\n" +
                       "  Our vanguard tried their best to conquer, " +
                       "but now we can't find traces of them anymore. " +
                       "Let's colonize this Planet.\nTake care and Focus Developer.....\nGood Luck.....");
-        StoryList.Add(" 미안하지만, 대본 쓰는게 너무 힘들어요 대충 뭐 이런 행성입니다!!!"+" 룰루랄라 신나는 소설기");
-        StoryList.Add(" 지옥행성입니다. 어서오세요 소설기 지옥에!!"+" 매우 유용할 겁니다..");
+        
+        StoryList.Add("Congrats Clearing HJD-1029X2!!! This is our second destination."+
+                      "It has similar temperature with the moon."+
+                      "VERY hot during the daytime and VERY cold after the sunset."
+                      +"It snowed there last night. Watch out!!! Pretty Slippery out there.."
+                      +"Get Some thick clothes on and take care! We trust you...");
+        
+        StoryList.Add("Finally....this is our final destination."
+                      + "We don't have much information about JHS-8854xD to tell you."
+                      + "We just checked that there are some flaming hot lava lakes."
+                      +"You better not fall into it." +"Oh, we just got a new information."
+                      +"The control-unit is in the middle of the map. So the monsters will" +
+                      "come from every direction...Good Luck...");
         
         InfoList.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
-        InfoList.Add("Average temperature: 0.4\u00b0C\nPlanet diameter: 3,515 km\nBiological Population: 5,558,421\nPlanet type: Ice Planet");
-        InfoList.Add("Average temperature: 41.7\u00b0C\nPlanet diameter: 9,564 km\nBiological Population: 34,512\nPlanet type: Lava Planet");
+        InfoList.Add("Average temperature: 0.4\u00b0C\nPlanet diameter: 3,515 km\nBiological Population: 5,558,421\nPlanet type: Moon-type Planet");
+        InfoList.Add("Average temperature: 64.7\u00b0C\nPlanet diameter: 9,564 km\nBiological Population: 34,512\nPlanet type: Lava Planet");
     }
     
     public static string GetCurStageName()
