@@ -15,8 +15,8 @@ public class AdcBullet : MonoBehaviour
 
     void Start()
     {
-        GameObject leafPos = GameObject.Find("Leaf 1");
-        bulletSpawnPoint = leafPos.transform;
+        // GameObject leafPos = GameObject.Find("Leaf 1(Clone)");
+        // bulletSpawnPoint = leafPos.transform;
     } // 방향을 설정하는 메서드
     public void SetDirection(Vector2 dir)
     {
@@ -46,12 +46,15 @@ public class AdcBullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {   
         //Monster monster = other.gameObject.GetComponent<Monster>();
-        Player player = other.gameObject.GetComponent<Player>();
-        PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
-        if (player != null)
+        if (other.gameObject.GetComponent<Player>() != null)
         {
-            playerInfo.TakeDamage((int)bulletDamage);
+            Player player = other.gameObject.GetComponent<Player>();
+            PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
+            if (player != null)
+            {
+                playerInfo.TakeDamage((int)bulletDamage);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

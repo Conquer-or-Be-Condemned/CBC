@@ -162,6 +162,8 @@ public class SceneController : Singleton<SceneController>
             
             GameManager.InGame = false;
             GameManager.InGameInit = false;
+
+            GeneralManager.Instance.settingManager.isEnable = false;
         }
 
         if (GameManager.InGame)
