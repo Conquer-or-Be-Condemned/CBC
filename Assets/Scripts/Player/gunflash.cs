@@ -36,7 +36,10 @@ public class gunflash : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GunFlash();    
+            if (GeneralManager.Instance.inGameManager.isWave)
+            {
+                GunFlash();
+            }
         }
     }
 

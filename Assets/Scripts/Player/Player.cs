@@ -56,7 +56,10 @@ public class Player : MonoBehaviour
     {
         if (!GeneralManager.Instance.inGameManager.isTalking)
         {
-            PlayerMove();
+            if (GeneralManager.Instance.inGameManager.isWave)
+            {
+                PlayerMove();
+            }
         }
     }
 
@@ -125,15 +128,20 @@ public class Player : MonoBehaviour
 
             if (!GeneralManager.Instance.inGameManager.pauseVisible)
             {
-                CheckDirectionToMouse();
+                if (GeneralManager.Instance.inGameManager.isWave)
+                {
+                    CheckDirectionToMouse();
+                }
             }
-
         }
 
 
         if (!GeneralManager.Instance.inGameManager.isTalking)
         {
-            PlayerAttack();
+            if (GeneralManager.Instance.inGameManager.isWave)
+            {
+                PlayerAttack();    
+            }
         }
     }
 

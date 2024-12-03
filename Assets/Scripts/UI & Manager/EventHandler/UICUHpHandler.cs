@@ -27,6 +27,7 @@ public class UICUHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        
         if (!isHover)
         {
             isHover = true;

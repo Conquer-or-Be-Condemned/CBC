@@ -25,6 +25,7 @@ public class InGameManager : MonoBehaviour
     //  웨이브 중인지 판단하는 변수
     [Header("Wave")] public bool isWave;
     public bool spawnEnd;
+    public bool isClear;
 
     //  Wave 진행 버튼
     public GameObject waveStart;
@@ -74,6 +75,10 @@ public class InGameManager : MonoBehaviour
     public Button clearGoToStageSelect;
     public Button clearRestart;
 
+    [Header("Player")] 
+    public GameObject player;
+    public GameObject playerSpawnPoint;
+
     private void Start()
     {
 
@@ -88,6 +93,7 @@ public class InGameManager : MonoBehaviour
         curWave = 1;
         maxWave = StageInfoManager.GetStageInfo();
         isWave = false;
+        isClear = false;
 
         talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
 
@@ -113,6 +119,17 @@ public class InGameManager : MonoBehaviour
         clearGoToMain.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
         clearGoToStageSelect.onClick.AddListener(()=>SceneController.ChangeScene("StageMenu"));
         clearRestart.onClick.AddListener(()=>SceneController.Instance.ReStartGame());
+        
+        //  player 검색
+        if (player == null)
+        {
+            player = GameObject.Find("Player");
+        }
+
+        if (playerSpawnPoint == null)
+        {
+            playerSpawnPoint = GameObject.Find("PlayerSpawnPoint");
+        }
     }
 
     //  대화 중에는 스킵 불가능
@@ -127,8 +144,12 @@ public class InGameManager : MonoBehaviour
         {
             CheckWaveClear();
         }
+
+        if (!spawnEnd)
+        {
+            CheckCurSpawn();
+        }
         
-        CheckCurSpawn();
     }
 
     //  Blind를 통해 다른 UI 클릭을 방지한다.
@@ -279,30 +300,58 @@ public class InGameManager : MonoBehaviour
         maxSpawn = StageInfoManager.GetWaveInfo(curWave);
         dieSpawn = 0;
         curSpawn = 0;
+        isClear = false;
     }
 
     private void CheckWaveClear()
     {
         if (dieSpawn == curSpawn && spawnEnd)
         {
-            curWave++;
-            isWave = false;
-            
-            if (!CheckStageClear())
+            if (!isClear)
             {
-                ShowWaveClear();
-                CheckStageClear();
+                if (!CheckStageClear())
+                {
+                    isClear = true;
+                    
+                    Debug.Log("Wave ++ ");
+                    curWave++;
+                    ShowWaveClear();
 
-                //  Player 회복
-                GameManager.Instance.player.GetComponent<PlayerInfo>().RecoverHp();
+                    //  Player 회복
+                    GameManager.Instance.player.GetComponent<PlayerInfo>().RecoverHp();
+
+                    StartCoroutine(MovePlayCoroutine());
+                }
             }
         }
+    }
+
+    private IEnumerator MovePlayCoroutine()
+    {
+        //  대화중이라고 판정
+        isTalking = true;
+        yield return new WaitForSeconds(1f);
+        
+        MovePlayer();
+
+        yield return new WaitForSeconds(1f);
+        isTalking = false;
+        isWave = false;
+    }
+    
+    private void MovePlayer()
+    {
+        player.transform.position = new Vector3(playerSpawnPoint.transform.position.x,
+            playerSpawnPoint.transform.position.y, player.transform.position.z);
     }
 
     private bool CheckStageClear()
     {
         if (curWave > maxWave)
         {
+            //  재 입장 방지용
+            curWave = 1;
+            
             Debug.Log("Stage Clear");
             
             blind.SetActive(true);
@@ -450,7 +499,6 @@ public class InGameManager : MonoBehaviour
         {
             if (!waveStart.GetComponent<Button>().interactable)
             {
-                Debug.LogError("ENGGGGGG");
                 yield break;
             }
             

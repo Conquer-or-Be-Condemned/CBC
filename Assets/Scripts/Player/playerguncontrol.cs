@@ -31,7 +31,10 @@ public class playerguncontrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckDirectionToMouse();
+        if (GeneralManager.Instance.inGameManager.isWave)
+        {
+            CheckDirectionToMouse();
+        }
     }
 
     private void CheckDirectionToMouse()
