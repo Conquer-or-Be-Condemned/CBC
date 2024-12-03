@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndingViewer : MonoBehaviour
 {
     [Header("Objects")]
     public GameObject endingText;
+
+    public GameObject logoText;
+
+    [Header("Button")] public Button goToMain;
 
     // [Header("Handlers")] 
     // public float showTerm = 7f;
@@ -17,6 +22,7 @@ public class EndingViewer : MonoBehaviour
     [Header("Text")] public List<string> endingList = new List<string>();
     private void Start()
     {
+        goToMain.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
         SetEndingText();
         
         StartCoroutine(ShowTextCoroutine());
@@ -40,16 +46,21 @@ public class EndingViewer : MonoBehaviour
         
         while (true)
         {
-            if (idx >= endingList.Count - 1)
-            {
-                idx++;
-                ShowText(idx);
-                yield break;
-            }
             
             ShowText(idx);
             yield return new WaitForSeconds(3.2f);
             idx++;
+            
+            if (idx >= endingList.Count)
+            {
+                HideText();
+                yield return new WaitForSeconds(2);
+                endingText.GetComponent<TMP_Text>().SetText("");
+                yield return new WaitForSeconds(0.1f);
+                StartCoroutine(ShowEndingCreditCoroutine());
+                yield break;
+            }
+            
             StartCoroutine(HideTextCoroutine(idx));
 
             yield return new WaitForSeconds(2.1f);
@@ -61,7 +72,7 @@ public class EndingViewer : MonoBehaviour
         HideText();
         
         yield return new WaitForSeconds(2);
-
+        
         StartCoroutine(ResetTextCoroutine(idx));
     }
 
@@ -83,6 +94,20 @@ public class EndingViewer : MonoBehaviour
         endingList.Add("Fatal : Null Pointer Exception");
         endingList.Add("여기까지 엔딩입니다.");
         endingList.Add("플레이 해주셔서 감사합니다.");
+    }
+
+    public IEnumerator ShowEndingCreditCoroutine()
+    {
+        logoText.GetComponent<TMP_Text>().SetText("The Developer");
+        yield return new WaitForSeconds(0.5f);
+        logoText.GetComponent<Animator>().SetBool("visible",true);
+        // yield return new WaitForSeconds(5);
+        // logoText.GetComponent<Animator>().SetBool("visible",false);
+        // yield return new WaitForSeconds(2);
+        //
+        // logoText.GetComponent<TMP_Text>().SetText("The End");
+        // yield return new WaitForSeconds(0.5f);
+        // logoText.GetComponent<Animator>().SetBool("visible",true);
     }
 
 }

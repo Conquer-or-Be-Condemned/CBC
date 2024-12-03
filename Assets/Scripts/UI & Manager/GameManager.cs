@@ -53,7 +53,10 @@ public class GameManager : Singleton<GameManager>
             {
                 if (SceneManager.GetActiveScene().name == e)
                 {
-                    InGame = true;
+                    if (e != SceneController.stageList[3])
+                    {
+                        InGame = true;
+                    }
                 }
             }
         }

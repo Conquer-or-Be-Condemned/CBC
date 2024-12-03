@@ -15,7 +15,7 @@ public class AdcBullet : MonoBehaviour
 
     void Start()
     {
-        GameObject leafPos = GameObject.Find("leaf_cur1 1");
+        GameObject leafPos = GameObject.Find("Leaf 1");
         bulletSpawnPoint = leafPos.transform;
     } // 방향을 설정하는 메서드
     public void SetDirection(Vector2 dir)
