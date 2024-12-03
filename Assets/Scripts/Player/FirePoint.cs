@@ -17,7 +17,10 @@ public class FirePoint : MonoBehaviour
     void Update()
     {
         oriPosition = playerpoint.position;
-        CheckDirectionToMouse();
+        if (GeneralManager.Instance.inGameManager.isWave)
+        {
+            CheckDirectionToMouse();
+        }
     }
     private void CheckDirectionToMouse()
     {
