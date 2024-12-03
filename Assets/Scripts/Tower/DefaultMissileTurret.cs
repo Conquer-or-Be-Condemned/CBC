@@ -109,12 +109,17 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
             {
                 break;
             }
-            if (availableTargets.Count > 0)
+
+            if ((availableTargets.Count > 0))
             {
-                Targets[i] = availableTargets[0].collider.transform;
-                availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
-                if(availableTargets.Count !=0)
-                    availableTargets.RemoveAt(0);
+                if(!availableTargets[0].collider.GetComponent<Monster>().isTargeted)
+                {
+                    Targets[i] = availableTargets[0].collider.transform;
+                    availableTargets[0].collider.GetComponent<Monster>().isTargeted = true;
+                    availableTargets.RemoveAt(0); // 할당된 타겟은 리스트에서 제거
+                    if (availableTargets.Count != 0)
+                        availableTargets.RemoveAt(0);
+                }
             }
         }
         if (Targets[1] == null) Targets[1] = Targets[0];
@@ -161,6 +166,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
             _timeTilFire += Time.deltaTime;
             if (_timeTilFire >= (1f / FireRate))// && IsTargetInSight())//적이 타워의 시야각에 있고 RPS만큼 발사
             {
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileLaunch);
                 Shoot();
                 _timeTilFire = 0f;
             }
