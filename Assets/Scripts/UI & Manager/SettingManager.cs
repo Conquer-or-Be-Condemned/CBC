@@ -30,6 +30,9 @@ public class SettingManager : MonoBehaviour
             isEnable = true;
             bgmSlider = GameObject.Find("BgmSlider").GetComponent<Slider>();
             sfxSlider = GameObject.Find("SfxSlider").GetComponent<Slider>();
+
+            bgmSlider.value = AudioManager.Instance.bgmVolume;
+            sfxSlider.value = AudioManager.Instance.sfxVolume;
             
             if (GameObject.Find("Dropdown")!=null)
             {
