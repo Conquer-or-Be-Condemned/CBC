@@ -17,6 +17,9 @@ public class StageSelectManager : MonoBehaviour
 
     public int curSelectStage;
 
+    [Header("Various Buttons")] public Button goToMainButton;
+    // public Button tipButton;
+
     public void Start()
     {
         curSelectStage = GameManager.CurStage - 1;
@@ -49,6 +52,8 @@ public class StageSelectManager : MonoBehaviour
         {
             leftButton.GetComponent<Button>().interactable = true;
         }
+        
+        goToMainButton.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
     }
 
     //  추가 검증을 위한 점검
