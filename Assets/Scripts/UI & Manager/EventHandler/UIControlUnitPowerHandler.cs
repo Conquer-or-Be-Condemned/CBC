@@ -39,8 +39,16 @@ public class UIControlUnitPowerHandler : MonoBehaviour, IPointerEnterHandler, IP
             isHover = true;
             upgradeInfoWrapper.SetActive(true);
             
-            infoTitle.SetText("Control Unit Power");
-            infoContent.SetText("You can increase the power\nof the Control Unit.");
+            if (GameManager.Language == 0)
+            {
+                infoTitle.SetText("Control Unit Power");
+                infoContent.SetText("You can increase the power\nof the Control Unit.");
+            }
+            else if (GameManager.Language == 1)
+            {
+                infoTitle.SetText("Control Unit Power");
+                infoContent.SetText("컨트롤 유닛의 최대 전력량을\n증가시킬 수 있습니다.");
+            }
             
             infoMaxLevel.SetText("");
             infoCost.SetText("");
