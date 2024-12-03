@@ -34,7 +34,9 @@ public class AudioManager : Singleton<AudioManager>
 
     public enum Sfx
     {
-        fire
+        fire, 
+        bossTroopComing, 
+        bossStepSound
     }
 
     public enum Alert
@@ -116,7 +118,7 @@ public class AudioManager : Singleton<AudioManager>
         // }
     }
 
-    public void PlaySfx(Sfx sfx)
+    public void PlaySfx(Sfx sfx, bool isPlay)
     {
         for (int i = 0; i < sfxPlayers.Length; i++)
         {

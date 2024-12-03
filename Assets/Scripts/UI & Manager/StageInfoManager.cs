@@ -185,7 +185,8 @@ public class StageInfoManager : MonoBehaviour
     public static void SetWaveInfo()
     {
         //  Stage 1 - Wave 9개 (임시 3개)
-        WaveInfo.Add(new List<int> {20,275,350,0,0,0,0,0,0});
+        // 보스 웨이브는 별도로
+        WaveInfo.Add(new List<int> {100,275,350,0,0,0,0,0,0});
         WaveInfo.Add(new List<int> {100,275,350,0,0,0,0,0,0,0});
     }
     

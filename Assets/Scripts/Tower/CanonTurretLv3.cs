@@ -55,7 +55,7 @@ public class CanonTurretLv3 : DefaultCanonTurret
             TowerBullet towerBulletScript = _bulletObj[i].GetComponent<TowerBullet>();
             towerBulletScript.SetTarget(bulletFireDirection[i]);
         }
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.fire);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.fire, true);
     }
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
     {

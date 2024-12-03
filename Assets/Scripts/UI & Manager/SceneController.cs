@@ -27,8 +27,8 @@ public class SceneController : Singleton<SceneController>
     public static string[] stageList = { "Stage_1", "Stage_2" };
     
     // 보스 테스트
-    // public static string[] stageList = { "Stage_Boss" };
-    
+    // public static string[] stageList = { "Stage_Boss", "Stage_2" };
+
     //  게임 시작 여부
     private bool isStart;
 

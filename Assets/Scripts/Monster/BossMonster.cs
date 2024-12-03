@@ -112,7 +112,7 @@ public class BossMonster : Monster
     {
         int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
         // 디버깅용
-        // int randomAction = 1;
+        // int randomAction = 2;
 
         switch (randomAction)
         {
@@ -148,14 +148,12 @@ public class BossMonster : Monster
         UpdateAnimationState();
     }
 
-    private void StartTread(Vector2 treadDirection)
-    {
+    private void StartTread(Vector2 treadDirection) {
         isTreading = true;
         SetMoving(false);
         actionTimer = attackCooldown; // 밟기도 쿨다운 공유
 
         UpdateAnimationState();
-
         // 플레이어 또는 제어 장치에게 데미지
         DealDamageToTarget((int)treadDamage);
         
@@ -164,11 +162,11 @@ public class BossMonster : Monster
 
     private void FinishTread()
     {
-        
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.bossStepSound, true);
+
         // 카메라 흔들림 효과 트리거
         CameraController cameraController = Camera.main.GetComponent<CameraController>();
-        if (cameraController != null)
-        {
+        if (cameraController != null) {
             StartCoroutine(cameraController.Shake(0.5f, 0.3f)); // 0.5초 동안, 0.3 강도로 흔들림
         }
         
@@ -180,9 +178,10 @@ public class BossMonster : Monster
     {
         isSpawning = true;
         SetMoving(false);
+        actionTimer = attackCooldown; // 밟기도 쿨다운 공유
 
         UpdateAnimationState();
-
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.bossTroopComing, true);
 
         Invoke(nameof(FinishSpawn), 1f); // 스폰 애니메이션 길이에 맞춰서 설정
     }
@@ -200,6 +199,7 @@ public class BossMonster : Monster
 
     private void SpawnMonster()
     {
+
         // 이미 스폰 중인 상태라면 리턴
         if (!isSpawning || monsterSpawnData.monsterPrefab == null)
         {
