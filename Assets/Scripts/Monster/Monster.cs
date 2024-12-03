@@ -12,7 +12,7 @@ public abstract class Monster : MonoBehaviour
     public float attackRange;
     public float attackCooldown; // Added attackCooldown here
     public bool isDead;
-
+    public bool isTargeted;
     [Header("Detection Settings")] [Tooltip("플레이어를 감지할 범위")]
     public float detectionRange; // 기본값 설정
 
@@ -38,7 +38,7 @@ public abstract class Monster : MonoBehaviour
         polygonCollider = GetComponent<PolygonCollider2D>();
 
         currentHealth = maxHealth;
-
+        isTargeted = false;
         // 체력바 프리팹 인스턴스화
         if (healthBarPrefab != null)
         {
