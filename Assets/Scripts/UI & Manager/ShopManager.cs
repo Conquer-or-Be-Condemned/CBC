@@ -40,6 +40,8 @@ public class ShopManager : MonoBehaviour
             int finalNum = i;
             shopButtons[i].onClick.AddListener(()=>CheckingBuy(finalNum));
         }
+        
+        ValidateUpgradeButtons();
     }
 
     private void ValidateText()
@@ -102,6 +104,8 @@ public class ShopManager : MonoBehaviour
         }
         
         checkBox.SetActive(false);
+        
+        ValidateUpgradeButtons();
     }
 
     public void CheckingBuy(int mode)

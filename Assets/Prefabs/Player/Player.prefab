@@ -475,7 +475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &132358397131132597
 Transform:
   m_ObjectHideFlags: 0
@@ -901,8 +901,6 @@ MonoBehaviour:
   pushAmount: 0.002
   bulletPrefab: {fileID: 5527518119625726090, guid: 71d691117f0b648c0ba428ef30cd6bba, type: 3}
   bulletSpawnPoint: {fileID: 1429413951217043725}
-  bulletsPerShot: 3
-  spreadAngle: 15
   fireRate: 8
   map: {fileID: 0}
   attackDelay: 0.2

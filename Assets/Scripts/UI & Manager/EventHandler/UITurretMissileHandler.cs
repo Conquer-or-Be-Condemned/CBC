@@ -30,6 +30,9 @@ public class UITurretMissileHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
         if (!isHover)
         {
             isHover = true;
@@ -45,7 +48,7 @@ public class UITurretMissileHandler : MonoBehaviour, IPointerEnterHandler, IPoin
             //  MAX
             if (DataManager.TurretMissileLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.TurretMissile + ">");
             }
             else
             {
