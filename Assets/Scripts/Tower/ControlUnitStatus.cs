@@ -53,7 +53,6 @@ public class ControlUnitStatus : MonoBehaviour
     {
         //  반드시 이 Method를 거쳐야 합니다. (천천히 파워가 올라감)
         RecoverPower(power);
-        onCUPowerChange.Invoke(currentPower, maxPower);
     }
 
     public int GetCurrentPower()
@@ -125,8 +124,8 @@ public class ControlUnitStatus : MonoBehaviour
     }
 
     //  파워 회복량, 속도
-    [SerializeField] private int powerOffset = 5;
-    [SerializeField] private float recoverSpeed = 0.5f;
+    [SerializeField] private int powerOffset = 7;
+    [SerializeField] private float recoverSpeed = 0.1f;
 
     private void RecoverPower(int power)
     {
@@ -142,10 +141,10 @@ public class ControlUnitStatus : MonoBehaviour
             if (tmp <= 0) yield break;
             
             tmp--;
-            currentPower += powerOffset;
+            currentPower++;
             
-            onCUPowerChange.Invoke(currentPower,maxPower);
             yield return new WaitForSeconds(recoverSpeed);
+            onCUPowerChange.Invoke(currentPower,maxPower);
         }
     }
 }
