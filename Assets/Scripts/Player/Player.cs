@@ -152,6 +152,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.PlayerBullet);
                 Vector2 baseDirection = (_mouse - (Vector2)bulletSpawnPoint.position).normalized;
                 float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
 
