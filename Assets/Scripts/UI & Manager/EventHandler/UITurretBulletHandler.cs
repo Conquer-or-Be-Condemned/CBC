@@ -30,6 +30,9 @@ public class UITurretBulletHandler : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
         if (!isHover)
         {
             isHover = true;
@@ -45,7 +48,7 @@ public class UITurretBulletHandler : MonoBehaviour, IPointerEnterHandler, IPoint
             //  MAX
             if (DataManager.TurretBulletLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.TurretBullet + ">");
             }
             else
             {

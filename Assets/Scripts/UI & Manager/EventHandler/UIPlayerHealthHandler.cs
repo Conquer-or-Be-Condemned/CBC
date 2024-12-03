@@ -31,6 +31,9 @@ public class UIPlayerHealthHandler : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
         if (!isHover)
         {
             isHover = true;
@@ -46,7 +49,7 @@ public class UIPlayerHealthHandler : MonoBehaviour, IPointerEnterHandler, IPoint
             //  MAX
             if (DataManager.PlayerHpLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.PlayerHp + ">");
             }
             else
             {
