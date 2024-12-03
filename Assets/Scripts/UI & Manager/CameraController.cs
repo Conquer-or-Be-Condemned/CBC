@@ -43,10 +43,21 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 흔들림 중이 아니면 카메라 이동
-        if (!isShaking)
+        
+        if (GeneralManager.Instance.inGameManager.isWave)
         {
-            CameraMove();
+            // 흔들림 중이 아니면 카메라 이동
+            if (!isShaking)
+            {
+                CameraMove();
+            }
+        }
+        else
+        {
+            if (!GeneralManager.Instance.inGameManager.isTalking)
+            {
+                CameraMoveAlone();
+            }
         }
     }
 
@@ -57,6 +68,22 @@ public class CameraController : MonoBehaviour
         Vector3 desiredPosition = new Vector3(
             Mathf.Clamp(target.transform.position.x, tilemapBounds.min.x + _cameraHalfWidth, tilemapBounds.max.x - _cameraHalfWidth),
             Mathf.Clamp(target.transform.position.y, tilemapBounds.min.y + _cameraHalfHeight, tilemapBounds.max.y - _cameraHalfHeight),
+            transform.position.z
+        );
+
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+    }
+
+    private void CameraMoveAlone()
+    {
+        Bounds tilemapBounds = map.GetComponent<Renderer>().bounds;
+        
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 desiredPosition = new Vector3(
+            Mathf.Clamp(transform.position.x + horizontal * 2.5f, tilemapBounds.min.x + _cameraHalfWidth, tilemapBounds.max.x - _cameraHalfWidth),
+            Mathf.Clamp(transform.position.y + vertical * 2.5f, tilemapBounds.min.y + _cameraHalfHeight, tilemapBounds.max.y - _cameraHalfHeight),
             transform.position.z
         );
 

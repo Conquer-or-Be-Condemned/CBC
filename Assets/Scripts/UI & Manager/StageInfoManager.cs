@@ -178,14 +178,14 @@ public class StageInfoManager : MonoBehaviour
     //  웨이브 저장을 위한 Method
     public static void SetStageInfo()
     {
-        StageInfo.Add(1);
+        StageInfo.Add(2);
         StageInfo.Add(1);
     }
 
     public static void SetWaveInfo()
     {
         //  Stage 1 - Wave 9개 (임시 3개)
-        WaveInfo.Add(new List<int> {20,275,350,0,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {20,20,350,0,0,0,0,0,0});
         WaveInfo.Add(new List<int> {100,275,350,0,0,0,0,0,0,0});
     }
     
