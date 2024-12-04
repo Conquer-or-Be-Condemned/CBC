@@ -63,10 +63,10 @@ public class TowerMissile : MonoBehaviour
     {
         if (_target == null)
         {
-            if (!string.IsNullOrEmpty(_missileSoundId))
-            {
-                AudioManager.Instance.StopSfx(_missileDetectId);
-            }
+            // if (!string.IsNullOrEmpty(_missileSoundId))
+            // {
+            //     AudioManager.Instance.StopSfx(_missileDetectId);
+            // }
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 300);
             foreach (var monster in hits)
             {
@@ -75,7 +75,7 @@ public class TowerMissile : MonoBehaviour
                     if(_target == null)
                     {
                         _target = monster.transform;
-                        _missileDetectId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileTargetDetected);
+                        // _missileDetectId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileTargetDetected);
                     }
                     else return;
                 }
@@ -139,8 +139,12 @@ public class TowerMissile : MonoBehaviour
     }
     private IEnumerator DestroyObject()
     {
+        _sr.enabled = false;
         yield return new WaitForSeconds(0.1f);
-        _target.GetComponent<Monster>().isTargeted = false;
+        if(_target != null)
+        {
+            _target.GetComponent<Monster>().isTargeted = false;
+        }
         // MissileFlying SFX 중단
         if (!string.IsNullOrEmpty(_missileSoundId))
         {
@@ -150,7 +154,6 @@ public class TowerMissile : MonoBehaviour
         {
             AudioManager.Instance.StopSfx(_missileDetectId); 
         }
-        _sr.enabled = false;
         Collider2D[] monsters = Physics2D.OverlapCircleAll(rb.position, explosionRange);
         foreach (var monster in monsters)
         {
