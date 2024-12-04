@@ -38,6 +38,7 @@ public class CanonTurretLv1 : DefaultCanonTurret
     {
         GunRenderer = gunRenderer;
         Animator = animator;
+        //fjkdsj
         TurretRotationPoint = turretRotationPoint;
         Range = range;         // 타워 사거리
         RotationSpeed = rotationSpeed;// 타워 회전 속도
