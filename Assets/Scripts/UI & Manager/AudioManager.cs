@@ -32,8 +32,8 @@ public class AudioManager : Singleton<AudioManager>
     public enum Sfx
     {
         Fire,
-        BossStepSound,
         BossTroopComing,
+        BossStepSound,
         MissileFinalDetect,
         MissileExplosion,
         MissileTargetDetected,
@@ -185,5 +185,24 @@ public class AudioManager : Singleton<AudioManager>
     {
         AudioHighPassFilter bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
         bgmEffect.enabled = isPlay;
+    }
+
+    public void ChangeBgmVolume(float vol)
+    {
+        bgmVolume = vol;
+        for (int i = 0; i < bgmPlayers.Length; i++)
+        {
+            bgmPlayers[i].volume = bgmVolume;
+        }
+    }
+
+    public void ChangeSfxVolume(float vol)
+    {
+        sfxVolume = vol;
+
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            sfxPlayers[i].volume = sfxVolume;
+        }
     }
 }
