@@ -38,8 +38,17 @@ public class UITurretMissileHandler : MonoBehaviour, IPointerEnterHandler, IPoin
             isHover = true;
             upgradeInfoWrapper.SetActive(true);
             
-            infoTitle.SetText("Turret Missile");
-            infoContent.SetText("You can increase the damage\nto the missile turret.");
+            if (GameManager.Language == 0)
+            {
+                infoTitle.SetText("Turret Missile");
+                infoContent.SetText("You can increase the damage\nto the missile turret.");
+            }
+            else if (GameManager.Language == 1)
+            {
+                infoTitle.SetText("Turret Missile");
+                infoContent.SetText("미사일 터렛의 데미지를\n증가시킬 수 있습니다.");
+            }
+            
             
             infoMaxLevel.SetText("");
             infoCost.SetText("");

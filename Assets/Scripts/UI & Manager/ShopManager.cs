@@ -17,6 +17,7 @@ public class ShopManager : MonoBehaviour
     public GameObject blind;
     public TMP_Text coinText;
     public GameObject checkBox;
+    public TMP_Text checkBoxText;
     public Button checkBuyButton;
     public Button checkCancelButton;
 
@@ -25,11 +26,20 @@ public class ShopManager : MonoBehaviour
     [Header("Alert")] public GameObject alertBox;
     public TMP_Text alertText;
     private int curAlert;
-    private string[] alerts =
+    private string[][] alerts =
     {
-        "Upgrade Completed.",
-        "Not enough bits."
+        new string[]
+        {
+            "Upgrade Completed.",
+            "Not enough bits."
+        },
+        new string[]
+        {
+            "업그레이드 완료",
+            "Bit가 부족합니다."
+        }
     };
+
 
     private void Start()
     {
@@ -89,7 +99,7 @@ public class ShopManager : MonoBehaviour
                 Debug.Log("돈 없거나 최대 레벨"); //    최대 레벨은 버튼을 막기로 결정
             }
             
-            alertText.SetText(alerts[curAlert]);
+            alertText.SetText(alerts[GameManager.Language][curAlert]);
             ShowAlert();
         }
         else
@@ -112,6 +122,15 @@ public class ShopManager : MonoBehaviour
     {
         curMode = mode;
         checkBox.SetActive(true);
+
+        if (GameManager.Language == 0)
+        {
+            checkBoxText.SetText("Are you sure you want to buy it?");
+        }
+        else 
+        {
+            checkBoxText.SetText("구매하시겠습니까?");
+        }
         
         //  button click 방지
         for (int i = 0; i < shopButtons.Length; i++)

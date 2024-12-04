@@ -17,6 +17,7 @@ public class GeneralManager : Singleton<GeneralManager>
     public SceneController sceneController;
     public CursorManager cursorManager;
     public AudioManager audioManager;
+    public SettingManager settingManager;
 
     //  InGame Managers (Local)
     [Header("In Game Manager")]
@@ -51,6 +52,7 @@ public class GeneralManager : Singleton<GeneralManager>
         sceneController = SceneController.Instance;
         cursorManager = GetComponent<CursorManager>();
         audioManager = AudioManager.Instance;
+        settingManager = GetComponent<SettingManager>();
 
         if (gameManager == null) Debug.LogError("GameManager 스크립트 오류");
         if (sceneController == null) Debug.LogError("SceneController 스크립트 오류");

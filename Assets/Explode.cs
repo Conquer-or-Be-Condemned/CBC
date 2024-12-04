@@ -9,6 +9,8 @@ public class Explode : MonoBehaviour
     void Start()
     {
         // Debug.Log("ExplodeisCalled");
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileExplosion);
+
         _animator = GetComponent<Animator>();
         StartCoroutine(DestroyExplosion());
     }

@@ -81,6 +81,7 @@ public class InGameManager : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
 
         //  Pause, Settings
         pauseVisible = false;
@@ -188,7 +189,11 @@ public class InGameManager : MonoBehaviour
     public void ShowSettings()
     {
         settingVisible = true;
+        
         settings.SetActive(settingVisible);
+        
+        GeneralManager.Instance.settingManager.AllocateSetting();
+        
     }
 
     public void ShowOperationKey()

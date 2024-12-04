@@ -39,8 +39,16 @@ public class UIControlUnitHealthHandler : MonoBehaviour, IPointerEnterHandler, I
             isHover = true;
             upgradeInfoWrapper.SetActive(true);
 
-            infoTitle.SetText("Control Unit Health");
-            infoContent.SetText("You can increase the maximum\nHp of the Control Unit.");
+            if (GameManager.Language == 0)
+            {
+                infoTitle.SetText("Control Unit Health");
+                infoContent.SetText("You can increase the maximum\nHp of the Control Unit.");
+            }
+            else if (GameManager.Language == 1)
+            {
+                infoTitle.SetText("Control Unit Health");
+                infoContent.SetText("컨트롤 유닛의 최대 체력을\n증가시킬 수 있습니다.");
+            }
 
             infoMaxLevel.SetText("");
             infoCost.SetText("");

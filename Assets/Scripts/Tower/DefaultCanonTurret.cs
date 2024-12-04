@@ -118,6 +118,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
             _timeTilFire += Time.deltaTime;
             if (_timeTilFire >= (1f / FireRate) && IsTargetInSight())//적이 타워의 시야각에 있고 RPS만큼 발사
             {
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire);
                 Shoot();
                 _timeTilFire = 0f;
 
