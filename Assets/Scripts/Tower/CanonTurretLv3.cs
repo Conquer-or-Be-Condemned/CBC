@@ -18,7 +18,8 @@ public class CanonTurretLv3 : DefaultCanonTurret
     [SerializeField] private Animator animator;             //타워 부분 Animator
     [SerializeField] private GameObject bulletPrefab;           //총알 오브젝트 생성 위한 변수
     [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
-    
+    [SerializeField] private SpriteRenderer rangeRenderer;
+
     [Header("Attributes")] 
     [SerializeField] private float range;                   // 타워 사거리
     [SerializeField] private float rotationSpeed;           // 타워 회전 속도
@@ -27,6 +28,12 @@ public class CanonTurretLv3 : DefaultCanonTurret
     [SerializeField] private float overHeatTime;            //~초 격발시 과열
     [SerializeField] private float coolTime;                //~초 지나면 냉각
     private GameObject []_bulletObj;
+    [SerializeField] private bool showRange;
+
+    // private void Update()
+    // {
+    //     rangeRenderer.enabled = showRange;
+    // }
     private void Start()
     {
         _bulletObj = new GameObject[bulletSpawnPoint.Length];
