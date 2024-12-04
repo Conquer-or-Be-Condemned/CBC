@@ -19,7 +19,9 @@ public class MissileTurretLV2 : DefaultMissileTurret
     [SerializeField] protected Transform []missileTargetPoint;    //미사일 스폰 지점
     
     [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
-    
+    [SerializeField] private SpriteRenderer rangeRenderer;
+    [SerializeField] private Transform rangeTransform;
+
     //[SerializeField] private GameObject towerPrefab;
     
     [Header("Attributes")]
@@ -41,6 +43,12 @@ public class MissileTurretLV2 : DefaultMissileTurret
         OverHeatMissileCount = overHeatMissileCount;
         RotationSpeed = rotationSpeed;
         EnemyMask = enemyMask;
+        RangeRenderer = rangeRenderer;
+        // RangeTransform = rangeTransform;
+        rangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
+
+
+
         Level = 2;
         
         gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
