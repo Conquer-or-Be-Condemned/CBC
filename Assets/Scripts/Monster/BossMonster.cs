@@ -110,9 +110,9 @@ public class BossMonster : Monster
 
     private void StartRandomAction(Vector2 actionDirection)
     {
-        int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
+        // int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
         // 디버깅용
-        // int randomAction = 2;
+        int randomAction = 0;
 
         switch (randomAction)
         {
@@ -135,12 +135,22 @@ public class BossMonster : Monster
         actionTimer = attackCooldown;
 
         UpdateAnimationState();
+    
+        // 공격 사운드를 1초 뒤에 재생하도록 설정
+        Invoke(nameof(PlayBossPunchSound), 0.5f);
 
         // 플레이어 또는 제어 장치에게 데미지
         DealDamageToTarget((int)attackDamage);
 
+        // 공격 종료를 애니메이션 길이에 맞게 호출
         Invoke(nameof(FinishAttack), 1f); // 공격 애니메이션 길이에 맞춰서 설정
     }
+
+    private void PlayBossPunchSound()
+    {
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.BossPunch);
+    }
+
 
     private void FinishAttack()
     {
