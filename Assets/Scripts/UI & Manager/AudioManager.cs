@@ -29,6 +29,7 @@ public class AudioManager : Singleton<AudioManager>
         Stage1,
         Stage2,
         Stage3,
+        OminousSound,
         Ending
     }
 
@@ -37,6 +38,8 @@ public class AudioManager : Singleton<AudioManager>
         Fire,
         BossTroopComing,
         BossStepSound,
+        BossPunch,
+        BossWalkingAppears,
         MissileFinalDetect,
         MissileExplosion,
         MissileTargetDetected,
