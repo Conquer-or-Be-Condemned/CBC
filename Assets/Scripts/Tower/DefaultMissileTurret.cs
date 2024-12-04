@@ -12,13 +12,15 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
     [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
+    public bool ShowRange;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;//타워 회전 각도
     protected LayerMask EnemyMask;
     protected Transform[] Targets;
     protected Animator Animator;            //타워 부분 Animator
     protected SpriteRenderer GunRenderer;   //과열시 색 변화
-    
+    protected SpriteRenderer RangeRenderer;
+    protected Transform RangeTransform;
     protected float Range;                  //타워 사거리
     protected float FireRate;               //발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
     protected float RotationSpeed;
@@ -35,7 +37,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     private float _timeTilFire;             //다음 발사까지의 시간
     private float _angleThreshold = 360f;   // 타워와 적의 각도 차이 허용 범위 (조정 가능)
     private float _totCoolTime;             //냉각시 누적 냉각시간
-    
+
     //Override Methods---------------------------
     protected abstract void Shoot();
     //--------------------------------------------
@@ -44,6 +46,8 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
         _originPower = GameObject.Find("ControlUnit");
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
         _name = "Missile Turret";
+        ShowRange = false;
+        // RangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
     }
     private void Update()
     {
@@ -52,6 +56,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     }
     private void CheckToggle()//Checks toggle of isActivated
     {
+        RangeRenderer.enabled = ShowRange;
         if (isActivated != previousIsActivated)//toggle check
         {
             if (isActivated)
