@@ -44,6 +44,9 @@ public class GameManager : Singleton<GameManager>
         InGameInit = false;
         
         CurStage = DataManager.CurStage;
+        
+        //  Audio Start
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene, true);
     }
 
     private void FixedUpdate()

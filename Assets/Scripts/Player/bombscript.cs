@@ -10,7 +10,7 @@ public class bombscript : MonoBehaviour
    // [SerializeField] private GameObject effect;
     [SerializeField] public float bombDamage = 10f;
   //  [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float explosionRange = 20f;
+    [SerializeField] private float explosionRange = 10f;
     [SerializeField] private Animator animator;  // Animator 컴포넌트 참조
     public bool isbam=false;
     
@@ -29,6 +29,15 @@ public class bombscript : MonoBehaviour
         // isbomb 파라미터를 true로 설정
         isbam = true;
         yield return new WaitForSeconds(0.6f); 
+        
+        Collider2D[] monsters = Physics2D.OverlapCircleAll(GetComponent<Rigidbody2D>().position, explosionRange);
+        foreach (var monster in monsters)
+        {
+            if (monster.CompareTag("Enemy"))
+            {
+                monster.GetComponent<Monster>().TakeDamage(bombDamage);
+            }
+        }
         Destroy(gameObject);
         //bomb.SetActive(false);  // bomb 오브젝트 숨김
         //effect.SetActive(true);  // effect 활성화
