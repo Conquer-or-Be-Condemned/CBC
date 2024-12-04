@@ -30,7 +30,9 @@ public class AudioManager : Singleton<AudioManager>
         Stage2,
         Stage3,
         OminousSound,
-        Ending
+        Ending,
+        GameOver,
+        Opening
     }
 
     public enum Sfx

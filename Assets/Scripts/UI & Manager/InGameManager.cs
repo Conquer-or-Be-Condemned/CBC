@@ -425,6 +425,8 @@ public class InGameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.GameOver,true);
+        
         blind.SetActive(true);
         stageClearWrapper.SetActive(true);
         

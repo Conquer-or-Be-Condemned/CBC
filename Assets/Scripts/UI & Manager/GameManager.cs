@@ -34,6 +34,8 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Language")] public static int Language = 0;
 
+    [Header("Notice")] public static bool ReadNotice = false;    
+
     private void Start()
     {
         //  다음 씬에서도 동일하게 유지하기 위함
