@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 using Random = Unity.Mathematics.Random;
 
 public class Player : MonoBehaviour
@@ -11,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private float fireRate;
+    [SerializeField] private GameObject bombPrefab; // 폭탄 프리팹 추가
     public Tilemap map;
     public float attackDelay;
     public bool attackAble;
@@ -25,11 +28,23 @@ public class Player : MonoBehaviour
     private int _bulletsPerShot; // 한 번에 발사할 총알 수
     private float _spreadAngle; // 총알 퍼짐 각도
 
+    [Header("Bomb")] 
+    public int maxBombCount;
+    public int curBombCount;
+    public bool isCharging;
+    public int bombElapsed;
+    public int bombElapsedMax = 400;
+    public UnityEvent onBombRecharge;
+
     private void Awake()
     {
         _bulletsPerShot = DataManager.PlayerBullet;
         _spreadAngle = _bulletsPerShot * 5;
 
+        //  최대 소지 개수
+        maxBombCount = 3;
+        curBombCount = maxBombCount;
+        isCharging = false;
     }
 
     private void Start()
@@ -50,6 +65,8 @@ public class Player : MonoBehaviour
         }
 
         attackAble = true;
+        
+        onBombRecharge.AddListener(()=>GeneralManager.Instance.inGameManager.ChargeBombImage(bombElapsed, bombElapsedMax));
     }
 
     private void FixedUpdate()
@@ -59,6 +76,14 @@ public class Player : MonoBehaviour
             if (GeneralManager.Instance.inGameManager.isWave)
             {
                 PlayerMove();
+            }
+        }
+
+        if (!isCharging)
+        {
+            if (curBombCount < maxBombCount)
+            {
+                StartCoroutine(RechargeBombCoroutine());
             }
         }
     }
@@ -174,12 +199,53 @@ public class Player : MonoBehaviour
                 }
                 _timeTilFire = 0f;
             }
+            
+            //  똑같이 쿨타임 존재
+            if (Input.GetKeyDown(KeyCode.F)) PlaceBomb();
         }
     }
     // StartCoroutine(PlayerAttackCoroutine());
         
     
+    private void PlaceBomb()//폭탄 설치
+    {
+        // 플레이어의 현재 위치에 폭탄을 생성합니다.
+        if (bombPrefab != null)
+        {
+            if (curBombCount > 0)
+            {
+                Instantiate(bombPrefab, transform.position, Quaternion.identity);
+                curBombCount--;
+                
+                GeneralManager.Instance.inGameManager.ValidateBombCount(curBombCount);
+            }
+        }
+    }
 
+    private IEnumerator RechargeBombCoroutine()
+    {
+        isCharging = true;
+        bombElapsed = 0;
+        
+        while (true)
+        {
+            if (bombElapsed > bombElapsedMax)
+            {
+                isCharging = false;
+                curBombCount++;
+                
+                GeneralManager.Instance.inGameManager.ValidateBombCount(curBombCount);
+                
+                yield break;
+            }
+            
+            bombElapsed++;
+            onBombRecharge.Invoke();
+            
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+    
     private IEnumerator PlayerAttackCoroutine()
     {
         attackAble = false;

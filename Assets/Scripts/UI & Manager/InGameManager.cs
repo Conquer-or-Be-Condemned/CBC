@@ -79,10 +79,15 @@ public class InGameManager : MonoBehaviour
     public GameObject player;
     public GameObject playerSpawnPoint;
 
+    [Header("Player Bomb")] 
+    public TMP_Text bombCount;
+    public GameObject bombImage;
+
     private void Start()
     {
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
-
+        
+        
+        
         //  Pause, Settings
         pauseVisible = false;
         settingVisible = false;
@@ -96,8 +101,6 @@ public class InGameManager : MonoBehaviour
         isWave = false;
         isClear = false;
 
-        talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
-
         talkEnd = false;
         isTalking = false;
         
@@ -108,8 +111,18 @@ public class InGameManager : MonoBehaviour
         {
             //  진전도 초기화
             talkIdx = 1;
-
-            StartCoroutine(TalkProcess());
+            
+            if (SceneController.Instance.curSelectStage >= DataManager.CurStage)
+            {
+                Debug.Log("Talk Process!!");
+                talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
+                StartCoroutine(TalkProcess());
+            }
+            else
+            {
+                ShowButton();
+            }
+            
         }
         else
         {
@@ -519,5 +532,18 @@ public class InGameManager : MonoBehaviour
     {
         waveStart.GetComponent<Button>().interactable = false;
         startWrapper.GetComponent<Animator>().SetBool("visible", false);
+    }
+    
+    //  Player Bomb
+    public void ValidateBombCount(int count)
+    {
+        bombCount.SetText(count.ToString());
+    }
+
+    public void ChargeBombImage(int curTime, int maxTime)
+    {
+        float ratio = (float)curTime / maxTime;
+        
+        bombImage.GetComponent<Image>().fillAmount = ratio;
     }
 }
