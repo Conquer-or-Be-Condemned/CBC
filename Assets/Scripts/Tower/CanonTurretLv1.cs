@@ -18,7 +18,8 @@ public class CanonTurretLv1 : DefaultCanonTurret
     [SerializeField] private GameObject bulletPrefab;       //총알 오브젝트 생성 위한 변수
     [SerializeField] private Transform bulletSpawnPoint;    //총알 스폰 지점
     [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
-    [SerializeField] private Transform bulletFirePoint;
+    [SerializeField] private Transform[] bulletFirePoint;
+    [SerializeField] private SpriteRenderer rangeRenderer;
     // [SerializeField] private LayerMask enemyMask;
     [Header("Attributes")] 
     [SerializeField] private float range;        // 타워 사거리
@@ -27,7 +28,11 @@ public class CanonTurretLv1 : DefaultCanonTurret
     [SerializeField] private int power;            //타워 사용 전력량
     [SerializeField] private float overHeatTime;    //~초 격발시 과열
     [SerializeField] private float coolTime;        //~초 지나면 냉각
-    
+    [SerializeField] private bool showRange;
+    // private void Update()
+    // {
+    //     rangeRenderer.enabled = showRange;
+    // }
     private void Start()
     {
         GunRenderer = gunRenderer;
@@ -44,7 +49,7 @@ public class CanonTurretLv1 : DefaultCanonTurret
         RPM = (int)(60 / (1 / fireRate));
         Damage = 10;
         EnemyMask = enemyMask;
-
+        RangeRenderer = rangeRenderer;
     }
     override 
     protected void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
@@ -52,7 +57,8 @@ public class CanonTurretLv1 : DefaultCanonTurret
         animator.enabled = true; // 발사할 때 애니메이션 시작
         GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         TowerBullet towerBulletScript = bulletObj.GetComponent<TowerBullet>();
-        towerBulletScript.SetTarget(bulletFirePoint);   
+        int randomValue = Random.Range(0, 5); // 0 이상 5 미만
+        towerBulletScript.SetTarget(bulletFirePoint[randomValue]);   
         // AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire,true);
     }
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)

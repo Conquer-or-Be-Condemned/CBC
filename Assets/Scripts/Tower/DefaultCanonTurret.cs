@@ -11,6 +11,8 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
     [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
+
+    protected bool ShowRange;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;// 타워 회전 각도
     protected Transform Target;             //target of bullets
@@ -18,7 +20,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     protected SpriteRenderer GunRenderer;   //과열시 색 변화
     protected String Name;                  //타워 이름
     protected LayerMask EnemyMask;
-    
+    protected SpriteRenderer RangeRenderer;
     protected float Range;                  //타워 사거리
     protected float RotationSpeed;          //타워 회전 속도
     protected float FireRate;               //발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
@@ -44,8 +46,9 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
         Name = "Canon Turret";
     }
-    private void Update()
+    protected void Update()
     {
+        // RangeRenderer.enabled = ShowRange;
         CheckToggle();//사용자에 의한 타워 가동 토글 확인
         TowerIsActivatedNow();//사용자에 의해 타워가 가동 됐다면 역할 수행
         
