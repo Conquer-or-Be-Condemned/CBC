@@ -16,7 +16,9 @@ public class MissileTurretLV1 : DefaultMissileTurret
     // [SerializeField] private Transform missileSpawnPoint2;  //미사일 스폰 지점
     [SerializeField] private Transform []missileSpawnPoint;
     [SerializeField] private SpriteRenderer gunRenderer;    //과열시 색 변화
-    
+    [SerializeField] private SpriteRenderer rangeRenderer;
+    [SerializeField] private Transform rangeTransform;
+
     [Header("Attributes")]
     [SerializeField] private float range;           // 타워 사거리
     [SerializeField] private float rotationSpeed;   // 타워 회전 속도
@@ -36,7 +38,10 @@ public class MissileTurretLV1 : DefaultMissileTurret
         OverHeatMissileCount = overHeatMissileCount;
         RotationSpeed = rotationSpeed;
         EnemyMask = enemyMask;
-        
+        RangeRenderer = rangeRenderer;
+        // RangeTransform = rangeTransform;
+        rangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
+
         Targets = new Transform[2];
         Level = 1;
         

@@ -11,7 +11,6 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
     [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
-
     protected bool ShowRange;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;// 타워 회전 각도
@@ -21,6 +20,8 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     protected String Name;                  //타워 이름
     protected LayerMask EnemyMask;
     protected SpriteRenderer RangeRenderer;
+    protected Transform RangeTransform;
+
     protected float Range;                  //타워 사거리
     protected float RotationSpeed;          //타워 회전 속도
     protected float FireRate;               //발사 속도, 충격발 애니메이션이랑 연동시키기? ㄱㄴ?
@@ -45,16 +46,19 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
         _originPower = GameObject.Find("ControlUnit");
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
         Name = "Canon Turret";
+        ShowRange = false;
+        // RangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
     }
     protected void Update()
     {
-        // RangeRenderer.enabled = ShowRange;
+        RangeRenderer.enabled = ShowRange;
         CheckToggle();//사용자에 의한 타워 가동 토글 확인
         TowerIsActivatedNow();//사용자에 의해 타워가 가동 됐다면 역할 수행
         
     }
     private void CheckToggle()//Checks toggle of isActivated
     {
+        // RangeRenderer.enabled = ShowRange;
         if (isActivated != previousIsActivated)//toggle check
         {
             if (isActivated)
@@ -130,8 +134,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     }
     private void OverHeatAnimationController()//설정시간 도달 시 과열(TowerIsActivatedNow에서 수행)
     {
-        GunRenderer.color = new Color(1f,(255f-255f* (_fireTime / OverHeatTime))/255f,(255f-255f*
-            (_fireTime / OverHeatTime))/255f);
+        GunRenderer.color = new Color(1f, 1-(_fireTime / OverHeatTime),1-(_fireTime / OverHeatTime));
 
         if (IsTargetInSight())//적이 사격 시야에 있음
         {
@@ -198,7 +201,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
         // _totCoolTime = _fireTime;
         while (_fireTime >= 0f)
         {
-            GunRenderer.color = new Color(1f,((CoolTime - _fireTime) / CoolTime),((CoolTime - _fireTime) / CoolTime));
+            GunRenderer.color = new Color(1f,1-(_fireTime / OverHeatTime),1-(_fireTime / OverHeatTime));
             _fireTime -= Time.deltaTime;
             yield return null;
         }
@@ -206,11 +209,11 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     }
     private IEnumerator OverHeat()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
     {
-        _totCoolTime = 0f;
-        while (_totCoolTime <= CoolTime)
+        _totCoolTime = CoolTime;
+        while (_totCoolTime >= 0f)
         {
-            GunRenderer.color = new Color(1f,(_totCoolTime / CoolTime),(_totCoolTime / CoolTime));
-            _totCoolTime += Time.deltaTime;
+            GunRenderer.color = new Color(1f,1-(_totCoolTime / CoolTime),1-(_totCoolTime / CoolTime));
+            _totCoolTime -= Time.deltaTime;
             yield return null;
         }
         Animator.SetBool("isShoot", false);
