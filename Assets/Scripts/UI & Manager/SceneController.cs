@@ -140,7 +140,18 @@ public class SceneController : Singleton<SceneController>
             GameManager.InGameInit = true;
         
             //  배경 음악
-            AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
+            switch (curSelectStage)
+            {
+                case 0 :
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
+                    break;
+                case 1 :
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage2,true);
+                    break;
+                case 2:
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage3,true);
+                    break;
+            }
         
             //  플레이어 할당
             GameManager.Instance.player = GameObject.Find("Player");
@@ -158,7 +169,9 @@ public class SceneController : Singleton<SceneController>
         {
             Debug.Log("MAIN!!");
             Time.timeScale = 1f;
+            
             AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,false);
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene, true);
             
             GameManager.InGame = false;
             GameManager.InGameInit = false;

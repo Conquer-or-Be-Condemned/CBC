@@ -28,6 +28,8 @@ public class EndingViewer : MonoBehaviour
         goToMain.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
         SetEndingText();
         
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.Ending,true);
+        
         StartCoroutine(ShowTextCoroutine());
     }
 
