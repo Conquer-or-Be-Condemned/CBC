@@ -10,14 +10,21 @@ public class MonsterSpawnData
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [Header("Monster Prefabs")]
-    [SerializeField] private MonsterSpawnData[] monsterSpawnDataArray; // 여러 몬스터 데이터를 관리할 배열
+    [Header("Monster Prefabs")] [SerializeField]
+    private MonsterSpawnData[] monsterSpawnDataArray; // 여러 몬스터 데이터를 관리할 배열
 
-    [Header("Spawn Settings")]
-    [SerializeField] private float spawnInterval = 2f;
-    [SerializeField] private float spawnRadius = 1f;   // 스폰 범위
-    [SerializeField] private float spawnZPosition = -2f;  // Z축 고정값 추가
+    [Header("Spawn Settings")] [SerializeField]
+    private float spawnInterval = 2f;
 
+    [SerializeField] private float spawnRadius = 1f; // 스폰 범위
+    [SerializeField] private float spawnZPosition = -2f; // Z축 고정값 추가
+
+    [Header("Spawner Info")] public int id;
+
+    [Header("For Alert")] public GameObject alert;
+
+    [Header("Handlers")] 
+    public bool workable = false;
     public bool isWorking = false;
     private Coroutine spawnCoroutine;
 
@@ -29,19 +36,22 @@ public class MonsterSpawner : MonoBehaviour
     private void FixedUpdate()
     {
         // 게임 상태와 관련된 로직이 필요할 경우 GeneralManager와 연동 가능
-        if (!isWorking)
+        if (workable)
         {
-            if (GeneralManager.Instance.inGameManager.isWave && !GeneralManager.Instance.inGameManager.spawnEnd)
+            if (!isWorking)
             {
-                spawnCoroutine = StartCoroutine(SpawnRoutine());
-                isWorking = true;
+                if (GeneralManager.Instance.inGameManager.isWave && !GeneralManager.Instance.inGameManager.spawnEnd)
+                {
+                    spawnCoroutine = StartCoroutine(SpawnRoutine());
+                    isWorking = true;
+                }
             }
-        }
 
-        if (GeneralManager.Instance.inGameManager.spawnEnd)
-        {
-            isWorking = false;
-            StopCoroutine(spawnCoroutine);
+            if (GeneralManager.Instance.inGameManager.spawnEnd)
+            {
+                isWorking = false;
+                StopCoroutine(spawnCoroutine);
+            }
         }
     }
 
@@ -99,4 +109,30 @@ public class MonsterSpawner : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
+
+    public void ShowAlert()
+    {
+        alert.GetComponent<Animator>().SetBool("visible", true);
+    }
+
+    public void HideAlert()
+    {
+        alert.GetComponent<Animator>().SetBool("visible", false);
+    }
+
+    public int GetId()
+    {
+        return id % 100;
+    }
+
+    public int GetWaveId()
+    {
+        return id / 100;
+    }
+
+    public void SetWorkable(bool work)
+    {
+        workable = work;
+    }
+
 }

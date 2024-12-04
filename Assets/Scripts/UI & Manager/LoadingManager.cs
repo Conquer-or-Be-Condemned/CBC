@@ -75,15 +75,17 @@ public class LoadingManager : MonoBehaviour
         
         tipList_KOR.Clear();
         
-        tipList_KOR.Add("[팁] 웨이브가 시작하기 전에 타워를 켜는 것을 추천합니다.");
-        tipList_KOR.Add("[팁] 안녕하세요, 세상!");
-        tipList_KOR.Add("[팁] 이건 매우 유용합니다.");
-        tipList_KOR.Add("[팁] 전기를 아껴주세요.");
-        tipList_KOR.Add("[팁] 라면을 끓일 때, 스프를 먼저 넣으세요.");
-        tipList_KOR.Add("[팁] 우리는 항상 후원을 환영합니다.");
-        tipList_KOR.Add("[팁] 팀 이름이 왜 HJD인가요? 음... 재동에게 물어보세요.");
-        tipList_KOR.Add("[팁] 죄송합니다. 사실 드릴 게 별로 없네요.");
-        tipList_KOR.Add("[팁] 미니맵은 매우 유용한 지도입니다...");
+        // tipList_KOR.Add("[팁] 웨이브가 시작하기 전에 타워를 켜는 것을 추천합니다.");
+        // tipList_KOR.Add("[팁] 안녕하세요, 세상!");
+        // tipList_KOR.Add("[팁] 이건 매우 유용합니다.");
+        // tipList_KOR.Add("[팁] 전기를 아껴주세요.");
+        // tipList_KOR.Add("[팁] 라면을 끓일 때, 스프를 먼저 넣으세요.");
+        // tipList_KOR.Add("[팁] 우리는 항상 후원을 환영합니다.");
+        // tipList_KOR.Add("[팁] 팀 이름이 왜 HJD인가요? 음... 재동에게 물어보세요.");
+        // tipList_KOR.Add("[팁] 죄송합니다. 사실 드릴 게 별로 없네요.");
+        // tipList_KOR.Add("[팁] 미니맵은 매우 유용한 지도입니다...");
+        tipList_KOR.Add("마시지마 ㅋㅋ N빵이야");
+        tipList_KOR.Add("우리 1002844030401");
 
     }
 

@@ -11,7 +11,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
     [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
-    protected bool ShowRange;
+    public bool ShowRange;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;// 타워 회전 각도
     protected Transform Target;             //target of bullets

@@ -203,7 +203,14 @@ public class SceneController : Singleton<SceneController>
     //  다음 씬 정보를 저장하는 함수
     public static void SetNextScene(string name)
     {
-        NextScene = name;
+        if (GameManager.TutorialEnd)
+        {
+            NextScene = "StageMenu";
+        }
+        else
+        {
+            NextScene = name;
+        }
     }
 
     //  다음 씬을 불러오는 함수

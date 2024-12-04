@@ -227,7 +227,7 @@ public class StageInfoManager : MonoBehaviour
                           "강력한 적군이 이 행성을 방어하고 있습니다. \n\n" +
                           "우리의 선발대가 최선을 다해 이 행성을 정복하려 했지만, " +
                           "현재는 그들의 흔적을 더 이상 찾을 수 없습니다. " +
-                          "이 행성을 식민지화합시다. \n조심하고 집중하세요, 개발자님... \n행운을 빕니다.....");
+                          "이 행성을 식민지화합시다. \n조심하고 집중하세요, 개발자님... 행운을 빕니다.....");
 
         StoryList_KOR.Add("HJD-1029X2를 클리어한 것을 축하드립니다!!! \n여기가 우리의 두 번째 목적지입니다. " +
                           "이곳은 달과 비슷한 온도를 가지고 있습니다. " +
@@ -260,14 +260,14 @@ public class StageInfoManager : MonoBehaviour
     //  웨이브 저장을 위한 Method
     public static void SetStageInfo()
     {
-        StageInfo.Add(2);
+        StageInfo.Add(3);
         StageInfo.Add(1);
     }
 
     public static void SetWaveInfo()
     {
         //  Stage 1 - Wave 9개 (임시 3개)
-        WaveInfo.Add(new List<int> {20,20,350,0,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {50,150,250,0,0,0,0,0,0});
         WaveInfo.Add(new List<int> {100,275,350,0,0,0,0,0,0,0});
     }
     
