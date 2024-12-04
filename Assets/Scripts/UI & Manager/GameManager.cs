@@ -113,7 +113,8 @@ public class GameManager : Singleton<GameManager>
     public void NewGame()
     {
         IsNewGame = true;
-        TutorialEnd = false;
+        //  임시로 true로 해놓음
+        TutorialEnd = true;
     }
 
     public void SetLanguageSetting(int lang)

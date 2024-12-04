@@ -83,6 +83,9 @@ public class InGameManager : MonoBehaviour
     public TMP_Text bombCount;
     public GameObject bombImage;
 
+    [Header("Monster Spawners")] 
+    public MonsterSpawner[] monsterSpawners;
+
     private void Start()
     {
         
@@ -107,26 +110,20 @@ public class InGameManager : MonoBehaviour
         //  Button 연결
         goToMainButton.GetComponent<Button>().onClick.AddListener(()=>SceneController.ChangeScene("Main"));
         restartButton.GetComponent<Button>().onClick.AddListener(()=>SceneController.Instance.ReStartGame());
-        if (GameManager.IsNewGame && !GameManager.TutorialEnd)
+        
+        //  진전도 초기화
+        talkIdx = 1;
+            
+        if (SceneController.Instance.curSelectStage + 1 >= DataManager.CurStage)
         {
-            //  진전도 초기화
-            talkIdx = 1;
-            
-            if (SceneController.Instance.curSelectStage >= DataManager.CurStage)
-            {
-                Debug.Log("Talk Process!!");
-                talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
-                StartCoroutine(TalkProcess());
-            }
-            else
-            {
-                ShowButton();
-            }
-            
+            Debug.Log("Talk Process!!");
+            talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
+            StartCoroutine(TalkProcess());
         }
         else
         {
             ShowButton();
+            ShowAlerts();
         }
         
         //  Stage Clear Button 연결
@@ -163,7 +160,6 @@ public class InGameManager : MonoBehaviour
         {
             CheckCurSpawn();
         }
-        
     }
 
     //  Blind를 통해 다른 UI 클릭을 방지한다.
@@ -246,6 +242,7 @@ public class InGameManager : MonoBehaviour
 
         talkWrapper.GetComponent<Animator>().SetBool("isShow", false);
 
+        ShowAlerts();
         ShowButton();
     }
 
@@ -311,6 +308,8 @@ public class InGameManager : MonoBehaviour
         InitWave();
         ShowInfo();
         HideButton();
+        
+        HideAlerts();
     }
 
     private void InitWave()
@@ -337,11 +336,45 @@ public class InGameManager : MonoBehaviour
 
                     //  Player 회복
                     GameManager.Instance.player.GetComponent<PlayerInfo>().RecoverHp();
+                    
+                    ShowAlerts();
 
                     StartCoroutine(MovePlayCoroutine());
                 }
             }
         }
+    }
+
+    public void ShowAlerts()
+    {
+        for (int i = 0; i < monsterSpawners.Length; i++)
+        {
+            if (curWave == monsterSpawners[i].GetWaveId())
+            {
+                monsterSpawners[i].ShowAlert();
+            }
+        }
+    }
+
+    public void HideAlerts()
+    {
+        for (int i = 0; i < monsterSpawners.Length; i++)
+        {
+            if (curWave == monsterSpawners[i].GetWaveId())
+            {
+                monsterSpawners[i].HideAlert();
+                ActivateFitWaveSpawner(monsterSpawners[i],true);
+            }
+            else
+            {
+                ActivateFitWaveSpawner(monsterSpawners[i],false);
+            }
+        }
+    }
+
+    public void ActivateFitWaveSpawner(MonsterSpawner spawner, bool work)
+    {
+        spawner.SetWorkable(work);
     }
 
     private IEnumerator MovePlayCoroutine()
