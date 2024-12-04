@@ -32,6 +32,8 @@ public class GameManager : Singleton<GameManager>
     //  로딩을 스킵할 수 있는지 확인
     public static bool LoadingSkip;
 
+    [Header("Language")] public static int Language = 0;
+
     private void Start()
     {
         //  다음 씬에서도 동일하게 유지하기 위함
@@ -42,6 +44,9 @@ public class GameManager : Singleton<GameManager>
         InGameInit = false;
         
         CurStage = DataManager.CurStage;
+        
+        //  Audio Start
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene, true);
     }
 
     private void FixedUpdate()
@@ -53,7 +58,10 @@ public class GameManager : Singleton<GameManager>
             {
                 if (SceneManager.GetActiveScene().name == e)
                 {
-                    InGame = true;
+                    if (e != SceneController.stageList[3])
+                    {
+                        InGame = true;
+                    }
                 }
             }
         }
@@ -61,7 +69,6 @@ public class GameManager : Singleton<GameManager>
         //  인게임인지 확인
         if (InGame)
         {
-            AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
 
             //  플레이어 재검색 (혹시 모를 오류 대비)
             if (player == null)
@@ -105,6 +112,11 @@ public class GameManager : Singleton<GameManager>
     {
         IsNewGame = true;
         TutorialEnd = false;
+    }
+
+    public void SetLanguageSetting(int lang)
+    {
+        Language = lang;
     }
     
 }

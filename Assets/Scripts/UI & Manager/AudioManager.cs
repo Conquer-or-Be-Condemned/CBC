@@ -1,42 +1,48 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    // public static AudioManager instance;
-    [Header("BGM")] public AudioClip[] bgmClips;
+    [Header("BGM")]
+    public AudioClip[] bgmClips;
     public float bgmVolume;
-    public int bgmChannels;
-    AudioSource[] bgmPlayers;
-    int bgmChannelIndex;
-    
-    [Header("SFX")] public AudioClip[] sfxClips;
+    private AudioSource[] bgmPlayers;
+    public int bgmChannelIndex;
+
+    [Header("SFX")]
+    public AudioClip[] sfxClips;
     public float sfxVolume;
-    public int sfxChannels;
-    AudioSource[] sfxPlayers;
-    int sfxChannelIndex;
-    
-    [Header("Alert")] public AudioClip[] alertClips;
-    public float alertVolume;
-    public int alertChannels;
-    private AudioSource[] alertPlayers;
-    private int alertChannelIndex;
+    private AudioSource[] sfxPlayers;
+    private Dictionary<string, AudioSource> activeSfx = new Dictionary<string, AudioSource>();
+    public int sfxChannelIndex;
+    //
+    // [Header("Alert")]
+    // public AudioClip[] alertClips;
+    // public float alertVolume;
+    // private AudioSource[] alertPlayers;
+    // private int alertChannelIndex;
 
     public enum Bgm
     {
         StartingScene,
         StageSelection,
-        Stage1
+        Stage1,
+        Stage2,
+        Stage3,
+        Ending
     }
 
     public enum Sfx
     {
-        fire, 
-        bossTroopComing, 
-        bossStepSound
+        Fire,
+        BossTroopComing,
+        BossStepSound,
+        MissileFinalDetect,
+        MissileExplosion,
+        MissileTargetDetected,
+        MissileLaunch,
+        PlayerBullet,
+        MissileFlying
     }
 
     public enum Alert
@@ -54,7 +60,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         GameObject bgmObject = new GameObject("BGM");
         bgmObject.transform.parent = transform;
-        bgmPlayers = new AudioSource[bgmChannels];
+        bgmPlayers = new AudioSource[bgmChannelIndex];
         for (int i = 0; i < bgmPlayers.Length; i++)
         {
             bgmPlayers[i] = bgmObject.AddComponent<AudioSource>();
@@ -65,7 +71,7 @@ public class AudioManager : Singleton<AudioManager>
 
         GameObject sfxObject = new GameObject("SFXPlayer");
         sfxObject.transform.parent = transform;
-        sfxPlayers = new AudioSource[sfxChannels];
+        sfxPlayers = new AudioSource[sfxChannelIndex];
 
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
@@ -74,20 +80,34 @@ public class AudioManager : Singleton<AudioManager>
             sfxPlayers[i].volume = sfxVolume;
         }
         
-        GameObject alertObject = new GameObject("ALERTPlayer");
-        alertObject.transform.parent = transform;
-        alertPlayers = new AudioSource[alertChannels];
-
-        for (int i = 0; i < alertPlayers.Length; i++)
-        {
-            alertPlayers[i] = alertObject.AddComponent<AudioSource>();
-            alertPlayers[i].playOnAwake = false;
-            alertPlayers[i].volume = alertVolume;
-        }
+        // GameObject alertObject = new GameObject("ALERTPlayer");
+        // alertObject.transform.parent = transform;
+        // alertPlayers = new AudioSource[alertChannels];
+        //
+        // for (int i = 0; i < alertPlayers.Length; i++)
+        // {
+        //     alertPlayers[i] = alertObject.AddComponent<AudioSource>();
+        //     alertPlayers[i].playOnAwake = false;
+        //     alertPlayers[i].volume = alertVolume;
+        // }
     }
-    
-    //  TODO : 아예 브금을 안나오게 하는 Method 있으면 좋을 듯
 
+    //
+    // AudioSource[] SetupAudioPlayers(string name, int channels, float volume)
+    // {
+    //     GameObject obj = new GameObject(name);
+    //     obj.transform.parent = transform;
+    //     AudioSource[] players = new AudioSource[channels];
+    //     for (int i = 0; i < channels; i++)
+    //     {
+    //         players[i] = obj.AddComponent<AudioSource>();
+    //         players[i].playOnAwake = false;
+    //         players[i].volume = volume;
+    //     }
+    //     return players;
+    // }
+
+    // BGM 재생
     public void PlayBGM(Bgm bgm, bool isPlay)
     {
         for (int i = 0; i < bgmPlayers.Length; i++)
@@ -105,43 +125,87 @@ public class AudioManager : Singleton<AudioManager>
             {
                 bgmPlayers[loopIndex].Stop();
             }
-            // break;
         }
-
-        // if (isPlay)
-        // {
-        //     bgmPlayers[(int)bgm].Play();
-        // }
-        // else
-        // {
-        //     bgmPlayers[(int)bgm].Stop();
-        // }
     }
 
-    public void PlaySfx(Sfx sfx, bool isPlay)
+    // SFX 재생 (폴링 방식)
+    public string PlaySfx(Sfx sfx)
     {
+        int loopIndex = sfxChannelIndex % sfxPlayers.Length;
+        sfxChannelIndex++;
+
+        AudioSource source = sfxPlayers[loopIndex];
+        source.clip = sfxClips[(int)sfx];
+        source.Play();
+
+        string id = System.Guid.NewGuid().ToString(); // 고유 ID 생성
+        activeSfx[id] = source;
+
+        return id;
+    }
+
+    // 특정 SFX 중지
+    public void StopSfx(string id)
+    {
+        if (activeSfx.ContainsKey(id)&&activeSfx[id]!=null)
+        {
+            activeSfx[id].Stop();
+            activeSfx.Remove(id);
+        }
+    }
+
+    // 모든 SFX 중지
+    public void StopAllSfx()
+    {
+        foreach (var source in activeSfx.Values)
+        {
+            source.Stop();
+        }
+        activeSfx.Clear();
+    }
+
+    // // Alert SFX 재생
+    // public void PlayAlert(Alert alert, bool isPlay)
+    // {
+    //     int loopIndex = alertChannelIndex % alertPlayers.Length;
+    //     alertChannelIndex++;
+    //
+    //     if (isPlay)
+    //     {
+    //         if (!alertPlayers[loopIndex].isPlaying)
+    //         {
+    //             alertPlayers[loopIndex].clip = alertClips[(int)alert];
+    //             alertPlayers[loopIndex].Play();
+    //         }
+    //     }
+    //     else
+    //     {
+    //         alertPlayers[loopIndex].Stop();
+    //     }
+    // }
+
+    public void UIBgm(bool isPlay) // UI 창을 띄웠을 때 고음만 통과시켜 간지나게 함
+    {
+        AudioHighPassFilter bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
+        bgmEffect.enabled = isPlay;
+    }
+
+    public void ChangeBgmVolume(float vol)
+    {
+        bgmVolume = vol;
+        for (int i = 0; i < bgmPlayers.Length; i++)
+        {
+            bgmPlayers[i].volume = bgmVolume;
+        }
+    }
+
+    public void ChangeSfxVolume(float vol)
+    {
+        sfxVolume = vol;
+
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
-            int loopIndex = (i + sfxChannelIndex) % sfxPlayers.Length;
-            // if (sfxPlayers[loopIndex].isPlaying)
-            //     continue;
-            sfxChannelIndex = loopIndex;
-            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
-            sfxPlayers[loopIndex].Play();
-            break;
-        }
-    }
-
-    public void PlayAlert(Alert alert)
-    {
-        for (int i = 0; i < alertPlayers.Length; i++)
-        {
-            int loopIndex = (i + alertChannelIndex) % alertPlayers.Length;
-            alertChannelIndex = loopIndex;
-            alertPlayers[loopIndex].clip = alertClips[(int)alert];
-            alertPlayers[loopIndex].Play();
-            Debug.Log("BGM Play");
-            break;
+            sfxPlayers[i].volume = sfxVolume;
         }
     }
 }

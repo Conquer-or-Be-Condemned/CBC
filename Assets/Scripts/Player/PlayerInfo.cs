@@ -21,6 +21,11 @@ public class PlayerInfo : MonoBehaviour
     private void FixedUpdate()
     {
         onHpChange.Invoke(curHp, maxHp);
+
+        if (curHp <= 0)
+        {
+            Die();
+        }
     }
 
     public void Die()
@@ -38,7 +43,7 @@ public class PlayerInfo : MonoBehaviour
         
         if (curHp <= 0)
         {
-            Invoke("Die", 1f);
+            Invoke("Die", 0f);
         }
     }
 

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    [Header("About Game")] public static int CurStage = 1;
-    
+    [Header("About Game")] public static int CurStage = 4;
 
-    [Header("Shop")] public static int Coin = 20;
+
+    [Header("Shop")] public static int Coin = 30;
 
     public const int LEVEL_MAX = 3;
 
@@ -115,9 +115,9 @@ public class DataManager : MonoBehaviour
     {
         PlayerHpLv = LevelList[0];
         PlayerBulletLv = LevelList[1];
-        TurretBulletLv = LevelList[1];
-        TurretMissileLv = LevelList[1];
-        ControlUnitPowerLv = LevelList[1];
-        ControlUnitHpLv = LevelList[1];
+        TurretBulletLv = LevelList[2];
+        TurretMissileLv = LevelList[3];
+        ControlUnitPowerLv = LevelList[4];
+        ControlUnitHpLv = LevelList[5];
     }
 }

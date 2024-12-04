@@ -30,13 +30,25 @@ public class UIControlUnitPowerHandler : MonoBehaviour, IPointerEnterHandler, IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
+        
         if (!isHover)
         {
             isHover = true;
             upgradeInfoWrapper.SetActive(true);
             
-            infoTitle.SetText("Control Unit Power");
-            infoContent.SetText("You can increase the power\nof the Control Unit.");
+            if (GameManager.Language == 0)
+            {
+                infoTitle.SetText("Control Unit Power");
+                infoContent.SetText("You can increase the power\nof the Control Unit.");
+            }
+            else if (GameManager.Language == 1)
+            {
+                infoTitle.SetText("Control Unit Power");
+                infoContent.SetText("컨트롤 유닛의 최대 전력량을\n증가시킬 수 있습니다.");
+            }
             
             infoMaxLevel.SetText("");
             infoCost.SetText("");
@@ -45,12 +57,12 @@ public class UIControlUnitPowerHandler : MonoBehaviour, IPointerEnterHandler, IP
             //  MAX
             if (DataManager.ControlUnitPowerLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.ControlUnitPower + ">");
             }
             else
             {
-                infoNext.SetText(DataManager.ControlUnitPower + " -> " + (DataManager.ControlUnitPower + DataManager.GetMargin(4)) + "(+ "+DataManager.GetMargin(4)+")");
-                infoCost.SetText("Cost : "+ DataManager.GetCost(4));
+                infoNext.SetText(DataManager.ControlUnitPower + " -> " + (DataManager.ControlUnitPower + DataManager.GetMargin(5)) + "(+ "+DataManager.GetMargin(5)+")");
+                infoCost.SetText("Cost : "+ DataManager.GetCost(5));
             }
 
             RectTransform rectTransform = upgradeInfoBox.GetComponent<RectTransform>();

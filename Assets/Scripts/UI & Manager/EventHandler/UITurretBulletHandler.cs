@@ -30,13 +30,24 @@ public class UITurretBulletHandler : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
         if (!isHover)
         {
             isHover = true;
             upgradeInfoWrapper.SetActive(true);
             
-            infoTitle.SetText("Turret Bullet");
-            infoContent.SetText("You can increase the damage\nof the canon turret.");
+            if (GameManager.Language == 0)
+            {
+                infoTitle.SetText("Turret Bullet");
+                infoContent.SetText("You can increase the damage\nof the canon turret.");
+            }
+            else if (GameManager.Language == 1)
+            {
+                infoTitle.SetText("Turret Bullet");
+                infoContent.SetText("캐논 터렛의 데미지를\n증가시킬 수 있습니다.");
+            }
             
             infoMaxLevel.SetText("");
             infoCost.SetText("");
@@ -45,7 +56,7 @@ public class UITurretBulletHandler : MonoBehaviour, IPointerEnterHandler, IPoint
             //  MAX
             if (DataManager.TurretBulletLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.TurretBullet + ">");
             }
             else
             {

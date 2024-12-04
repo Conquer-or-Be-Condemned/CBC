@@ -100,7 +100,7 @@ MonoBehaviour:
   animator: {fileID: 4942308883632473229}
   gunRenderer: {fileID: 8829399613561908817}
   bulletPrefab: {fileID: 5527518119625726090, guid: d68bdf48dc0984e30ba45c78cad3a501, type: 3}
-  range: 23
+  range: 32
   rotationSpeed: 500
   fireRate: 8
   power: 25

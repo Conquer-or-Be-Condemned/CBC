@@ -162,7 +162,7 @@ public class BossMonster : Monster
 
     private void FinishTread()
     {
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.bossStepSound, true);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.BossStepSound);
 
         // 카메라 흔들림 효과 트리거
         CameraController cameraController = Camera.main.GetComponent<CameraController>();
@@ -181,7 +181,7 @@ public class BossMonster : Monster
         actionTimer = attackCooldown; // 밟기도 쿨다운 공유
 
         UpdateAnimationState();
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.bossTroopComing, true);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.BossTroopComing);
 
         Invoke(nameof(FinishSpawn), 1f); // 스폰 애니메이션 길이에 맞춰서 설정
     }

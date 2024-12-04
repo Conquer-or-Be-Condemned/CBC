@@ -29,13 +29,26 @@ public class UIPlayerBulletHandler : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
         if (!isHover)
         {
             isHover = true;
             upgradeInfoWrapper.SetActive(true);
             
-            infoTitle.SetText("Player Bullet");
-            infoContent.SetText("You can increase the number\nof bullets the player fires.");
+            if (GameManager.Language == 0)
+            {
+                infoTitle.SetText("Player Bullet");
+                infoContent.SetText("You can increase the number\nof bullets the player fires.");
+            }
+            else if (GameManager.Language == 1)
+            {
+                infoTitle.SetText("Player Bullet");
+                infoContent.SetText("플레이어의 총알 발사 수를\n증가시킬 수 있습니다.");
+            }
+            
+            
             
             infoMaxLevel.SetText("");
             infoCost.SetText("");
@@ -44,7 +57,7 @@ public class UIPlayerBulletHandler : MonoBehaviour, IPointerEnterHandler, IPoint
             //  MAX
             if (DataManager.PlayerBulletLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.PlayerBullet + ">");
             }
             else
             {

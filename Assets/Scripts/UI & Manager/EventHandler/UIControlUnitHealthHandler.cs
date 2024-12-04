@@ -30,13 +30,25 @@ public class UIControlUnitHealthHandler : MonoBehaviour, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
+        
         if (!isHover)
         {
             isHover = true;
             upgradeInfoWrapper.SetActive(true);
 
-            infoTitle.SetText("Control Unit Health");
-            infoContent.SetText("You can increase the maximum\nHp of the Control Unit.");
+            if (GameManager.Language == 0)
+            {
+                infoTitle.SetText("Control Unit Health");
+                infoContent.SetText("You can increase the maximum\nHp of the Control Unit.");
+            }
+            else if (GameManager.Language == 1)
+            {
+                infoTitle.SetText("Control Unit Health");
+                infoContent.SetText("컨트롤 유닛의 최대 체력을\n증가시킬 수 있습니다.");
+            }
 
             infoMaxLevel.SetText("");
             infoCost.SetText("");
@@ -45,14 +57,14 @@ public class UIControlUnitHealthHandler : MonoBehaviour, IPointerEnterHandler, I
             //  MAX
             if (DataManager.ControlUnitHpLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.ControlUnitHp + ">");
             }
             else
             {
                 infoNext.SetText(DataManager.ControlUnitHp + " -> " +
-                                 (DataManager.ControlUnitHp + DataManager.GetMargin(5)) + "(+ " +
-                                 DataManager.GetMargin(5) + ")");
-                infoCost.SetText("Cost : " + DataManager.GetCost(5));
+                                 (DataManager.ControlUnitHp + DataManager.GetMargin(4)) + "(+ " +
+                                 DataManager.GetMargin(4) + ")");
+                infoCost.SetText("Cost : " + DataManager.GetCost(4));
             }
 
             RectTransform rectTransform = upgradeInfoBox.GetComponent<RectTransform>();

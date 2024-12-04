@@ -31,13 +31,24 @@ public class UIPlayerHealthHandler : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoMaxLevel.SetText("");
+        infoCost.SetText("");
+        infoNext.SetText("");
         if (!isHover)
         {
             isHover = true;
             upgradeInfoWrapper.SetActive(true);
-            
-            infoTitle.SetText("Player Health");
-            infoContent.SetText("You can increase the maximum\nHp of the player.");
+
+            if (GameManager.Language == 0)
+            {
+                infoTitle.SetText("Player Health");
+                infoContent.SetText("You can increase the maximum\nHp of the player.");
+            }
+            else if (GameManager.Language == 1)
+            {
+                infoTitle.SetText("Player Health");
+                infoContent.SetText("플레이어의 최대 체력을\n증가시킬 수 있습니다.");
+            }
             
             infoMaxLevel.SetText("");
             infoCost.SetText("");
@@ -46,7 +57,7 @@ public class UIPlayerHealthHandler : MonoBehaviour, IPointerEnterHandler, IPoint
             //  MAX
             if (DataManager.PlayerHpLv == DataManager.LEVEL_MAX)
             {
-                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.LEVEL_MAX + ">");
+                infoMaxLevel.SetText("MAX LEVEL <" + DataManager.PlayerHp + ">");
             }
             else
             {

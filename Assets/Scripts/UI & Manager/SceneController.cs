@@ -24,7 +24,7 @@ public class SceneController : Singleton<SceneController>
     public static string NextScene;
     
     //  스테이지 정보
-    public static string[] stageList = { "Stage_1", "Stage_2" };
+    public static string[] stageList = { "Stage_1", "Stage_2", "Stage_3", "Ending" };
     
     // 보스 테스트
     // public static string[] stageList = { "Stage_Boss", "Stage_2" };
@@ -127,17 +127,37 @@ public class SceneController : Singleton<SceneController>
         isStart = false;
         
         yield return new WaitForSeconds(2.8f);
-        //  게임 시작 직전 초기화 설정
-        ChangeScene(stageList[curSelectStage]);
-        GameManager.InGameInit = true;
+
+        //  Ending
+        if (curSelectStage == 3)
+        {
+            ChangeScene(stageList[curSelectStage]);
+        }
+        else
+        {
+            //  게임 시작 직전 초기화 설정
+            ChangeScene(stageList[curSelectStage]);
+            GameManager.InGameInit = true;
         
-        //  배경 음악
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
+            //  배경 음악
+            switch (curSelectStage)
+            {
+                case 0 :
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
+                    break;
+                case 1 :
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage2,true);
+                    break;
+                case 2:
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage3,true);
+                    break;
+            }
         
-        //  플레이어 할당
-        GameManager.Instance.player = GameObject.Find("Player");
+            //  플레이어 할당
+            GameManager.Instance.player = GameObject.Find("Player");
         
-        //  추가적인 검증은 하지 않겠음
+            //  추가적인 검증은 하지 않겠음
+        }
     }
     #endregion
     
@@ -149,11 +169,14 @@ public class SceneController : Singleton<SceneController>
         {
             Debug.Log("MAIN!!");
             Time.timeScale = 1f;
+            
             AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,false);
-            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,true);
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene, true);
             
             GameManager.InGame = false;
             GameManager.InGameInit = false;
+
+            GeneralManager.Instance.settingManager.isEnable = false;
         }
 
         if (GameManager.InGame)
