@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private float fireRate;
+    [SerializeField] private GameObject bombPrefab; // 폭탄 프리팹 추가
     public Tilemap map;
     public float attackDelay;
     public bool attackAble;
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A)) sumVector += Vector3.left * moveSpeed;
         if (Input.GetKey(KeyCode.S)) sumVector += Vector3.down * moveSpeed;
         if (Input.GetKey(KeyCode.D)) sumVector += Vector3.right * moveSpeed;
+        if (Input.GetKey(KeyCode.F)) PlaceBomb();
 
         // 이동 처리
         transform.position += sumVector * Time.fixedDeltaTime;
@@ -179,7 +181,14 @@ public class Player : MonoBehaviour
     // StartCoroutine(PlayerAttackCoroutine());
         
     
-
+    private void PlaceBomb()//폭탄 설치
+    {
+        // 플레이어의 현재 위치에 폭탄을 생성합니다.
+        if (bombPrefab != null)
+        {
+            Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        }
+    }
     private IEnumerator PlayerAttackCoroutine()
     {
         attackAble = false;
