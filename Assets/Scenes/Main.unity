@@ -896,7 +896,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120170495}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: db0e544f495b2974483f6fe3f0d94447, type: 3}
@@ -4360,9 +4360,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmClips:
-  - {fileID: 8300000, guid: 767d4c015c430e84094d5ededcd91ab5, type: 3}
+  - {fileID: 8300000, guid: db0e544f495b2974483f6fe3f0d94447, type: 3}
   - {fileID: 8300000, guid: 988a36379972ab4419593ee644b786ef, type: 3}
   - {fileID: 8300000, guid: ce8f3b950a159fb4782fff71edccdaae, type: 3}
+  - {fileID: 8300000, guid: 8b650ac658a3b844f9ffffb3ccdb7b70, type: 3}
+  - {fileID: 8300000, guid: 5d6715408ebff4829bb014bda1b08b29, type: 3}
+  - {fileID: 8300000, guid: 9def9b988a7825643bb258d61bd368a7, type: 3}
   bgmVolume: 0.5
   bgmChannelIndex: 3
   sfxClips:

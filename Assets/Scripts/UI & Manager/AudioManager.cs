@@ -26,7 +26,10 @@ public class AudioManager : Singleton<AudioManager>
     {
         StartingScene,
         StageSelection,
-        Stage1
+        Stage1,
+        Stage2,
+        Stage3,
+        Ending
     }
 
     public enum Sfx
