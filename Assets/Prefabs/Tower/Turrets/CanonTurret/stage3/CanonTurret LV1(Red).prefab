@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActivated: 0
   previousIsActivated: 0
+  ShowRange: 0
   turretRotationPoint: {fileID: 286097789958134540}
   enemyMask:
     serializedVersion: 2
@@ -596,7 +597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3735823970655440404}
   - component: {fileID: 5496085443188878580}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +613,7 @@ Transform:
   m_GameObject: {fileID: 8909151110565786663}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 87, y: 87, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
