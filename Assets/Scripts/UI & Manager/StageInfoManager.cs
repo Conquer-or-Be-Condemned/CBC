@@ -132,24 +132,55 @@ public class StageInfoManager : MonoBehaviour
     private IEnumerator StoryCoroutine()
     {
         planetStory.SetText("");
+
+        string unknownStory_ENG = "Exception: Information is NULL.";
+        string unknownStory_KOR = "예외 : 정보가 NULL입니다.";
+        
         StringBuilder stringBuilder = new StringBuilder();
 
         if (GameManager.Language == 0)
         {
-            for (var i = 0; i < StoryList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+            if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
-                stringBuilder.Append(StoryList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
-                planetStory.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(0.005f);
+                for (var i = 0; i < StoryList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+                {
+                    stringBuilder.Append(StoryList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
+                    planetStory.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
             }
+            else
+            {
+                for (var i = 0; i < unknownStory_ENG.Length; i++)
+                {
+                    stringBuilder.Append(unknownStory_ENG[i]);
+                    planetStory.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
+            }
+            
         }
         else if (GameManager.Language == 1)
         {
-            for (var i = 0; i < StoryList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+            if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
-                stringBuilder.Append(StoryList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
-                planetStory.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(0.005f);
+                for (var i = 0;
+                     i < StoryList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length;
+                     i++)
+                {
+                    stringBuilder.Append(StoryList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
+                    planetStory.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
+            }
+            else
+            {
+                for (var i = 0; i < unknownStory_KOR.Length; i++)
+                {
+                    stringBuilder.Append(unknownStory_KOR[i]);
+                    planetStory.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
             }
         }
         
@@ -159,24 +190,31 @@ public class StageInfoManager : MonoBehaviour
     private IEnumerator InfoCoroutine()
     {
         planetInfo.SetText("");
+        
         StringBuilder stringBuilder = new StringBuilder();
 
         if (GameManager.Language == 0)
         {
-            for (int i = 0; i < InfoList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+            if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
-                stringBuilder.Append(InfoList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
-                planetInfo.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(0.005f);
+                for (int i = 0; i < InfoList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+                {
+                    stringBuilder.Append(InfoList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
+                    planetInfo.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
             }
         }
         else if (GameManager.Language == 1)
         {
-            for (int i = 0; i < InfoList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+            if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
-                stringBuilder.Append(InfoList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
-                planetInfo.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(0.005f);
+                for (int i = 0; i < InfoList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+                {
+                    stringBuilder.Append(InfoList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
+                    planetInfo.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
             }
         }
         

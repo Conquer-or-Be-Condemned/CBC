@@ -25,14 +25,13 @@ public class TalkManager : MonoBehaviour
         TalkData_ENG = new Dictionary<int, string[]>();
         TalkData_KOR = new Dictionary<int, string[]>();
 
+        //  ENGLISH
         TalkData_ENG.Add(001, new string[]
         {
-            "뭐가 어째고 저째?",
+            "Holy Shit Mother Fxxk?",
             "갑자기 나보고 전쟁을 나가라고?",
             "이게 뭔 개소리야"
-
         });
-        
         TalkData_ENG.Add(002, new string[]
         {
             "응 안해",
@@ -40,13 +39,33 @@ public class TalkManager : MonoBehaviour
             "응 ㄲㅈ 안해"
 
         });
-        
         TalkData_ENG.Add(003, new string[]
+        {
+            "Third Test",
+            "오케이",
+            "Shit"
+
+        });
+        
+        //  KOREAN
+        
+        TalkData_KOR.Add(001, new string[]
+        {
+            "뭐가 어째고 저째?",
+            "갑자기 나보고 전쟁을 나가라고?",
+            "이게 뭔 개소리야"
+        });
+        TalkData_KOR.Add(002, new string[]
+        {
+            "응 안해",
+            "응 못해",
+            "응 ㄲㅈ 안해"
+        });
+        TalkData_KOR.Add(003, new string[]
         {
             "세 번째 테스트",
             "오케이",
             "응 ㄲㅈ 안해"
-
         });
 
         //  수동으로 설정해야 함 (한글 영어 동일하게)
