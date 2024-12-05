@@ -10,11 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 50272009421142868}
   - component: {fileID: 6045527164146839024}
+  - component: {fileID: 4634762124135122215}
   - component: {fileID: 5622057028196791835}
   - component: {fileID: 7753738974401572330}
-  - component: {fileID: 4634762124135122215}
-  - component: {fileID: 3900603413399298288}
-  - component: {fileID: 4634171855346967050}
   - component: {fileID: 4453263762811442578}
   m_Layer: 7
   m_Name: Leaf 1
@@ -32,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 3420052572910455820}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.22, y: -8.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.22, y: -8.52, z: -2}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8414983799832770627}
@@ -91,6 +89,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4634762124135122215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420052572910455820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67de0285e11494abfcf8ca36c9ade52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterName: Leaf
+  maxHealth: 100
+  currentHealth: 100
+  attackDamage: 10
+  moveSpeed: 5
+  attackRange: 15
+  attackCooldown: 2
+  isDead: 0
+  isTargeted: 0
+  detectionRange: 25
+  player: {fileID: 0}
+  controlUnitStatus: {fileID: 0}
+  healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
+  healthBarYOffset: 5
+  bulletPrefabGreen: {fileID: 8523253081943708297, guid: 3ad749c0ab1bc2543b7b73f7c5adae5a, type: 3}
+  projectileSpeed: 10
+  currentTarget: {fileID: 0}
 --- !u!95 &5622057028196791835
 Animator:
   serializedVersion: 5
@@ -139,96 +166,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4634762124135122215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3420052572910455820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d67de0285e11494abfcf8ca36c9ade52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterName: Leaf
-  maxHealth: 100
-  currentHealth: 10
-  attackDamage: 10
-  moveSpeed: 5
-  attackRange: 15
-  attackCooldown: 2
-  isDead: 0
-  isTargeted: 0
-  detectionRange: 25
-  player: {fileID: 0}
-  controlUnitStatus: {fileID: 0}
-  healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
-  healthBarYOffset: 5
-  bulletPrefabGreen: {fileID: 8523253081943708297, guid: 3ad749c0ab1bc2543b7b73f7c5adae5a, type: 3}
-  projectileSpeed: 10
-  currentTarget: {fileID: 0}
---- !u!114 &3900603413399298288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3420052572910455820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a1862af7744977b3709b6a0349ca10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  bulletSpeed: 2
-  bulletDamage: 10
-  bulletSpawnPoint: {fileID: 0}
---- !u!61 &4634171855346967050
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3420052572910455820}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.285715, y: 18.285715}
-    newSize: {x: 1.28, y: 1.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 18.285715, y: 18.285715}
-  m_EdgeRadius: 0
 --- !u!60 &4453263762811442578
 PolygonCollider2D:
   m_ObjectHideFlags: 0

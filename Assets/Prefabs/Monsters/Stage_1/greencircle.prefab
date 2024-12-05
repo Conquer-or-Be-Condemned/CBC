@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3878343572487553125}
   - component: {fileID: 4301688003737086183}
   - component: {fileID: 1557083787853802698}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: greencircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,6 +103,7 @@ MonoBehaviour:
   bulletSpeed: 4
   bulletDamage: 10
   bulletSpawnPoint: {fileID: 0}
+  controlUnit: {fileID: 0}
 --- !u!50 &4301688003737086183
 Rigidbody2D:
   serializedVersion: 4

@@ -10,18 +10,16 @@ public class AdcBullet : MonoBehaviour
     [SerializeField] private float bulletSpeed = 17f;
     [SerializeField] private float bulletDamage = 30f;
     [SerializeField] private Transform bulletSpawnPoint;
+
+    [Header("ControlUnit")] public ControlUnitStatus controlUnit;
     
     private Vector2 direction;
-
-    void Start()
-    {
-        // GameObject leafPos = GameObject.Find("Leaf 1(Clone)");
-        // bulletSpawnPoint = leafPos.transform;
-    } // 방향을 설정하는 메서드
+    
+    // 방향을 설정하는 메서드
     public void SetDirection(Vector2 dir)
     {
         direction = dir.normalized;
-        StartCoroutine(destroyObjectIfNotHit());
+        StartCoroutine(DestroyObjectIfNotHit());
     }
 
     private void FixedUpdate()
@@ -36,10 +34,15 @@ public class AdcBullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    private IEnumerator destroyObjectIfNotHit()
+    private IEnumerator DestroyObjectIfNotHit()
     {
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
+    }
+
+    public void SetControlUnitTarget(ControlUnitStatus target)
+    {
+        controlUnit = target;
     }
 
     // 충돌 시 총알 파괴
@@ -52,8 +55,22 @@ public class AdcBullet : MonoBehaviour
             PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
             if (player != null)
             {
+                Debug.Log("Damaged!");
                 playerInfo.TakeDamage((int)bulletDamage);
             }
+            Destroy(gameObject);
+        }
+        
+        //  수정이 필요하긴 할 것 같음 - 현석
+        if (other.gameObject.CompareTag("CUBoundary"))
+        {
+            Debug.Log("충돌!");
+            if (controlUnit == null)
+            {
+                Debug.LogError("CU가 감지되지 않습니다.");
+                return;
+            }
+            controlUnit.GetDamage((int)bulletDamage);
             Destroy(gameObject);
         }
     }

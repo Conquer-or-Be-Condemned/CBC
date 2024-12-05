@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1113229755471347362}
   - component: {fileID: 1681059103846683528}
+  - component: {fileID: -7792215644566802799}
   - component: {fileID: 3727076148842209913}
   - component: {fileID: 2009005005601722383}
-  - component: {fileID: -7792215644566802799}
   - component: {fileID: 7553824960772183692}
   m_Layer: 7
   m_Name: Slime
@@ -89,6 +89,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-7792215644566802799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009334584712422631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd6e0f5f7fe345919986e8dd4feaa72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterName: Slime
+  maxHealth: 100
+  currentHealth: 100
+  attackDamage: 5
+  moveSpeed: 5
+  attackRange: 3
+  attackCooldown: 1
+  isDead: 0
+  isTargeted: 0
+  detectionRange: 15
+  player: {fileID: 0}
+  controlUnitStatus: {fileID: 0}
+  healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
+  healthBarYOffset: 5
+  currentTarget: {fileID: 0}
 --- !u!95 &3727076148842209913
 Animator:
   serializedVersion: 5
@@ -137,32 +164,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-7792215644566802799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4009334584712422631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fd6e0f5f7fe345919986e8dd4feaa72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterName: Slime
-  maxHealth: 100
-  currentHealth: 100
-  attackDamage: 5
-  moveSpeed: 5
-  attackRange: 3
-  attackCooldown: 1
-  isDead: 0
-  detectionRange: 15
-  player: {fileID: 0}
-  controlUnitStatus: {fileID: 0}
-  healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
-  healthBarYOffset: 5
-  currentTarget: {fileID: 0}
 --- !u!60 &7553824960772183692
 PolygonCollider2D:
   m_ObjectHideFlags: 0
