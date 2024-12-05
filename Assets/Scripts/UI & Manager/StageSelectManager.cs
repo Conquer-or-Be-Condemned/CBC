@@ -18,6 +18,8 @@ public class StageSelectManager : MonoBehaviour
     public int curSelectStage;
 
     [Header("Various Buttons")] public Button goToMainButton;
+
+    public Button storyButton;
     // public Button tipButton;
 
     public void Start()
@@ -54,6 +56,7 @@ public class StageSelectManager : MonoBehaviour
         }
         
         goToMainButton.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
+        storyButton.onClick.AddListener(()=>SceneController.ChangeScene("Opening"));
     }
 
     //  추가 검증을 위한 점검

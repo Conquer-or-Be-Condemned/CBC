@@ -27,8 +27,8 @@ public class SceneController : Singleton<SceneController>
     public static string[] stageList = { "Stage_1", "Stage_2", "Stage_3", "Ending" };
     
     // 보스 테스트
-    // public static string[] stageList = { "Stage_Boss" };
-    
+    // public static string[] stageList = { "Stage_Boss", "Stage_2" };
+
     //  게임 시작 여부
     private bool isStart;
 
@@ -203,7 +203,14 @@ public class SceneController : Singleton<SceneController>
     //  다음 씬 정보를 저장하는 함수
     public static void SetNextScene(string name)
     {
-        NextScene = name;
+        if (GameManager.TutorialEnd)
+        {
+            NextScene = "StageMenu";
+        }
+        else
+        {
+            NextScene = name;
+        }
     }
 
     //  다음 씬을 불러오는 함수

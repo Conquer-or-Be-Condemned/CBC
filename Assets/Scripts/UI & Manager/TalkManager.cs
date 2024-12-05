@@ -10,8 +10,10 @@ using UnityEngine;
  */
 public class TalkManager : MonoBehaviour
 {
-    private static Dictionary<int, string[]> TalkData_ENG;
-    private static Dictionary<int, string[]> TalkData_KOR;
+    public static Dictionary<int, string[]> TalkData_ENG;
+    public static Dictionary<int, string[]> TalkData_KOR;
+
+    public static int ForOpeningIdx;
 
     /*
      * Stage 대화 추가하는 방법
@@ -22,6 +24,33 @@ public class TalkManager : MonoBehaviour
     {
         TalkData_ENG = new Dictionary<int, string[]>();
         TalkData_KOR = new Dictionary<int, string[]>();
+
+        TalkData_ENG.Add(001, new string[]
+        {
+            "뭐가 어째고 저째?",
+            "갑자기 나보고 전쟁을 나가라고?",
+            "이게 뭔 개소리야"
+
+        });
+        
+        TalkData_ENG.Add(002, new string[]
+        {
+            "응 안해",
+            "응 못해",
+            "응 ㄲㅈ 안해"
+
+        });
+        
+        TalkData_ENG.Add(003, new string[]
+        {
+            "세 번째 테스트",
+            "오케이",
+            "응 ㄲㅈ 안해"
+
+        });
+
+        //  수동으로 설정해야 함 (한글 영어 동일하게)
+        ForOpeningIdx = 3;
 
         TalkData_ENG.Add(101, new string[]
         {
@@ -102,6 +131,7 @@ public class TalkManager : MonoBehaviour
             "전력이 부족해질 수 있습니다. 신중히 사용하세요.",
             "연결이 끊어졌습니다..."
         });
+        
     }
 
     public static string GetTalk(int id, int talkIndex)

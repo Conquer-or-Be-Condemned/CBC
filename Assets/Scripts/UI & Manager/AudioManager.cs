@@ -29,7 +29,10 @@ public class AudioManager : Singleton<AudioManager>
         Stage1,
         Stage2,
         Stage3,
-        Ending
+        OminousSound,
+        Ending,
+        GameOver,
+        Opening
     }
 
     public enum Sfx
@@ -37,6 +40,8 @@ public class AudioManager : Singleton<AudioManager>
         Fire,
         BossTroopComing,
         BossStepSound,
+        BossPunch,
+        BossWalkingAppears,
         MissileFinalDetect,
         MissileExplosion,
         MissileTargetDetected,

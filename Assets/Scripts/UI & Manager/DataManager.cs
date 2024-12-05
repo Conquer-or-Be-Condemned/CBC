@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    [Header("About Game")] public static int CurStage = 4;
-
-
+    [Header("About Game")] public static int CurStage = 1;
+    
     [Header("Shop")] public static int Coin = 30;
 
     public const int LEVEL_MAX = 3;
@@ -28,7 +27,7 @@ public class DataManager : MonoBehaviour
     public static int ControlUnitPower = 225;
     public static int ControlUnitHp = 1500;
 
-    public static int[] CostList = { 10, 20, 30 };
+    public static int[] CostList = { 10, 20, 30, 40, 50 };
 
     public static void ApplyLevelingSystem()
     {

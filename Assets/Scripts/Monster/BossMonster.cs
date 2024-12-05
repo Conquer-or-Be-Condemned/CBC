@@ -110,9 +110,9 @@ public class BossMonster : Monster
 
     private void StartRandomAction(Vector2 actionDirection)
     {
-        int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
+        // int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
         // 디버깅용
-        // int randomAction = 1;
+        int randomAction = 0;
 
         switch (randomAction)
         {
@@ -135,12 +135,22 @@ public class BossMonster : Monster
         actionTimer = attackCooldown;
 
         UpdateAnimationState();
+    
+        // 공격 사운드를 1초 뒤에 재생하도록 설정
+        Invoke(nameof(PlayBossPunchSound), 0.5f);
 
         // 플레이어 또는 제어 장치에게 데미지
         DealDamageToTarget((int)attackDamage);
 
+        // 공격 종료를 애니메이션 길이에 맞게 호출
         Invoke(nameof(FinishAttack), 1f); // 공격 애니메이션 길이에 맞춰서 설정
     }
+
+    private void PlayBossPunchSound()
+    {
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.BossPunch);
+    }
+
 
     private void FinishAttack()
     {
@@ -148,14 +158,12 @@ public class BossMonster : Monster
         UpdateAnimationState();
     }
 
-    private void StartTread(Vector2 treadDirection)
-    {
+    private void StartTread(Vector2 treadDirection) {
         isTreading = true;
         SetMoving(false);
         actionTimer = attackCooldown; // 밟기도 쿨다운 공유
 
         UpdateAnimationState();
-
         // 플레이어 또는 제어 장치에게 데미지
         DealDamageToTarget((int)treadDamage);
         
@@ -164,11 +172,11 @@ public class BossMonster : Monster
 
     private void FinishTread()
     {
-        
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.BossStepSound);
+
         // 카메라 흔들림 효과 트리거
         CameraController cameraController = Camera.main.GetComponent<CameraController>();
-        if (cameraController != null)
-        {
+        if (cameraController != null) {
             StartCoroutine(cameraController.Shake(0.5f, 0.3f)); // 0.5초 동안, 0.3 강도로 흔들림
         }
         
@@ -180,9 +188,10 @@ public class BossMonster : Monster
     {
         isSpawning = true;
         SetMoving(false);
+        actionTimer = attackCooldown; // 밟기도 쿨다운 공유
 
         UpdateAnimationState();
-
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.BossTroopComing);
 
         Invoke(nameof(FinishSpawn), 1f); // 스폰 애니메이션 길이에 맞춰서 설정
     }
@@ -200,6 +209,7 @@ public class BossMonster : Monster
 
     private void SpawnMonster()
     {
+
         // 이미 스폰 중인 상태라면 리턴
         if (!isSpawning || monsterSpawnData.monsterPrefab == null)
         {

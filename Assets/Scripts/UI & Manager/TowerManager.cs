@@ -189,7 +189,11 @@ public class TowerManager : MonoBehaviour
                      hit.collider.GetComponentInParent<DefaultCanonTurret>() != null)
             {
                 //  Missile 타워 해제 (반드시)
-                curMissileTower = null;
+                if (curMissileTower != null)
+                {
+                    curMissileTower.ShowRange = false;
+                    curMissileTower = null;
+                }
 
                 //  동일 오브젝트를 다시 클릭했다면 무시
                 if (curCanonTower == hit.collider.GetComponentInParent<DefaultCanonTurret>())
@@ -197,7 +201,13 @@ public class TowerManager : MonoBehaviour
                     return;
                 }
 
+                if (curCanonTower != null)
+                {
+                    curCanonTower.ShowRange = false;
+                }
+                
                 curCanonTower = hit.collider.GetComponentInParent<DefaultCanonTurret>();
+                curCanonTower.ShowRange = true;
 
                 //  이미 UI가 보여지고 있다면, 메뉴에 햅틱
                 if (isVisible)
@@ -217,7 +227,11 @@ public class TowerManager : MonoBehaviour
                      hit.collider.GetComponentInParent<DefaultMissileTurret>() != null)
             {
                 //  Canon Tower 해제 (반드시)
-                curCanonTower = null;
+                if (curCanonTower != null)
+                {
+                    curCanonTower.ShowRange = false;
+                    curCanonTower = null;
+                }
 
                 //  동일 오브젝트를 다시 클릭했다면 무시
                 if (curMissileTower == hit.collider.GetComponentInParent<DefaultMissileTurret>())
@@ -225,7 +239,13 @@ public class TowerManager : MonoBehaviour
                     return;
                 }
 
+                if (curMissileTower != null)
+                {
+                    curMissileTower.ShowRange = false;
+                }
+                
                 curMissileTower = hit.collider.GetComponentInParent<DefaultMissileTurret>();
+                curMissileTower.ShowRange = true;
 
                 //  이미 UI가 보여지고 있다면, 메뉴에 햅틱
                 if (isVisible)
@@ -243,6 +263,16 @@ public class TowerManager : MonoBehaviour
             else
             {
                 isVisible = false;
+                if (curCanonTower != null)
+                {
+                    curCanonTower.ShowRange = false;
+                }
+
+                if (curMissileTower != null)
+                {
+                    curMissileTower.ShowRange = false;
+                }
+
                 curCanonTower = null;
                 curMissileTower = null;
             }
