@@ -8,9 +8,9 @@ public class bombscript : MonoBehaviour
 {
     [SerializeField] private GameObject bomb;  
    // [SerializeField] private GameObject effect;
-    [SerializeField] public float bombDamage = 10f;
+    [SerializeField] public float bombDamage = 100f;
   //  [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float explosionRange = 10f;
+    [SerializeField] private float explosionRange = 20f;
     [SerializeField] private Animator animator;  // Animator 컴포넌트 참조
     public bool isbam=false;
     

@@ -16,6 +16,9 @@ public class OpeningViewer : MonoBehaviour
     private int talkIdx;
 
     [Header("Skip Button")] public GameObject skipButton;
+    
+    [Header("Space Ship")]
+    public GameObject spaceShip;
 
     private void Start()
     {
@@ -91,6 +94,7 @@ public class OpeningViewer : MonoBehaviour
             }
             else
             {
+                spaceShip.GetComponent<Animator>().SetBool("isEnd", true);
                 yield return new WaitForSeconds(2f);
                 GameManager.TutorialEnd = true;
                 SceneController.ChangeScene("StageMenu");
@@ -104,6 +108,7 @@ public class OpeningViewer : MonoBehaviour
             }
             else
             {
+                spaceShip.GetComponent<Animator>().SetBool("isEnd", true);
                 yield return new WaitForSeconds(2f);
                 GameManager.TutorialEnd = true;
                 SceneController.ChangeScene("StageMenu");

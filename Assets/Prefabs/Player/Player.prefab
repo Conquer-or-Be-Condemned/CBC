@@ -906,6 +906,14 @@ MonoBehaviour:
   map: {fileID: 0}
   attackDelay: 0.2
   attackAble: 0
+  maxBombCount: 0
+  curBombCount: 0
+  isCharging: 0
+  bombElapsed: 0
+  bombElapsedMax: 400
+  onBombRecharge:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6538483365708020521
 MonoBehaviour:
   m_ObjectHideFlags: 0
