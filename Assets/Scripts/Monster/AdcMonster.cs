@@ -188,61 +188,41 @@ public class AdcMonster : Monster
         // 플레이어 또는 제어 장치에게 데미지
         if (currentTarget.CompareTag("Player"))
         {
-            
                 // 타겟 방향 계산
                 Vector2 targetDirection = (currentTarget.position - transform.position).normalized;
 
                 // 총알 생성
                 GameObject bulletObj = Instantiate(bulletPrefabGreen, transform.position, Quaternion.identity);
                 AdcBullet adcBulletScript=bulletObj.GetComponent<AdcBullet>();
-                //PlayerBullet playerBulletScript = bulletObj.GetComponent<PlayerBullet>();
-                //playerBulletScript.SetDirection(targetDirection);
+
                 adcBulletScript.SetDirection(targetDirection);
-                // 총알에 방향 설정
-                // Rigidbody2D bulletRigidbody = bulletObj.GetComponent<Rigidbody2D>();
-                // if (bulletRigidbody != null)
-                // {
-                //     bulletRigidbody.velocity = targetDirection * projectileSpeed; // 속도 설정
-                // }
-                // else
-                // {
-                //     Debug.LogError("Bullet prefab에 Rigidbody2D가 없습니다.");
-                // }
-
-              
         }
-
-        //  아마 이 코드는 사용이 어려울 것 같습니다. - 현석
-        else if (currentTarget.CompareTag("CU"))
-        {
-            ControlUnitStatus controlUnit = controlUnitStatus;
-            if (controlUnit != null)
-            {
-                Debug.LogError("Attack CU");
-                controlUnit.GetDamage((int)attackDamage);
-            }
-            else
-            {
-                Debug.LogError("Can not attack CU");
-            }
-        }
-        //  요 아래껄로 대체해주세요.
         else
         {
             ControlUnitStatus controlUnit = controlUnitStatus;
+            
             if (controlUnit == null)
             {
                 Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
                 return;
             }
-            foreach (Transform accessPoint in controlUnitStatus.accessPoints)
-            {
-                if (accessPoint == currentTarget)
-                {
-                    controlUnit.GetDamage((int)attackDamage);
-                    break;
-                }
-            }
+            
+            // foreach (Transform accessPoint in controlUnitStatus.accessPoints)
+            // {
+            //     if (accessPoint == currentTarget)
+            //     {
+                    Vector2 targetDirection = (currentTarget.position - transform.position).normalized;
+                    
+                    GameObject bulletObj = Instantiate(bulletPrefabGreen, transform.position, Quaternion.identity);
+                    AdcBullet adcBulletScript = bulletObj.GetComponent<AdcBullet>();
+                
+                    adcBulletScript.SetControlUnitTarget(controlUnitStatus);
+
+                    adcBulletScript.SetDirection(targetDirection);
+
+                    // break;
+            //     }
+            // }
         }
 
         Invoke(nameof(FinishAttack), 1f);

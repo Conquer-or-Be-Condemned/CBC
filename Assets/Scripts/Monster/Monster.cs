@@ -121,7 +121,7 @@ public abstract class Monster : MonoBehaviour
 
     protected virtual void Die()
     {
-        
+        Debug.Log("죽음");
         //  For Debug
         if (GeneralManager.Instance.inGameManager != null)
         {
