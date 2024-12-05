@@ -4369,8 +4369,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9def9b988a7825643bb258d61bd368a7, type: 3}
   - {fileID: 8300000, guid: ee932e99a9e85b149a582bb9563736e7, type: 3}
   - {fileID: 8300000, guid: eec9e34af99fa1f489165ef5fdc12378, type: 3}
-  bgmVolume: 0.3
-  bgmChannelIndex: 3
+  bgmVolume: 0.05
+  bgmChannelIndex: 20
   sfxClips:
   - {fileID: 8300000, guid: 3ae6a6600a6a7409481c896e5a4dd962, type: 3}
   - {fileID: 8300000, guid: 2bf07c61265af4337996d2bfee626366, type: 3}
@@ -4383,8 +4383,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 417d97ce1895a4c948f24660a1c05d90, type: 3}
   - {fileID: 8300000, guid: d6def6d7317e649159ba29e8642819e4, type: 3}
   - {fileID: 8300000, guid: 5e0c25dbebde9494eb2128dced9898f6, type: 3}
-  sfxVolume: 0.3
-  sfxChannelIndex: 30
+  - {fileID: 8300000, guid: d4f2e527034ac4b33aef2d18506342af, type: 3}
+  - {fileID: 8300000, guid: 6397c08612db4450096cce8413ccf437, type: 3}
+  - {fileID: 8300000, guid: a85a15478657941abb6c65230fd3dc67, type: 3}
+  sfxVolume: 1
+  sfxChannelIndex: 100
 --- !u!4 &1181962955
 Transform:
   m_ObjectHideFlags: 0

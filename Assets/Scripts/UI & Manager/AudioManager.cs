@@ -47,7 +47,10 @@ public class AudioManager : Singleton<AudioManager>
         MissileTargetDetected,
         MissileLaunch,
         PlayerBullet,
-        MissileFlying
+        MissileFlying,
+        PlayerMine,
+        TurretOff,
+        TurretOn
     }
 
     public enum Alert
@@ -84,33 +87,8 @@ public class AudioManager : Singleton<AudioManager>
             sfxPlayers[i].playOnAwake = false;
             sfxPlayers[i].volume = sfxVolume;
         }
-        
-        // GameObject alertObject = new GameObject("ALERTPlayer");
-        // alertObject.transform.parent = transform;
-        // alertPlayers = new AudioSource[alertChannels];
-        //
-        // for (int i = 0; i < alertPlayers.Length; i++)
-        // {
-        //     alertPlayers[i] = alertObject.AddComponent<AudioSource>();
-        //     alertPlayers[i].playOnAwake = false;
-        //     alertPlayers[i].volume = alertVolume;
-        // }
     }
-
-    //
-    // AudioSource[] SetupAudioPlayers(string name, int channels, float volume)
-    // {
-    //     GameObject obj = new GameObject(name);
-    //     obj.transform.parent = transform;
-    //     AudioSource[] players = new AudioSource[channels];
-    //     for (int i = 0; i < channels; i++)
-    //     {
-    //         players[i] = obj.AddComponent<AudioSource>();
-    //         players[i].playOnAwake = false;
-    //         players[i].volume = volume;
-    //     }
-    //     return players;
-    // }
+    
 
     // BGM 재생
     public void PlayBGM(Bgm bgm, bool isPlay)
@@ -118,7 +96,7 @@ public class AudioManager : Singleton<AudioManager>
         for (int i = 0; i < bgmPlayers.Length; i++)
         {
             int loopIndex = (i + bgmChannelIndex) % bgmPlayers.Length;
-            bgmChannelIndex = loopIndex;
+            // bgmChannelIndex = loopIndex;
             bgmPlayers[loopIndex].clip = bgmClips[(int)bgm];
             if (isPlay)
             {
