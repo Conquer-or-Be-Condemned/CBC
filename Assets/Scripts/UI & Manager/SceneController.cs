@@ -27,8 +27,8 @@ public class SceneController : Singleton<SceneController>
     public static string[] stageList = { "Stage_1", "Stage_2", "Stage_3", "Ending" };
     
     // 보스 테스트
-    // public static string[] stageList = { "Stage_Boss" };
-    
+    // public static string[] stageList = { "Stage_Boss", "Stage_2" };
+
     //  게임 시작 여부
     private bool isStart;
 
@@ -140,7 +140,18 @@ public class SceneController : Singleton<SceneController>
             GameManager.InGameInit = true;
         
             //  배경 음악
-            AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
+            switch (curSelectStage)
+            {
+                case 0 :
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,true);
+                    break;
+                case 1 :
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage2,true);
+                    break;
+                case 2:
+                    AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage3,true);
+                    break;
+            }
         
             //  플레이어 할당
             GameManager.Instance.player = GameObject.Find("Player");
@@ -158,7 +169,9 @@ public class SceneController : Singleton<SceneController>
         {
             Debug.Log("MAIN!!");
             Time.timeScale = 1f;
+            
             AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,false);
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene, true);
             
             GameManager.InGame = false;
             GameManager.InGameInit = false;
@@ -190,7 +203,14 @@ public class SceneController : Singleton<SceneController>
     //  다음 씬 정보를 저장하는 함수
     public static void SetNextScene(string name)
     {
-        NextScene = name;
+        if (GameManager.TutorialEnd)
+        {
+            NextScene = "StageMenu";
+        }
+        else
+        {
+            NextScene = name;
+        }
     }
 
     //  다음 씬을 불러오는 함수

@@ -33,6 +33,11 @@ public class VariousManager : MonoBehaviour
             aboutUsButtonMain.GetComponent<Button>().onClick.AddListener(ShowAboutUs);
         }
 
+        if (GameManager.ReadNotice)
+        {
+            noticeMain.SetActive(false);
+        }
+
         if (noticeMainButton != null)
         {
             noticeMainButton.GetComponent<Button>().onClick.AddListener((HideNotice));
@@ -80,6 +85,7 @@ public class VariousManager : MonoBehaviour
 
     public void HideNotice()
     {
+        GameManager.ReadNotice = true;
         noticeMain.SetActive(false);
     }
 }

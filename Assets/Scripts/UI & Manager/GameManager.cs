@@ -34,6 +34,8 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Language")] public static int Language = 0;
 
+    [Header("Notice")] public static bool ReadNotice = false;    
+
     private void Start()
     {
         //  다음 씬에서도 동일하게 유지하기 위함
@@ -44,6 +46,9 @@ public class GameManager : Singleton<GameManager>
         InGameInit = false;
         
         CurStage = DataManager.CurStage;
+        
+        //  Audio Start
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene, true);
     }
 
     private void FixedUpdate()
@@ -108,7 +113,8 @@ public class GameManager : Singleton<GameManager>
     public void NewGame()
     {
         IsNewGame = true;
-        TutorialEnd = false;
+        //  임시로 true로 해놓음
+        TutorialEnd = true;
     }
 
     public void SetLanguageSetting(int lang)

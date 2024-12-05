@@ -26,7 +26,13 @@ public class AudioManager : Singleton<AudioManager>
     {
         StartingScene,
         StageSelection,
-        Stage1
+        Stage1,
+        Stage2,
+        Stage3,
+        OminousSound,
+        Ending,
+        GameOver,
+        Opening
     }
 
     public enum Sfx
@@ -34,6 +40,8 @@ public class AudioManager : Singleton<AudioManager>
         Fire,
         BossTroopComing,
         BossStepSound,
+        BossPunch,
+        BossWalkingAppears,
         MissileFinalDetect,
         MissileExplosion,
         MissileTargetDetected,
@@ -144,7 +152,7 @@ public class AudioManager : Singleton<AudioManager>
     // 특정 SFX 중지
     public void StopSfx(string id)
     {
-        if (activeSfx.ContainsKey(id))
+        if (activeSfx.ContainsKey(id)&&activeSfx[id]!=null)
         {
             activeSfx[id].Stop();
             activeSfx.Remove(id);
