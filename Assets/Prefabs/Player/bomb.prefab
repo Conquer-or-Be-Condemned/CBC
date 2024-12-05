@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 6757870014131357828}
-  bombDamage: 10
-  explosionRange: 20
+  bombDamage: 50
+  explosionRange: 5
   animator: {fileID: 0}
   isbam: 0
 --- !u!50 &5950224543752731837
