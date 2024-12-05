@@ -21,7 +21,7 @@ public class AdcBullet : MonoBehaviour
     public void SetDirection(Vector2 dir)
     {
         direction = dir.normalized;
-        StartCoroutine(destroyObjectIfNotHit());
+        StartCoroutine(DestroyObjectIfNotHit());
     }
 
     private void FixedUpdate()
@@ -36,7 +36,7 @@ public class AdcBullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    private IEnumerator destroyObjectIfNotHit()
+    private IEnumerator DestroyObjectIfNotHit()
     {
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);

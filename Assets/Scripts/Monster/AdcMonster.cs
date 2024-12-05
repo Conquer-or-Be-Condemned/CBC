@@ -10,9 +10,11 @@ public class AdcMonster : Monster
     private float debugTimer = 0f;
     private float debugInterval = 0.5f;
     private int currentDirection = 0;
-
+    
     //원거리 공격프리펩
     private Transform playerTransform;
+    
+    [Header("Bullet")]
     [SerializeField] private GameObject bulletPrefabGreen;  // 총알로 사용할 프리팹
     [SerializeField] private float projectileSpeed = 10f;  // 총알의 속도
     // 방향 상수 정의
