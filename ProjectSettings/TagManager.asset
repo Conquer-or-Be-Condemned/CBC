@@ -18,7 +18,6 @@ TagManager:
   - MapElement
   - TargetPoint
   - Forest
-  - CUBoundary
   layers:
   - Default
   - TransparentFX
@@ -36,9 +35,9 @@ TagManager:
   - Tower
   - Forest
   - TowerRange
-  - EnemyBullet
   - 
-  - 
+  - Camera
+  - Player
   - 
   - 
   - 
