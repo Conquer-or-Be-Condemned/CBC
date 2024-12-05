@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    [Header("About Game")] public static int CurStage = 4;
+    [Header("About Game")] public static int CurStage = 2;
     
     [Header("Shop")] public static int Coin = 30;
 

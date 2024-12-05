@@ -31,6 +31,7 @@ public class MonsterSpawner : MonoBehaviour
     private void Start()
     {
         isWorking = false;
+        
     }
 
     private void FixedUpdate()
