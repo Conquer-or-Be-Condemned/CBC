@@ -38,24 +38,24 @@ public class FirePoint : MonoBehaviour
         // 각도에 따라 오브젝트 활성화
         if (angle > -45 && angle <= 45)
         {
-            newPosition.x += 1f;
+            newPosition.x += 2f;
             transform.position = oriPosition + newPosition;
         }
         else if (angle > 45 && angle <= 135)
         {
-            newPosition.y += 1f;
+            newPosition.y += 2f;
             transform.position = oriPosition + newPosition;
         }
         else if (angle > -135 && angle <= -45)
         {
             // 마우스가 아래쪽 방향에 있을 때 gundown 활성화
-            newPosition.y -= 1f;
+            newPosition.y -= 2f;
             transform.position = oriPosition + newPosition;
         }
         else
         {
             // 마우스가 왼쪽 방향에 있을 때 gunside 활성화
-            newPosition.x-= 1f;
+            newPosition.x-= 2f;
             transform.position = oriPosition + newPosition;
             
         }
