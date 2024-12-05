@@ -83,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActivated: 0
   previousIsActivated: 0
+  ShowRange: 0
   turretRotationPoint: {fileID: 714818547979223039}
   bulletSpawnPoint:
   - {fileID: 4415268648827251105}
@@ -732,7 +733,7 @@ GameObject:
   - component: {fileID: 6220006798756236841}
   - component: {fileID: 4697836675795572690}
   - component: {fileID: 6352759299500901830}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

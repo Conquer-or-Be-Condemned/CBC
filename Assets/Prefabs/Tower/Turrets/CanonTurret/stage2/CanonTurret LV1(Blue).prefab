@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActivated: 0
   previousIsActivated: 0
+  ShowRange: 0
   turretRotationPoint: {fileID: 286097789958134540}
   enemyMask:
     serializedVersion: 2
@@ -257,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8414836952263305618}
   - component: {fileID: 7506254957663382205}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
