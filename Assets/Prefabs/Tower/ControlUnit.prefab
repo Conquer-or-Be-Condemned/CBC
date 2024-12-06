@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 4546850635533796810}
   m_Layer: 12
   m_Name: STATION1
-  m_TagString: Untagged
+  m_TagString: CUBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

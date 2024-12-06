@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    [Header("About Game")] public static int CurStage = 2;
+    [Header("About Game")] public static int CurStage = 4;
     
     [Header("Shop")] public static int Coin = 30;
 
@@ -24,7 +24,7 @@ public class DataManager : MonoBehaviour
     public static int PlayerBullet = 3;
     public static int TurretBullet = 10;
     public static int TurretMissile = 15;
-    public static int ControlUnitPower = 225;
+    public static int ControlUnitPower = 200;
     public static int ControlUnitHp = 1500;
 
     public static int[] CostList = { 10, 20, 30, 40, 50 };
@@ -41,7 +41,7 @@ public class DataManager : MonoBehaviour
 
         //  Control Unit
         ControlUnitHp = ControlUnitHpLv * 500 + 1000;
-        ControlUnitPower = ControlUnitPowerLv * 45 + 180;
+        ControlUnitPower = ControlUnitPowerLv * 50 + 150;
 
         /*
          * Player Hp : 200 250 300 (+ 50)
