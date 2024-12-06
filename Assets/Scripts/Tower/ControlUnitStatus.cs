@@ -34,6 +34,13 @@ public class ControlUnitStatus : MonoBehaviour
         ValidateData();
     }
 
+    private void Update()
+    {
+        if (curHealth < 0)
+        {
+            curHealth = 0;
+        }
+    }
     private void ValidateData()
     {
         maxHealth = DataManager.ControlUnitHp;
@@ -81,6 +88,7 @@ public class ControlUnitStatus : MonoBehaviour
         
         if (curHealth <= 0)
         {
+            curHealth = 0;
             Invoke("Die", 1f);
         }
     }
