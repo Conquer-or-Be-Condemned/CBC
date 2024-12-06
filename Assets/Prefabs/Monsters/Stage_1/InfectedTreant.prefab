@@ -234,13 +234,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: TreantMushroom
-  maxHealth: 1000
-  currentHealth: 1000
+  maxHealth: 4000
+  currentHealth: 4000
   attackDamage: 40
   moveSpeed: 2
   attackRange: 12
   attackCooldown: 5
   isDead: 0
+  isTargeted: 0
   detectionRange: 30
   player: {fileID: 0}
   controlUnitStatus: {fileID: 0}
