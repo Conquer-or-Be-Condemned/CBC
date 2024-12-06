@@ -41,6 +41,7 @@ public class AudioManager : Singleton<AudioManager>
         BossTroopComing,
         BossStepSound,
         BossPunch,
+        BossGrowl,
         BossWalkingAppears,
         MissileFinalDetect,
         MissileExplosion,

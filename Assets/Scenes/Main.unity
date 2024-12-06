@@ -1202,7 +1202,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Opening
+          m_StringArgument: StageMenu
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1055396292}
@@ -4369,13 +4369,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9def9b988a7825643bb258d61bd368a7, type: 3}
   - {fileID: 8300000, guid: ee932e99a9e85b149a582bb9563736e7, type: 3}
   - {fileID: 8300000, guid: eec9e34af99fa1f489165ef5fdc12378, type: 3}
-  bgmVolume: 0.05
-  bgmChannelIndex: 20
+  bgmVolume: 1
+  bgmChannelIndex: 3
   sfxClips:
   - {fileID: 8300000, guid: 3ae6a6600a6a7409481c896e5a4dd962, type: 3}
   - {fileID: 8300000, guid: 2bf07c61265af4337996d2bfee626366, type: 3}
   - {fileID: 8300000, guid: 8b73826c532064f43830247df1cc2a74, type: 3}
   - {fileID: 8300000, guid: 3e67d9badb6284a629a61b237c491b19, type: 3}
+  - {fileID: 8300000, guid: 5a35a65a7dfb0423d8ad8ae8bf3d0fe6, type: 3}
   - {fileID: 8300000, guid: 7aff6a86549484737aa4e635a78091e8, type: 3}
   - {fileID: 8300000, guid: 3f3dec3087eda410c84bea610f666ca4, type: 3}
   - {fileID: 8300000, guid: 4736a73d7cfa4458e9ad1d1488e8eecc, type: 3}
@@ -4386,8 +4387,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d4f2e527034ac4b33aef2d18506342af, type: 3}
   - {fileID: 8300000, guid: 6397c08612db4450096cce8413ccf437, type: 3}
   - {fileID: 8300000, guid: a85a15478657941abb6c65230fd3dc67, type: 3}
-  sfxVolume: 1
-  sfxChannelIndex: 100
+  sfxVolume: 2
+  sfxChannelIndex: 30
 --- !u!4 &1181962955
 Transform:
   m_ObjectHideFlags: 0
@@ -5863,8 +5864,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 155.17, y: -115.765}
-  m_SizeDelta: {x: 250.34, y: 81.51}
+  m_AnchoredPosition: {x: 147.825, y: -115.765}
+  m_SizeDelta: {x: 235.65, y: 81.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869680058
 MonoBehaviour:
@@ -5903,8 +5904,8 @@ MonoBehaviour:
   m_text: "[\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uC124\uACC4 \uAE30\uCD08(001) 2\uC870]\n\uC870\uC7A5
     | \uC548\uC815\uD604 (\uBAAC\uC2A4\uD130) <example@email.com>\n\uC870\uC6D0 |
     \uC7A5\uD638\uC131 (\uD50C\uB808\uC774\uC5B4) <example@email.com>\n\uC870\uC6D0
-    | \uC591\uD604\uC11D (UI, \uC2DC\uC2A4\uD15C) <example@email.com>\n\uC870\uC6D0
-    | \uD669\uC7AC\uB3D9 (\uD130\uB81B, \uB9F5, \uC2A4\uD1A0\uB9AC) <example@email.com>"
+    | \uC591\uD604\uC11D (UI, Map) <example@email.com>\n\uC870\uC6D0 | \uD669\uC7AC\uB3D9
+    (\uD130\uB81B, \uC624\uB514\uC624) <example@email.com>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
   m_sharedMaterial: {fileID: 6633813256750574405, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
