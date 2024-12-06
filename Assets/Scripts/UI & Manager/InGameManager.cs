@@ -44,6 +44,7 @@ public class InGameManager : MonoBehaviour
     //  Wave 몬스터 수
     public int dieBossSpawn;
     public int curBossSpawn;
+    public bool isBossWave;
 
     [Header("Talk Management")]
     //  대화창 끝남을 확인
@@ -302,9 +303,23 @@ public class InGameManager : MonoBehaviour
 
     public void ListenBossSpawn()
     {
+        float bgmVolume = AudioManager.Instance.bgmVolume;
+        
         dieBossSpawn = 0;
+        curBossSpawn = 1;
+        isBossWave = true;
         Debug.LogWarning("BossSpawn");
-        dieBossSpawn++;
+
+        StartCoroutine(BossSfxCoroutine(bgmVolume));
+    }
+
+    public IEnumerator BossSfxCoroutine(float bgmVolume)
+    {
+        AudioManager.Instance.bgmVolume = AudioManager.Instance.sfxVolume * 0.1f;
+        
+        yield return new WaitForSeconds(10f);
+        
+        AudioManager.Instance.bgmVolume = bgmVolume;
     }
 
     public void StartWave()
@@ -411,13 +426,13 @@ public class InGameManager : MonoBehaviour
         dieBossSpawn = 0;
         curBossSpawn = 0;
         isClear = false;
+        isBossWave = false;
     }
 
     private void CheckWaveClear()
     {
-
         // 만약 현재 웨이브가 마지막 웨이브(보스 웨이브)이고, 보스를 모두 처치했다면 스테이지 클리어
-        if (curWave == maxWave && dieBossSpawn == curBossSpawn && curBossSpawn > 0)
+        if (curWave == maxWave && dieBossSpawn == curBossSpawn && isBossWave)
         {
             Debug.Log("Wave is End");
             Debug.Log("curWave3: " + curWave);
@@ -433,7 +448,7 @@ public class InGameManager : MonoBehaviour
             }
         }
         // 보스 웨이브가 아닌 일반 웨이브 클리어 처리
-        else if (dieSpawn == curSpawn && spawnEnd && curWave < maxWave)
+        else if (dieSpawn == curSpawn && spawnEnd && curWave < maxWave && !isBossWave)
         {
             if (!isClear)
             {
