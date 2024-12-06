@@ -54,6 +54,8 @@ public class BossMonster : Monster
         {
             Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
         }
+
+        GeneralManager.Instance.inGameManager.ListenBossSpawn();
     }
 
     private void Update()
@@ -110,9 +112,9 @@ public class BossMonster : Monster
 
     private void StartRandomAction(Vector2 actionDirection)
     {
-        // int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
+        int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
         // 디버깅용
-        int randomAction = 0;
+        // int randomAction = 0;
 
         switch (randomAction)
         {
@@ -135,7 +137,7 @@ public class BossMonster : Monster
         actionTimer = attackCooldown;
 
         UpdateAnimationState();
-    
+
         // 공격 사운드를 1초 뒤에 재생하도록 설정
         Invoke(nameof(PlayBossPunchSound), 0.5f);
 
@@ -158,7 +160,8 @@ public class BossMonster : Monster
         UpdateAnimationState();
     }
 
-    private void StartTread(Vector2 treadDirection) {
+    private void StartTread(Vector2 treadDirection)
+    {
         isTreading = true;
         SetMoving(false);
         actionTimer = attackCooldown; // 밟기도 쿨다운 공유
@@ -166,7 +169,7 @@ public class BossMonster : Monster
         UpdateAnimationState();
         // 플레이어 또는 제어 장치에게 데미지
         DealDamageToTarget((int)treadDamage);
-        
+
         Invoke(nameof(FinishTread), 0.6f); // 밟기 애니메이션 길이에 맞춰서 설정
     }
 
@@ -176,10 +179,11 @@ public class BossMonster : Monster
 
         // 카메라 흔들림 효과 트리거
         CameraController cameraController = Camera.main.GetComponent<CameraController>();
-        if (cameraController != null) {
+        if (cameraController != null)
+        {
             StartCoroutine(cameraController.Shake(0.5f, 0.3f)); // 0.5초 동안, 0.3 강도로 흔들림
         }
-        
+
         isTreading = false;
         UpdateAnimationState();
     }
@@ -198,10 +202,9 @@ public class BossMonster : Monster
 
     private void FinishSpawn()
     {
-        
         // 스폰 로직 구현 (예: 새로운 몬스터 생성)
         SpawnMonster();
-        
+
         isSpawning = false;
         UpdateAnimationState();
     }
@@ -209,7 +212,6 @@ public class BossMonster : Monster
 
     private void SpawnMonster()
     {
-
         // 이미 스폰 중인 상태라면 리턴
         if (!isSpawning || monsterSpawnData.monsterPrefab == null)
         {
@@ -349,6 +351,7 @@ public class BossMonster : Monster
 
         return closestPoint;
     }
+
 
     private void OnDrawGizmos()
     {

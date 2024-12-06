@@ -119,13 +119,14 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
-    protected virtual void Die()
+    protected void Die()
     {
         Debug.Log("죽음");
         //  For Debug
         if (GeneralManager.Instance.inGameManager != null)
         {
             GeneralManager.Instance.inGameManager.ListenMonsterDie();
+            GeneralManager.Instance.inGameManager.ListenBossDie();
         }
         
         // 체력바 제거

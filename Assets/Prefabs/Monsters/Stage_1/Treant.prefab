@@ -207,13 +207,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: Treant
-  maxHealth: 300
-  currentHealth: 300
+  maxHealth: 450
+  currentHealth: 450
   attackDamage: 15
   moveSpeed: 4
   attackRange: 6.5
   attackCooldown: 1
   isDead: 0
+  isTargeted: 0
   detectionRange: 15
   player: {fileID: 0}
   controlUnitStatus: {fileID: 0}
