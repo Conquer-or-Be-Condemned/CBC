@@ -28,45 +28,56 @@ public class TalkManager : MonoBehaviour
         //  ENGLISH
         TalkData_ENG.Add(001, new string[]
         {
-            "Holy Shit Mother Fxxk?",
-            "갑자기 나보고 전쟁을 나가라고?",
-            "이게 뭔 개소리야"
+            "Due to Earth's overpopulation and resource depletion, I.S.C.A. was starting to colonize planets near Earth.",
+            "To Colonize the planet they had to activate the Control Unit.",
+            "Cause this process took a long time, I.S.C.A. needed armies to protect it.",
+            "But strangely, there were few planets they failed every time.",
+            "The chairman held \"The Developer\" of control unit to go and fix it immediately if he didn't want to get in trouble."
         });
         TalkData_ENG.Add(002, new string[]
         {
-            "응 안해",
-            "응 못해",
-            "응 ㄲㅈ 안해"
-
+            "\"Hello guys, I'm \"The Developer\" of the control unit\"",
+            "\"I'm heading to the first planet now\"",
+            "\"How come they ask me to hold responsibility???\"",
+            "\"It doesn't makes sense at all!!!\"",
+            "\"I just dedicated myself to develop it!!!\"",
+            "\"I'm soon arriving at the planet and have to prepare for laning\"",
+            "\"Goodbye....Hope to see you.....ALIVE....\""
         });
-        TalkData_ENG.Add(003, new string[]
-        {
-            "Third Test",
-            "오케이",
-            "Shit"
-
-        });
+        // TalkData_ENG.Add(003, new string[]
+        // {
+        //     "Third Test",
+        //     "오케이",
+        //     "Shit"
+        //
+        // });
         
         //  KOREAN
         
         TalkData_KOR.Add(001, new string[]
         {
-            "뭐가 어째고 저째?",
-            "갑자기 나보고 전쟁을 나가라고?",
-            "이게 뭔 개소리야"
+            "지구의 인구 과밀과 자원 고갈 때문에 I.S.C.A.는 지구에서 가까운 행성부터 정복하고 있었다.",
+            "행성을 정복하기 위해서는 제어장치를 활성화하는 절차를 진행해야 한다.",
+            "이 절차를 시간이 꽤 오래 걸리기 때문에 I.S.C.A.는 이 시간 동안 이를 지킬 군인들을 필요로 했다.",
+            "하지만 이상하게도, 항상 실패하는 행성들이 몇 군데 있었다.",
+            "I.S.C.A의 최고위원장은 \"The Developer\"에게 험한 꼴을 당하고 싶지 않으면 지금 당장 가서 제어장치를 고치라고 고함쳤다."
         });
         TalkData_KOR.Add(002, new string[]
         {
-            "응 안해",
-            "응 못해",
-            "응 ㄲㅈ 안해"
+            "\"안녕? 난 제어장치의 개발자야 만나서 반가워\"",
+            "\"지금 내가 정복해야 할 첫번째 행성으로 이동하고 있어\"",
+            "\"아니 어떻게 그 책임을 나한테 묻지???\"",
+            "\"전혀 말이 안되잖아!!!\"",
+            "\"난 그냥 제어장치를 개발하는데 전념했을 뿐인데!!!\"",
+            "\"하..이제 곧 도착하니까 이만 착륙 준비하러 갈게\"",
+            "\"잘가...우리...꼭..살아서..보자고...\""
         });
-        TalkData_KOR.Add(003, new string[]
-        {
-            "세 번째 테스트",
-            "오케이",
-            "응 ㄲㅈ 안해"
-        });
+        // TalkData_KOR.Add(003, new string[]
+        // {
+        //     "세 번째 테스트",
+        //     "오케이",
+        //     "응 ㄲㅈ 안해"
+        // });
 
         //  수동으로 설정해야 함 (한글 영어 동일하게)
         ForOpeningIdx = 3;
@@ -74,14 +85,14 @@ public class TalkManager : MonoBehaviour
         TalkData_ENG.Add(101, new string[]
         {
             "Connecting to Headquarters...",
-            $"Developer, You arrived at {StageInfoManager.GetCurStageName()}.",
+            $"Developer, You arrived at HJD-1029X2.",
             "Scanning Hazard Objects Nearby.",
             "Scanning...",
             "Analyzing...",
             "Briefing Scanning Results...",
-            //  터렛 숫자는 지금 넣으려면 조금 빡세서 나중으로 미룸
-            "Found some Turrets and One Control Unit",
-            "[Manufacturer : Von Neumann Industry]\nAssembled by Vanguard from Earth.",
+            "Found 11 Canon Turrets and 3 Missile Turrets.",
+            "[Manufacturer : von Neumann Industries]\nAssembled by Vanguard from Earth.",
+            "Current Temperature: 21.5\u00b0C",
             "Finished Briefing Scanning Results...",
             "Once the Control Unit activates, You can conquer the planet.",
             "You MUST protect it from the enemies until it activates.",
@@ -93,35 +104,49 @@ public class TalkManager : MonoBehaviour
         
         TalkData_ENG.Add(201, new string[]
         {
-            "음 어서와요 뚜뚜 스테이지 2입니다!",
-            $"Developer, You arrived at {StageInfoManager.GetCurStageName()}.",
+            "Connecting to Headquarters...",
+            $"Developer, You arrived at AJH-4001D2.",
+            "You did a good job at the first planet! Well done!",
             "Scanning Hazard Objects Nearby.",
             "Scanning...",
             "Analyzing...",
             "Briefing Scanning Results...",
-            //  터렛 숫자는 지금 넣으려면 조금 빡세서 나중으로 미룸
-            "Found some Turrets and One Control Unit",
-            "[Manufacturer : Von Neumann Industry]\nAssembled by Vanguard from Earth.",
+            "Found 8 Canon Turrets and 4 Missile Turrets.",
+            "Current Temperature: -21.7\u00b0C",
             "Finished Briefing Scanning Results...",
-            "Once the Control Unit activates, You can conquer the planet.",
-            "You MUST protect it from the enemies until it activates.",
-            "You can use the emergency power system of the Control Unit to activate turrets.",
-            "Turrets will support You in eliminating enemies.",
-            "You can face a lack of power. Use it wisely.",
+            "As I briefed you it's pretty cold outside take care.",
+            "I believe you can success in the mission one more time.",
+            "Connection Lost..."
+        });
+        TalkData_ENG.Add(301, new string[]
+        {
+            "Connecting to Headquarters...",
+            $"Developer, You arrived at JHS-8854xD.",
+            "Finally it's our last planet!",
+            "Scanning Hazard Objects Nearby.",
+            "Scanning...",
+            "Analyzing...",
+            "Briefing Scanning Results...",
+            "Found 9 Canon Turrets and 4 Missile Turrets.",
+            "Current Temperature: 89.3\u00b0C",
+            "Finished Briefing Scanning Results...",
+            "Unlike the planet before it's very hot outside",
+            "Cause the control unit is placed at the right middle",
+            "monsters will come out from everywhere. Watch Out!",
             "Connection Lost..."
         });
         
         TalkData_KOR.Add(101, new string[]
         {
             "본부와 연결 중...",
-            $"개발자님, {StageInfoManager.GetCurStageName()}에 도착했습니다.",
+            $"개발자님, HJD-1029X2에 도착했습니다.",
             "주변의 위험 물체를 스캔 중입니다.",
             "스캔 중...",
             "분석 중...",
             "스캔 결과를 브리핑합니다...",
-            // 터렛 숫자는 지금 넣으려면 조금 빡세서 나중으로 미룸
-            "몇 개의 터렛과 하나의 컨트롤 유닛을 발견했습니다.",
+            "11개의 캐논 터렛과 3개의 미사일 터렛을 발견했습니다.",
             "[제조사 : 폰 노이만 산업]\n지구에서 온 선발대에 의해 조립되었습니다.",
+            "외부 기온: 21.5\u00b0C",
             "스캔 결과 브리핑을 완료했습니다...",
             "컨트롤 유닛을 활성화하면 행성을 정복할 수 있습니다.",
             "활성화될 때까지 반드시 적들로부터 보호해야 합니다.",
@@ -133,21 +158,35 @@ public class TalkManager : MonoBehaviour
         
         TalkData_KOR.Add(201, new string[]
         {
-            "한국어 버젼 스테이지 2입니다!",
-            $"개발자님, {StageInfoManager.GetCurStageName()}에 도착했습니다.",
+            "본부와 연결 중...",
+            $"개발자님, AJH-4001D2에 도착했습니다.",
+            "첫번째 행성을 성공적으로 정복하셨군요! 축하드립니다!",
             "주변의 위험 물체를 스캔 중입니다.",
             "스캔 중...",
             "분석 중...",
             "스캔 결과를 브리핑합니다...",
-            // 터렛 숫자는 지금 넣으려면 조금 빡세서 나중으로 미룸
-            "몇 개의 터렛과 하나의 컨트롤 유닛을 발견했습니다.",
-            "[제조사 : 폰 노이만 산업]\n지구에서 온 선발대에 의해 조립되었습니다.",
+            "8개의 캐논 터렛과 4개의 미사일 터렛을 발견했습니다.",
+            "외부 기온: -21.7\u00b0C",
             "스캔 결과 브리핑을 완료했습니다...",
-            "컨트롤 유닛을 활성화하면 행성을 정복할 수 있습니다.",
-            "활성화될 때까지 반드시 적들로부터 보호해야 합니다.",
-            "컨트롤 유닛의 비상 전력 시스템을 사용하여 터렛을 활성화할 수 있습니다.",
-            "터렛은 적을 제거하는 데 도움을 줄 것입니다.",
-            "전력이 부족해질 수 있습니다. 신중히 사용하세요.",
+            "제가 말씀드렸듯이 밖에는 현재 기온이 매우 낮습니다.",
+            "추위 잘 이기시고 건승을 빕니다.",
+            "연결이 끊어졌습니다..."
+        });
+        TalkData_KOR.Add(301, new string[]
+        {
+            "본부와 연결 중...",
+            $"개발자님, JHS-8854xD에 도착했습니다.",
+            "드디어 마지막 행성입니다! 조금만 더 힘내세요!",
+            "주변의 위험 물체를 스캔 중입니다.",
+            "스캔 중...",
+            "분석 중...",
+            "스캔 결과를 브리핑합니다...",
+            "9개의 캐논 터렛과 4개의 미사일 터렛을 발견했습니다.",
+            "외부 기온: 89.3\u00b0C",
+            "스캔 결과 브리핑을 완료했습니다...",
+            "좀 전의 행성과는 다르게 여기는 기온이 매우 높습니다.",
+            "제어장치가 중앙에 있기 때문에 대응하는데 어려움이 있을 것입니다.",
+            "적들이 사방에서 나오니까 주의하세요!",
             "연결이 끊어졌습니다..."
         });
         
