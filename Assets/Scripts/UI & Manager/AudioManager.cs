@@ -117,7 +117,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         int loopIndex = sfxChannelIndex % sfxPlayers.Length;
         sfxChannelIndex++;
-
+        if (sfxChannelIndex >= 200) sfxChannelIndex = 20;
         AudioSource source = sfxPlayers[loopIndex];
         source.clip = sfxClips[(int)sfx];
         source.Play();
@@ -186,7 +186,7 @@ public class AudioManager : Singleton<AudioManager>
     public void ChangeSfxVolume(float vol)
     {
         sfxVolume = vol;
-
+    
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             sfxPlayers[i].volume = sfxVolume;
