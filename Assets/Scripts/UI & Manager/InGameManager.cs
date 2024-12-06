@@ -105,6 +105,7 @@ public class InGameManager : MonoBehaviour
         isWave = false;
         isClear = false;
 
+        AudioManager.Instance.sfxChannelIndex = 1;
         talkEnd = false;
         isTalking = false;
 
