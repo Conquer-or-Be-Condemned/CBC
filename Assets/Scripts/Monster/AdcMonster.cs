@@ -191,11 +191,28 @@ public class AdcMonster : Monster
                 // 타겟 방향 계산
                 Vector2 targetDirection = (currentTarget.position - transform.position).normalized;
 
-                // 총알 생성
-                GameObject bulletObj = Instantiate(bulletPrefabGreen, transform.position, Quaternion.identity);
-                AdcBullet adcBulletScript=bulletObj.GetComponent<AdcBullet>();
 
-                adcBulletScript.SetDirection(targetDirection);
+                float bulletsToFire = 3;
+                float _spreadAngle = bulletsToFire * 5;
+                Vector2 baseDirection =  (currentTarget.position - transform.position).normalized;
+                float baseAngle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
+                float angleStep = _spreadAngle / (bulletsToFire - 1);
+                float startAngle = baseAngle - _spreadAngle / 2;
+
+                for (int i = 0; i < bulletsToFire; i++)
+                {
+                    // Debug.Log("Shot!");
+                    float currentAngle = startAngle + angleStep * i;
+                    float radianAngle = currentAngle * Mathf.Deg2Rad;
+                    Vector2 bulletDirection = new Vector2(Mathf.Cos(radianAngle), Mathf.Sin(radianAngle));
+                    
+                    // 총알 생성
+                    GameObject bulletObj = Instantiate(bulletPrefabGreen, transform.position, Quaternion.identity);
+                    AdcBullet adcBulletScript=bulletObj.GetComponent<AdcBullet>();
+
+                    adcBulletScript.SetDirection(bulletDirection );
+                }
+
         }
         else
         {
