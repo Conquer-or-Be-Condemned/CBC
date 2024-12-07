@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7792215644566802799}
   - component: {fileID: 3727076148842209913}
   - component: {fileID: 2009005005601722383}
-  - component: {fileID: 7553824960772183692}
+  - component: {fileID: 3162765951595215054}
   m_Layer: 7
   m_Name: SkeletonThug
   m_TagString: Enemy
@@ -115,6 +115,7 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 5
+  isDerivedBoss: 0
   currentTarget: {fileID: 0}
 --- !u!95 &3727076148842209913
 Animator:
@@ -164,7 +165,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &7553824960772183692
+--- !u!60 &3162765951595215054
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,7 +201,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.8333333, y: 4.8333335}
+    oldSize: {x: 3.4, y: 5.8}
     newSize: {x: 3.84, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -208,14 +209,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1, y: 1.1666667}
-      - {x: -1.3333334, y: 0.8333334}
-      - {x: -1.3333334, y: -0.8333334}
-      - {x: -1, y: -1.1666667}
-      - {x: 1, y: -1.1666667}
-      - {x: 1.3333334, y: -0.8333334}
-      - {x: 1.3333334, y: 0.8333334}
-      - {x: 1, y: 1.1666667}
+    - - {x: -1.7, y: 2.9}
+      - {x: -1.7, y: -2.7}
+      - {x: -1.5, y: -2.9}
+      - {x: 1.7, y: -2.9}
+      - {x: 1.7, y: 2.5}
+      - {x: 1.3000001, y: 2.9}
   m_UseDelaunayMesh: 0
 --- !u!1 &4104958986449835875
 GameObject:
