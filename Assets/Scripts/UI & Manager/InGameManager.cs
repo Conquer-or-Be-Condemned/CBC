@@ -41,6 +41,11 @@ public class InGameManager : MonoBehaviour
     public int dieSpawn;
     public int curSpawn;
 
+    //  Wave 몬스터 수
+    // public int dieBossSpawn;
+    // public int curBossSpawn;
+    public bool isBossWave;
+
     [Header("Talk Management")]
     //  대화창 끝남을 확인
     private bool talkEnd;
@@ -75,22 +80,18 @@ public class InGameManager : MonoBehaviour
     public Button clearGoToStageSelect;
     public Button clearRestart;
 
-    [Header("Player")] 
-    public GameObject player;
+    [Header("Player")] public GameObject player;
     public GameObject playerSpawnPoint;
 
-    [Header("Player Bomb")] 
-    public TMP_Text bombCount;
+    [Header("Player Bomb")] public TMP_Text bombCount;
     public GameObject bombImage;
 
-    [Header("Monster Spawners")] 
-    public MonsterSpawner[] monsterSpawners;
+    [Header("Monster Spawners")] public MonsterSpawner[] monsterSpawners;
+    
+    [Header("Boss Animation")] public GameObject bossAnimationManager;
 
     private void Start()
     {
-        
-        
-        
         //  Pause, Settings
         pauseVisible = false;
         settingVisible = false;
@@ -104,16 +105,17 @@ public class InGameManager : MonoBehaviour
         isWave = false;
         isClear = false;
 
+        // AudioManager.Instance.sfxChannelIndex = 20;
         talkEnd = false;
         isTalking = false;
-        
+
         //  Button 연결
-        goToMainButton.GetComponent<Button>().onClick.AddListener(()=>SceneController.ChangeScene("Main"));
-        restartButton.GetComponent<Button>().onClick.AddListener(()=>SceneController.Instance.ReStartGame());
-        
+        goToMainButton.GetComponent<Button>().onClick.AddListener(() => SceneController.ChangeScene("Main"));
+        restartButton.GetComponent<Button>().onClick.AddListener(() => SceneController.Instance.ReStartGame());
+
         //  진전도 초기화
         talkIdx = 1;
-            
+
         if (SceneController.Instance.curSelectStage + 1 >= DataManager.CurStage)
         {
             Debug.Log("Talk Process!!");
@@ -125,12 +127,12 @@ public class InGameManager : MonoBehaviour
             ShowButton();
             ShowAlerts();
         }
-        
+
         //  Stage Clear Button 연결
-        clearGoToMain.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
-        clearGoToStageSelect.onClick.AddListener(()=>SceneController.ChangeScene("StageMenu"));
-        clearRestart.onClick.AddListener(()=>SceneController.Instance.ReStartGame());
-        
+        clearGoToMain.onClick.AddListener(() => SceneController.ChangeScene("Main"));
+        clearGoToStageSelect.onClick.AddListener(() => SceneController.ChangeScene("StageMenu"));
+        clearRestart.onClick.AddListener(() => SceneController.Instance.ReStartGame());
+
         //  player 검색
         if (player == null)
         {
@@ -150,7 +152,7 @@ public class InGameManager : MonoBehaviour
         {
             CheckKeyBoardInput();
         }
-        
+
         if (isWave)
         {
             CheckWaveClear();
@@ -194,15 +196,14 @@ public class InGameManager : MonoBehaviour
             }
         }
     }
-    
+
     public void ShowSettings()
     {
         settingVisible = true;
-        
+
         settings.SetActive(settingVisible);
-        
+
         GeneralManager.Instance.settingManager.AllocateSetting();
-        
     }
 
     public void ShowOperationKey()
@@ -263,7 +264,7 @@ public class InGameManager : MonoBehaviour
     {
         //  현재 씬 분석
         int cnt = 1;
-        foreach(var e in SceneController.stageList)
+        foreach (var e in SceneController.stageList)
         {
             if (SceneController.NowScene == e)
             {
@@ -293,6 +294,31 @@ public class InGameManager : MonoBehaviour
         }
     }
 
+    // public void ListenBossDie()
+    // {
+    //     Debug.LogWarning("BossDie");
+    //     dieBossSpawn++;
+    // }
+
+    public void ListenBossSpawn()
+    {
+        float bgmVolume = AudioManager.Instance.bgmVolume;
+        
+        isBossWave = true;
+        Debug.LogWarning("BossSpawn");
+
+        StartCoroutine(BossSfxCoroutine(bgmVolume));
+    }
+
+    public IEnumerator BossSfxCoroutine(float bgmVolume)
+    {
+        AudioManager.Instance.bgmVolume = AudioManager.Instance.sfxVolume * 0.04f;
+        
+        yield return new WaitForSeconds(7f);
+        
+        AudioManager.Instance.bgmVolume = bgmVolume;
+    }
+
     public void StartWave()
     {
         //  오작동 방지
@@ -300,16 +326,92 @@ public class InGameManager : MonoBehaviour
         {
             return;
         }
-        
+
+        if (curWave == maxWave)
+        {
+            Debug.Log("Entering Boss Stage: Deactivating all towers and activating BossAnimationManager.");
+
+            // 모든 타워 비활성화
+            for (int i = 0; i < TowerManager.towerList.Count; i++)
+            {
+                GameObject towerObject = TowerManager.towerList[i];
+                if (towerObject != null)
+                {
+                    // 타워 컴포넌트 가져오기
+                    DefaultCanonTurret canonTurret = towerObject.GetComponent<DefaultCanonTurret>();
+                    DefaultMissileTurret missileTurret = towerObject.GetComponent<DefaultMissileTurret>();
+
+                    if (canonTurret != null)
+                    {
+                        canonTurret.DeactivateTurret();
+                        Debug.Log($"Deactivated Canon Turret: {towerObject.name}");
+                    }
+
+                    if (missileTurret != null)
+                    {
+                        missileTurret.DeactivateTurret();
+                        Debug.Log($"Deactivated Missile Turret: {towerObject.name}");
+                    }
+
+                    // 미니맵 요소 색상 업데이트
+                    UpdateMiniMapElement(towerObject, false); // 비활성화 상태
+                }
+                else
+                {
+                    Debug.LogWarning($"Tower at index {i} in towerList is null.");
+                }
+            }
+
+            // BossAnimationManager 활성화
+            if (bossAnimationManager != null)
+            {
+                bossAnimationManager.SetActive(true);
+                Debug.Log("BossAnimationManager 활성화됨.");
+            }
+            else
+            {
+                Debug.LogError("BossAnimationManager가 할당되지 않았습니다.");
+            }
+        }
+
+
         Debug.Log("Wave Start");
         isWave = true;
         spawnEnd = false;
 
         InitWave();
-        ShowInfo();
+        StartCoroutine(ShowInfo()); // 코루틴으로 호출
         HideButton();
-        
+
         HideAlerts();
+    }
+
+    private void UpdateMiniMapElement(GameObject tower, bool isActive)
+    {
+        if (tower == null)
+        {
+            Debug.LogWarning("Tower is null. Cannot update minimap element.");
+            return;
+        }
+
+        // 타워의 모든 자식 중 "MapElement" 태그를 가진 오브젝트 찾기
+        Transform[] children = tower.GetComponentsInChildren<Transform>();
+        foreach (Transform child in children)
+        {
+            if (child.CompareTag("MapElement"))
+            {
+                SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.color = isActive ? Color.green : Color.yellow;
+                    Debug.Log($"MiniMap Element '{child.name}' color set to {(isActive ? "green" : "yellow")}.");
+                }
+                else
+                {
+                    Debug.LogWarning($"MapElement '{child.name}' does not have a SpriteRenderer.");
+                }
+            }
+        }
     }
 
     private void InitWave()
@@ -317,26 +419,47 @@ public class InGameManager : MonoBehaviour
         maxSpawn = StageInfoManager.GetWaveInfo(curWave);
         dieSpawn = 0;
         curSpawn = 0;
+        
+        // dieBossSpawn = 0;
+        // curBossSpawn = 0;
         isClear = false;
+        isBossWave = false;
     }
 
     private void CheckWaveClear()
     {
-        if (dieSpawn == curSpawn && spawnEnd)
+        // 만약 현재 웨이브가 마지막 웨이브(보스 웨이브)이고, 보스를 모두 처치했다면 스테이지 클리어
+        if (dieSpawn == curSpawn &&curWave == maxWave && isBossWave)
+        {
+            Debug.Log("Wave is End");
+            Debug.Log("curWave3: " + curWave);
+            Debug.Log("maxWave3: " + maxWave);
+            if (!isClear)
+            {
+                Debug.Log("isClear 진입");
+                if (CheckStageClear())
+                {
+                    Debug.Log("isStageClear 진입");
+                    isClear = true;
+                }
+            }
+        }
+        // 보스 웨이브가 아닌 일반 웨이브 클리어 처리
+        else if (dieSpawn == curSpawn && spawnEnd && curWave < maxWave && !isBossWave)
         {
             if (!isClear)
             {
                 if (!CheckStageClear())
                 {
                     isClear = true;
-                    
-                    Debug.Log("Wave ++ ");
+
+                    Debug.Log("Wave ++");
                     curWave++;
                     ShowWaveClear();
 
                     //  Player 회복
                     GameManager.Instance.player.GetComponent<PlayerInfo>().RecoverHp();
-                    
+
                     ShowAlerts();
 
                     StartCoroutine(MovePlayCoroutine());
@@ -344,6 +467,7 @@ public class InGameManager : MonoBehaviour
             }
         }
     }
+
 
     public void ShowAlerts()
     {
@@ -363,11 +487,11 @@ public class InGameManager : MonoBehaviour
             if (curWave == monsterSpawners[i].GetWaveId())
             {
                 monsterSpawners[i].HideAlert();
-                ActivateFitWaveSpawner(monsterSpawners[i],true);
+                ActivateFitWaveSpawner(monsterSpawners[i], true);
             }
             else
             {
-                ActivateFitWaveSpawner(monsterSpawners[i],false);
+                ActivateFitWaveSpawner(monsterSpawners[i], false);
             }
         }
     }
@@ -382,14 +506,14 @@ public class InGameManager : MonoBehaviour
         //  대화중이라고 판정
         isTalking = true;
         yield return new WaitForSeconds(1f);
-        
+
         MovePlayer();
 
         yield return new WaitForSeconds(1f);
         isTalking = false;
         isWave = false;
     }
-    
+
     private void MovePlayer()
     {
         player.transform.position = new Vector3(playerSpawnPoint.transform.position.x,
@@ -398,21 +522,21 @@ public class InGameManager : MonoBehaviour
 
     private bool CheckStageClear()
     {
-        if (curWave > maxWave)
+        if (curWave >= maxWave)
         {
             //  재 입장 방지용
             curWave = 1;
-            
+
             Debug.Log("Stage Clear");
-            
+
             blind.SetActive(true);
             stageClearWrapper.SetActive(true);
-            
+
             //  다음 스테이지 해금
             DataManager.CurStage++;
             //  Synchronize
             GameManager.CurStage = DataManager.CurStage;
-            
+
             int reward = CalculateCoin();
             StartCoroutine(CoinCoroutine(reward));
             return true;
@@ -432,7 +556,7 @@ public class InGameManager : MonoBehaviour
                 Time.timeScale = 0f;
                 yield break;
             }
-            
+
             yield return new WaitForSeconds(0.02f);
             cnt++;
             stageCoinText.SetText("+ " + cnt);
@@ -443,11 +567,11 @@ public class InGameManager : MonoBehaviour
     {
         int curCUHp = GeneralManager.Instance.towerManager.controlUnit.GetCurHp();
         int maxCUHp = GeneralManager.Instance.towerManager.controlUnit.GetMaxHp();
-        
+
         float ratio = (float)curCUHp / maxCUHp;
         int reward = (int)(ratio * StageInfoManager.GetReward());
-        
-        Debug.Log("Reward : "+ reward);
+
+        Debug.Log("Reward : " + reward);
 
         DataManager.Coin += reward;
 
@@ -457,25 +581,31 @@ public class InGameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
-        
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.GameOver,true);
-        
+
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.GameOver, true);
+
         blind.SetActive(true);
         stageClearWrapper.SetActive(true);
-        
+
         stageClearText.SetText("Game Over");
         stageContentText.SetText("Mission failed.");
         stageCoinText.SetText("");
         stageCoinImage.SetActive(false);
-        
+
         Time.timeScale = 0f;
     }
 
-    private void ShowInfo()
+    private IEnumerator ShowInfo()
     {
-        if (curWave == maxWave)
+        if (curWave == maxWave - 1)
         {
             waveInfo.SetText("Final Wave");
+        }
+        else if (curWave == maxWave)
+        {
+            yield return new WaitForSeconds(24);
+
+            waveInfo.SetText("Boss Wave");
         }
 
         else
@@ -554,10 +684,10 @@ public class InGameManager : MonoBehaviour
             {
                 yield break;
             }
-            
+
             waveStartText.GetComponent<Animator>().SetBool("big", true);
             yield return new WaitForSeconds(1f);
-            
+
             waveStartText.GetComponent<Animator>().SetBool("big", false);
             yield return new WaitForSeconds(1f);
         }
@@ -568,7 +698,7 @@ public class InGameManager : MonoBehaviour
         waveStart.GetComponent<Button>().interactable = false;
         startWrapper.GetComponent<Animator>().SetBool("visible", false);
     }
-    
+
     //  Player Bomb
     public void ValidateBombCount(int count)
     {
@@ -578,7 +708,7 @@ public class InGameManager : MonoBehaviour
     public void ChargeBombImage(int curTime, int maxTime)
     {
         float ratio = (float)curTime / maxTime;
-        
+
         bombImage.GetComponent<Image>().fillAmount = ratio;
     }
 }

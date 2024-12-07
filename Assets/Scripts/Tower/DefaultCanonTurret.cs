@@ -64,11 +64,13 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
             if (isActivated)
             {
                 previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.TurretOn);
                 AddTurret();
             }
             else if (isActivated == false)
             {
                 Animator.SetBool("isShoot", false);
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.TurretOff);
                 StartCoroutine(DeactivateProcess());
                 previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
                 DeleteTurret();

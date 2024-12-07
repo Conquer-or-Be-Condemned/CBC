@@ -28,9 +28,13 @@ public class MonsterSpawner : MonoBehaviour
     public bool isWorking = false;
     private Coroutine spawnCoroutine;
 
+    [Header("For BossMonster")] 
+    public bool isDerivedBoss;
+
     private void Start()
     {
         isWorking = false;
+        
     }
 
     private void FixedUpdate()
@@ -51,6 +55,24 @@ public class MonsterSpawner : MonoBehaviour
             {
                 isWorking = false;
                 StopCoroutine(spawnCoroutine);
+            }
+        }
+        
+    }
+
+    public void BossSkillSpawn()
+    {
+        if (!isDerivedBoss)
+        {
+            Debug.Log("Invalid : 잘못된 접근입니다.");
+            return;
+        }
+        // 스폰 배열에서 무작위로 선택하여 몬스터를 스폰
+        foreach (var spawnData in monsterSpawnDataArray)
+        {
+            for (int i = 0; i < spawnData.spawnCount; i++)
+            {
+                SpawnMonster(spawnData);
             }
         }
     }
@@ -90,6 +112,11 @@ public class MonsterSpawner : MonoBehaviour
 
         // 몬스터 생성
         GameObject monster = Instantiate(spawnData.monsterPrefab, spawnPosition, Quaternion.identity);
+        monster.GetComponent<Monster>().SetMonsterDerivedBoss(isDerivedBoss);
+        if (!isDerivedBoss)
+        {
+            GeneralManager.Instance.inGameManager.ListenMonsterSpawn();
+        }
 
         // 몬스터에 플레이어 참조 연결
         GameObject player = GameObject.FindGameObjectWithTag("Player");
