@@ -30,9 +30,6 @@ public class SettingManager : MonoBehaviour
             isEnable = true;
             bgmSlider = GameObject.Find("BgmSlider").GetComponent<Slider>();
             sfxSlider = GameObject.Find("SfxSlider").GetComponent<Slider>();
-
-            bgmSlider.value = AudioManager.Instance.bgmVolume;
-            sfxSlider.value = AudioManager.Instance.sfxVolume;
             
             if (GameObject.Find("Dropdown")!=null)
             {
@@ -44,6 +41,13 @@ public class SettingManager : MonoBehaviour
             
             bgmSlider.onValueChanged.AddListener((e)=>audioManager.ChangeBgmVolume(e));
             sfxSlider.onValueChanged.AddListener((e)=>audioManager.ChangeSfxVolume(e));
+            
+            bgmSlider.value = AudioManager.Instance.bgmVolume;
+            sfxSlider.value = AudioManager.Instance.sfxVolume;
+            
+            Debug.Log(bgmSlider.value);
+            Debug.Log(sfxSlider.value);
+            
             return true;
         }
         else
@@ -57,6 +61,13 @@ public class SettingManager : MonoBehaviour
         isEnable = true;
         bgmSlider = GameObject.Find("BgmSlider").GetComponent<Slider>();
         sfxSlider = GameObject.Find("SfxSlider").GetComponent<Slider>();
+        
+        //  silder의 범위 변환
+        bgmSlider.value = AudioManager.Instance.bgmVolume;
+        sfxSlider.value = AudioManager.Instance.sfxVolume;
+            
+        Debug.Log(bgmSlider.value);
+        Debug.Log(sfxSlider.value);
         
         bgmSlider.onValueChanged.AddListener((e)=>audioManager.ChangeBgmVolume(e));
         sfxSlider.onValueChanged.AddListener((e)=>audioManager.ChangeSfxVolume(e));

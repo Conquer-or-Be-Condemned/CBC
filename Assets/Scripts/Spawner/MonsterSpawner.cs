@@ -10,38 +10,70 @@ public class MonsterSpawnData
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [Header("Monster Prefabs")]
-    [SerializeField] private MonsterSpawnData[] monsterSpawnDataArray; // 여러 몬스터 데이터를 관리할 배열
+    [Header("Monster Prefabs")] [SerializeField]
+    private MonsterSpawnData[] monsterSpawnDataArray; // 여러 몬스터 데이터를 관리할 배열
 
-    [Header("Spawn Settings")]
-    [SerializeField] private float spawnInterval = 2f;
-    [SerializeField] private float spawnRadius = 1f;   // 스폰 범위
-    [SerializeField] private float spawnZPosition = -2f;  // Z축 고정값 추가
+    [Header("Spawn Settings")] [SerializeField]
+    private float spawnInterval = 2f;
 
+    [SerializeField] private float spawnRadius = 1f; // 스폰 범위
+    [SerializeField] private float spawnZPosition = -2f; // Z축 고정값 추가
+
+    [Header("Spawner Info")] public int id;
+
+    [Header("For Alert")] public GameObject alert;
+
+    [Header("Handlers")] 
+    public bool workable = false;
     public bool isWorking = false;
     private Coroutine spawnCoroutine;
+
+    [Header("For BossMonster")] 
+    public bool isDerivedBoss;
 
     private void Start()
     {
         isWorking = false;
+        
     }
 
     private void FixedUpdate()
     {
         // 게임 상태와 관련된 로직이 필요할 경우 GeneralManager와 연동 가능
-        if (!isWorking)
+        if (workable)
         {
-            if (GeneralManager.Instance.inGameManager.isWave && !GeneralManager.Instance.inGameManager.spawnEnd)
+            if (!isWorking)
             {
-                spawnCoroutine = StartCoroutine(SpawnRoutine());
-                isWorking = true;
+                if (GeneralManager.Instance.inGameManager.isWave && !GeneralManager.Instance.inGameManager.spawnEnd)
+                {
+                    spawnCoroutine = StartCoroutine(SpawnRoutine());
+                    isWorking = true;
+                }
+            }
+
+            if (GeneralManager.Instance.inGameManager.spawnEnd)
+            {
+                isWorking = false;
+                StopCoroutine(spawnCoroutine);
             }
         }
+        
+    }
 
-        if (GeneralManager.Instance.inGameManager.spawnEnd)
+    public void BossSkillSpawn()
+    {
+        if (!isDerivedBoss)
         {
-            isWorking = false;
-            StopCoroutine(spawnCoroutine);
+            Debug.Log("Invalid : 잘못된 접근입니다.");
+            return;
+        }
+        // 스폰 배열에서 무작위로 선택하여 몬스터를 스폰
+        foreach (var spawnData in monsterSpawnDataArray)
+        {
+            for (int i = 0; i < spawnData.spawnCount; i++)
+            {
+                SpawnMonster(spawnData);
+            }
         }
     }
 
@@ -80,6 +112,11 @@ public class MonsterSpawner : MonoBehaviour
 
         // 몬스터 생성
         GameObject monster = Instantiate(spawnData.monsterPrefab, spawnPosition, Quaternion.identity);
+        monster.GetComponent<Monster>().SetMonsterDerivedBoss(isDerivedBoss);
+        if (!isDerivedBoss)
+        {
+            GeneralManager.Instance.inGameManager.ListenMonsterSpawn();
+        }
 
         // 몬스터에 플레이어 참조 연결
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -99,4 +136,30 @@ public class MonsterSpawner : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
+
+    public void ShowAlert()
+    {
+        alert.GetComponent<Animator>().SetBool("visible", true);
+    }
+
+    public void HideAlert()
+    {
+        alert.GetComponent<Animator>().SetBool("visible", false);
+    }
+
+    public int GetId()
+    {
+        return id % 100;
+    }
+
+    public int GetWaveId()
+    {
+        return id / 100;
+    }
+
+    public void SetWorkable(bool work)
+    {
+        workable = work;
+    }
+
 }

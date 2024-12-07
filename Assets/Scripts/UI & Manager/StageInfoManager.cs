@@ -132,24 +132,55 @@ public class StageInfoManager : MonoBehaviour
     private IEnumerator StoryCoroutine()
     {
         planetStory.SetText("");
+
+        string unknownStory_ENG = "Exception: Information is NULL.";
+        string unknownStory_KOR = "예외 : 정보가 NULL입니다.";
+        
         StringBuilder stringBuilder = new StringBuilder();
 
         if (GameManager.Language == 0)
         {
-            for (var i = 0; i < StoryList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+            if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
-                stringBuilder.Append(StoryList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
-                planetStory.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(0.005f);
+                for (var i = 0; i < StoryList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+                {
+                    stringBuilder.Append(StoryList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
+                    planetStory.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
             }
+            else
+            {
+                for (var i = 0; i < unknownStory_ENG.Length; i++)
+                {
+                    stringBuilder.Append(unknownStory_ENG[i]);
+                    planetStory.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
+            }
+            
         }
         else if (GameManager.Language == 1)
         {
-            for (var i = 0; i < StoryList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+            if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
-                stringBuilder.Append(StoryList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
-                planetStory.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(0.005f);
+                for (var i = 0;
+                     i < StoryList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length;
+                     i++)
+                {
+                    stringBuilder.Append(StoryList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
+                    planetStory.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
+            }
+            else
+            {
+                for (var i = 0; i < unknownStory_KOR.Length; i++)
+                {
+                    stringBuilder.Append(unknownStory_KOR[i]);
+                    planetStory.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
             }
         }
         
@@ -159,24 +190,31 @@ public class StageInfoManager : MonoBehaviour
     private IEnumerator InfoCoroutine()
     {
         planetInfo.SetText("");
+        
         StringBuilder stringBuilder = new StringBuilder();
 
         if (GameManager.Language == 0)
         {
-            for (int i = 0; i < InfoList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+            if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
-                stringBuilder.Append(InfoList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
-                planetInfo.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(0.005f);
+                for (int i = 0; i < InfoList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+                {
+                    stringBuilder.Append(InfoList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
+                    planetInfo.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
             }
         }
         else if (GameManager.Language == 1)
         {
-            for (int i = 0; i < InfoList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+            if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
-                stringBuilder.Append(InfoList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
-                planetInfo.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(0.005f);
+                for (int i = 0; i < InfoList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
+                {
+                    stringBuilder.Append(InfoList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage][i]);
+                    planetInfo.text = stringBuilder.ToString();
+                    yield return new WaitForSeconds(0.005f);
+                }
             }
         }
         
@@ -196,20 +234,20 @@ public class StageInfoManager : MonoBehaviour
                       "but now we can't find traces of them anymore. " +
                       "Let's colonize this Planet.\nTake care and Focus Developer.....\nGood Luck.....");
         
-        StoryList_ENG.Add("Congrats Clearing HJD-1029X2!!! This is our second destination."+
-                      "It has similar temperature with the moon."+
-                      "VERY hot during the daytime and VERY cold after the sunset."
-                      +"It snowed there last night. Watch out!!! Pretty Slippery out there.."
-                      +"Get Some thick clothes on and take care! We trust you...");
+        StoryList_ENG.Add("Congrats Clearing HJD-1029X2!!! This is our second destination. "+
+                      "It has similar temperature with the moon. "+
+                      "VERY hot during the daytime and VERY cold after the sunset. "
+                      +"It snowed there last night. Watch out!!! Pretty Slippery out there.. "
+                      +"Get Some thick clothes on and take care! We trust you... ");
         
-        StoryList_ENG.Add("Finally....this is our final destination."
-                      + "We don't have much information about JHS-8854xD to tell you."
-                      + "We just checked that there are some flaming hot lava lakes."
-                      +"You better not fall into it." +"Oh, we just got a new information."
+        StoryList_ENG.Add("Finally....this is our final destination. "
+                      + "We don't have much information about JHS-8854xD to tell you. "
+                      + "We just checked that there are some flaming hot lava lakes. "
+                      +"You better not fall into it." +"Oh, we just got a new information. "
                       +"The control-unit is in the middle of the map. So the monsters will" +
-                      "come from every direction...Good Luck...");
+                      "come from every direction... Good Luck... ");
         
-        StoryList_ENG.Add("The End of Game.");
+        StoryList_ENG.Add("");
         
         InfoList_ENG.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
         InfoList_ENG.Add("Average temperature: 0.4\u00b0C\nPlanet diameter: 3,515 km\nBiological Population: 5,558,421\nPlanet type: Moon-type Planet");
@@ -223,25 +261,25 @@ public class StageInfoManager : MonoBehaviour
         NameList_KOR.Add("JHS-8854xD");
         NameList_KOR.Add("엔딩");
 
-        StoryList_KOR.Add("이 행성은 우리의 첫 번째 목적지입니다. \n지구와 유사한 환경을 가지고 있지만, " +
-                          "강력한 적군이 이 행성을 방어하고 있습니다. \n\n" +
-                          "우리의 선발대가 최선을 다해 이 행성을 정복하려 했지만, " +
-                          "현재는 그들의 흔적을 더 이상 찾을 수 없습니다. " +
-                          "이 행성을 식민지화합시다. \n조심하고 집중하세요, 개발자님... \n행운을 빕니다.....");
+        StoryList_KOR.Add("이 행성은 우리의 첫 번째 목적지입니다.\n지구와 유사한 환경을 가지고 있지만,\n" +
+                          "강력한 적군이 이 행성을 방어하고 있습니다.\n" +
+                          "우리의 선발대가 최선을 다해 이 행성을\n정복하려 했지만,\n" +
+                          "현재는 그들의 흔적을 더 이상 찾을 수 없습니다.\n" +
+                          "이 행성을 식민지화합시다.\n조심하고 집중하세요, 개발자님...\n행운을 빕니다.....");
 
-        StoryList_KOR.Add("HJD-1029X2를 클리어한 것을 축하드립니다!!! \n여기가 우리의 두 번째 목적지입니다. " +
-                          "이곳은 달과 비슷한 온도를 가지고 있습니다. " +
-                          "낮에는 매우 덥고, 해가 지고 나면 매우 춥습니다. " +
-                          "어젯밤에는 눈이 내렸습니다. 조심하세요! 꽤 미끄럽습니다... " +
-                          "두꺼운 옷을 준비하시고 조심히 다녀오세요! \n우리는 당신을 믿습니다...");
+        StoryList_KOR.Add("HJD-1029X2를 클리어한 것을 축하드립니다!!!\n여기가 우리의 두 번째 목적지입니다.\n" +
+                          "이곳은 달과 비슷한 온도를 가지고 있습니다.\n" +
+                          "낮에는 매우 덥고, 해가 지고 나면 매우 춥습니다.\n" +
+                          "어젯밤에는 눈이 내렸습니다.\n조심하세요! 꽤 미끄럽습니다...\n" +
+                          "두꺼운 옷을 준비하시고 조심히 다녀오세요! \n우리는 당신을 믿습니다...\n");
 
-        StoryList_KOR.Add("드디어... 여기가 우리의 마지막 목적지입니다. " +
-                          "JHS-8854xD에 대해 알려드릴 정보가 많지 않습니다. " +
+        StoryList_KOR.Add("드디어... 여기가 우리의 마지막 목적지입니다.\n" +
+                          "JHS-8854xD에 대해 알려드릴 정보가 많지 않습니다.\n" +
                           "단지, 뜨거운 용암 호수가 있다는 사실만 확인되었습니다. " +
-                          "그곳에 빠지지 않도록 조심하세요. " +
-                          "아, 방금 새로운 정보를 얻었습니다. " +
-                          "제어 유닛이 지도의 중앙에 위치해 있습니다. 따라서 몬스터들이" +
-                          "모든 방향에서 몰려올 것입니다... 행운을 빕니다...");
+                          "그곳에 빠지지 않도록 조심하세요.\n" +
+                          "아, 방금 새로운 정보를 얻었습니다.\n" +
+                          "제어 유닛이 지도의 중앙에 위치해 있습니다.\n따라서 몬스터들이 " +
+                          "모든 방향에서 몰려올 것입니다...\n행운을 빕니다...");
 
         StoryList_KOR.Add("게임 엔딩입니다.");
 
@@ -260,15 +298,16 @@ public class StageInfoManager : MonoBehaviour
     //  웨이브 저장을 위한 Method
     public static void SetStageInfo()
     {
-        StageInfo.Add(2);
+        StageInfo.Add(1);
         StageInfo.Add(1);
     }
 
     public static void SetWaveInfo()
     {
         //  Stage 1 - Wave 9개 (임시 3개)
-        WaveInfo.Add(new List<int> {20,20,350,0,0,0,0,0,0});
-        WaveInfo.Add(new List<int> {100,275,350,0,0,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {50,150,250,2,0,0,0,0,0});
+        // WaveInfo.Add(new List<int> {10,10,10,1000,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {100,275,350,1000,0,0,0,0,0,0});
     }
     
     public static int GetStageInfo()

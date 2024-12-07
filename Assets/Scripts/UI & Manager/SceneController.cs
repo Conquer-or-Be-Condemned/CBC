@@ -45,17 +45,6 @@ public class SceneController : Singleton<SceneController>
 
     public void FixedUpdate()
     {
-        //  Stage 선택 창인지를 지속적으로 확인
-        //  이는 버튼을 가져오기 위함
-        if (NowScene == "StageMenu" && StageInfoManager.StageInit)
-        {
-            Debug.Log("Boom!");
-            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,true);
-
-            //  버튼과 게임 시작 함수를 연동
-            GeneralManager.Instance.stageInfoManager.warpButton.GetComponent<Button>().onClick.AddListener(GoToGame);
-            StageInfoManager.StageInit = false;
-        }
 
         if (NowScene == null)
         {
@@ -78,6 +67,7 @@ public class SceneController : Singleton<SceneController>
     //  게임 시작만을 위한 메소드
     public void GoToGame()
     {
+        AudioManager.Instance.StopAllSfx();
         if (!isStart)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -165,6 +155,7 @@ public class SceneController : Singleton<SceneController>
     //  Scene을 이동하는 전역 함수
     public static void ChangeScene(string sceneName)
     {
+        AudioManager.Instance.StopAllSfx();
         if (sceneName == "Main")
         {
             Debug.Log("MAIN!!");
@@ -203,12 +194,20 @@ public class SceneController : Singleton<SceneController>
     //  다음 씬 정보를 저장하는 함수
     public static void SetNextScene(string name)
     {
-        NextScene = name;
+        if (GameManager.TutorialEnd)
+        {
+            NextScene = "StageMenu";
+        }
+        else
+        {
+            NextScene = name;
+        }
     }
 
     //  다음 씬을 불러오는 함수
     public static void LoadNextScene()
     {
+        AudioManager.Instance.StopAllSfx();
         ChangeScene(NextScene);
     }
     

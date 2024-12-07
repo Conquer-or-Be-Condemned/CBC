@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tales_Pumpkin
+  m_Controller: {fileID: 9100000, guid: 3d7abfea2d285467a9f9d374ddabd9a0, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 3292dd76b6aa94e988517dd2e812d354, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9bcee0de312fc4711963ae3fd2c36a89, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a1c2f72f351404bd3bfb282aae165cce, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9f95d920772e64fd6a0ffc9c1ed45fec, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d09237dedc54b40ff8943cfe5d40e255, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b4d37353c596a4266945617a81fbd53b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f8907a8faf9e94c7cbcd4e8f7b3ee232, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cacedaa205f0c408d93972f060cb6015, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e44356811dc11478bb5b191a1682e753, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 96c1c8a4f15574bd4a2703af15822d3d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ae590313a000b4833afb4e96b756cf49, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e59e229ba0a0b44cca8a067b0b096a48, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ac2211b9d9b93459d9b8142b15f018ad, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4afda7540859d436481f407e5efa46d4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 734e53fb429d84b3aab757ab1dd08296, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a0669d3afc6174e08940fa77fea7b1ac, type: 2}

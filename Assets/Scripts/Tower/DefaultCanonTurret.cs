@@ -11,7 +11,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
     [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
-    protected bool ShowRange;
+    public bool ShowRange;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;// 타워 회전 각도
     protected Transform Target;             //target of bullets
@@ -51,24 +51,26 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     }
     protected void Update()
     {
-        RangeRenderer.enabled = ShowRange;
+        // RangeRenderer.enabled = ShowRange;
         CheckToggle();//사용자에 의한 타워 가동 토글 확인
         TowerIsActivatedNow();//사용자에 의해 타워가 가동 됐다면 역할 수행
         
     }
     private void CheckToggle()//Checks toggle of isActivated
     {
-        // RangeRenderer.enabled = ShowRange;
+        RangeRenderer.enabled = ShowRange;
         if (isActivated != previousIsActivated)//toggle check
         {
             if (isActivated)
             {
                 previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.TurretOn);
                 AddTurret();
             }
             else if (isActivated == false)
             {
                 Animator.SetBool("isShoot", false);
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.TurretOff);
                 StartCoroutine(DeactivateProcess());
                 previousIsActivated = isActivated; // 이전 상태를 현재 상태로 업데이트
                 DeleteTurret();

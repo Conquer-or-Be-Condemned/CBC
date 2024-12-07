@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class bombscript : MonoBehaviour
 {
     [SerializeField] private GameObject bomb;  
    // [SerializeField] private GameObject effect;
-    [SerializeField] public float bombDamage = 10f;
+    [SerializeField] public float bombDamage = 100f;
   //  [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float explosionRange = 10f;
+    [SerializeField] private float explosionRange = 20f;
     [SerializeField] private Animator animator;  // Animator 컴포넌트 참조
-    public bool isbam=false;
+    [FormerlySerializedAs("isbam")] public bool isBomb=false;
     
     void Start()
     { 
@@ -27,9 +28,9 @@ public class bombscript : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);  // 2초 대기
         // isbomb 파라미터를 true로 설정
-        isbam = true;
-        yield return new WaitForSeconds(0.6f); 
-        
+        isBomb = true;
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.PlayerMine);
+        yield return new WaitForSeconds(0.6f);
         Collider2D[] monsters = Physics2D.OverlapCircleAll(GetComponent<Rigidbody2D>().position, explosionRange);
         foreach (var monster in monsters)
         {
@@ -50,10 +51,10 @@ public class bombscript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isbam == true)
+        if (isBomb == true)
         {
             animator.SetBool("isboom", true);  // isboom 파라미터를 true로 설정
-            isbam = false;  // 파라미터를 한 번만 설정하고 이후로는 반복하지 않도록
+            isBomb = false;  // 파라미터를 한 번만 설정하고 이후로는 반복하지 않도록
         }
     }
 

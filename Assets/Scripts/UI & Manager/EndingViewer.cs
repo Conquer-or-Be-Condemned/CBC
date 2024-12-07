@@ -64,7 +64,7 @@ public class EndingViewer : MonoBehaviour
         {
             
             ShowText(idx);
-            yield return new WaitForSeconds(3.2f);
+            yield return new WaitForSeconds(5.5f);
             idx++;
             
             if (idx >= leng)
@@ -108,25 +108,21 @@ public class EndingViewer : MonoBehaviour
 
     private void SetEndingText()
     {
-        endingList_ENG.Add("Finally, all the colonial wars have ended.");
-        endingList_ENG.Add("The developer who succeeded in the conquest finally returned to their home planet.");
-        endingList_ENG.Add("However, Earth was already gone.");
-        endingList_ENG.Add("It was due to Jaedong Hwang's martial law.");
-        endingList_ENG.Add("The developer asked Chat-GPT.");
-        endingList_ENG.Add("Chat-GPT responded to the developer.");
-        endingList_ENG.Add("Fatal: Null Pointer Exception");
-        endingList_ENG.Add("This is the end of the story.");
-        endingList_ENG.Add("Thank you for playing.");
+        endingList_ENG.Add("Finally, \"The developer\" succeeded colonizing the planets");
+        endingList_ENG.Add("Even missions that the soldiers themselves couldn’t complete were successfully accomplished by the developer alone.");
+        endingList_ENG.Add("People began to show him big respect.");
+        endingList_ENG.Add("The I.S.C.A.‘s chairman was removed from his position and replaced with someone else.");
+        endingList_ENG.Add("The new chairman assigned a team to the developer and asked him to take the lead in conquering other planets.");
+        endingList_ENG.Add("The developer gladly accepted and led the world’s most formidable unit to conquer the universe.");
+        endingList_ENG.Add("To be Continued.....");
         
-        endingList_KOR.Add("마침내 모든 식민 전쟁은 종료 되었다.");
-        endingList_KOR.Add("점령에 성공한 개발자는 마침내 고향행성으로 돌아갔다.");
-        endingList_KOR.Add("하지만, 지구는 이미 없어지고 말았다");
-        endingList_KOR.Add("바로 황재동의 계엄령 때문이었다.");
-        endingList_KOR.Add("개발자는 Chat-GPT에게 물어봤다.");
-        endingList_KOR.Add("Chat-GPT는 개발자에게 말했다.");
-        endingList_KOR.Add("Fatal : Null Pointer Exception");
-        endingList_KOR.Add("여기까지 엔딩입니다.");
-        endingList_KOR.Add("플레이 해주셔서 감사합니다.");
+        endingList_KOR.Add("마침내 \"The developer\" 는 행성들을\n정복하는데 성공했다.");
+        endingList_KOR.Add("군인들도 성공하지 못했던 임무들이\n그에 의해서 성공적으로 완수됐다.");
+        endingList_KOR.Add("시민들은 그에 대한 존경을\n표하기 시작했다.");
+        endingList_KOR.Add("I.S.C.A.의 위원장은 보직에서 해제됐고\n다른사람으로 교체됐다.");
+        endingList_KOR.Add("새로운 위원장은 개발자에게 팀을 주며\n다른 행성들의 정복에 앞장 설 것을 부탁했다.");
+        endingList_KOR.Add("개발자는 흔쾌히 수락했고 우주를 정복하는\n세계 최강의 부대를 이끌어 나간다.");
+        endingList_KOR.Add("To be Continued.....");
     }
 
     public IEnumerator ShowEndingCreditCoroutine()
