@@ -556,7 +556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: -35}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!95 &1340527749
@@ -614,17 +614,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Developed By
+  m_text: 'Developed By {
 
 
-    An Jeong Hyeon
+    An Jeong Hyeon (Monster);
 
-    Jang Ho sung
+    Jang Ho sung (Player);
 
-    Yang Hyun Seok
+    Yang
+    Hyun Seok (UI, System);
 
-    Hwang
-    Jae Dong'
+    Hwang Jae Dong (Turret, Map); }'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3739164d2b75c084eb84a11172cc2ce8, type: 2}
   m_sharedMaterial: {fileID: 6692588118950626053, guid: 3739164d2b75c084eb84a11172cc2ce8, type: 2}
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 40
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
