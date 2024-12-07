@@ -32,6 +32,9 @@ public abstract class Monster : MonoBehaviour
     private Animator animator;
     private PolygonCollider2D polygonCollider;
 
+    [Header("For BossMonster")] 
+    public bool isDerivedBoss = false;
+
     protected virtual void Start()
     {
 
@@ -98,7 +101,10 @@ public abstract class Monster : MonoBehaviour
 
         // For In Game
         isDead = false;
-        GeneralManager.Instance.inGameManager.ListenMonsterSpawn();
+        // if (!isDerivedBoss)
+        // {
+        //     GeneralManager.Instance.inGameManager.ListenMonsterSpawn();
+        // }
     }
 
     public virtual void TakeDamage(float damage)
@@ -119,14 +125,21 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
+    public void SetMonsterDerivedBoss(bool flag)
+    {
+        isDerivedBoss = flag;
+    }
+
     protected void Die()
     {
         Debug.Log("죽음");
         //  For Debug
         if (GeneralManager.Instance.inGameManager != null)
         {
-            GeneralManager.Instance.inGameManager.ListenMonsterDie();
-            GeneralManager.Instance.inGameManager.ListenBossDie();
+            if (!isDerivedBoss)
+            {
+                GeneralManager.Instance.inGameManager.ListenMonsterDie();
+            }
         }
         
         // 체력바 제거

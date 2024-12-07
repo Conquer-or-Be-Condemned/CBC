@@ -28,10 +28,12 @@ public class MonsterSpawner : MonoBehaviour
     public bool isWorking = false;
     private Coroutine spawnCoroutine;
 
+    [Header("For BossMonster")] 
+    public bool isDerivedBoss;
+
     private void Start()
     {
         isWorking = false;
-        
     }
 
     private void FixedUpdate()
@@ -91,6 +93,11 @@ public class MonsterSpawner : MonoBehaviour
 
         // 몬스터 생성
         GameObject monster = Instantiate(spawnData.monsterPrefab, spawnPosition, Quaternion.identity);
+        monster.GetComponent<Monster>().SetMonsterDerivedBoss(isDerivedBoss);
+        if (!isDerivedBoss)
+        {
+            GeneralManager.Instance.inGameManager.ListenMonsterSpawn();
+        }
 
         // 몬스터에 플레이어 참조 연결
         GameObject player = GameObject.FindGameObjectWithTag("Player");

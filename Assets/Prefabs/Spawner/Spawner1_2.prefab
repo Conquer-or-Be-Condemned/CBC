@@ -56,4 +56,8 @@ MonoBehaviour:
   spawnInterval: 5
   spawnRadius: 1
   spawnZPosition: -2
+  id: 0
+  alert: {fileID: 0}
+  workable: 0
   isWorking: 0
+  isDerivedBoss: 1
