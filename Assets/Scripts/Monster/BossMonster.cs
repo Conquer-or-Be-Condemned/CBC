@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BossMonster : Monster
 {
@@ -20,7 +23,7 @@ public class BossMonster : Monster
     private const int DIRECTION_RIGHT = 3;
 
     [Header("Spawner Setting")] [SerializeField]
-    private MonsterSpawnData monsterSpawnData;
+    private GameObject monsterSpawnerInBoss;
 
     // 생성된 스포너 오브젝트를 추적
     private GameObject spawnerInstance;
@@ -56,6 +59,9 @@ public class BossMonster : Monster
         }
 
         GeneralManager.Instance.inGameManager.ListenBossSpawn();
+        
+        //  Spawner 위치 설정
+        monsterSpawnerInBoss.transform.position = transform.position;
     }
 
     private void Update()
@@ -84,6 +90,9 @@ public class BossMonster : Monster
         {
             actionTimer -= Time.deltaTime;
         }
+        
+        //  Spawner 위치 설정
+        monsterSpawnerInBoss.transform.position = transform.position;
     }
 
     private void UpdateState(float distanceToTarget, Vector2 directionToTarget)
@@ -115,6 +124,8 @@ public class BossMonster : Monster
         int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
         // 디버깅용
         // int randomAction = 0;
+        
+        Debug.Log("Boss" + randomAction);
 
         switch (randomAction)
         {
@@ -209,41 +220,51 @@ public class BossMonster : Monster
         UpdateAnimationState();
     }
 
-
     private void SpawnMonster()
     {
-        // 이미 스폰 중인 상태라면 리턴
-        if (!isSpawning || monsterSpawnData.monsterPrefab == null)
+        if (monsterSpawnerInBoss == null)
         {
-            Debug.LogWarning("Spawning is not allowed or Monster prefab is null!");
-            return;
+            Debug.LogWarning("Monster Spawner is Null");
         }
 
-        // 보스 주변에 스폰 위치 계산
-        float randomOffsetX = Random.Range(-2f, 2f); // X축 랜덤 오프셋
-        float randomOffsetY = Random.Range(-2f, 2f); // Y축 랜덤 오프셋
-        Vector3 spawnPosition = new Vector3(
-            transform.position.x + randomOffsetX,
-            transform.position.y + randomOffsetY,
-            transform.position.z
-        );
-
-        // 몬스터 생성
-        GameObject monster = Instantiate(monsterSpawnData.monsterPrefab, spawnPosition, Quaternion.identity);
-
-        // 생성된 몬스터가 플레이어를 타겟팅하도록 설정
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            Monster monsterComponent = monster.GetComponent<Monster>();
-            if (monsterComponent != null)
-            {
-                monsterComponent.player = player.transform;
-            }
-        }
-
-        Destroy(monster, 0.1f); // 1초 후 스포너 오브젝트 제거
+        monsterSpawnerInBoss.GetComponent<MonsterSpawner>().BossSkillSpawn();
     }
+    
+    // private void SpawnMonster()
+    // {
+    //     // 이미 스폰 중인 상태라면 리턴
+    //     if (!isSpawning || monsterSpawnData.monsterPrefab == null)
+    //     {
+    //         Debug.LogWarning("Spawning is not allowed or Monster prefab is null!");
+    //         return;
+    //     }
+    //
+    //     // 보스 주변에 스폰 위치 계산
+    //     float randomOffsetX = Random.Range(-2f, 2f); // X축 랜덤 오프셋
+    //     float randomOffsetY = Random.Range(-2f, 2f); // Y축 랜덤 오프셋
+    //     Vector3 spawnPosition = new Vector3(
+    //         transform.position.x + randomOffsetX,
+    //         transform.position.y + randomOffsetY,
+    //         transform.position.z
+    //     );
+    //
+    //     // 몬스터 생성
+    //     GameObject monster = Instantiate(monsterSpawnData.monsterPrefab, spawnPosition, Quaternion.identity);
+    //     Debug.Log(monster);
+    //     
+    //     // 생성된 몬스터가 플레이어를 타겟팅하도록 설정
+    //     GameObject player = GameObject.FindGameObjectWithTag("Player");
+    //     if (player != null)
+    //     {
+    //         Monster monsterComponent = monster.GetComponent<Monster>();
+    //         if (monsterComponent != null)
+    //         {
+    //             monsterComponent.player = player.transform;
+    //         }
+    //     }
+    //
+    //     Destroy(monster, 0.1f); // 1초 후 스포너 오브젝트 제거
+    // }
 
 
     private void DealDamageToTarget(int damage)

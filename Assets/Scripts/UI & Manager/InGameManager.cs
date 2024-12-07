@@ -42,8 +42,8 @@ public class InGameManager : MonoBehaviour
     public int curSpawn;
 
     //  Wave 몬스터 수
-    public int dieBossSpawn;
-    public int curBossSpawn;
+    // public int dieBossSpawn;
+    // public int curBossSpawn;
     public bool isBossWave;
 
     [Header("Talk Management")]
@@ -87,8 +87,7 @@ public class InGameManager : MonoBehaviour
     public GameObject bombImage;
 
     [Header("Monster Spawners")] public MonsterSpawner[] monsterSpawners;
-
-
+    
     [Header("Boss Animation")] public GameObject bossAnimationManager;
 
     private void Start()
@@ -295,18 +294,16 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    public void ListenBossDie()
-    {
-        Debug.LogWarning("BossDie");
-        dieBossSpawn++;
-    }
+    // public void ListenBossDie()
+    // {
+    //     Debug.LogWarning("BossDie");
+    //     dieBossSpawn++;
+    // }
 
     public void ListenBossSpawn()
     {
         float bgmVolume = AudioManager.Instance.bgmVolume;
         
-        dieBossSpawn = 0;
-        curBossSpawn = 1;
         isBossWave = true;
         Debug.LogWarning("BossSpawn");
 
@@ -315,9 +312,9 @@ public class InGameManager : MonoBehaviour
 
     public IEnumerator BossSfxCoroutine(float bgmVolume)
     {
-        AudioManager.Instance.bgmVolume = AudioManager.Instance.sfxVolume * 0.1f;
+        AudioManager.Instance.bgmVolume = AudioManager.Instance.sfxVolume * 0.04f;
         
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
         
         AudioManager.Instance.bgmVolume = bgmVolume;
     }
@@ -423,8 +420,8 @@ public class InGameManager : MonoBehaviour
         dieSpawn = 0;
         curSpawn = 0;
         
-        dieBossSpawn = 0;
-        curBossSpawn = 0;
+        // dieBossSpawn = 0;
+        // curBossSpawn = 0;
         isClear = false;
         isBossWave = false;
     }
@@ -432,7 +429,7 @@ public class InGameManager : MonoBehaviour
     private void CheckWaveClear()
     {
         // 만약 현재 웨이브가 마지막 웨이브(보스 웨이브)이고, 보스를 모두 처치했다면 스테이지 클리어
-        if (curWave == maxWave && dieBossSpawn == curBossSpawn && isBossWave)
+        if (dieSpawn == curSpawn &&curWave == maxWave && isBossWave)
         {
             Debug.Log("Wave is End");
             Debug.Log("curWave3: " + curWave);
