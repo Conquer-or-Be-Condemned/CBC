@@ -62,6 +62,7 @@ public class SettingManager : MonoBehaviour
         bgmSlider = GameObject.Find("BgmSlider").GetComponent<Slider>();
         sfxSlider = GameObject.Find("SfxSlider").GetComponent<Slider>();
         
+        //  silder의 범위 변환
         bgmSlider.value = AudioManager.Instance.bgmVolume;
         sfxSlider.value = AudioManager.Instance.sfxVolume;
             
