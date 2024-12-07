@@ -111,8 +111,8 @@ public class EndingViewer : MonoBehaviour
         endingList_ENG.Add("Finally, \"The developer\" succeeded colonizing the planets");
         endingList_ENG.Add("Even missions that the soldiers themselves couldn’t complete were successfully accomplished by the developer alone.");
         endingList_ENG.Add("People began to show him big respect.");
-        endingList_ENG.Add("The I.S.C.A.‘s top official was removed from his position and replaced with someone else.");
-        endingList_ENG.Add("The new top official assigned a team to the developer and asked him to take the lead in conquering other planets.");
+        endingList_ENG.Add("The I.S.C.A.‘s chairman was removed from his position and replaced with someone else.");
+        endingList_ENG.Add("The new chairman assigned a team to the developer and asked him to take the lead in conquering other planets.");
         endingList_ENG.Add("The developer gladly accepted and led the world’s most formidable unit to conquer the universe.");
         endingList_ENG.Add("To be Continued.....");
         

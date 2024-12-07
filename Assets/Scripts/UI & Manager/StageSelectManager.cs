@@ -26,6 +26,9 @@ public class StageSelectManager : MonoBehaviour
     {
         curSelectStage = GameManager.CurStage - 1;
         
+        //  Stage Init 여부
+        StageInfoManager.StageInit = false;
+        
         planets[curSelectStage].SetActive(true);
         planets[curSelectStage].GetComponent<Animator>().SetBool("visible", true);
         
@@ -57,6 +60,9 @@ public class StageSelectManager : MonoBehaviour
         
         goToMainButton.onClick.AddListener(()=>SceneController.ChangeScene("Main"));
         storyButton.onClick.AddListener(()=>SceneController.ChangeScene("Opening"));
+        warpButton.GetComponent<Button>().onClick.AddListener(()=>SceneController.Instance.GoToGame());
+        
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,true);
     }
 
     //  추가 검증을 위한 점검

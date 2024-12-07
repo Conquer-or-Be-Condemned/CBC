@@ -533,7 +533,11 @@ public class InGameManager : MonoBehaviour
             stageClearWrapper.SetActive(true);
 
             //  다음 스테이지 해금
-            DataManager.CurStage++;
+            if (DataManager.CurStage <= SceneController.Instance.curSelectStage + 1)
+            {
+                DataManager.CurStage++;
+            }
+            
             //  Synchronize
             GameManager.CurStage = DataManager.CurStage;
 
