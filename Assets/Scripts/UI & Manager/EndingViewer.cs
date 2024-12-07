@@ -11,6 +11,7 @@ public class EndingViewer : MonoBehaviour
     public GameObject endingText;
 
     public GameObject logoText;
+    public GameObject developerText;
 
     [Header("Button")] public Button goToMain;
 
@@ -130,6 +131,7 @@ public class EndingViewer : MonoBehaviour
         logoText.GetComponent<TMP_Text>().SetText("The Developer");
         yield return new WaitForSeconds(0.5f);
         logoText.GetComponent<Animator>().SetBool("visible",true);
+        developerText.GetComponent<Animator>().SetBool("visible",true);
         // yield return new WaitForSeconds(5);
         // logoText.GetComponent<Animator>().SetBool("visible",false);
         // yield return new WaitForSeconds(2);
