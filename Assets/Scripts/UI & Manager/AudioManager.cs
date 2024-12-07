@@ -111,7 +111,27 @@ public class AudioManager : Singleton<AudioManager>
             }
         }
     }
-
+    public void PlaySFXOnce(Sfx sfx, bool isPlay)
+    {
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            int loopIndex = (i + sfxChannelIndex) % sfxPlayers.Length;
+            // bgmChannelIndex = loopIndex;
+            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+            sfxPlayers[loopIndex].volume = sfxVolume/10f;
+            Debug.Log(sfxPlayers[loopIndex].volume);
+            if (isPlay)
+            {
+                // if (sfxPlayers[loopIndex].isPlaying)
+                //     continue;
+                sfxPlayers[loopIndex].Play();
+            }
+            else
+            {
+                sfxPlayers[loopIndex].Stop();
+            }
+        }
+    }
     // SFX 재생 (폴링 방식)
     public string PlaySfx(Sfx sfx)
     {
@@ -119,6 +139,10 @@ public class AudioManager : Singleton<AudioManager>
         sfxChannelIndex++;
         if (sfxChannelIndex >= 200) sfxChannelIndex = 20;
         AudioSource source = sfxPlayers[loopIndex];
+        if (sfx == Sfx.Fire)
+        {
+            source.volume = sfxVolume/2f;
+        }
         source.clip = sfxClips[(int)sfx];
         source.Play();
 

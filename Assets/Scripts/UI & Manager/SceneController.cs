@@ -45,17 +45,6 @@ public class SceneController : Singleton<SceneController>
 
     public void FixedUpdate()
     {
-        //  Stage 선택 창인지를 지속적으로 확인
-        //  이는 버튼을 가져오기 위함
-        if (NowScene == "StageMenu" && StageInfoManager.StageInit)
-        {
-            Debug.Log("Boom!");
-            AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,true);
-
-            //  버튼과 게임 시작 함수를 연동
-            GeneralManager.Instance.stageInfoManager.warpButton.GetComponent<Button>().onClick.AddListener(GoToGame);
-            StageInfoManager.StageInit = false;
-        }
 
         if (NowScene == null)
         {
