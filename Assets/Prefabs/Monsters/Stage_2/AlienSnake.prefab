@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7792215644566802799}
   - component: {fileID: 3727076148842209913}
   - component: {fileID: 2009005005601722383}
-  - component: {fileID: -244780659897888879}
+  - component: {fileID: 7979704945678101881}
   m_Layer: 7
   m_Name: AlienSnake
   m_TagString: Enemy
@@ -115,6 +115,7 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 5
+  isDerivedBoss: 0
   currentTarget: {fileID: 0}
 --- !u!95 &3727076148842209913
 Animator:
@@ -164,7 +165,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &-244780659897888879
+--- !u!60 &7979704945678101881
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,12 +209,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.4166667, y: 2.4166667}
-      - {x: -1.4166667, y: -2.25}
-      - {x: -1.25, y: -2.4166667}
-      - {x: 1.4166667, y: -2.4166667}
-      - {x: 1.4166667, y: 2.0833335}
-      - {x: 1.0833334, y: 2.4166667}
+    - - {x: -0.7857143, y: 1.8571429}
+      - {x: -0.7857143, y: -1.4285715}
+      - {x: -0.6428572, y: -1.8571429}
+      - {x: 0.7857143, y: -1.8571429}
+      - {x: 0.7857143, y: 0.8571429}
+      - {x: 0.21428573, y: 1.8571429}
   m_UseDelaunayMesh: 0
 --- !u!1 &4104958986449835875
 GameObject:

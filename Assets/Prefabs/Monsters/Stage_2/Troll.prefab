@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3727076148842209913}
   - component: {fileID: 2009005005601722383}
   - component: {fileID: -7792215644566802799}
+  - component: {fileID: 5668103486936741841}
   m_Layer: 7
   m_Name: Troll
   m_TagString: Enemy
@@ -162,7 +163,60 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 8
+  isDerivedBoss: 0
   currentTarget: {fileID: 0}
+--- !u!60 &5668103486936741841
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009334584712422631}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 9.666667, y: 13.666667}
+    newSize: {x: 3.84, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -2.1666667, y: 6.8333335}
+      - {x: -4.8333335, y: 3.5}
+      - {x: -4.8333335, y: -6.166667}
+      - {x: -4.166667, y: -6.8333335}
+      - {x: 4.8333335, y: -6.8333335}
+      - {x: 4.8333335, y: 4.8333335}
+      - {x: 2.1666667, y: 6.8333335}
+  m_UseDelaunayMesh: 0
 --- !u!1 &7391762672961567574
 GameObject:
   m_ObjectHideFlags: 0

@@ -247,10 +247,9 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 4
+  isDerivedBoss: 0
   treadDamage: 80
-  monsterSpawnData:
-    monsterPrefab: {fileID: 1084871462846035899, guid: 28b7ef2ba34dd48ed8f33c8d28ef6fd8, type: 3}
-    spawnCount: 1
+  monsterSpawnerInBoss: {fileID: 1084871462846035899, guid: 28b7ef2ba34dd48ed8f33c8d28ef6fd8, type: 3}
   currentTarget: {fileID: 0}
 --- !u!60 &6642390465229006115
 PolygonCollider2D:
