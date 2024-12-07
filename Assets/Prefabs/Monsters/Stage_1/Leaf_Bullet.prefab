@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1906694760514295439}
   - component: {fileID: 2513548741337155926}
   m_Layer: 16
-  m_Name: Plant_Leafer_Projectile_2
+  m_Name: Leaf_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
