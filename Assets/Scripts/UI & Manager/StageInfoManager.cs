@@ -247,7 +247,7 @@ public class StageInfoManager : MonoBehaviour
                       +"The control-unit is in the middle of the map. So the monsters will" +
                       "come from every direction... Good Luck... ");
         
-        StoryList_ENG.Add("The End of Game.");
+        StoryList_ENG.Add("");
         
         InfoList_ENG.Add("Average temperature: 15.6\u00b0C\nPlanet diameter: 12,564 km\nBiological Population: 145,235,520\nPlanet type: Earth-type planet");
         InfoList_ENG.Add("Average temperature: 0.4\u00b0C\nPlanet diameter: 3,515 km\nBiological Population: 5,558,421\nPlanet type: Moon-type Planet");

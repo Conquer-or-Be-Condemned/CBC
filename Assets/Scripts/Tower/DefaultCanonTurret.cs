@@ -51,14 +51,14 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     }
     protected void Update()
     {
-        RangeRenderer.enabled = ShowRange;
+        // RangeRenderer.enabled = ShowRange;
         CheckToggle();//사용자에 의한 타워 가동 토글 확인
         TowerIsActivatedNow();//사용자에 의해 타워가 가동 됐다면 역할 수행
         
     }
     private void CheckToggle()//Checks toggle of isActivated
     {
-        // RangeRenderer.enabled = ShowRange;
+        RangeRenderer.enabled = ShowRange;
         if (isActivated != previousIsActivated)//toggle check
         {
             if (isActivated)
