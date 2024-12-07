@@ -247,6 +247,7 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 10
+  isDerivedBoss: 0
   treadDamage: 80
   monsterSpawnData:
     monsterPrefab: {fileID: 1084871462846035899, guid: 2afc40aedefe746c78920a9523650646, type: 3}

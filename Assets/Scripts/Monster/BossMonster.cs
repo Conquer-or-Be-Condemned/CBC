@@ -115,6 +115,8 @@ public class BossMonster : Monster
         int randomAction = Random.Range(0, 3); // 0: Attack, 1: Tread, 2: Spawn
         // 디버깅용
         // int randomAction = 0;
+        
+        Debug.Log("Boss" + randomAction);
 
         switch (randomAction)
         {
@@ -230,7 +232,8 @@ public class BossMonster : Monster
 
         // 몬스터 생성
         GameObject monster = Instantiate(monsterSpawnData.monsterPrefab, spawnPosition, Quaternion.identity);
-
+        Debug.Log(monster);
+        
         // 생성된 몬스터가 플레이어를 타겟팅하도록 설정
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)

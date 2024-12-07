@@ -78,6 +78,7 @@ public class SceneController : Singleton<SceneController>
     //  게임 시작만을 위한 메소드
     public void GoToGame()
     {
+        AudioManager.Instance.StopAllSfx();
         if (!isStart)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -165,6 +166,7 @@ public class SceneController : Singleton<SceneController>
     //  Scene을 이동하는 전역 함수
     public static void ChangeScene(string sceneName)
     {
+        AudioManager.Instance.StopAllSfx();
         if (sceneName == "Main")
         {
             Debug.Log("MAIN!!");
@@ -216,6 +218,7 @@ public class SceneController : Singleton<SceneController>
     //  다음 씬을 불러오는 함수
     public static void LoadNextScene()
     {
+        AudioManager.Instance.StopAllSfx();
         ChangeScene(NextScene);
     }
     

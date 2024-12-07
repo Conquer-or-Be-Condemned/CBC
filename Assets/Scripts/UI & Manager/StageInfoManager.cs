@@ -298,7 +298,7 @@ public class StageInfoManager : MonoBehaviour
     //  웨이브 저장을 위한 Method
     public static void SetStageInfo()
     {
-        StageInfo.Add(4);
+        StageInfo.Add(1);
         StageInfo.Add(1);
     }
 
