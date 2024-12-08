@@ -73,5 +73,10 @@ public class AdcBullet : MonoBehaviour
             controlUnit.GetDamage((int)bulletDamage);
             Destroy(gameObject);
         }
+
+        if (other.gameObject.CompareTag("Tower"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

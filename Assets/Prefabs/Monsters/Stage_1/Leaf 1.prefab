@@ -115,7 +115,8 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 5
-  bulletPrefabGreen: {fileID: 8523253081943708297, guid: 3ad749c0ab1bc2543b7b73f7c5adae5a, type: 3}
+  isDerivedBoss: 0
+  bulletPrefabGreen: {fileID: 8091874617663987887, guid: e80c8a4f01cc2cd4ab9af57eb8004804, type: 3}
   projectileSpeed: 10
   currentTarget: {fileID: 0}
 --- !u!95 &5622057028196791835
