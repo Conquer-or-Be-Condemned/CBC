@@ -4391,8 +4391,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7ad5c8fbb84ed4959aef28539549c55b, type: 3}
   - {fileID: 8300000, guid: 79a9b8fcdb0e84bfb99634160b153073, type: 3}
   - {fileID: 8300000, guid: 64b69b7a66c214866b8f2e87d0750e0b, type: 3}
-  sfxVolume: 0.7
-  sfxChannelIndex: 40
+  sfxVolume: 0.5
+  sfxChannelIndex: 100
 --- !u!4 &1181962955
 Transform:
   m_ObjectHideFlags: 0
