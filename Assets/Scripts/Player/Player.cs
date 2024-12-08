@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     private float _timeTilFire;
     private int _bulletsPerShot; // 한 번에 발사할 총알 수
     private float _spreadAngle; // 총알 퍼짐 각도
+    
+    
 
     [Header("Bomb")] 
     public int maxBombCount;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _rb = GetComponent<Rigidbody2D>();
         _bulletsPerShot = DataManager.PlayerBullet;
         _spreadAngle = _bulletsPerShot * 5;
 
@@ -49,7 +52,6 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
         if (_rb)
         {
             _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Continuous로 설정
@@ -104,7 +106,7 @@ public class Player : MonoBehaviour
 
         // 이동 처리
         transform.position += sumVector * Time.fixedDeltaTime;
-
+        // _rb.velocity = sumVector.normalized * moveSpeed;
         // 경계 내에서 위치 클램프
         Bounds tilemapBounds = map.GetComponent<Renderer>().bounds;
         transform.position = new Vector3(
@@ -195,7 +197,8 @@ public class Player : MonoBehaviour
 
                     GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
                     PlayerBullet playerBulletScript = bulletObj.GetComponent<PlayerBullet>();
-                    playerBulletScript.SetDirection(bulletDirection);
+                    // Debug.Log(_rb.velocity);
+                    playerBulletScript.SetDirection(bulletDirection,sumVector);
                 }
                 _timeTilFire = 0f;
             }

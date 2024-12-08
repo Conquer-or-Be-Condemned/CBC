@@ -11,12 +11,15 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] private float bulletSpeed = 5f;
     [SerializeField] private float bulletDamage = 10f;
 
-    private Vector2 direction;
+    private Vector2 _direction;
 
+    private Vector2 _playerSpeed;
     // 방향을 설정하는 메서드
-    public void SetDirection(Vector2 dir)
+    public void SetDirection(Vector2 dir,Vector2 playerSpeed)
     {
-        direction = dir.normalized;
+        _direction = dir.normalized;
+        _playerSpeed = playerSpeed;
+        Debug.Log(_playerSpeed);
         StartCoroutine(destroyObjectIfNotHit());
     }
 
@@ -24,19 +27,22 @@ public class PlayerBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (direction == Vector2.zero) return;
-
+        if (_direction == Vector2.zero) return;
+        // Debug.Log(rb.velocity);
         // Rigidbody2D의 속도를 방향과 속도에 맞게 설정
-        rb.velocity = direction * bulletSpeed;
+        // Debug.Log(_playerSpeed.magnitude);
+        rb.velocity = _direction * bulletSpeed +_playerSpeed;
+        // rb.velocity = _direction * bulletSpeed;
+        // Debug.Log(rb.velocity);
 
         // 총알의 회전 설정 (방향 벡터 기준)
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     private IEnumerator destroyObjectIfNotHit()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
 

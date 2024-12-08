@@ -131,7 +131,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         int loopIndex = sfxChannelIndex % sfxPlayers.Length;
         sfxChannelIndex++;
-        if (sfxChannelIndex >= 300) sfxChannelIndex = 40;
+        if (sfxChannelIndex >= 1000) sfxChannelIndex = 100;
         AudioSource source = sfxPlayers[loopIndex];
         foreach (var src in activeSfx.Values)//먼저 들어온 sfx 볼륨 감소
         {
