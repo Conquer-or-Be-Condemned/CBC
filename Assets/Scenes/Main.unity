@@ -4387,8 +4387,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d4f2e527034ac4b33aef2d18506342af, type: 3}
   - {fileID: 8300000, guid: 6397c08612db4450096cce8413ccf437, type: 3}
   - {fileID: 8300000, guid: a85a15478657941abb6c65230fd3dc67, type: 3}
+  - {fileID: 8300000, guid: bd779651eb7964ed4b361a80447dab8f, type: 3}
+  - {fileID: 8300000, guid: 7ad5c8fbb84ed4959aef28539549c55b, type: 3}
+  - {fileID: 8300000, guid: 79a9b8fcdb0e84bfb99634160b153073, type: 3}
+  - {fileID: 8300000, guid: 64b69b7a66c214866b8f2e87d0750e0b, type: 3}
   sfxVolume: 0.7
-  sfxChannelIndex: 20
+  sfxChannelIndex: 40
 --- !u!4 &1181962955
 Transform:
   m_ObjectHideFlags: 0
