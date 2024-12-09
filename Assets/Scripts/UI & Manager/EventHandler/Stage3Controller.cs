@@ -14,21 +14,23 @@ public class Stage3Controller : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         
-        yield return new WaitForSeconds(4f);
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.OminousSound, false);
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.DragonComing);
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.HorseComing);
-
-        yield return new WaitForSeconds(1f);
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.HorseMoving);
         
         // FadeIn과 ScaleUp을 하나의 코루틴에서 동시에 진행
         yield return StartCoroutine(FadeInAndScale(monsterCanvasGroup, monsterTransform, fadeDuration, scaleDuration));
-        yield return new WaitForSeconds(1f);
+
         yield return StartCoroutine(FadeOut(monsterCanvasGroup, fadeDuration));
+
+        yield return new WaitForSeconds(2f);
+
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.OminousSound, false);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.HorseMoving);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.DragonComing);
         
-        yield return new WaitForSeconds(1f);
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage3, true);
+        yield return new WaitForSeconds(4f);
+        AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1, true);
+
     }
 
     IEnumerator FadeInAndScale(CanvasGroup group, Transform target, float fadeDuration, float scaleDuration)
