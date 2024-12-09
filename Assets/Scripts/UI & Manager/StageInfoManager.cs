@@ -1,13 +1,10 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+
 
 /*
  *  Stage 선택 창에서 Stage에 대한 정보를 출력하고 저장하는 스크립트입니다.
@@ -298,19 +295,19 @@ public class StageInfoManager : MonoBehaviour
     //  웨이브 저장을 위한 Method
     public static void SetStageInfo()
     {
-        StageInfo.Add(4);
-        StageInfo.Add(4);
-        StageInfo.Add(4);
+        StageInfo.Add(5);
+        StageInfo.Add(5);
+        StageInfo.Add(5);
         
     }
 
     public static void SetWaveInfo()
     {
         //  Stage 1 - Wave 9개 (임시 3개)
-        WaveInfo.Add(new List<int> {70,110,170,180,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {150,200,250,350,0,0,0,0,0});
         // WaveInfo.Add(new List<int> {10,10,10,1000,0,0,0,0,0});
-        WaveInfo.Add(new List<int> {100,275,350,1000,0,0,0,0,0,0});
-        WaveInfo.Add(new List<int> {100,275,350,6,0,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {200,250,300,450,0,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {250,300,350,550,0,0,0,0,0,0});
     }
     
     public static int GetStageInfo()

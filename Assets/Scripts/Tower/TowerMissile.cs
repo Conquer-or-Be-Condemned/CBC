@@ -148,11 +148,13 @@ public class TowerMissile : MonoBehaviour
         // MissileFlying SFX 중단
         if (!string.IsNullOrEmpty(_missileSoundId))
         {
-            AudioManager.Instance.StopSfx(_missileSoundId);
+            AudioManager.Instance.StopSfx(_missileDetectId); 
+            Debug.Log("missiledetect delete");
         }
         if (!string.IsNullOrEmpty(_missileSoundId))
         {
-            AudioManager.Instance.StopSfx(_missileDetectId); 
+            AudioManager.Instance.StopSfx(_missileSoundId);
+            Debug.Log("missilesound delete");
         }
         Collider2D[] monsters = Physics2D.OverlapCircleAll(rb.position, explosionRange);
         foreach (var monster in monsters)
