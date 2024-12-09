@@ -101,7 +101,11 @@ public class TalkManager : MonoBehaviour
             "You can face a lack of power. Use it wisely.",
             "Connection Lost..."
         });
-        
+        TalkData_ENG.Add(102, new string[]
+        {
+            "(영어)개발자님, 강력한 전파의 수신입니다.",
+            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
+        });
         TalkData_ENG.Add(201, new string[]
         {
             "Connecting to Headquarters...",
@@ -117,6 +121,11 @@ public class TalkManager : MonoBehaviour
             "As I briefed you it's pretty cold outside take care.",
             "I believe you can success in the mission one more time.",
             "Connection Lost..."
+        });
+        TalkData_ENG.Add(202, new string[]
+        {
+            "(영어)개발자님, 강력한 전파의 수신입니다.",
+            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
         });
         TalkData_ENG.Add(301, new string[]
         {
@@ -134,6 +143,11 @@ public class TalkManager : MonoBehaviour
             "Cause the control unit is placed at the right middle",
             "monsters will come out from everywhere. Watch Out!",
             "Connection Lost..."
+        });
+        TalkData_ENG.Add(302, new string[]
+        {
+            "(영어)개발자님, 강력한 전파의 수신입니다.",
+            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
         });
         
         TalkData_KOR.Add(101, new string[]
@@ -155,6 +169,11 @@ public class TalkManager : MonoBehaviour
             "전력이 부족해질 수 있습니다.\n신중히 사용하세요.",
             "연결이 끊어졌습니다..."
         });
+        TalkData_KOR.Add(102, new string[]
+        {
+            "개발자님, 강력한 전파의 수신입니다.",
+            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
+        });
         
         TalkData_KOR.Add(201, new string[]
         {
@@ -172,6 +191,12 @@ public class TalkManager : MonoBehaviour
             "추위 잘 이기시고 건승을 빕니다.",
             "연결이 끊어졌습니다..."
         });
+        TalkData_KOR.Add(202, new string[]
+        {
+            "개발자님, 강력한 전파의 수신입니다.",
+            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
+        });
+        
         TalkData_KOR.Add(301, new string[]
         {
             "본부와 연결 중...",
@@ -188,6 +213,11 @@ public class TalkManager : MonoBehaviour
             "제어장치가 중앙에 있기 때문에 대응하는데\n어려움이 있을 것입니다.",
             "적들이 사방에서 나오니까 주의하세요!",
             "연결이 끊어졌습니다..."
+        });
+        TalkData_KOR.Add(302, new string[]
+        {
+            "개발자님, 강력한 전파의 수신입니다.",
+            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
         });
         
     }

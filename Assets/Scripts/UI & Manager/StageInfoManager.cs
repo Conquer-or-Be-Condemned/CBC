@@ -43,7 +43,7 @@ public class StageInfoManager : MonoBehaviour
     public static List<int> StageInfo = new List<int>();
     public static List<List<int>> WaveInfo = new List<List<int>>();
 
-    [Header("Stage Rewards")] public static int[] StageRewards = { 100,100,100 };
+    [Header("Stage Rewards")] public static int[] StageRewards = { 200,200,200 };
     
     //  현재 Display되고 있는 스테이지
     private void Awake()
@@ -307,7 +307,7 @@ public class StageInfoManager : MonoBehaviour
     public static void SetWaveInfo()
     {
         //  Stage 1 - Wave 9개 (임시 3개)
-        WaveInfo.Add(new List<int> {70,110,170,2,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {70,110,170,180,0,0,0,0,0});
         // WaveInfo.Add(new List<int> {10,10,10,1000,0,0,0,0,0});
         WaveInfo.Add(new List<int> {100,275,350,1000,0,0,0,0,0,0});
         WaveInfo.Add(new List<int> {50,50,50,50,0,0,0,0,0,0});
