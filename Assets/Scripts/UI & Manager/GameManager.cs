@@ -92,7 +92,7 @@ public class GameManager : Singleton<GameManager>
             // AudioManager.Instance.PlayBGM(AudioManager.Bgm.StartingScene,false);
             // AudioManager.Instance.PlayBGM(AudioManager.Bgm.StageSelection,false);
 
-            CheckSpaceKey();    
+            CheckSpaceKey();
         }
     }
 
@@ -113,8 +113,8 @@ public class GameManager : Singleton<GameManager>
     public void NewGame()
     {
         IsNewGame = true;
-        //  임시로 true로 해놓음
-        TutorialEnd = true;
+        //  디버깅할 때 true 바꾸면 튜토리얼 스킵 가능
+        TutorialEnd = false;
     }
 
     public void SetLanguageSetting(int lang)

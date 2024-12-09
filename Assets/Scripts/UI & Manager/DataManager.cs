@@ -5,20 +5,21 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+    //  기본 빌드용 값 1 / 개발 빌드용 값 4
     [Header("About Game")] public static int CurStage = 4;
     
-    [Header("Shop")] public static int Coin = 30;
+    [Header("Shop")] public static int Coin = 0;
 
     public const int LEVEL_MAX = 3;
 
-    public static int PlayerHpLv = 1;
-    public static int PlayerBulletLv = 1;
-    public static int TurretBulletLv = 1;
-    public static int TurretMissileLv = 1;
-    public static int ControlUnitPowerLv = 1;
-    public static int ControlUnitHpLv = 1;
+    public static int PlayerHpLv = 0;
+    public static int PlayerBulletLv = 0;
+    public static int TurretBulletLv = 0;
+    public static int TurretMissileLv = 0;
+    public static int ControlUnitPowerLv = 0;
+    public static int ControlUnitHpLv = 0;
 
-    public static int[] LevelList = { 1, 1, 1, 1, 1, 1 };
+    public static int[] LevelList = { 0, 0, 0, 0, 0, 0 };
 
     public static int PlayerHp = 200;
     public static int PlayerBullet = 3;
@@ -44,10 +45,10 @@ public class DataManager : MonoBehaviour
         ControlUnitPower = ControlUnitPowerLv * 50 + 150;
 
         /*
-         * Player Hp : 200 250 300 (+ 50)
+         * Player Hp : 400 450 500 (+ 50)
          * Player Bullet : 3 4 5 (+ 1)
-         * Turret Bullet : 10 15 20 (+ 5)
-         * Turret Missile : 15 20 25 (+ 5)
+         * Turret Bullet : 20 25 30 (+ 10)
+         * Turret Missile : 100 120 140 (+ 20)
          * Control Unit Power : 225 270 315 (+ 45)
          * Control Unit Hp : 1500 2000 2500 (+ 500)
          */
