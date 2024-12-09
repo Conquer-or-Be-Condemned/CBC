@@ -5910,9 +5910,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "[\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uC124\uACC4 \uAE30\uCD08(001) 2\uC870]\n\uC870\uC7A5
-    | \uC548\uC815\uD604 (\uBAAC\uC2A4\uD130) <example@email.com>\n\uC870\uC6D0 |
-    \uC7A5\uD638\uC131 (\uD50C\uB808\uC774\uC5B4) <example@email.com>\n\uC870\uC6D0
-    | \uC591\uD604\uC11D (UI, Map) <example@email.com>\n\uC870\uC6D0 | \uD669\uC7AC\uB3D9
+    | \uC548\uC815\uD604 (\uBAAC\uC2A4\uD130) <ajh08070@naver.com>\n\uC870\uC6D0
+    | \uC7A5\uD638\uC131 (\uD50C\uB808\uC774\uC5B4) <example@email.com>\n\uC870\uC6D0
+    | \uC591\uD604\uC11D (UI, Map) <yanggogi1423@gmail.com>\n\uC870\uC6D0 | \uD669\uC7AC\uB3D9
     (\uD130\uB81B, \uC624\uB514\uC624) <example@email.com>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
@@ -6443,7 +6443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Latest Update v.20241204 DEMO by HJD Team Sejong Univ.
+  m_text: Latest Update v.20241210 DEMO by HJD Team Sejong Univ.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
   m_sharedMaterial: {fileID: 6633813256750574405, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
