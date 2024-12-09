@@ -21,7 +21,7 @@ public class CanonTurretLv1 : DefaultCanonTurret
     [SerializeField] private Transform bulletFirePoint;
     [SerializeField] private SpriteRenderer rangeRenderer;
     [SerializeField] private Transform rangeTransform;
-    // [SerializeField] private LayerMask enemyMask;
+    
     [Header("Attributes")] 
     [SerializeField] private float range;        // 타워 사거리
     [SerializeField] private float rotationSpeed;// 타워 회전 속도
@@ -30,15 +30,11 @@ public class CanonTurretLv1 : DefaultCanonTurret
     [SerializeField] private float overHeatTime;    //~초 격발시 과열
     [SerializeField] private float coolTime;        //~초 지나면 냉각
     [SerializeField] private bool showRange;
-    // private void Update()
-    // {
-    //     rangeRenderer.enabled = showRange;
-    // }
+  
     private void Start()
     {
         GunRenderer = gunRenderer;
         Animator = animator;
-        //fjkdsj
         TurretRotationPoint = turretRotationPoint;
         Range = range;         // 타워 사거리
         RotationSpeed = rotationSpeed;// 타워 회전 속도
@@ -46,16 +42,15 @@ public class CanonTurretLv1 : DefaultCanonTurret
         Power = power;            //타워 사용 전력량
         OverHeatTime = overHeatTime;    //~초 격발시 과열
         CoolTime = coolTime; //~초 지나면 냉각
-        Level = 1;
         GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
-        RPM = (int)(60 / (1 / fireRate));
-        Damage = 10;
         EnemyMask = enemyMask;
         RangeRenderer = rangeRenderer;
-        
-        // RangeTransform = rangeTransform;
+        //Turrets Attack Range
         rangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
-
+        //Info for Ui
+        Level = 1;
+        RPM = (int)(60 / (1 / fireRate));
+        Damage = DataManager.TurretBullet;
     }
     override 
     protected void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
@@ -63,10 +58,9 @@ public class CanonTurretLv1 : DefaultCanonTurret
         animator.enabled = true; // 발사할 때 애니메이션 시작
         GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         TowerBullet towerBulletScript = bulletObj.GetComponent<TowerBullet>();
-        float randomValue = Random.Range(-1f, 1f);
+        float randomValue = Random.Range(-0.5f, 0.5f);
         bulletFirePoint.position = new Vector3(bulletFirePoint.position.x+randomValue, bulletFirePoint.position.y,0f);
         towerBulletScript.SetTarget(bulletFirePoint);   
-        // AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire,true);
     }
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
     {
