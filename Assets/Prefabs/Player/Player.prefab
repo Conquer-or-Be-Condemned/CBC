@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHp: 0
-  maxHp: 200
+  maxHp: 400
   onDeath:
     m_PersistentCalls:
       m_Calls: []
