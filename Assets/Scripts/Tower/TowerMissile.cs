@@ -70,7 +70,7 @@ public class TowerMissile : MonoBehaviour
                 {
                     if(_target == null&&!monster.GetComponent<Monster>().isTargeted)
                     {
-                        _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileTargetDetected);
+                        // _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFinalDetect);
                         monster.GetComponent<Monster>().isTargeted = true;
                         _target = monster.transform;
                     }
@@ -116,7 +116,7 @@ public class TowerMissile : MonoBehaviour
     {
         yield return new WaitForSeconds(initialStraightTime);
         _isHoming = true;
-        _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileTargetDetected);
+        // _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFinalDetect);
     }
 
     private IEnumerator ExplodeMissileIfNotHit()//미사일 임무 시간 내에 
@@ -135,11 +135,11 @@ public class TowerMissile : MonoBehaviour
             _target.GetComponent<Monster>().isTargeted = false;
         }
         // MissileFlying SFX 중단
-        if (!string.IsNullOrEmpty(_missileDetectId))
-        {
-            AudioManager.Instance.StopSfx(_missileDetectId); 
-            // Debug.Log("missiledetect delete");
-        }
+        // if (!string.IsNullOrEmpty(_missileDetectId))
+        // {
+        //     AudioManager.Instance.StopSfx(_missileDetectId); 
+        //     // Debug.Log("missiledetect delete");
+        // }
         // if (!string.IsNullOrEmpty(_missileSoundId))
         // {
         //     AudioManager.Instance.StopSfx(_missileSoundId);
