@@ -43,7 +43,7 @@ public class TowerMissile : MonoBehaviour
         rb.velocity = _initialDirection * _currentSpeed;
 
         // MissileFlying SFX 재생 및 ID 저장
-        _missileSoundId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFlying);
+        // _missileSoundId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFlying);
 
         StartCoroutine(InitialStraightMovement());
         StartCoroutine(ExplodeMissileIfNotHit());
@@ -63,19 +63,16 @@ public class TowerMissile : MonoBehaviour
     {
         if (_target == null)
         {
-            // if (!string.IsNullOrEmpty(_missileSoundId))
-            // {
-            //     AudioManager.Instance.StopSfx(_missileDetectId);
-            // }
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 300);
             foreach (var monster in hits)
             {
                 if (monster.CompareTag("Enemy"))
                 {
-                    if(_target == null)
+                    if(_target == null&&!monster.GetComponent<Monster>().isTargeted)
                     {
+                        _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileTargetDetected);
+                        monster.GetComponent<Monster>().isTargeted = true;
                         _target = monster.transform;
-                        // _missileDetectId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileTargetDetected);
                     }
                     else return;
                 }
@@ -85,14 +82,6 @@ public class TowerMissile : MonoBehaviour
     private void AccelerateToTarget()
     {
         if (!_isHoming || !_target) return;
-        // if (Vector2.Distance(rb.position, _target.position) < 20f)
-        // {
-        //     if (!string.IsNullOrEmpty(_missileSoundId))
-        //     {
-        //         AudioManager.Instance.StopSfx(_missileDetectId);
-        //     }
-        //     //AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFinalDetect);
-        // }
         // 현재 진행 방향과 목표 방향 사이의 각도 계산
         Vector2 directionToTarget = ((Vector2)_target.position - rb.position).normalized;
         Vector2 currentDirection = rb.velocity.normalized;
@@ -146,16 +135,16 @@ public class TowerMissile : MonoBehaviour
             _target.GetComponent<Monster>().isTargeted = false;
         }
         // MissileFlying SFX 중단
-        if (!string.IsNullOrEmpty(_missileSoundId))
+        if (!string.IsNullOrEmpty(_missileDetectId))
         {
             AudioManager.Instance.StopSfx(_missileDetectId); 
-            Debug.Log("missiledetect delete");
+            // Debug.Log("missiledetect delete");
         }
-        if (!string.IsNullOrEmpty(_missileSoundId))
-        {
-            AudioManager.Instance.StopSfx(_missileSoundId);
-            Debug.Log("missilesound delete");
-        }
+        // if (!string.IsNullOrEmpty(_missileSoundId))
+        // {
+        //     AudioManager.Instance.StopSfx(_missileSoundId);
+        //     Debug.Log("missilesound delete");
+        // }
         Collider2D[] monsters = Physics2D.OverlapCircleAll(rb.position, explosionRange);
         foreach (var monster in monsters)
         {
