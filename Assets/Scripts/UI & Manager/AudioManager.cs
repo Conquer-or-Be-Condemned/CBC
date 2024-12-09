@@ -171,10 +171,17 @@ public class AudioManager : Singleton<AudioManager>
     // 특정 SFX 중지
     public void StopSfx(string id)
     {
+        if (id == null)
+        {
+            return;
+        }
         if (activeSfx.ContainsKey(id))
         {
-            activeSfx[id].Stop(); 
-            activeSfx.Remove(id);
+            if (activeSfx[id] != null)
+            {
+                activeSfx[id].Stop(); 
+                activeSfx.Remove(id);
+            }
         }
     }
 

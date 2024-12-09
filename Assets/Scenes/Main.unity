@@ -155,8 +155,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 212170280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7, y: 0}
-  m_AnchorMax: {x: 0.7, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.19999695, y: 0}
   m_SizeDelta: {x: 19.5, y: 2.09091}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1787,9 +1787,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 27877577}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 0.7
+  m_MaxValue: 0.5
   m_WholeNumbers: 0
-  m_Value: 0.7
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2432,7 +2432,7 @@ RectTransform:
   m_Father: {fileID: 1549905204}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.7, y: 1}
+  m_AnchorMax: {x: 0.19999999, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2815,8 +2815,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1751061884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7, y: 0}
-  m_AnchorMax: {x: 0.7, y: 1}
+  m_AnchorMin: {x: 0.19999999, y: 0}
+  m_AnchorMax: {x: 0.19999999, y: 1}
   m_AnchoredPosition: {x: -0.19999695, y: 0}
   m_SizeDelta: {x: 19.5, y: 2.09091}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4395,7 +4395,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7ad5c8fbb84ed4959aef28539549c55b, type: 3}
   - {fileID: 8300000, guid: 79a9b8fcdb0e84bfb99634160b153073, type: 3}
   - {fileID: 8300000, guid: 64b69b7a66c214866b8f2e87d0750e0b, type: 3}
-  sfxVolume: 0.5
+  sfxVolume: 0.15
   sfxChannelIndex: 23
 --- !u!4 &1181962955
 Transform:
@@ -4563,7 +4563,7 @@ RectTransform:
   m_Father: {fileID: 2004474461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.7, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5873,7 +5873,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 147.825, y: -115.765}
-  m_SizeDelta: {x: 235.65, y: 81.51}
+  m_SizeDelta: {x: 251.14, y: 81.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869680058
 MonoBehaviour:
@@ -6445,8 +6445,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Latest Update v.20241209 Devoper Demo by HJD Team Sejong Univ.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
-  m_sharedMaterial: {fileID: 6633813256750574405, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

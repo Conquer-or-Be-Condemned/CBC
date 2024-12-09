@@ -9,9 +9,9 @@ public class bombscript : MonoBehaviour
 {
     [SerializeField] private GameObject bomb;  
    // [SerializeField] private GameObject effect;
-    public float bombDamage = 175f;
+    public float bombDamage = 250f;
   //  [SerializeField] private Rigidbody2D rb;
-    private float explosionRange = 20f;
+    private float explosionRange = 27.5f;
     [SerializeField] private Animator animator;  // Animator 컴포넌트 참조
     [FormerlySerializedAs("isbam")] public bool isBomb=false;
     
@@ -26,8 +26,8 @@ public class bombscript : MonoBehaviour
 
     IEnumerator ActivateBombSequence()
     {
-        //  2초 뒤 폭발
-        yield return new WaitForSeconds(2f); 
+        //  2.1초 뒤 폭발
+        yield return new WaitForSeconds(2.1f); 
         animator.SetBool("isboom", true);  // isboom 파라미터를 true로 설정
         
         // isbomb 파라미터를 true로 설정
@@ -44,6 +44,9 @@ public class bombscript : MonoBehaviour
                 monster.GetComponent<Monster>().TakeDamage(bombDamage);
             }
         }
+
+        yield return new WaitForSeconds(0.8f);
+        
         Destroy(gameObject);
         //bomb.SetActive(false);  // bomb 오브젝트 숨김
         //effect.SetActive(true);  // effect 활성화

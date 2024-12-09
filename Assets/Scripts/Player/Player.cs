@@ -204,7 +204,7 @@ public class Player : MonoBehaviour
             }
             
             //  똑같이 쿨타임 존재
-            if (Input.GetKeyDown(KeyCode.F)) PlaceBomb();
+            if (Input.GetKeyDown(KeyCode.LeftShift)) PlaceBomb();
         }
     }
     // StartCoroutine(PlayerAttackCoroutine());
