@@ -299,7 +299,9 @@ public class StageInfoManager : MonoBehaviour
     public static void SetStageInfo()
     {
         StageInfo.Add(4);
-        StageInfo.Add(1);
+        StageInfo.Add(4);
+        StageInfo.Add(4);
+        
     }
 
     public static void SetWaveInfo()
@@ -308,7 +310,7 @@ public class StageInfoManager : MonoBehaviour
         WaveInfo.Add(new List<int> {70,110,170,180,0,0,0,0,0});
         // WaveInfo.Add(new List<int> {10,10,10,1000,0,0,0,0,0});
         WaveInfo.Add(new List<int> {100,275,350,1000,0,0,0,0,0,0});
-        WaveInfo.Add(new List<int> {100,275,350,1000,0,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {50,50,50,50,0,0,0,0,0,0});
     }
     
     public static int GetStageInfo()

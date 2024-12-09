@@ -12,21 +12,20 @@ public class Stage2Controller : MonoBehaviour
     {
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.OminousSound, true);
         yield return new WaitForSeconds(5f);
-
-        
-        yield return new WaitForSeconds(4f);
-
         
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.WolfComing);
         
         // FadeIn과 ScaleUp을 하나의 코루틴에서 동시에 진행
         yield return StartCoroutine(FadeInAndScale(monsterCanvasGroup, monsterTransform, fadeDuration, scaleDuration));
-        yield return new WaitForSeconds(1f);
+        
         yield return StartCoroutine(FadeOut(monsterCanvasGroup, fadeDuration));
+        
+        yield return new WaitForSeconds(2f);
+
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.WolfComing2);
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.OminousSound, false);
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage2, true);
 
     }
