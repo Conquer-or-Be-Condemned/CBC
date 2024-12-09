@@ -15,13 +15,7 @@ public class AudioManager : Singleton<AudioManager>
     private AudioSource[] sfxPlayers;
     private Dictionary<string, AudioSource> activeSfx = new Dictionary<string, AudioSource>();
     public int sfxChannelIndex;
-    //
-    // [Header("Alert")]
-    // public AudioClip[] alertClips;
-    // public float alertVolume;
-    // private AudioSource[] alertPlayers;
-    // private int alertChannelIndex;
-
+   
     public enum Bgm
     {
         StartingScene,
@@ -51,7 +45,15 @@ public class AudioManager : Singleton<AudioManager>
         MissileFlying,
         PlayerMine,
         TurretOff,
-        TurretOn
+        TurretOn,
+        WolfComing,
+        WolfComing2,
+        WolfBark,
+        WolfBite,
+        WolfSpawn,
+        DragonComing,
+        HorseComing,
+        HorseMoving
     }
 
     public enum Alert
@@ -97,7 +99,6 @@ public class AudioManager : Singleton<AudioManager>
         for (int i = 0; i < bgmPlayers.Length; i++)
         {
             int loopIndex = (i + bgmChannelIndex) % bgmPlayers.Length;
-            // bgmChannelIndex = loopIndex;
             bgmPlayers[loopIndex].clip = bgmClips[(int)bgm];
             if (isPlay)
             {
@@ -116,14 +117,11 @@ public class AudioManager : Singleton<AudioManager>
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             int loopIndex = (i + sfxChannelIndex) % sfxPlayers.Length;
-            // bgmChannelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
             sfxPlayers[loopIndex].volume = sfxVolume/10f;
             Debug.Log(sfxPlayers[loopIndex].volume);
             if (isPlay)
             {
-                // if (sfxPlayers[loopIndex].isPlaying)
-                //     continue;
                 sfxPlayers[loopIndex].Play();
             }
             else
@@ -137,12 +135,15 @@ public class AudioManager : Singleton<AudioManager>
     {
         int loopIndex = sfxChannelIndex % sfxPlayers.Length;
         sfxChannelIndex++;
-        if (sfxChannelIndex >= 200) sfxChannelIndex = 20;
+        if (sfxChannelIndex >= 1000) sfxChannelIndex = 100;
         AudioSource source = sfxPlayers[loopIndex];
-        if (sfx == Sfx.Fire)
+        foreach (var src in activeSfx.Values)//먼저 들어온 sfx 볼륨 감소
         {
-            source.volume = sfxVolume/2f;
+            src.volume -= 0.1f;
         }
+        activeSfx.Clear();
+        //초기화
+        source.volume = sfxVolume;
         source.clip = sfxClips[(int)sfx];
         source.Play();
 
@@ -171,27 +172,6 @@ public class AudioManager : Singleton<AudioManager>
         }
         activeSfx.Clear();
     }
-
-    // // Alert SFX 재생
-    // public void PlayAlert(Alert alert, bool isPlay)
-    // {
-    //     int loopIndex = alertChannelIndex % alertPlayers.Length;
-    //     alertChannelIndex++;
-    //
-    //     if (isPlay)
-    //     {
-    //         if (!alertPlayers[loopIndex].isPlaying)
-    //         {
-    //             alertPlayers[loopIndex].clip = alertClips[(int)alert];
-    //             alertPlayers[loopIndex].Play();
-    //         }
-    //     }
-    //     else
-    //     {
-    //         alertPlayers[loopIndex].Stop();
-    //     }
-    // }
-
     public void UIBgm(bool isPlay) // UI 창을 띄웠을 때 고음만 통과시켜 간지나게 함
     {
         AudioHighPassFilter bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();

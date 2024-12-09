@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 1681059103846683528}
   - component: {fileID: 3727076148842209913}
   - component: {fileID: 2009005005601722383}
-  - component: {fileID: -2084431905485033598}
-  - component: {fileID: 6642390465229006115}
+  - component: {fileID: 8134917969876608250}
+  - component: {fileID: 7329752125622980649}
   m_Layer: 7
   m_Name: WolfBlack
   m_TagString: Enemy
@@ -221,7 +221,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-2084431905485033598
+--- !u!114 &8134917969876608250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,14 +230,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4009334584712422631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67135770c515494294e529163666e842, type: 3}
+  m_Script: {fileID: 11500000, guid: 716412d9794149f8900cdd5020d8e3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: WolfBlack
   maxHealth: 4000
   currentHealth: 4000
-  attackDamage: 40
-  moveSpeed: 7
+  attackDamage: 1
+  moveSpeed: 15
   attackRange: 8
   attackCooldown: 5
   isDead: 0
@@ -246,12 +246,12 @@ MonoBehaviour:
   player: {fileID: 0}
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
-  healthBarYOffset: 4
+  healthBarYOffset: 8
   isDerivedBoss: 0
-  treadDamage: 80
+  treadDamage: 1
   monsterSpawnerInBoss: {fileID: 1084871462846035899, guid: 28b7ef2ba34dd48ed8f33c8d28ef6fd8, type: 3}
   currentTarget: {fileID: 0}
---- !u!60 &6642390465229006115
+--- !u!60 &7329752125622980649
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,7 +287,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.8, y: 10}
+    oldSize: {x: 8, y: 16.666666}
     newSize: {x: 3.84, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -295,10 +295,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.4, y: 1.8000001}
-      - {x: 1, y: 5}
-      - {x: -0.8, y: 5}
-      - {x: -2.4, y: 2}
-      - {x: -2.4, y: -5}
-      - {x: 2.4, y: -5}
+    - - {x: 4, y: 3}
+      - {x: 1.6666667, y: 8.333334}
+      - {x: -1.3333334, y: 8.333334}
+      - {x: -4, y: 3.3333335}
+      - {x: -4, y: -8.333334}
+      - {x: 4, y: -8.333334}
   m_UseDelaunayMesh: 0
