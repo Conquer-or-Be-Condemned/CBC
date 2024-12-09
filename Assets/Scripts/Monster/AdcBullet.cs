@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AdcBullet : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class AdcBullet : MonoBehaviour
     
     [Header("Attributes")] 
     [SerializeField] private float bulletSpeed = 17f;
-    [SerializeField] private float bulletDamage = 30f;
+    [SerializeField] private int bulletDamage = 30;
     [SerializeField] private Transform bulletSpawnPoint;
 
     [Header("ControlUnit")] public ControlUnitStatus controlUnit;
@@ -46,39 +47,20 @@ public class AdcBullet : MonoBehaviour
     }
 
     // 충돌 시 총알 파괴
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {   
-        //Monster monster = other.gameObject.GetComponent<Monster>();
-        if (other.gameObject.GetComponent<Player>() != null)
+        PlayerInfo player = collision.gameObject.GetComponent<PlayerInfo>();
+        if (player != null)
         {
-            Player player = other.gameObject.GetComponent<Player>();
-            PlayerInfo playerInfo = player.GetComponent<PlayerInfo>();
-            if (player != null)
-            {
-                Debug.Log("Damaged!");
-                playerInfo.TakeDamage((int)bulletDamage);
-            }
-            Destroy(gameObject);
+            player.TakeDamage(bulletDamage);
         }
         
         //  수정이 필요하긴 할 것 같음 - 현석
-        if (other.gameObject.CompareTag("CUBoundary"))
+        ControlUnitStatus cu = collision.gameObject.GetComponent<ControlUnitStatus>();
+        if (cu != null)
         {
-            Debug.Log("충돌!");
-            if (controlUnit == null)
-            {
-                Debug.LogError("CU가 감지되지 않습니다.");
-                return;
-            }
-            controlUnit.GetDamage((int)bulletDamage);
-            Destroy(gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Tower"))
-        {
-            Destroy(gameObject);
+            cu.GetDamage(bulletDamage);
         }
         Destroy(gameObject);
-
     }
 }

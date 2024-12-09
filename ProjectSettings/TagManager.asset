@@ -39,7 +39,7 @@ TagManager:
   - EmenyBullet
   - Camera
   - Player
-  - 
+  - PlayerBulletCollider
   - 
   - 
   - 
