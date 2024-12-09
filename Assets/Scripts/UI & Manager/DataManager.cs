@@ -32,12 +32,12 @@ public class DataManager : MonoBehaviour
     public static void ApplyLevelingSystem()
     {
         //  Player
-        PlayerHp = PlayerHpLv * 50 + 150;
+        PlayerHp = PlayerHpLv * 50 + 350;
         PlayerBullet = PlayerBulletLv + 2;
 
         //  Turret
         TurretBullet = TurretBulletLv * 5 + 5;
-        TurretMissile = TurretMissileLv * 5 + 10;
+        TurretMissile = TurretMissileLv * 20 + 80;
 
         //  Control Unit
         ControlUnitHp = ControlUnitHpLv * 500 + 1000;
