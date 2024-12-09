@@ -390,7 +390,6 @@ public class InGameManager : MonoBehaviour
 
 
         Debug.Log("Wave Start");
-        isWave = true;
         spawnEnd = false;
 
         InitWave();
@@ -399,8 +398,14 @@ public class InGameManager : MonoBehaviour
         if (curWave != maxWave - 1)
         {
             HideAlerts();
+            isWave = true;
         }
-
+        else if(curWave != maxWave)
+        {
+            //  Boss Spawn 여기서 함
+            HideAlertAtFinalWave();
+            isWave = true;
+        }
         
         HideButton();
     }
@@ -463,6 +468,8 @@ public class InGameManager : MonoBehaviour
                     isClear = true;
                 }
             }
+
+            isWave = false;
         }
         // 보스 웨이브가 아닌 일반 웨이브 클리어 처리
         else if (dieSpawn == curSpawn && spawnEnd && curWave < maxWave && !isBossWave)
@@ -482,7 +489,7 @@ public class InGameManager : MonoBehaviour
 
                     if (curWave == maxWave - 1)
                     {
-                        ShowAlertAtBossWave();
+                        ShowAlertAtFinalWave();
                     }
                     else
                     {
@@ -492,6 +499,8 @@ public class InGameManager : MonoBehaviour
                     StartCoroutine(MovePlayCoroutine());
                 }
             }
+            
+            isWave = false;
         }
     }
 
@@ -507,7 +516,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    public void ShowAlertAtBossWave()
+    public void ShowAlertAtFinalWave()
     {
         for (int i = 0; i < monsterSpawners.Length; i++)
         {
@@ -534,11 +543,12 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    public void HideAlertAtBossWave()
+    public void HideAlertAtFinalWave()
     {
         for (int i = 0; i < monsterSpawners.Length; i++)
         {
             monsterSpawners[i].HideAlert();
+            
             if (monsterSpawners[i].GetWaveId() == 2 || monsterSpawners[i].GetWaveId() == 3)
             {
                 ActivateFitWaveSpawner(monsterSpawners[i], true);
@@ -664,8 +674,8 @@ public class InGameManager : MonoBehaviour
             yield return new WaitForSeconds(24f);
             
             //  Boss Spawn 여기서 함
-            HideAlertAtBossWave();
-
+            HideAlertAtFinalWave();
+            isWave = true;
             waveInfo.SetText("Boss Wave");
         }
 
