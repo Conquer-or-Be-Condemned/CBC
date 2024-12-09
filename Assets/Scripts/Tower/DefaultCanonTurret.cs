@@ -10,7 +10,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
 {   
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
-    [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
+    public bool previousIsActivated = false;//버퍼(토글 확인)
     public bool ShowRange;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;// 타워 회전 각도
@@ -47,11 +47,9 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
         Name = "Canon Turret";
         ShowRange = false;
-        // RangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
     }
     protected void Update()
     {
-        // RangeRenderer.enabled = ShowRange;
         CheckToggle();//사용자에 의한 타워 가동 토글 확인
         TowerIsActivatedNow();//사용자에 의해 타워가 가동 됐다면 역할 수행
         
@@ -97,7 +95,6 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
             if(_fireTime <= 0f) _fireTime = 0f;
             Animator.SetBool("isShoot", false);
             FindTarget();//(Overlap 사용)
-            return;
         }
     }
     private void RotateTowardsTarget()//적향해 타워 z축 회전(TowerIsActivatedNow에서 수행)

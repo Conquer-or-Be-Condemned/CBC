@@ -11,7 +11,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
 {   
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
-    [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
+    public bool previousIsActivated = false;//버퍼(토글 확인)
     public bool ShowRange;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;//타워 회전 각도
@@ -47,7 +47,6 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
         _name = "Missile Turret";
         ShowRange = false;
-        // RangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
     }
     private void Update()
     {
@@ -91,8 +90,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     {
         if (Targets[0] == null)
         {
-            CurMissileCount -= Time.deltaTime*2;
-            // Debug.Log("finding target");
+            // CurMissileCount -= Time.deltaTime*2;
             FindTarget();//(raycast 사용)
         }
     }
@@ -161,17 +159,13 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     {
         if (!CheckTargetIsInRange())//적이 범위에 없음
         {
-            // for (int i = 0; i < Targets.Length; i++)
-            // {
-            //     Targets[i] = null;
-            // }
             _timeTilFire = 0f;
         }
         else//적이 범위에 있음
         {
-            // Debug.Log("Target is in the range");
+            
             _timeTilFire += Time.deltaTime;
-            if (_timeTilFire >= (1f / FireRate))// && IsTargetInSight())//적이 타워의 시야각에 있고 RPS만큼 발사
+            if (_timeTilFire >= 1f / FireRate)//적이 타워의 시야각에 있고 RPS만큼 발사
             {
                 AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileLaunch);
                 Shoot();

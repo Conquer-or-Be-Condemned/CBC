@@ -41,14 +41,14 @@ public class MissileTurretLV3 : DefaultMissileTurret
         RotationSpeed = rotationSpeed;
         EnemyMask = enemyMask;
         RangeRenderer = rangeRenderer;
-        // RangeTransform = rangeTransform;
-        rangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);;
-
-        Level = 3;
-        
         gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
         Targets = new Transform[6];
         _missileObj = new GameObject[missileSpawnPoint.Length];
+        
+        //Turrets Attack Range
+        rangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);;
+        //Info for UI
+        Level = 3;
         RPM = (int)(60 / (1 / fireRate));
         Damage = 30;
     }
@@ -64,13 +64,6 @@ public class MissileTurretLV3 : DefaultMissileTurret
                 TowerMissile missileScript = _missileObj[i].GetComponent<TowerMissile>();
                 missileScript.SetTarget(Targets[i]);
             }
-
-            // if (Targets[i] != null) missileScript.SetTarget(Targets[i]);
-            // else if((Targets[i] != null) && (i > 1))
-            // {
-            //     if (Targets[i - 2] != null) missileScript.SetTarget(Targets[i - 2]);
-            //     else missileScript.SetTarget(Targets[i - 4]);
-            // }
         }
 
         for (var i = 0; i < _missileObj.Length; i++)
