@@ -9,9 +9,9 @@ public class bombscript : MonoBehaviour
 {
     [SerializeField] private GameObject bomb;  
    // [SerializeField] private GameObject effect;
-    [SerializeField] public float bombDamage = 100f;
+    public float bombDamage = 175f;
   //  [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float explosionRange = 20f;
+    private float explosionRange = 20f;
     [SerializeField] private Animator animator;  // Animator 컴포넌트 참조
     [FormerlySerializedAs("isbam")] public bool isBomb=false;
     
@@ -26,12 +26,17 @@ public class bombscript : MonoBehaviour
 
     IEnumerator ActivateBombSequence()
     {
-        yield return new WaitForSeconds(2f);  // 2초 대기
+        //  2초 뒤 폭발
+        yield return new WaitForSeconds(2f); 
+        animator.SetBool("isboom", true);  // isboom 파라미터를 true로 설정
+        
         // isbomb 파라미터를 true로 설정
-        isBomb = true;
+        
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.PlayerMine);
-        yield return new WaitForSeconds(0.6f);
+        
+        // yield return new WaitForSeconds(0.6f);
         Collider2D[] monsters = Physics2D.OverlapCircleAll(GetComponent<Rigidbody2D>().position, explosionRange);
+        
         foreach (var monster in monsters)
         {
             if (monster.CompareTag("Enemy"))
@@ -53,7 +58,7 @@ public class bombscript : MonoBehaviour
     {
         if (isBomb == true)
         {
-            animator.SetBool("isboom", true);  // isboom 파라미터를 true로 설정
+            
             isBomb = false;  // 파라미터를 한 번만 설정하고 이후로는 반복하지 않도록
         }
     }

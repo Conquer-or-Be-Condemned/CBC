@@ -116,18 +116,19 @@ public class InGameManager : MonoBehaviour
         //  진전도 초기화
         talkIdx = 1;
 
-        if (SceneController.Instance.curSelectStage + 1 >= DataManager.CurStage)
-        {
+        //  진전도 표시
+        // if (SceneController.Instance.curSelectStage + 1 >= DataManager.CurStage)
+        // {
             Debug.Log("Talk Process!!");
             talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
             StartCoroutine(TalkProcess());
-        }
-        else
-        {
-            ShowButton();
-            ShowAlerts();
-            talkIdx++;
-        }
+        // }
+        // else
+        // {
+        //     ShowButton();
+        //     ShowAlerts();
+        //     talkIdx++;
+        // }
 
         //  Stage Clear Button 연결
         clearGoToMain.onClick.AddListener(() => SceneController.ChangeScene("Main"));

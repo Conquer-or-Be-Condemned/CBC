@@ -19,7 +19,6 @@ public class PlayerBullet : MonoBehaviour
     {
         _direction = dir.normalized;
         _playerSpeed = playerSpeed;
-        Debug.Log(_playerSpeed);
         StartCoroutine(destroyObjectIfNotHit());
     }
 

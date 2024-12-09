@@ -132,7 +132,7 @@ public abstract class Monster : MonoBehaviour
 
     protected void Die()
     {
-        Debug.Log("죽음");
+
         //  For Debug
         if (GeneralManager.Instance.inGameManager != null)
         {
@@ -151,7 +151,6 @@ public abstract class Monster : MonoBehaviour
         if (polygonCollider != null)
         {
             Destroy(polygonCollider);
-            Debug.Log("PolygonCollider2D 제거됨");
         }
         
         moveSpeed = 0;

@@ -21,12 +21,12 @@ public class DataManager : MonoBehaviour
 
     public static int[] LevelList = { 0, 0, 0, 0, 0, 0 };
 
-    public static int[] MarginList = { 50, 1, 7, 40, 500, 50 };
+    public static int[] MarginList = { 50, 1, 6, 30, 500, 50 };
 
     public static int PlayerHp = 400;
     public static int PlayerBullet = 3;
-    public static int TurretBullet = 20;
-    public static int TurretMissile = 100;
+    public static int TurretBullet = 12;
+    public static int TurretMissile = 75;
     public static int ControlUnitPower = 225;
     public static int ControlUnitHp = 1500;
 
@@ -39,7 +39,7 @@ public class DataManager : MonoBehaviour
         PlayerBullet = PlayerBulletLv *MarginList[1] + 3;
 
         //  Turret
-        TurretBullet = TurretBulletLv * MarginList[2] + 20;
+        TurretBullet = TurretBulletLv * MarginList[2] + 12;
         TurretMissile = TurretMissileLv * MarginList[3] + 100;
 
         //  Control Unit
@@ -49,8 +49,8 @@ public class DataManager : MonoBehaviour
         /*
          * Player Hp : 400 450 500 550 (+ 50)
          * Player Bullet : 3 4 5 6 (+ 1)
-         * Turret Bullet : 20 27 34 41 (+ 5)
-         * Turret Missile : 100 140 180 220 (+ 20)
+         * Turret Bullet : 12 18 24 30 (+ 6)
+         * Turret Missile : 100 130 160 190 (+ 30)
          * Control Unit Power : 225 270 315 360 (+ 45)
          * Control Unit Hp : 1500 2000 2500 3000 (+ 500)
          */

@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     public int curBombCount;
     public bool isCharging;
     public int bombElapsed;
-    public int bombElapsedMax = 400;
+    public int bombElapsedMax = 500;
     public UnityEvent onBombRecharge;
 
     private void Awake()
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         _spreadAngle = _bulletsPerShot * 5;
 
         //  최대 소지 개수
-        maxBombCount = 3;
+        maxBombCount = 5;
         curBombCount = maxBombCount;
         isCharging = false;
     }
