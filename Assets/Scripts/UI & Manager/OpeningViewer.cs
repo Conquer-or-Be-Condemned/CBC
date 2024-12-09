@@ -83,7 +83,7 @@ public class OpeningViewer : MonoBehaviour
 
     private IEnumerator WaitCoroutine()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         talkIdx++;
 
         if (GameManager.Language == 0)

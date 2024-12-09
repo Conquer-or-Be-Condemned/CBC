@@ -126,6 +126,7 @@ public class InGameManager : MonoBehaviour
         {
             ShowButton();
             ShowAlerts();
+            talkIdx++;
         }
 
         //  Stage Clear Button 연결
@@ -306,6 +307,8 @@ public class InGameManager : MonoBehaviour
         
         isBossWave = true;
         Debug.LogWarning("BossSpawn");
+        
+        StartCoroutine(TalkProcess());
 
         StartCoroutine(BossSfxCoroutine(bgmVolume));
     }
@@ -372,6 +375,8 @@ public class InGameManager : MonoBehaviour
             {
                 Debug.LogError("BossAnimationManager가 할당되지 않았습니다.");
             }
+            
+            //  Spawner ON (wave 1, 2)
         }
 
 
@@ -381,9 +386,17 @@ public class InGameManager : MonoBehaviour
 
         InitWave();
         StartCoroutine(ShowInfo()); // 코루틴으로 호출
-        HideButton();
 
-        HideAlerts();
+        if (isBossWave)
+        {
+            HideAlertAtBossWave();
+        }
+        else
+        {
+            HideAlerts();
+        }
+        
+        HideButton();
     }
 
     private void UpdateMiniMapElement(GameObject tower, bool isActive)
@@ -484,9 +497,25 @@ public class InGameManager : MonoBehaviour
     {
         for (int i = 0; i < monsterSpawners.Length; i++)
         {
+            monsterSpawners[i].HideAlert();
             if (curWave == monsterSpawners[i].GetWaveId())
             {
-                monsterSpawners[i].HideAlert();
+                ActivateFitWaveSpawner(monsterSpawners[i], true);
+            }
+            else
+            {
+                ActivateFitWaveSpawner(monsterSpawners[i], false);
+            }
+        }
+    }
+
+    public void HideAlertAtBossWave()
+    {
+        for (int i = 0; i < monsterSpawners.Length; i++)
+        {
+            monsterSpawners[i].HideAlert();
+            if (monsterSpawners[i].GetWaveId() == 1 || monsterSpawners[i].GetWaveId() == 2)
+            {
                 ActivateFitWaveSpawner(monsterSpawners[i], true);
             }
             else
@@ -601,11 +630,12 @@ public class InGameManager : MonoBehaviour
 
     private IEnumerator ShowInfo()
     {
+        // if (curWave == maxWave - 1)
+        // {
+        //     waveInfo.SetText("Final Wave");
+        // }
+        // else
         if (curWave == maxWave - 1)
-        {
-            waveInfo.SetText("Final Wave");
-        }
-        else if (curWave == maxWave - 1)
         {
             yield return new WaitForSeconds(24);
 
