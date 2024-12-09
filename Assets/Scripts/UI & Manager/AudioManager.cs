@@ -118,7 +118,8 @@ public class AudioManager : Singleton<AudioManager>
         source.reverbZoneMix = 0.0f;
         source.volume = sfxVolume;
         source.clip = sfxClips[(int)sfx];
-        if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
+        // if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
+        if (sfx == Sfx.MissileFinalDetect) source.loop = true;
         source.Play();
 
         string id = System.Guid.NewGuid().ToString(); // 고유 ID 생성
