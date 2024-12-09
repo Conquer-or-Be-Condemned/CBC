@@ -47,6 +47,10 @@ public class AudioManager : Singleton<AudioManager>
         TurretOff,
         TurretOn,
         WolfComing,
+        WolfComing2,
+        WolfBark,
+        WolfBite,
+        WolfSpawn,
         DragonComing,
         HorseComing,
         HorseMoving
