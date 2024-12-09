@@ -605,7 +605,7 @@ public class InGameManager : MonoBehaviour
         {
             waveInfo.SetText("Final Wave");
         }
-        else if (curWave == maxWave)
+        else if (curWave == maxWave - 1)
         {
             yield return new WaitForSeconds(24);
 
