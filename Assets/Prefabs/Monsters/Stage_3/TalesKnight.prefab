@@ -150,19 +150,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: TalesKnight
-  maxHealth: 450
-  currentHealth: 450
-  attackDamage: 10
+  maxHealth: 1000
+  currentHealth: 1000
+  attackDamage: 35
   moveSpeed: 15
   attackRange: 7.3
   attackCooldown: 1
   isDead: 0
-  isTargeted: 0
+  isTargeted: 1
   detectionRange: 30
   player: {fileID: 0}
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 8
+  isDerivedBoss: 0
   currentTarget: {fileID: 0}
 --- !u!60 &8427811026046601417
 PolygonCollider2D:

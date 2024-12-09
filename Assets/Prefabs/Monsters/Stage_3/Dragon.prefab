@@ -150,9 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: Dragon
-  maxHealth: 4000
-  currentHealth: 4000
-  attackDamage: 10
+  maxHealth: 50000
+  currentHealth: 50000
+  attackDamage: 80
   moveSpeed: 15
   attackRange: 13
   attackCooldown: 1
@@ -163,6 +163,7 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 10
+  isDerivedBoss: 0
   currentTarget: {fileID: 0}
 --- !u!60 &7536219728220803184
 PolygonCollider2D:

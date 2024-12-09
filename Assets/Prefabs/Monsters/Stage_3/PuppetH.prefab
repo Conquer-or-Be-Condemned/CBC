@@ -152,7 +152,7 @@ MonoBehaviour:
   monsterName: PuppetH
   maxHealth: 450
   currentHealth: 450
-  attackDamage: 10
+  attackDamage: 15
   moveSpeed: 4
   attackRange: 13
   attackCooldown: 1
@@ -163,6 +163,7 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 15
+  isDerivedBoss: 0
   currentTarget: {fileID: 0}
 --- !u!60 &858329386576070653
 PolygonCollider2D:
