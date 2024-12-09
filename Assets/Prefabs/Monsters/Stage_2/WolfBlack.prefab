@@ -234,9 +234,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: WolfBlack
-  maxHealth: 4000
-  currentHealth: 4000
-  attackDamage: 1
+  maxHealth: 50000
+  currentHealth: 50000
+  attackDamage: 40
   moveSpeed: 15
   attackRange: 8
   attackCooldown: 5
@@ -247,8 +247,8 @@ MonoBehaviour:
   controlUnitStatus: {fileID: 0}
   healthBarPrefab: {fileID: 5923136517399835792, guid: 9f5f595c12ea043288a57743f47ba096, type: 3}
   healthBarYOffset: 8
-  isDerivedBoss: 0
-  treadDamage: 1
+  isDerivedBoss: 1
+  treadDamage: 80
   monsterSpawnerInBoss: {fileID: 1084871462846035899, guid: 28b7ef2ba34dd48ed8f33c8d28ef6fd8, type: 3}
   currentTarget: {fileID: 0}
 --- !u!60 &7329752125622980649
