@@ -298,7 +298,7 @@ public class StageInfoManager : MonoBehaviour
     //  웨이브 저장을 위한 Method
     public static void SetStageInfo()
     {
-        StageInfo.Add(3);
+        StageInfo.Add(4);
         StageInfo.Add(1);
     }
 
@@ -307,6 +307,7 @@ public class StageInfoManager : MonoBehaviour
         //  Stage 1 - Wave 9개 (임시 3개)
         WaveInfo.Add(new List<int> {50,150,250,2,0,0,0,0,0});
         // WaveInfo.Add(new List<int> {10,10,10,1000,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {100,275,350,1000,0,0,0,0,0,0});
         WaveInfo.Add(new List<int> {100,275,350,1000,0,0,0,0,0,0});
     }
     
