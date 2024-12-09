@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4301688003737086183}
   bulletSpeed: 4
-  bulletDamage: 10
+  bulletDamage: 15
   bulletSpawnPoint: {fileID: 0}
   controlUnit: {fileID: 0}
 --- !u!50 &4301688003737086183
