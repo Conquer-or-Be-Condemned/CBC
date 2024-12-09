@@ -135,13 +135,12 @@ public class AudioManager : Singleton<AudioManager>
     {
         int loopIndex = sfxChannelIndex % sfxPlayers.Length;
         sfxChannelIndex++;
-        if (sfxChannelIndex >= 1000) sfxChannelIndex = 100;
+        if (sfxChannelIndex >= 300) sfxChannelIndex = 23;
         AudioSource source = sfxPlayers[loopIndex];
         foreach (var src in activeSfx.Values)//먼저 들어온 sfx 볼륨 감소
         {
-            src.volume -= 0.1f;
+            src.volume -= 0.07f;
         }
-        activeSfx.Clear();
         //초기화
         source.volume = sfxVolume;
         source.clip = sfxClips[(int)sfx];
@@ -158,8 +157,13 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (activeSfx.ContainsKey(id)&&activeSfx[id]!=null)
         {
-            activeSfx[id].Stop();
-            activeSfx.Remove(id);
+            // debug
+            Debug.Log(activeSfx[id].isPlaying);
+            if(activeSfx[id].isPlaying)
+            {
+                activeSfx[id].Stop();
+                activeSfx.Remove(id);
+            }
         }
     }
 

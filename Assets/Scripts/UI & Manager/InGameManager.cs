@@ -188,6 +188,7 @@ public class InGameManager : MonoBehaviour
 
                 if (pauseVisible)
                 {
+                    AudioManager.Instance.StopAllSfx();
                     Time.timeScale = 0f;
                 }
                 else
@@ -444,6 +445,7 @@ public class InGameManager : MonoBehaviour
         // 만약 현재 웨이브가 마지막 웨이브(보스 웨이브)이고, 보스를 모두 처치했다면 스테이지 클리어
         if (dieSpawn == curSpawn &&curWave == maxWave && isBossWave)
         {
+            AudioManager.Instance.StopAllSfx();
             Debug.Log("Wave is End");
             Debug.Log("curWave3: " + curWave);
             Debug.Log("maxWave3: " + maxWave);
@@ -560,7 +562,7 @@ public class InGameManager : MonoBehaviour
 
             blind.SetActive(true);
             stageClearWrapper.SetActive(true);
-
+            AudioManager.Instance.StopAllSfx();
             //  다음 스테이지 해금
             if (DataManager.CurStage <= SceneController.Instance.curSelectStage + 1)
             {
@@ -614,7 +616,7 @@ public class InGameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
-
+        AudioManager.Instance.StopAllSfx();
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.GameOver, true);
 
         blind.SetActive(true);
@@ -630,14 +632,13 @@ public class InGameManager : MonoBehaviour
 
     private IEnumerator ShowInfo()
     {
-        // if (curWave == maxWave - 1)
-        // {
-        //     waveInfo.SetText("Final Wave");
-        // }
-        // else
         if (curWave == maxWave - 1)
         {
-            yield return new WaitForSeconds(24);
+            waveInfo.SetText("Final Wave");
+        }
+        else if (curWave == maxWave)
+        {
+            yield return new WaitForSeconds(24f);
 
             waveInfo.SetText("Boss Wave");
         }
