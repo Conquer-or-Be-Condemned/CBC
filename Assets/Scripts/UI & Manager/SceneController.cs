@@ -55,10 +55,10 @@ public class SceneController : Singleton<SceneController>
             }
         }
 
-        if (NowScene == "GameOver")
-        {
-            GameObject.Find("ExitProgram").GetComponent<Button>().onClick.AddListener(ExitProgram);
-        }
+        // if (NowScene == "GameOver")
+        // {
+        //     GameObject.Find("ExitProgram").GetComponent<Button>().onClick.AddListener(ExitProgram);
+        // }
         
     }
 
