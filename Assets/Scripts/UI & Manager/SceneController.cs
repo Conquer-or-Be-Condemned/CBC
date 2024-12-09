@@ -89,6 +89,8 @@ public class SceneController : Singleton<SceneController>
     //  Restart Game
     public void ReStartGame()
     {
+        AudioManager.Instance.StopAllSfx();
+        
         Time.timeScale = 1f;
         Debug.Log("Restart!");
         isStart = false;
