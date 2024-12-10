@@ -158,6 +158,7 @@ public class SceneController : Singleton<SceneController>
     public static void ChangeScene(string sceneName)
     {
         AudioManager.Instance.StopAllSfx();
+        AudioManager.Instance.RestoreAudioMixerSettings();
         if (sceneName == "Main")
         {
             Debug.Log("MAIN!!");

@@ -96,13 +96,15 @@ public class AudioManager : Singleton<AudioManager>
         // BGM 기본 볼륨 초기화
         if (bgmMixerGroup != null)
         {
-            bgmMixerGroup.audioMixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Clamp(bgmVolume, 0.0001f, 1f)) * 20);
+            Debug.Log("bgm mixer group set");
+            bgmMixerGroup.audioMixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Clamp(bgmVolume, 0.0001f, 1f)) * 20+42f);
         }
 
         // SFX 기본 볼륨 초기화
         if (sfxMixerGroup != null)
         {
-            sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(sfxVolume, 0.0001f, 1f)) * 20);
+            Debug.Log("sfx mixer group set");
+            sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(sfxVolume, 0.0001f, 1f)) * 20+16f);
         }
         else
         {
@@ -147,7 +149,7 @@ public class AudioManager : Singleton<AudioManager>
         source.reverbZoneMix = 0.0f;
         // if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
         if (sfx == Sfx.TurretOn) source.volume /= 2f;
-        if (sfx == Sfx.MissileFinalDetect) source.loop = true;
+        if (sfx == Sfx.MissileFlying) source.loop = true;
         // if (sfx == Sfx.Fire && _activeSfx.Count > 20)
         // {
         //     return null;
@@ -173,7 +175,8 @@ public class AudioManager : Singleton<AudioManager>
         source.dopplerLevel = 0.0f;
         source.reverbZoneMix = 0.0f;
         // if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
-        if (sfx == Sfx.MissileFinalDetect) source.loop = true;
+        if (sfx == Sfx.SpaceShipHover) source.loop = true;
+        // if (sfx == Sfx.MissileFinalDetect) source.loop = true;
         // if (sfx == Sfx.Fire && _activeSfx.Count > 20)
         // {
         //     return null;
@@ -185,26 +188,14 @@ public class AudioManager : Singleton<AudioManager>
         StartCoroutine(RemoveSfxWhenFinished(id, source));
         return id;
     }
-    // public string PlaySfx(Sfx sfx,float volume)//볼륨을 커스텀 가능
-    // {
-    //     foreach (var src in _activeSfx.Values)//먼저 들어온 sfx 볼륨 감소
-    //     {
-    //         src.volume -= 0.03f;
-    //     }
-    //     //초기화
-    //     AudioSource source = _sfxObject.AddComponent<AudioSource>();
-    //     source.dopplerLevel = 0.0f;
-    //     source.reverbZoneMix = 0.0f;
-    //     source.volume = volume;
-    //     source.clip = sfxClips[(int)sfx];
-    //     source.Play();
-    //
-    //     string id = System.Guid.NewGuid().ToString(); // 고유 ID 생성
-    //     _activeSfx[id] = source;
-    //     StartCoroutine(RemoveSfxWhenFinished(id, source));
-    //     return id;
-    // }
-    //
+    public void ChangeVolume(string id, float distance, float searchDistance)
+    {
+        if (_activeSfx.ContainsKey(id))
+        {
+            Debug.Log("Volume changed");
+            _activeSfx[id].volume = (sfxVolume - sfxVolume * (distance / searchDistance));
+        }
+    }
     // 특정 SFX 중지
     public void StopSfx(string id)
     {
@@ -223,6 +214,8 @@ public class AudioManager : Singleton<AudioManager>
             source.Stop();
         }
         _activeSfx.Clear();
+        
+        RestoreAudioMixerSettings();
     }
     
     public void ChangeBgmVolume(float vol)
@@ -232,6 +225,7 @@ public class AudioManager : Singleton<AudioManager>
         {
             _bgmPlayers[i].volume = bgmVolume;
         }
+        bgmMixerGroup.audioMixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Clamp(bgmVolume, 0.0001f, 1f)) * 20+42f);
     }
 
     public void ChangeSfxVolume(float vol)
@@ -239,12 +233,27 @@ public class AudioManager : Singleton<AudioManager>
         foreach (var source in _activeSfx.Values)
             source.volume = vol;
         sfxVolume = vol;
-        sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(vol) * 20);
+        sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(sfxVolume, 0.0001f, 1f)) * 20+16f);
     }
     public void UIBgm(bool isPlay) // UI 창을 띄웠을 때 고음만 통과시켜 간지나게 함
     {
         AudioHighPassFilter bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
         bgmEffect.enabled = isPlay;
+    }
+    public void RestoreAudioMixerSettings()
+    {
+        if (bgmMixerGroup != null)
+        {
+            // BGMVolume을 수동으로 복구
+            bgmMixerGroup.audioMixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Clamp(bgmVolume, 0.0001f, 1f)) * 20+42f);
+            // bgmMixerGroup.audioMixer.SetFloat("BGMVolume", Mathf.Log10(bgmVolume) * 20);
+
+        }
+
+        if (sfxMixerGroup != null)
+        {
+            sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(sfxVolume, 0.0001f, 1f)) * 20+16f);
+        }
     }
     
 // 재생 종료 후 activeSfx에서 제거

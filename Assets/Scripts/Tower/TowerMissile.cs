@@ -23,7 +23,8 @@ public class TowerMissile : MonoBehaviour
     
     [Header("Combat Settings")]
     [SerializeField] private float explosionRange = 20f;
-    
+
+    public LayerMask layerMask;
     private float _bulletDamage;
     private Transform _target;
     private Vector2 _initialDirection;
@@ -43,8 +44,12 @@ public class TowerMissile : MonoBehaviour
         rb.velocity = _initialDirection * _currentSpeed;
 
         // MissileFlying SFX 재생 및 ID 저장
-        // _missileSoundId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFlying);
-
+        Collider2D hits = Physics2D.OverlapCircle(transform.position, 100, layerMask);
+        if (hits != null)
+        {
+            float distance = Vector2.Distance(transform.position, hits.transform.position);
+            _missileSoundId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFlying, distance, 100);
+        }
         StartCoroutine(InitialStraightMovement());
         StartCoroutine(ExplodeMissileIfNotHit());
     }
@@ -58,6 +63,7 @@ public class TowerMissile : MonoBehaviour
         DrawTargetLineToTarget();
         SearchForNewTarget();
         AccelerateToTarget();
+        FlyingSoundMove();
     }
     private void SearchForNewTarget()//목표하던 목표가 사라지면 호출
     {
@@ -105,6 +111,19 @@ public class TowerMissile : MonoBehaviour
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+    private void FlyingSoundMove()
+    {
+        Collider2D hits = Physics2D.OverlapCircle(transform.position, 100, layerMask);
+        if (hits != null&&_missileSoundId!=null)
+        {
+            float distance = Vector2.Distance(transform.position, hits.transform.position);
+            Debug.Log("Distance with player" + distance);
+            AudioManager.Instance.ChangeVolume(_missileSoundId,distance,100);
+        }
+
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         StartCoroutine(DestroyObject());
