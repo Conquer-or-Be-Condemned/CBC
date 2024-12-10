@@ -482,7 +482,7 @@ Transform:
   m_GameObject: {fileID: 7051758743884136471}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.62, y: -9, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -507,6 +507,10 @@ MonoBehaviour:
   isActivated: 0
   previousIsActivated: 0
   ShowRange: 0
+  turret: {fileID: 845453686062864816}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 262144
   turretRotationPoint: {fileID: 2603067881122175868}
   enemyMask:
     serializedVersion: 2
