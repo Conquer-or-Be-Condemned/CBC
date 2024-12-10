@@ -116,18 +116,19 @@ public class InGameManager : MonoBehaviour
         //  진전도 초기화
         talkIdx = 1;
 
-        if (SceneController.Instance.curSelectStage + 1 >= DataManager.CurStage)
-        {
+        //  진전도 표시
+        // if (SceneController.Instance.curSelectStage + 1 >= DataManager.CurStage)
+        // {
             Debug.Log("Talk Process!!");
             talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
             StartCoroutine(TalkProcess());
-        }
-        else
-        {
-            ShowButton();
-            ShowAlerts();
-            talkIdx++;
-        }
+        // }
+        // else
+        // {
+        //     ShowButton();
+        //     ShowAlerts();
+        //     talkIdx++;
+        // }
 
         //  Stage Clear Button 연결
         clearGoToMain.onClick.AddListener(() => SceneController.ChangeScene("Main"));
@@ -144,6 +145,9 @@ public class InGameManager : MonoBehaviour
         {
             playerSpawnPoint = GameObject.Find("PlayerSpawnPoint");
         }
+        
+        //  Bomb Count init
+        bombCount.SetText(player.GetComponent<Player>().maxBombCount.ToString());
     }
 
     //  대화 중에는 스킵 불가능
@@ -245,8 +249,11 @@ public class InGameManager : MonoBehaviour
 
         talkWrapper.GetComponent<Animator>().SetBool("isShow", false);
 
-        ShowAlerts();
-        ShowButton();
+        if (curWave != maxWave)
+        {
+            ShowAlerts();
+            ShowButton();
+        }
     }
 
     private IEnumerator TalkCoroutine(string buff)
@@ -306,9 +313,9 @@ public class InGameManager : MonoBehaviour
     {
         float bgmVolume = AudioManager.Instance.bgmVolume;
         
-        isBossWave = true;
         Debug.LogWarning("BossSpawn");
         
+        talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
         StartCoroutine(TalkProcess());
 
         StartCoroutine(BossSfxCoroutine(bgmVolume));
@@ -377,24 +384,27 @@ public class InGameManager : MonoBehaviour
                 Debug.LogError("BossAnimationManager가 할당되지 않았습니다.");
             }
             
+            isBossWave = true;
             //  Spawner ON (wave 1, 2)
         }
 
 
         Debug.Log("Wave Start");
-        isWave = true;
         spawnEnd = false;
 
         InitWave();
         StartCoroutine(ShowInfo()); // 코루틴으로 호출
-
-        if (isBossWave)
-        {
-            HideAlertAtBossWave();
-        }
-        else
+        
+        if (curWave != maxWave - 1)
         {
             HideAlerts();
+            isWave = true;
+        }
+        else if(curWave != maxWave)
+        {
+            //  Boss Spawn 여기서 함
+            HideAlertAtFinalWave();
+            isWave = true;
         }
         
         HideButton();
@@ -443,7 +453,7 @@ public class InGameManager : MonoBehaviour
     private void CheckWaveClear()
     {
         // 만약 현재 웨이브가 마지막 웨이브(보스 웨이브)이고, 보스를 모두 처치했다면 스테이지 클리어
-        if (dieSpawn == curSpawn &&curWave == maxWave && isBossWave)
+        if (dieSpawn == curSpawn && curWave == maxWave && isBossWave)
         {
             AudioManager.Instance.StopAllSfx();
             Debug.Log("Wave is End");
@@ -458,6 +468,8 @@ public class InGameManager : MonoBehaviour
                     isClear = true;
                 }
             }
+
+            isWave = false;
         }
         // 보스 웨이브가 아닌 일반 웨이브 클리어 처리
         else if (dieSpawn == curSpawn && spawnEnd && curWave < maxWave && !isBossWave)
@@ -475,11 +487,20 @@ public class InGameManager : MonoBehaviour
                     //  Player 회복
                     GameManager.Instance.player.GetComponent<PlayerInfo>().RecoverHp();
 
-                    ShowAlerts();
+                    if (curWave == maxWave - 1)
+                    {
+                        ShowAlertAtFinalWave();
+                    }
+                    else
+                    {
+                        ShowAlerts();
+                    }
 
                     StartCoroutine(MovePlayCoroutine());
                 }
             }
+            
+            isWave = false;
         }
     }
 
@@ -489,6 +510,17 @@ public class InGameManager : MonoBehaviour
         for (int i = 0; i < monsterSpawners.Length; i++)
         {
             if (curWave == monsterSpawners[i].GetWaveId())
+            {
+                monsterSpawners[i].ShowAlert();
+            }
+        }
+    }
+
+    public void ShowAlertAtFinalWave()
+    {
+        for (int i = 0; i < monsterSpawners.Length; i++)
+        {
+            if (monsterSpawners[i].GetWaveId() == 2 || monsterSpawners[i].GetWaveId() == 3)
             {
                 monsterSpawners[i].ShowAlert();
             }
@@ -511,12 +543,13 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    public void HideAlertAtBossWave()
+    public void HideAlertAtFinalWave()
     {
         for (int i = 0; i < monsterSpawners.Length; i++)
         {
             monsterSpawners[i].HideAlert();
-            if (monsterSpawners[i].GetWaveId() == 1 || monsterSpawners[i].GetWaveId() == 2)
+            
+            if (monsterSpawners[i].GetWaveId() == 2 || monsterSpawners[i].GetWaveId() == 3)
             {
                 ActivateFitWaveSpawner(monsterSpawners[i], true);
             }
@@ -639,7 +672,10 @@ public class InGameManager : MonoBehaviour
         else if (curWave == maxWave)
         {
             yield return new WaitForSeconds(24f);
-
+            
+            //  Boss Spawn 여기서 함
+            HideAlertAtFinalWave();
+            isWave = true;
             waveInfo.SetText("Boss Wave");
         }
 

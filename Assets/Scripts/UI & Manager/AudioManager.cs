@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +7,17 @@ public class AudioManager : Singleton<AudioManager>
     [Header("BGM")]
     public AudioClip[] bgmClips;
     public float bgmVolume;
-    private AudioSource[] bgmPlayers;
-    public int bgmChannelIndex;
+    private AudioSource[] _bgmPlayers;
+    private int _bgmChannelIndex;
 
     [Header("SFX")]
     public AudioClip[] sfxClips;
     public float sfxVolume;
-    private AudioSource[] sfxPlayers;
-    private Dictionary<string, AudioSource> activeSfx = new Dictionary<string, AudioSource>();
-    public int sfxChannelIndex;
-   
+    private AudioSource[] _sfxPlayers;
+    private Dictionary<string, AudioSource> _activeSfx = new Dictionary<string, AudioSource>();
+
+    private GameObject _sfxObject;
+    private GameObject _bgmObject;
     public enum Bgm
     {
         StartingScene,
@@ -53,151 +55,151 @@ public class AudioManager : Singleton<AudioManager>
         WolfSpawn,
         DragonComing,
         HorseComing,
-        HorseMoving
+        HorseMoving,
+        SpaceShipHover,
+        SpaceShipPassing
     }
-
-    public enum Alert
-    {
-        ControlUnitIsUnderAttack
-    }
-
+    
     void Awake()
     {
         base.Awake();
+        _bgmChannelIndex = bgmClips.Length;
         Init();
     }
 
     void Init()
     {
-        GameObject bgmObject = new GameObject("BGM");
-        bgmObject.transform.parent = transform;
-        bgmPlayers = new AudioSource[bgmChannelIndex];
-        for (int i = 0; i < bgmPlayers.Length; i++)
+        //BGM Initialization
+        _bgmObject = new GameObject("BGM");
+        _bgmObject.transform.parent = transform;
+        _bgmPlayers = new AudioSource[_bgmChannelIndex];
+        for (int i = 0; i < _bgmPlayers.Length; i++)
         {
-            bgmPlayers[i] = bgmObject.AddComponent<AudioSource>();
-            bgmPlayers[i].playOnAwake = false;
-            bgmPlayers[i].volume = bgmVolume;
+            _bgmPlayers[i] = _bgmObject.AddComponent<AudioSource>();
+            _bgmPlayers[i].playOnAwake = false;
+            _bgmPlayers[i].volume = bgmVolume;
         }
-
-
-        GameObject sfxObject = new GameObject("SFXPlayer");
-        sfxObject.transform.parent = transform;
-        sfxPlayers = new AudioSource[sfxChannelIndex];
-
-        for (int i = 0; i < sfxPlayers.Length; i++)
-        {
-            sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
-            sfxPlayers[i].playOnAwake = false;
-            sfxPlayers[i].volume = sfxVolume;
-        }
+        //SFX Initialization
+        _sfxObject = new GameObject("SFXPlayer");
+        _sfxObject.transform.parent = transform;
     }
     
 
     // BGM 재생
     public void PlayBGM(Bgm bgm, bool isPlay)
     {
-        for (int i = 0; i < bgmPlayers.Length; i++)
+        for (int i = 0; i < _bgmPlayers.Length; i++)
         {
-            int loopIndex = (i + bgmChannelIndex) % bgmPlayers.Length;
-            bgmPlayers[loopIndex].clip = bgmClips[(int)bgm];
+            int loopIndex = (i + _bgmChannelIndex) % _bgmPlayers.Length;
+            _bgmPlayers[loopIndex].clip = bgmClips[(int)bgm];
             if (isPlay)
             {
-                if (bgmPlayers[loopIndex].isPlaying)
+                if (_bgmPlayers[loopIndex].isPlaying)
                     continue;
-                bgmPlayers[loopIndex].Play();
+                _bgmPlayers[loopIndex].Play();
             }
             else
             {
-                bgmPlayers[loopIndex].Stop();
+                _bgmPlayers[loopIndex].Stop();
             }
         }
     }
-    public void PlaySFXOnce(Sfx sfx, bool isPlay)
-    {
-        for (int i = 0; i < sfxPlayers.Length; i++)
-        {
-            int loopIndex = (i + sfxChannelIndex) % sfxPlayers.Length;
-            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
-            sfxPlayers[loopIndex].volume = sfxVolume/10f;
-            Debug.Log(sfxPlayers[loopIndex].volume);
-            if (isPlay)
-            {
-                sfxPlayers[loopIndex].Play();
-            }
-            else
-            {
-                sfxPlayers[loopIndex].Stop();
-            }
-        }
-    }
+
     // SFX 재생 (폴링 방식)
     public string PlaySfx(Sfx sfx)
     {
-        int loopIndex = sfxChannelIndex % sfxPlayers.Length;
-        sfxChannelIndex++;
-        if (sfxChannelIndex >= 300) sfxChannelIndex = 23;
-        AudioSource source = sfxPlayers[loopIndex];
-        foreach (var src in activeSfx.Values)//먼저 들어온 sfx 볼륨 감소
-        {
-            src.volume -= 0.07f;
-        }
+        // foreach (var src in _activeSfx.Values)//먼저 들어온 sfx 볼륨 감소
+        // {
+        //     src.volume -= 0.005f;
+        // }
         //초기화
+        AudioSource source = _sfxObject.AddComponent<AudioSource>();
+        source.dopplerLevel = 0.0f;
+        source.reverbZoneMix = 0.0f;
         source.volume = sfxVolume;
         source.clip = sfxClips[(int)sfx];
+        // if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
+        if (sfx == Sfx.MissileFinalDetect) source.loop = true;
         source.Play();
 
         string id = System.Guid.NewGuid().ToString(); // 고유 ID 생성
-        activeSfx[id] = source;
-
+        _activeSfx[id] = source;
+        StartCoroutine(RemoveSfxWhenFinished(id, source));
         return id;
     }
-
+    // public string PlaySfx(Sfx sfx,float volume)//볼륨을 커스텀 가능
+    // {
+    //     foreach (var src in _activeSfx.Values)//먼저 들어온 sfx 볼륨 감소
+    //     {
+    //         src.volume -= 0.03f;
+    //     }
+    //     //초기화
+    //     AudioSource source = _sfxObject.AddComponent<AudioSource>();
+    //     source.dopplerLevel = 0.0f;
+    //     source.reverbZoneMix = 0.0f;
+    //     source.volume = volume;
+    //     source.clip = sfxClips[(int)sfx];
+    //     source.Play();
+    //
+    //     string id = System.Guid.NewGuid().ToString(); // 고유 ID 생성
+    //     _activeSfx[id] = source;
+    //     StartCoroutine(RemoveSfxWhenFinished(id, source));
+    //     return id;
+    // }
+    //
     // 특정 SFX 중지
     public void StopSfx(string id)
     {
-        if (activeSfx.ContainsKey(id)&&activeSfx[id]!=null)
+        if (_activeSfx.ContainsKey(id))
         {
-            // debug
-            Debug.Log(activeSfx[id].isPlaying);
-            if(activeSfx[id].isPlaying)
-            {
-                activeSfx[id].Stop();
-                activeSfx.Remove(id);
-            }
+            _activeSfx[id].Stop(); 
+            _activeSfx.Remove(id);
         }
     }
 
     // 모든 SFX 중지
     public void StopAllSfx()
     {
-        foreach (var source in activeSfx.Values)
+        foreach (var source in _activeSfx.Values)
         {
             source.Stop();
         }
-        activeSfx.Clear();
+        _activeSfx.Clear();
+    }
+    
+    public void ChangeBgmVolume(float vol)
+    {
+        bgmVolume = vol;
+        for (int i = 0; i < _bgmPlayers.Length; i++)
+        {
+            _bgmPlayers[i].volume = bgmVolume;
+        }
+    }
+
+    public void ChangeSfxVolume(float vol)
+    {
+        foreach (var source in _activeSfx.Values)
+            source.volume = vol;
+        sfxVolume = vol;
     }
     public void UIBgm(bool isPlay) // UI 창을 띄웠을 때 고음만 통과시켜 간지나게 함
     {
         AudioHighPassFilter bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
         bgmEffect.enabled = isPlay;
     }
-
-    public void ChangeBgmVolume(float vol)
-    {
-        bgmVolume = vol;
-        for (int i = 0; i < bgmPlayers.Length; i++)
-        {
-            bgmPlayers[i].volume = bgmVolume;
-        }
-    }
-
-    public void ChangeSfxVolume(float vol)
-    {
-        sfxVolume = vol;
     
-        for (int i = 0; i < sfxPlayers.Length; i++)
+// 재생 종료 후 activeSfx에서 제거
+    private IEnumerator RemoveSfxWhenFinished(string id, AudioSource source)
+    {
+        // AudioSource 재생이 끝날 때까지 대기
+        yield return new WaitUntil(() => !source.isPlaying);
+
+        // activeSfx에서 제거
+        if (_activeSfx.ContainsKey(id))
         {
-            sfxPlayers[i].volume = sfxVolume;
+            _activeSfx.Remove(id);
+            Destroy(source); // AudioSource 컴포넌트 제거
+            // Debug.Log($"SFX with ID {id} has finished and removed from activeSfx.");
         }
     }
 }

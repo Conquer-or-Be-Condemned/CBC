@@ -19,13 +19,13 @@ public class OpeningViewer : MonoBehaviour
     
     [Header("Space Ship")]
     public GameObject spaceShip;
-
+    private string _spaceShipHoverId;
     private void Start()
     {
         TalkManager.SetTalkData();
         
         AudioManager.Instance.PlayBGM(AudioManager.Bgm.Opening,true);
-
+        _spaceShipHoverId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.SpaceShipHover);
         talkIdx = 1;
 
         if (GameManager.TutorialEnd)
@@ -83,7 +83,7 @@ public class OpeningViewer : MonoBehaviour
 
     private IEnumerator WaitCoroutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.4f);
         talkIdx++;
 
         if (GameManager.Language == 0)
@@ -94,8 +94,11 @@ public class OpeningViewer : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.StopSfx(_spaceShipHoverId);
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.SpaceShipPassing);
                 spaceShip.GetComponent<Animator>().SetBool("isEnd", true);
-                yield return new WaitForSeconds(2f);
+                
+                yield return new WaitForSeconds(4f);
                 GameManager.TutorialEnd = true;
                 SceneController.ChangeScene("StageMenu");
             }
@@ -108,8 +111,10 @@ public class OpeningViewer : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.StopSfx(_spaceShipHoverId);
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.SpaceShipPassing);
                 spaceShip.GetComponent<Animator>().SetBool("isEnd", true);
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(4f);
                 GameManager.TutorialEnd = true;
                 SceneController.ChangeScene("StageMenu");
             }

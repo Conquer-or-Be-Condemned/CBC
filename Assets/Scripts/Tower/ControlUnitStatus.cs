@@ -133,7 +133,7 @@ public class ControlUnitStatus : MonoBehaviour
 
     //  파워 회복량, 속도
     [SerializeField] private int powerOffset = 7;
-    [SerializeField] private float recoverSpeed = 0.1f;
+    // [SerializeField] private float recoverSpeed = 0.1f;
 
     private void RecoverPower(int power)
     {
@@ -151,7 +151,7 @@ public class ControlUnitStatus : MonoBehaviour
             tmp--;
             currentPower++;
             
-            yield return new WaitForSeconds(recoverSpeed);
+            yield return new WaitForSeconds(0.1f);
             onCUPowerChange.Invoke(currentPower,maxPower);
         }
     }

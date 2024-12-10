@@ -902,7 +902,7 @@ MonoBehaviour:
   pushAmount: 0.002
   bulletPrefab: {fileID: 5527518119625726090, guid: 71d691117f0b648c0ba428ef30cd6bba, type: 3}
   bulletSpawnPoint: {fileID: 1429413951217043725}
-  fireRate: 8
+  fireRate: 7
   bombPrefab: {fileID: 6757870014131357828, guid: 38ba50bc42116c549b973019e7f5b15f, type: 3}
   map: {fileID: 0}
   attackDelay: 0.2
