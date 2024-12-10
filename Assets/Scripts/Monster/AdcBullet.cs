@@ -19,6 +19,7 @@ public class AdcBullet : MonoBehaviour
     // 방향을 설정하는 메서드
     public void SetDirection(Vector2 dir)
     {
+        Debug.Log("bullettargeted");
         direction = dir.normalized;
         StartCoroutine(DestroyObjectIfNotHit());
     }
