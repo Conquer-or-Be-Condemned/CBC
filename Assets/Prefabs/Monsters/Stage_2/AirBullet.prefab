@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4301688003737086183}
   - component: {fileID: 1557083787853802698}
   m_Layer: 16
-  m_Name: Projectile
+  m_Name: AirBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4301688003737086183}
-  bulletSpeed: 4
-  bulletDamage: 10
+  bulletSpeed: 8
+  bulletDamage: 15
   bulletSpawnPoint: {fileID: 0}
   controlUnit: {fileID: 0}
 --- !u!50 &4301688003737086183
@@ -167,7 +167,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.17, y: 0.18}
+    oldSize: {x: 1.1333333, y: 1.2}
     newSize: {x: 0.898, y: 0.566}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

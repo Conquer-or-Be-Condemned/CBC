@@ -120,6 +120,8 @@ public class AudioManager : Singleton<AudioManager>
         source.clip = sfxClips[(int)sfx];
         // if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
         if (sfx == Sfx.MissileFinalDetect) source.loop = true;
+        if (sfx == Sfx.Fire || sfx == Sfx.PlayerBullet) source.volume /= 2f;
+        
         source.Play();
 
         string id = System.Guid.NewGuid().ToString(); // 고유 ID 생성

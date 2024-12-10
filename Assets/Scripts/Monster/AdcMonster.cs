@@ -190,6 +190,7 @@ public class AdcMonster : Monster
         {
             // 타겟 방향 계산
             Vector2 targetDirection = (currentTarget.position - transform.position).normalized;
+            Debug.Log("bulletshot");
 
             // 총알 생성
             GameObject bulletObj = Instantiate(bulletPrefabGreen, transform.position, Quaternion.identity);
