@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 880866632979604109}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5804918}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,3 +159,4 @@ MonoBehaviour:
   alert: {fileID: 880866632979604109}
   workable: 0
   isWorking: 0
+  isDerivedBoss: 0
