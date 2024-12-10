@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1084871462846035899}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 63.46606, y: -106.74462, z: -0.0008420728}
+  m_LocalPosition: {x: 21.431099, y: -79.6078, z: -0.10874448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,13 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterSpawnDataArray:
-  - monsterPrefab: {fileID: 4009334584712422631, guid: 84029b6ea4e324cfa855223dba4205bc, type: 3}
+  - monsterPrefab: {fileID: 4009334584712422631, guid: 84029b6ea4e324cfa855223dba4205bc,
+      type: 3}
     spawnCount: 10
-  - monsterPrefab: {fileID: 4009334584712422631, guid: c0c1fd1171906468aa925745a523dde6, type: 3}
+  - monsterPrefab: {fileID: 4009334584712422631, guid: c0c1fd1171906468aa925745a523dde6,
+      type: 3}
     spawnCount: 10
-  - monsterPrefab: {fileID: 4009334584712422631, guid: ba061ef4f3e754c9aa4385f27da171e5, type: 3}
+  - monsterPrefab: {fileID: 4009334584712422631, guid: ba061ef4f3e754c9aa4385f27da171e5,
+      type: 3}
     spawnCount: 2
-  - monsterPrefab: {fileID: 4009334584712422631, guid: ddcf10839973644c699b092499c808fd, type: 3}
+  - monsterPrefab: {fileID: 4009334584712422631, guid: ddcf10839973644c699b092499c808fd,
+      type: 3}
     spawnCount: 2
   spawnInterval: 5
   spawnRadius: 1

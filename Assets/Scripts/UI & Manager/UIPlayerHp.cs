@@ -16,6 +16,8 @@ public class UIPlayerHp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private GameObject [] cells;
     [SerializeField] private int maxCell;
     [SerializeField] private int curCell;
+
+    private bool isInit;
     
     private void Start()
     {
@@ -25,15 +27,16 @@ public class UIPlayerHp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             cells = GameObject.FindGameObjectsWithTag("HpBar");
         }
         
+        isInit = false;
         maxCell = cells.Length;
     }
 
     private void FixedUpdate()
     {
-        //  플레이어와 UI 연결 -> 시간 차 오류로 인해 Start에 넣지 않음
-        if (GameManager.Instance.player == null)
+        if (!isInit)
         {
             GameManager.Instance.player.GetComponent<PlayerInfo>().onHpChange.AddListener(SetUIPlayerHp);
+            isInit = true;
         }
     }
 
