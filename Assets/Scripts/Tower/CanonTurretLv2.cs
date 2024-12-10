@@ -65,6 +65,12 @@ public class CanonTurretLv2 : DefaultCanonTurret
             float randomValue = Random.Range(-0.5f, 0.5f);
             bulletFireDirection[i].position = new Vector3(bulletFireDirection[i].position.x+randomValue, bulletFireDirection[i].position.y,0f);
             towerBulletScript.SetTarget(bulletFireDirection[i]);
+            // Collider2D player = Physics2D.OverlapCircle(transform.position, 40, playerMask);
+            // Debug.Log(player);
+            // if (player != null)
+            // {
+            //     AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire);
+            // } 
         }
     }
     

@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : Singleton<AudioManager>
 {
+    [Header("Audio Mixer Groups")]
+    public AudioMixerGroup bgmMixerGroup; // BGM Mixer Group
+    public AudioMixerGroup sfxMixerGroup; // SFX Mixer Group
+    
     [Header("BGM")]
     public AudioClip[] bgmClips;
     public float bgmVolume;
@@ -65,6 +70,7 @@ public class AudioManager : Singleton<AudioManager>
         base.Awake();
         _bgmChannelIndex = bgmClips.Length;
         Init();
+        InitializeMixerVolumes();
     }
 
     void Init()
@@ -78,12 +84,31 @@ public class AudioManager : Singleton<AudioManager>
             _bgmPlayers[i] = _bgmObject.AddComponent<AudioSource>();
             _bgmPlayers[i].playOnAwake = false;
             _bgmPlayers[i].volume = bgmVolume;
+            _bgmPlayers[i].loop = true;
+            _bgmPlayers[i].outputAudioMixerGroup = bgmMixerGroup;
         }
         //SFX Initialization
         _sfxObject = new GameObject("SFXPlayer");
         _sfxObject.transform.parent = transform;
     }
-    
+    private void InitializeMixerVolumes()
+    {
+        // BGM 기본 볼륨 초기화
+        if (bgmMixerGroup != null)
+        {
+            bgmMixerGroup.audioMixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Clamp(bgmVolume, 0.0001f, 1f)) * 20);
+        }
+
+        // SFX 기본 볼륨 초기화
+        if (sfxMixerGroup != null)
+        {
+            sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(sfxVolume, 0.0001f, 1f)) * 20);
+        }
+        else
+        {
+            Debug.LogWarning("SFX Mixer Group is not assigned! Skipping SFX volume initialization.");
+        }
+    }
 
     // BGM 재생
     public void PlayBGM(Bgm bgm, bool isPlay)
@@ -114,16 +139,47 @@ public class AudioManager : Singleton<AudioManager>
         // }
         //초기화
         AudioSource source = _sfxObject.AddComponent<AudioSource>();
+        source.volume = sfxVolume;// Random.Range(1f, 2f);
+        // source.volume = sfxVolume;
+        source.clip = sfxClips[(int)sfx];
+        source.outputAudioMixerGroup = sfxMixerGroup; // Assign SFX Audio Mixer Group
         source.dopplerLevel = 0.0f;
         source.reverbZoneMix = 0.0f;
-        source.volume = sfxVolume;
+        // if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
+        if (sfx == Sfx.TurretOn) source.volume /= 2f;
+        if (sfx == Sfx.MissileFinalDetect) source.loop = true;
+        // if (sfx == Sfx.Fire && _activeSfx.Count > 20)
+        // {
+        //     return null;
+        // }
+        source.Play();
+        // Debug.Log(_activeSfx.Count);
+        string id = System.Guid.NewGuid().ToString(); // 고유 ID 생성
+        _activeSfx[id] = source;
+        StartCoroutine(RemoveSfxWhenFinished(id, source));
+        return id;
+    }
+    public string PlaySfx(Sfx sfx,float distance, float searchDistance)
+    {
+        // foreach (var src in _activeSfx.Values)//먼저 들어온 sfx 볼륨 감소
+        // {
+        //     src.volume -= 0.005f;
+        // }
+        //초기화
+        AudioSource source = _sfxObject.AddComponent<AudioSource>();
+        source.volume = sfxVolume-(sfxVolume* (distance / searchDistance));
         source.clip = sfxClips[(int)sfx];
+        source.outputAudioMixerGroup = sfxMixerGroup; // Assign SFX Audio Mixer Group
+        source.dopplerLevel = 0.0f;
+        source.reverbZoneMix = 0.0f;
         // if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
         if (sfx == Sfx.MissileFinalDetect) source.loop = true;
-        if (sfx == Sfx.Fire || sfx == Sfx.PlayerBullet) source.volume /= 2f;
-        
+        // if (sfx == Sfx.Fire && _activeSfx.Count > 20)
+        // {
+        //     return null;
+        // }
         source.Play();
-
+        // Debug.Log(_activeSfx.Count);
         string id = System.Guid.NewGuid().ToString(); // 고유 ID 생성
         _activeSfx[id] = source;
         StartCoroutine(RemoveSfxWhenFinished(id, source));
@@ -183,6 +239,7 @@ public class AudioManager : Singleton<AudioManager>
         foreach (var source in _activeSfx.Values)
             source.volume = vol;
         sfxVolume = vol;
+        sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(vol) * 20);
     }
     public void UIBgm(bool isPlay) // UI 창을 띄웠을 때 고음만 통과시켜 간지나게 함
     {
