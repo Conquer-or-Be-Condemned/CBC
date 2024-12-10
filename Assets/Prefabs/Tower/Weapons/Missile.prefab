@@ -166,6 +166,9 @@ MonoBehaviour:
   acceleration: 20
   initialStraightTime: 1.5
   explosionRange: 7
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &8393742721520615193
 Animator:
   serializedVersion: 5
@@ -390,6 +393,9 @@ MonoBehaviour:
   acceleration: 20
   initialStraightTime: 1.5
   explosionRange: 7
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 262144
 --- !u!50 &5152064728928936489
 Rigidbody2D:
   serializedVersion: 4
