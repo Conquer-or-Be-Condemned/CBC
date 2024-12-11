@@ -11,7 +11,7 @@ using UnityEngine.UI;
  *  Player와 관련된 UI에 대한 스크립트입니다.
  *  HpBar의 Tag는 정해져있습니다.(HpBar)
  */
-public class UIPlayerHp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIPlayerHp : MonoBehaviour
 {
     [SerializeField] private GameObject [] cells;
     [SerializeField] private int maxCell;
@@ -60,15 +60,6 @@ public class UIPlayerHp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         
         // Debug.Log(cellNum);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        
     }
 }
 
