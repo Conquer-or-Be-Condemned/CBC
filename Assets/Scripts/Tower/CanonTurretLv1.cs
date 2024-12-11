@@ -61,6 +61,12 @@ public class CanonTurretLv1 : DefaultCanonTurret
         float randomValue = Random.Range(-0.5f, 0.5f);
         bulletFirePoint.position = new Vector3(bulletFirePoint.position.x+randomValue, bulletFirePoint.position.y,0f);
         towerBulletScript.SetTarget(bulletFirePoint);   
+        // Collider2D player = Physics2D.OverlapCircle(transform.position, 40, playerMask);
+        // Debug.Log(player);
+        // if (player != null)
+        // {
+        //     AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire);
+        // } 
     }
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
     {

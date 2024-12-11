@@ -12,6 +12,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     public bool isActivated = false;//타워 가동 여부
     public bool previousIsActivated = false;//버퍼(토글 확인)
     public bool ShowRange;
+    public LayerMask playerMask;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;// 타워 회전 각도
     protected Transform Target;             //target of bullets
@@ -38,8 +39,8 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     private float _angleThreshold = 10f; // 타워와 적의 각도 차이 허용 범위 (조정 가능)
     private float _fireTime = 0f;       //과열시 중지 위한 변수
     private float _totCoolTime;         //냉각시 누적 냉각시간
-    
- 
+
+    public Transform turret;
     protected abstract void Shoot();//총알 객체화 후 목표로 발사(FireRateController에서 수행)
     private void Awake()
     {
@@ -102,7 +103,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
         if (Target != null)
         {
             float angle =
-                Mathf.Atan2(Target.position.y - transform.position.y, Target.position.x - transform.position.x) *
+                Mathf.Atan2(Target.position.y - turret.position.y, Target.position.x - turret.position.x) *
                 Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             TurretRotationPoint.rotation = Quaternion.RotateTowards(TurretRotationPoint.rotation, targetRotation,
@@ -124,7 +125,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
             _timeTilFire += Time.deltaTime;
             if (_timeTilFire >= (1f / FireRate) && IsTargetInSight())//적이 타워의 시야각에 있고 RPS만큼 발사
             {
-                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire);
+                FireSound();
                 Shoot();
                 _timeTilFire = 0f;
 
@@ -160,14 +161,14 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     private void FindTarget()//raycast를 이용한 적 타워 반경 접근 확인 후 배열 추가(NoTargetInRange에서 적을 찾기위해 수행)
     {
         
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, Range, EnemyMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(turret.position, Range, EnemyMask);
         if (hits.Length == 0) return;
 
         // 사용할 수 있는 타겟들의 리스트를 만듭니다
         List<(Collider2D collider, float distance)> availableTargets = new List<(Collider2D, float)>();
         foreach (var hit in hits)
         {
-            float distance = Vector2.Distance(transform.position, hit.transform.position);
+            float distance = Vector2.Distance(turret.position, hit.transform.position);
             availableTargets.Add((hit, distance));
         }
         availableTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
@@ -184,12 +185,12 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     private bool CheckTargetIsInRange()//적이 사거리에 있는지 확인(FireRateController에서 수행)
     {
         if (Target==null) return false;
-        return Vector2.Distance(Target.position, transform.position) <= Range;
+        return Vector2.Distance(Target.position, turret.position) <= Range;
     }
     private bool IsTargetInSight()//적이 시야각에 있는지 확인(FireRateController, OverHeatAnimationController에서 수행)
     {
         if (Target==null) return false;
-        float angleToTarget = Mathf.Atan2(Target.position.y - transform.position.y, Target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        float angleToTarget = Mathf.Atan2(Target.position.y - turret.position.y, Target.position.x - turret.position.x) * Mathf.Rad2Deg - 90f;
         float turretAngle = TurretRotationPoint.eulerAngles.z;
         float angleDifference = Mathf.DeltaAngle(turretAngle, angleToTarget);
         return Mathf.Abs(angleDifference) <= _angleThreshold;
@@ -221,6 +222,16 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
         _fireTime = 0f;
         isActivated = true;
         previousIsActivated = true;
+    }
+    private void FireSound()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
+    {
+        // yield return new WaitForSeconds(0.2f);
+        Collider2D player = Physics2D.OverlapCircle(turret.position, 40, playerMask);
+        if(player!=null)
+        {
+            float distance = Vector2.Distance(turret.position, player.transform.position);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire, distance, 50);
+        }
     }
     //--------------------------------------------------------------------------------------------------------------------------
     //for Control Unit----------------------------------------------------------

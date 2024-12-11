@@ -63,6 +63,7 @@ public class CanonTurretLv3 : DefaultCanonTurret
             float randomValue = Random.Range(-0.5f, 0.5f);
             bulletFireDirection[i].position = new Vector3(bulletFireDirection[i].position.x+randomValue, bulletFireDirection[i].position.y,0f);
             towerBulletScript.SetTarget(bulletFireDirection[i]);
+            
         }
     }
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)
