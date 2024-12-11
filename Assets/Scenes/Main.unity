@@ -2650,7 +2650,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 758730376}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 0.06
+  m_MaxValue: 0.05
   m_WholeNumbers: 0
   m_Value: 0.01
   m_OnValueChanged:
@@ -4371,7 +4371,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fe1c9fcf47a7f40949054370aee96561, type: 3}
   - {fileID: 8300000, guid: eaa9ee289c7244b158b19fd6056b5611, type: 3}
   - {fileID: 8300000, guid: b1c9b76e26c59413980a93793991ee5a, type: 3}
-  bgmVolume: 0.04
+  bgmVolume: 0.03381025
   sfxClips:
   - {fileID: 8300000, guid: 582934a8a10fd4e00a71c5598571bb7c, type: 3}
   - {fileID: 8300000, guid: caeedbcc4b2cf45c0ad3bb91b564238c, type: 3}
@@ -4398,7 +4398,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a835f9cad9cb2412bbfc5212d080e0f6, type: 3}
   - {fileID: 8300000, guid: 6bd88a369fa664864bd3bda522e06386, type: 3}
   - {fileID: 8300000, guid: bfecec87b5dd44bfebfb2a44bcb23426, type: 3}
-  sfxVolume: 0.4
+  - {fileID: 8300000, guid: 1d72083ec6e0a4f978e93dea80dafef7, type: 3}
+  sfxVolume: 0.4761583
 --- !u!4 &1181962955
 Transform:
   m_ObjectHideFlags: 0
@@ -4818,10 +4819,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1393914855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 25, y: -12.5}
+  m_SizeDelta: {x: 25, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1496547999
 MonoBehaviour:
@@ -5151,7 +5152,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uAC1C\uBC1C \uC2DC\uC791 | 20240927\n\uAC1C\uBC1C \uAE30\uAC04 | -\n\uCD5C\uC885
     \uBE4C\uB4DC | -\nAbout Resoure | $\uB178\uC158\uB9C1\uD06C \uD0D1\uC7AC \uC608\uC815$\nContact
-    Us | e-Mail\n"
+    Us | -\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
   m_sharedMaterial: {fileID: 6633813256750574405, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
@@ -5262,10 +5263,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1393914855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 91, y: -12.5}
+  m_SizeDelta: {x: 25, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1664803239
 MonoBehaviour:
@@ -5409,10 +5410,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1393914855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 58, y: -12.5}
+  m_SizeDelta: {x: 25, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1705363528
 MonoBehaviour:
@@ -5906,8 +5907,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 169.325, y: -115.765}
-  m_SizeDelta: {x: 278.65, y: 81.51}
+  m_AnchoredPosition: {x: 147.825, y: -115.765}
+  m_SizeDelta: {x: 235.65, y: 81.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869680058
 MonoBehaviour:
@@ -5947,7 +5948,7 @@ MonoBehaviour:
     | \uC548\uC815\uD604 (\uBAAC\uC2A4\uD130) <ajh08070@naver.com>\n\uC870\uC6D0
     | \uC7A5\uD638\uC131 (\uD50C\uB808\uC774\uC5B4) <example@email.com>\n\uC870\uC6D0
     | \uC591\uD604\uC11D (UI, Map) <yanggogi1423@gmail.com>\n\uC870\uC6D0 | \uD669\uC7AC\uB3D9
-    (\uD130\uB81B, \uC624\uB514\uC624) <hjd01034215031@gmail.com>"
+    (\uD130\uB81B, \uC624\uB514\uC624) <example@email.com>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
   m_sharedMaterial: {fileID: 6633813256750574405, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
@@ -6477,7 +6478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Latest Update v.20241211 Developer Beta by HJD Team Sejong Univ.
+  m_text: Latest Update v.20241210 DEMO by HJD Team Sejong Univ.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}
   m_sharedMaterial: {fileID: 6633813256750574405, guid: 166b688a4516207439d5ad9c643bd8aa, type: 2}

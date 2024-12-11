@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 8393742721520615193}
   - component: {fileID: 9136459814119747297}
   m_Layer: 11
-  m_Name: Missile
+  m_Name: MinimapMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,6 +160,7 @@ MonoBehaviour:
   animator: {fileID: 5909110045634253783}
   explodePrefab: {fileID: 1969113204059454481, guid: 6f350330cacf045bb8ffa65e02f6d63f, type: 3}
   explosionPosition: {fileID: 272391895439230531}
+  minimapMissile: {fileID: 0}
   initialSpeed: 10
   maxSpeed: 35
   turnSpeed: 140
@@ -383,10 +384,11 @@ MonoBehaviour:
   rb: {fileID: 5152064728928936489}
   enemyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   animator: {fileID: 7265750388774410434}
   explodePrefab: {fileID: 1969113204059454481, guid: 6f350330cacf045bb8ffa65e02f6d63f, type: 3}
   explosionPosition: {fileID: 1343882165474493921}
+  minimapMissile: {fileID: 4430706936013774874}
   initialSpeed: 10
   maxSpeed: 35
   turnSpeed: 140

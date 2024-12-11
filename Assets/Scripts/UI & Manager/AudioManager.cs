@@ -62,7 +62,8 @@ public class AudioManager : Singleton<AudioManager>
         HorseComing,
         HorseMoving,
         SpaceShipHover,
-        SpaceShipPassing
+        SpaceShipPassing,
+        WitchLaughing
     }
     
     void Awake()
@@ -150,6 +151,7 @@ public class AudioManager : Singleton<AudioManager>
         // if (sfx == Sfx.MissileTargetDetected) source.volume =sfxVolume/2f;
         if (sfx == Sfx.TurretOn) source.volume /= 2f;
         if (sfx == Sfx.MissileFlying) source.loop = true;
+        if (sfx == Sfx.SpaceShipHover) source.loop = true;
         // if (sfx == Sfx.Fire && _activeSfx.Count > 20)
         // {
         //     return null;
