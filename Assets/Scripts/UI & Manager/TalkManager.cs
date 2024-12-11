@@ -90,7 +90,7 @@ public class TalkManager : MonoBehaviour
             "Scanning...",
             "Analyzing...",
             "Briefing Scanning Results...",
-            "Found 11 Canon Turrets and 3 Missile Turrets.",
+            "Found 12 Canon Turrets and 3 Missile Turrets.",
             "[Manufacturer : von Neumann Industries]\nAssembled by Vanguard from Earth.",
             "Current Temperature: 21.5\u00b0C",
             "Finished Briefing Scanning Results...",

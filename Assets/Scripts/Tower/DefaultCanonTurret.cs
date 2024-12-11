@@ -226,7 +226,7 @@ public abstract class DefaultCanonTurret : MonoBehaviour, IActivateTower
     private void FireSound()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
     {
         // yield return new WaitForSeconds(0.2f);
-        Collider2D player = Physics2D.OverlapCircle(turret.position, 40, playerMask);
+        Collider2D player = Physics2D.OverlapCircle(turret.position, 50, playerMask);
         if(player!=null)
         {
             float distance = Vector2.Distance(turret.position, player.transform.position);
