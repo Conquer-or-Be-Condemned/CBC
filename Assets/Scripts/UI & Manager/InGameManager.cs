@@ -68,7 +68,7 @@ public class InGameManager : MonoBehaviour
     public bool operationKeyVisible;
     public GameObject blind;
 
-    [Header("Pause Buttons")] public GameObject goToMainButton;
+    [Header("Pause Buttons")] public GameObject goToStageMenu;
     public GameObject restartButton;
 
     [Header("Stage Clear")] public GameObject stageClearWrapper;
@@ -110,7 +110,7 @@ public class InGameManager : MonoBehaviour
         isTalking = false;
 
         //  Button 연결
-        goToMainButton.GetComponent<Button>().onClick.AddListener(() => SceneController.ChangeScene("Main"));
+        goToStageMenu.GetComponent<Button>().onClick.AddListener(() => SceneController.ChangeScene("StageMenu"));
         restartButton.GetComponent<Button>().onClick.AddListener(() => SceneController.Instance.ReStartGame());
 
         //  진전도 초기화

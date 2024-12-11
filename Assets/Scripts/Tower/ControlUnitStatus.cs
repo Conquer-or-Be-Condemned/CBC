@@ -22,8 +22,8 @@ public class ControlUnitStatus : MonoBehaviour
     public Transform[] accessPoints; 
 
     //  UI와의 Event 연결
-    public UnityEvent<int, int> onCUHpChange = new UnityEvent<int, int>();
-    public UnityEvent<int, int> onCUPowerChange = new UnityEvent<int, int>();
+    public UnityEvent<int, int, float> onCUHpChange = new UnityEvent<int, int, float>();
+    public UnityEvent<int, int, float> onCUPowerChange = new UnityEvent<int, int,float>();
 
     private bool attackCool;
 
@@ -52,8 +52,9 @@ public class ControlUnitStatus : MonoBehaviour
 
     public void AddUnit(int power)
     {
+        onCUPowerChange.Invoke(currentPower-power, maxPower, currentPower/(float)maxPower);
+        
         currentPower = currentPower - power;
-        onCUPowerChange.Invoke(currentPower, maxPower);
     }
 
     public void RemoveUnit(int power)
@@ -83,8 +84,8 @@ public class ControlUnitStatus : MonoBehaviour
             StartCoroutine(AttackCoolCoroutine());
         }
         
+        onCUHpChange.Invoke(curHealth- damage, maxHealth, curHealth/(float)maxHealth);
         curHealth -= damage;
-        onCUHpChange.Invoke(curHealth, maxHealth);
         
         if (curHealth <= 0)
         {
@@ -149,10 +150,13 @@ public class ControlUnitStatus : MonoBehaviour
             if (tmp <= 0) yield break;
             
             tmp--;
+            
+            onCUPowerChange.Invoke(currentPower + 1, maxPower, currentPower/(float)maxPower);
+            
             currentPower++;
             
             yield return new WaitForSeconds(0.1f);
-            onCUPowerChange.Invoke(currentPower,maxPower);
+            
         }
     }
 }

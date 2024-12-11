@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,10 +18,10 @@ public class UIPlayerHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private bool isHover;
     private void Start()
     {
-        //  UIInfoWrapper 및 UIInfo Raycast에서 제외
+        // UIInfoWrapper 및 UIInfo Raycast에서 제외
         uiInfoWrapper.GetComponent<Image>().raycastTarget = false;
         uiInfo.raycastTarget = false;
-        
+
         uiInfoWrapper.SetActive(false);
         player = GameObject.Find("Player").GetComponent<PlayerInfo>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -31,26 +30,23 @@ public class UIPlayerHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerEx
         isHover = false;
     }
 
+    private void Update()
+    {
+        // Pointer가 UI 위에 있을 때 지속적으로 업데이트
+        if (isHover)
+        {
+            UpdateUIPosition();
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHover = true;
         uiInfoWrapper.SetActive(true);
         uiInfo.SetText("HP : " + player.curHp + " / " + player.maxHp);
-        
-        RectTransform rectTransform = uiInfoWrapper.GetComponent<RectTransform>();
-
-// RectTransform의 World Space 크기 계산
-        Vector3[] worldCorners = new Vector3[4];
-        rectTransform.GetWorldCorners(worldCorners);
-
-        float width = worldCorners[2].x - worldCorners[0].x; // 우측 상단 - 좌측 하단 (World Space 기준 너비)
-        float height = worldCorners[2].y - worldCorners[0].y; // 우측 상단 - 좌측 하단 (World Space 기준 높이)
-
-// 위치 설정
-        uiInfoWrapper.GetComponent<RectTransform>().position = eventData.position + 
-                                                               new Vector2(-width/2 - 1, height/2 +1);
+        UpdateUIPosition(eventData.position);
     }
-    
+
     public void OnPointerExit(PointerEventData eventData)
     {
         isHover = false;
@@ -61,18 +57,26 @@ public class UIPlayerHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         if (isHover)
         {
-            RectTransform rectTransform = uiInfoWrapper.GetComponent<RectTransform>();
-
-// RectTransform의 World Space 크기 계산
-            Vector3[] worldCorners = new Vector3[4];
-            rectTransform.GetWorldCorners(worldCorners);
-
-            float width = worldCorners[2].x - worldCorners[0].x; // 우측 상단 - 좌측 하단 (World Space 기준 너비)
-            float height = worldCorners[2].y - worldCorners[0].y; // 우측 상단 - 좌측 하단 (World Space 기준 높이)
-
-// 위치 설정
-            uiInfoWrapper.GetComponent<RectTransform>().position = eventData.position + 
-                                                                   new Vector2(-width/2 - 1, height/2 +1);
+            uiInfo.SetText("HP : " + player.curHp + " / " + player.maxHp);
+            UpdateUIPosition(eventData.position);
         }
+    }
+
+    private void UpdateUIPosition(Vector2? pointerPosition = null)
+    {
+        Vector2 targetPosition = pointerPosition ?? Input.mousePosition;
+
+        RectTransform rectTransform = uiInfoWrapper.GetComponent<RectTransform>();
+
+        // RectTransform의 World Space 크기 계산
+        Vector3[] worldCorners = new Vector3[4];
+        rectTransform.GetWorldCorners(worldCorners);
+
+        float width = worldCorners[2].x - worldCorners[0].x; // 우측 상단 - 좌측 하단 (World Space 기준 너비)
+        float height = worldCorners[2].y - worldCorners[0].y; // 우측 상단 - 좌측 하단 (World Space 기준 높이)
+
+        // 위치 설정
+        uiInfoWrapper.GetComponent<RectTransform>().position = targetPosition +
+                                                               new Vector2(-width / 2 - 1, height / 2 + 1);
     }
 }

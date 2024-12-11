@@ -10,11 +10,11 @@ public class Explode : MonoBehaviour
     void Start()
     {
         // Debug.Log("ExplodeisCalled");
-        Collider2D hits = Physics2D.OverlapCircle(transform.position, 50, layerMask);
+        Collider2D hits = Physics2D.OverlapCircle(transform.position, 70, layerMask);
         if (hits != null)
         {
             float distance = Vector2.Distance(transform.position, hits.transform.position);
-            AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileExplosion, distance, 50);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileExplosion, distance, 70);
         }
 
         _animator = GetComponent<Animator>();
