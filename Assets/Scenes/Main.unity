@@ -2650,7 +2650,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 758730376}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 0.05
+  m_MaxValue: 0.06
   m_WholeNumbers: 0
   m_Value: 0.01
   m_OnValueChanged:
@@ -4371,7 +4371,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fe1c9fcf47a7f40949054370aee96561, type: 3}
   - {fileID: 8300000, guid: eaa9ee289c7244b158b19fd6056b5611, type: 3}
   - {fileID: 8300000, guid: b1c9b76e26c59413980a93793991ee5a, type: 3}
-  bgmVolume: 0.03381025
+  bgmVolume: 0.04
   sfxClips:
   - {fileID: 8300000, guid: 582934a8a10fd4e00a71c5598571bb7c, type: 3}
   - {fileID: 8300000, guid: caeedbcc4b2cf45c0ad3bb91b564238c, type: 3}
@@ -4398,7 +4398,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a835f9cad9cb2412bbfc5212d080e0f6, type: 3}
   - {fileID: 8300000, guid: 6bd88a369fa664864bd3bda522e06386, type: 3}
   - {fileID: 8300000, guid: bfecec87b5dd44bfebfb2a44bcb23426, type: 3}
-  sfxVolume: 0.4761583
+  sfxVolume: 0.4
 --- !u!4 &1181962955
 Transform:
   m_ObjectHideFlags: 0
