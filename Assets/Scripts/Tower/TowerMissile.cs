@@ -44,11 +44,11 @@ public class TowerMissile : MonoBehaviour
         rb.velocity = _initialDirection * _currentSpeed;
 
         // MissileFlying SFX 재생 및 ID 저장
-        Collider2D hits = Physics2D.OverlapCircle(transform.position, 100, layerMask);
+        Collider2D hits = Physics2D.OverlapCircle(transform.position, 80, layerMask);
         if (hits != null)
         {
             float distance = Vector2.Distance(transform.position, hits.transform.position);
-            _missileSoundId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFlying, distance, 100);
+            _missileSoundId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFlying, distance, 80);
         }
         StartCoroutine(InitialStraightMovement());
         StartCoroutine(ExplodeMissileIfNotHit());
@@ -114,12 +114,12 @@ public class TowerMissile : MonoBehaviour
 
     private void FlyingSoundMove()
     {
-        Collider2D hits = Physics2D.OverlapCircle(transform.position, 100, layerMask);
+        Collider2D hits = Physics2D.OverlapCircle(transform.position, 80, layerMask);
         if (hits != null&&_missileSoundId!=null)
         {
             float distance = Vector2.Distance(transform.position, hits.transform.position);
             Debug.Log("Distance with player" + distance);
-            AudioManager.Instance.ChangeVolume(_missileSoundId,distance,100);
+            AudioManager.Instance.ChangeVolume(_missileSoundId,distance,80);
         }
 
     }
