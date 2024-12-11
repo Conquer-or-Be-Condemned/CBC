@@ -103,8 +103,8 @@ public class TalkManager : MonoBehaviour
         });
         TalkData_ENG.Add(102, new string[]
         {
-            "(영어)개발자님, 강력한 전파의 수신입니다.",
-            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
+            "Developer, we are receiving a strong signal.",
+            "All tower operations have been shut down. Please hurry to restart them.”"
         });
         TalkData_ENG.Add(201, new string[]
         {
@@ -124,8 +124,8 @@ public class TalkManager : MonoBehaviour
         });
         TalkData_ENG.Add(202, new string[]
         {
-            "(영어)개발자님, 강력한 전파의 수신입니다.",
-            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
+            "Developer, we are receiving a strong signal.",
+            "All tower operations have been shut down. Please hurry to restart them.”"
         });
         TalkData_ENG.Add(301, new string[]
         {
@@ -146,8 +146,8 @@ public class TalkManager : MonoBehaviour
         });
         TalkData_ENG.Add(302, new string[]
         {
-            "(영어)개발자님, 강력한 전파의 수신입니다.",
-            "모든 타워의 운영이 종료됩니다. 서둘러 재개시키십시오."
+            "Developer, we are receiving a strong signal.",
+            "All tower operations have been shut down. Please hurry to restart them.”"
         });
         
         TalkData_KOR.Add(101, new string[]
@@ -158,7 +158,7 @@ public class TalkManager : MonoBehaviour
             "스캔 중...",
             "분석 중...",
             "스캔 결과를 브리핑합니다...",
-            "11개의 캐논 터렛과 3개의 미사일 터렛을 발견했습니다.",
+            "12개의 캐논 터렛과 3개의 미사일 터렛을 발견했습니다.",
             "[제조사 : 폰 노이만 산업]\n지구에서 온 선발대에 의해 조립되었습니다.",
             "외부 기온: 21.5\u00b0C",
             "스캔 결과 브리핑을 완료했습니다...",
