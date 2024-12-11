@@ -55,10 +55,10 @@ public class SceneController : Singleton<SceneController>
             }
         }
 
-        if (NowScene == "GameOver")
-        {
-            GameObject.Find("ExitProgram").GetComponent<Button>().onClick.AddListener(ExitProgram);
-        }
+        // if (NowScene == "GameOver")
+        // {
+        //     GameObject.Find("ExitProgram").GetComponent<Button>().onClick.AddListener(ExitProgram);
+        // }
         
     }
 
@@ -89,6 +89,8 @@ public class SceneController : Singleton<SceneController>
     //  Restart Game
     public void ReStartGame()
     {
+        AudioManager.Instance.StopAllSfx();
+        
         Time.timeScale = 1f;
         Debug.Log("Restart!");
         isStart = false;
@@ -156,6 +158,7 @@ public class SceneController : Singleton<SceneController>
     public static void ChangeScene(string sceneName)
     {
         AudioManager.Instance.StopAllSfx();
+        AudioManager.Instance.RestoreAudioMixerSettings();
         if (sceneName == "Main")
         {
             Debug.Log("MAIN!!");

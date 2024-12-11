@@ -11,7 +11,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
 {   
     //-------------------------------------------------------
     public bool isActivated = false;//타워 가동 여부
-    [FormerlySerializedAs("_previousIsActivated")] public bool previousIsActivated = false;//버퍼(토글 확인)
+    public bool previousIsActivated = false;//버퍼(토글 확인)
     public bool ShowRange;
     //-------------------------------------------------------
     protected Transform TurretRotationPoint;//타워 회전 각도
@@ -37,7 +37,9 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     private float _timeTilFire;             //다음 발사까지의 시간
     private float _angleThreshold = 360f;   // 타워와 적의 각도 차이 허용 범위 (조정 가능)
     private float _totCoolTime;             //냉각시 누적 냉각시간
-
+    public Transform turret;
+    public LayerMask playerMask;
+    // protected Transform Turret;
     //Override Methods---------------------------
     protected abstract void Shoot();
     //--------------------------------------------
@@ -47,7 +49,6 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
         _cus = _originPower.GetComponent<ControlUnitStatus>();//제어장치 정보 가져오기 위함
         _name = "Missile Turret";
         ShowRange = false;
-        // RangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
     }
     private void Update()
     {
@@ -91,21 +92,20 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     {
         if (Targets[0] == null)
         {
-            CurMissileCount -= Time.deltaTime*2;
-            // Debug.Log("finding target");
+            CurMissileCount -= Time.deltaTime;
             FindTarget();//(raycast 사용)
         }
     }
     private void FindTarget()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, Range, EnemyMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(turret.position, Range, EnemyMask);
         if (hits.Length == 0) return;
 
         // 사용할 수 있는 타겟들의 리스트를 만듭니다
         List<(Collider2D collider, float distance)> availableTargets = new List<(Collider2D, float)>();
         foreach (var hit in hits)
         {
-            float distance = Vector2.Distance(transform.position, hit.transform.position);
+            float distance = Vector2.Distance(turret.position, hit.transform.position);
             availableTargets.Add((hit, distance));
         }
         availableTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
@@ -139,9 +139,9 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
             float angle =
                 Mathf.Atan2(
                     (Targets[0].position.y + Targets[1].position.y) / 2 -
-                    transform.position.y,
+                    turret.position.y,
                     (Targets[0].position.x + Targets[1].position.x) / 2 -
-                    transform.position.x) * Mathf.Rad2Deg - 90f;
+                    turret.position.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             TurretRotationPoint.rotation = Quaternion.RotateTowards(TurretRotationPoint.rotation, targetRotation,
                 RotationSpeed * Time.deltaTime);
@@ -149,8 +149,8 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
         else
         {
             float angle =
-                Mathf.Atan2(Targets[0].position.y - transform.position.y,
-                    Targets[0].position.x - transform.position.x) *
+                Mathf.Atan2(Targets[0].position.y - turret.position.y,
+                    Targets[0].position.x - turret.position.x) *
                 Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             TurretRotationPoint.rotation = Quaternion.RotateTowards(TurretRotationPoint.rotation, targetRotation,
@@ -161,19 +161,15 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     {
         if (!CheckTargetIsInRange())//적이 범위에 없음
         {
-            // for (int i = 0; i < Targets.Length; i++)
-            // {
-            //     Targets[i] = null;
-            // }
             _timeTilFire = 0f;
         }
         else//적이 범위에 있음
         {
-            // Debug.Log("Target is in the range");
+            
             _timeTilFire += Time.deltaTime;
-            if (_timeTilFire >= (1f / FireRate))// && IsTargetInSight())//적이 타워의 시야각에 있고 RPS만큼 발사
+            if (_timeTilFire >= 1f / FireRate)//적이 타워의 시야각에 있고 RPS만큼 발사
             {
-                AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileLaunch);
+                FireSound();
                 Shoot();
                 _timeTilFire = 0f;
             }
@@ -196,16 +192,26 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     private bool CheckTargetIsInRange()//적이 사거리에 있는지 확인(FireRateController에서 수행)
     {
         if (Targets[0] == null) return false;
-        return Vector2.Distance(Targets[0].position, transform.position) <= Range;
+        return Vector2.Distance(Targets[0].position, turret.position) <= Range;
     }
     private bool IsTargetInSight()//적이 시야각에 있는지 확인(FireRateController, OverHeatAnimationController에서 수행)
     {
         if(Targets[0]==null) return false;
-        float angleToTarget = Mathf.Atan2(Targets[0].position.y - transform.position.y, Targets[0].position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        float angleToTarget = Mathf.Atan2(Targets[0].position.y - turret.position.y, Targets[0].position.x - turret.position.x) * Mathf.Rad2Deg - 90f;
         float turretAngle = TurretRotationPoint.eulerAngles.z;
         float angleDifference = Mathf.DeltaAngle(turretAngle, angleToTarget);
         return Mathf.Abs(angleDifference) <= _angleThreshold;
         
+    }
+    private void FireSound()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
+    {
+        // yield return new WaitForSeconds(0.2f);
+        Collider2D player = Physics2D.OverlapCircle(turret.position, 100, playerMask);
+        if (player != null)
+        {
+            float distance = Vector2.Distance(turret.position, player.transform.position);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileLaunch, distance, 100);
+        }
     }
     //for Control Unit----------------------------------------------------------------------
     private void AddTurret()//ControlUnitStatus script 사용(CheckToggle에서 수행)
@@ -253,6 +259,7 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
         isActivated = true;
         previousIsActivated = true;
     }
+
     protected IEnumerator ShootAnimation()
     {
         Animator.SetBool("isShoot",true);

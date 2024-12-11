@@ -28,13 +28,9 @@ public class CanonTurretLv2 : DefaultCanonTurret
     [SerializeField] private int power;            //타워 사용 전력량
     [SerializeField] private float overHeatTime;    //~초 격발시 과열
     [SerializeField] private float coolTime;        //~초 지나면 냉각
-    // [SerializeField] private bool showRange;
 
     private GameObject []_bulletObj;
-    // private void Update()
-    // {
-    //     rangeRenderer.enabled = showRange;
-    // }
+    
     private void Start()
     {
         _bulletObj = new GameObject[bulletSpawnPoint.Length];
@@ -49,14 +45,14 @@ public class CanonTurretLv2 : DefaultCanonTurret
         Power = power;            //타워 사용 전력량
        OverHeatTime = overHeatTime;    //~초 격발시 과열
         CoolTime = coolTime; //~초 지나면 냉각
-        Level = 2;
         GunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
-        RPM = (int)(60 / (1 / fireRate));
-        Damage = 20;
         RangeRenderer = rangeRenderer;
-        // RangeTransform = rangeTransform;
+        //Turrets Attack Range
         rangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
-
+        //Info for Ui
+        Level = 2;
+        RPM = (int)(60 / (1 / fireRate));
+        Damage = DataManager.TurretBullet * 2;
     }
     override 
     protected void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)
@@ -66,11 +62,16 @@ public class CanonTurretLv2 : DefaultCanonTurret
         {
             _bulletObj[i] = Instantiate(bulletPrefab, bulletSpawnPoint[i].position, Quaternion.identity);
             TowerBullet towerBulletScript = _bulletObj[i].GetComponent<TowerBullet>();
-            float randomValue = Random.Range(-1f, 1f);
+            float randomValue = Random.Range(-0.5f, 0.5f);
             bulletFireDirection[i].position = new Vector3(bulletFireDirection[i].position.x+randomValue, bulletFireDirection[i].position.y,0f);
             towerBulletScript.SetTarget(bulletFireDirection[i]);
+            // Collider2D player = Physics2D.OverlapCircle(transform.position, 40, playerMask);
+            // Debug.Log(player);
+            // if (player != null)
+            // {
+            //     AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire);
+            // } 
         }
-        // AudioManager.Instance.PlaySfx(AudioManager.Sfx.Fire,true);
     }
     
     private void OnDrawGizmosSelected()//타워의 반경 그려줌(디버깅용, 인게임에는 안나옴)

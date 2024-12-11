@@ -13,6 +13,7 @@ public class TowerMissile : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject explodePrefab;
     [SerializeField] private Transform explosionPosition;
+    [SerializeField] private SpriteRenderer minimapMissile;
 
     [Header("Movement Settings")] 
     [SerializeField] private float initialSpeed = 10f;     // 초기 직진 속도
@@ -23,7 +24,8 @@ public class TowerMissile : MonoBehaviour
     
     [Header("Combat Settings")]
     [SerializeField] private float explosionRange = 20f;
-    
+
+    public LayerMask layerMask;
     private float _bulletDamage;
     private Transform _target;
     private Vector2 _initialDirection;
@@ -34,7 +36,7 @@ public class TowerMissile : MonoBehaviour
     private float _distanceToTarget;
     private string _missileSoundId; // MissileFlying SFX ID 저장
     private string _missileDetectId; // MissileDetect SFX ID 저장
-
+    
     public void SetTarget(Transform target)//각 미사일 터렛에서 호출됨
     {
         _target = target;
@@ -43,8 +45,12 @@ public class TowerMissile : MonoBehaviour
         rb.velocity = _initialDirection * _currentSpeed;
 
         // MissileFlying SFX 재생 및 ID 저장
-        _missileSoundId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFlying);
-
+        Collider2D hits = Physics2D.OverlapCircle(transform.position, 80, layerMask);
+        if (hits != null)
+        {
+            float distance = Vector2.Distance(transform.position, hits.transform.position);
+            _missileSoundId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFlying, distance, 80);
+        }
         StartCoroutine(InitialStraightMovement());
         StartCoroutine(ExplodeMissileIfNotHit());
     }
@@ -58,26 +64,20 @@ public class TowerMissile : MonoBehaviour
         DrawTargetLineToTarget();
         SearchForNewTarget();
         AccelerateToTarget();
+        FlyingSoundMove();
     }
     private void SearchForNewTarget()//목표하던 목표가 사라지면 호출
     {
         if (_target == null)
         {
-            // if (!string.IsNullOrEmpty(_missileSoundId))
-            // {
-            //     AudioManager.Instance.StopSfx(_missileDetectId);
-            // }
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 300);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 300,enemyMask);
             foreach (var monster in hits)
             {
-                if (monster.CompareTag("Enemy"))
+                if(_target == null&&!monster.GetComponent<Monster>().isTargeted)
                 {
-                    if(_target == null)
-                    {
-                        _target = monster.transform;
-                        // _missileDetectId = AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileTargetDetected);
-                    }
-                    else return;
+                    // _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFinalDetect);
+                    monster.GetComponent<Monster>().isTargeted = true; 
+                    _target = monster.transform;
                 }
             }
         }
@@ -85,14 +85,6 @@ public class TowerMissile : MonoBehaviour
     private void AccelerateToTarget()
     {
         if (!_isHoming || !_target) return;
-        // if (Vector2.Distance(rb.position, _target.position) < 20f)
-        // {
-        //     if (!string.IsNullOrEmpty(_missileSoundId))
-        //     {
-        //         AudioManager.Instance.StopSfx(_missileDetectId);
-        //     }
-        //     //AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFinalDetect);
-        // }
         // 현재 진행 방향과 목표 방향 사이의 각도 계산
         Vector2 directionToTarget = ((Vector2)_target.position - rb.position).normalized;
         Vector2 currentDirection = rb.velocity.normalized;
@@ -116,6 +108,19 @@ public class TowerMissile : MonoBehaviour
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+    private void FlyingSoundMove()
+    {
+        Collider2D hits = Physics2D.OverlapCircle(transform.position, 80, layerMask);
+        if (hits != null&&_missileSoundId!=null)
+        {
+            float distance = Vector2.Distance(transform.position, hits.transform.position);
+            Debug.Log("Distance with player" + distance);
+            AudioManager.Instance.ChangeVolume(_missileSoundId,distance,80);
+        }
+
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         StartCoroutine(DestroyObject());
@@ -127,7 +132,7 @@ public class TowerMissile : MonoBehaviour
     {
         yield return new WaitForSeconds(initialStraightTime);
         _isHoming = true;
-        _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileTargetDetected);
+        // _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFinalDetect);
     }
 
     private IEnumerator ExplodeMissileIfNotHit()//미사일 임무 시간 내에 
@@ -140,19 +145,22 @@ public class TowerMissile : MonoBehaviour
     private IEnumerator DestroyObject()
     {
         _sr.enabled = false;
+        minimapMissile.enabled = false;
         yield return new WaitForSeconds(0.1f);
         if(_target != null)
         {
             _target.GetComponent<Monster>().isTargeted = false;
         }
         // MissileFlying SFX 중단
+        // if (!string.IsNullOrEmpty(_missileDetectId))
+        // {
+        //     AudioManager.Instance.StopSfx(_missileDetectId); 
+        //     Debug.Log("missiledetect delete");
+        // }
         if (!string.IsNullOrEmpty(_missileSoundId))
         {
             AudioManager.Instance.StopSfx(_missileSoundId);
-        }
-        if (!string.IsNullOrEmpty(_missileSoundId))
-        {
-            AudioManager.Instance.StopSfx(_missileDetectId); 
+            Debug.Log("missilesound delete");
         }
         Collider2D[] monsters = Physics2D.OverlapCircleAll(rb.position, explosionRange);
         foreach (var monster in monsters)

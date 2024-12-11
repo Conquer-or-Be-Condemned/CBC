@@ -45,13 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterSpawnDataArray:
-  - monsterPrefab: {fileID: 4009334584712422631, guid: 84029b6ea4e324cfa855223dba4205bc, type: 3}
+  - monsterPrefab: {fileID: 4009334584712422631, guid: 84029b6ea4e324cfa855223dba4205bc,
+      type: 3}
     spawnCount: 10
-  - monsterPrefab: {fileID: 4009334584712422631, guid: c0c1fd1171906468aa925745a523dde6, type: 3}
+  - monsterPrefab: {fileID: 4009334584712422631, guid: c0c1fd1171906468aa925745a523dde6,
+      type: 3}
     spawnCount: 10
-  - monsterPrefab: {fileID: 4009334584712422631, guid: ba061ef4f3e754c9aa4385f27da171e5, type: 3}
+  - monsterPrefab: {fileID: 4009334584712422631, guid: ba061ef4f3e754c9aa4385f27da171e5,
+      type: 3}
     spawnCount: 2
-  - monsterPrefab: {fileID: 4009334584712422631, guid: ddcf10839973644c699b092499c808fd, type: 3}
+  - monsterPrefab: {fileID: 4009334584712422631, guid: ddcf10839973644c699b092499c808fd,
+      type: 3}
     spawnCount: 2
   spawnInterval: 5
   spawnRadius: 1

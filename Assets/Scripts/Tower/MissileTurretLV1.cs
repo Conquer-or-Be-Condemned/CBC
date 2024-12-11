@@ -39,17 +39,15 @@ public class MissileTurretLV1 : DefaultMissileTurret
         RotationSpeed = rotationSpeed;
         EnemyMask = enemyMask;
         RangeRenderer = rangeRenderer;
-        // RangeTransform = rangeTransform;
-        rangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
-
         Targets = new Transform[2];
-        Level = 1;
-        
         gunRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+        _missileObj = new GameObject[missileSpawnPoint.Length];
+        //Turrets Attack Range
+        rangeTransform.localScale = new Vector3(Range*2.5f, Range*2.5f, 1f);
+        //Info for UI
+        Level = 1;
         RPM = (int)(60 / (1 / fireRate));
         Damage = 10;
-        
-        _missileObj = new GameObject[missileSpawnPoint.Length];
     }
     protected override void Shoot()
     {

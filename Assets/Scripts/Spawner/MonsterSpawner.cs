@@ -160,6 +160,7 @@ public class MonsterSpawner : MonoBehaviour
     public void SetWorkable(bool work)
     {
         workable = work;
+        isWorking = false;
     }
 
 }

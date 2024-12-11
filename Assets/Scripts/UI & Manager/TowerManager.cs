@@ -301,7 +301,7 @@ public class TowerManager : MonoBehaviour
 
         nameText.SetText(curCanonTower.GetName());
         levelText.SetText("Lv " + curCanonTower.GetLevel());
-        powerText.SetText("Power : " + curCanonTower.GetPower());
+        powerText.SetText("Power : " + (curCanonTower.GetPower() / DataManager.ControlUnitPower * 100)+"%");
         damageText.SetText("Damage : " + curCanonTower.GetDamage());
         rpm.SetText("RPM : " + curCanonTower.GetRpm());
 

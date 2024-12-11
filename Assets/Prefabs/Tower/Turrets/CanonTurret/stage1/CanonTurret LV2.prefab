@@ -64,7 +64,7 @@ Transform:
   m_GameObject: {fileID: 2671403332973467931}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16, y: -18.8, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -89,6 +89,10 @@ MonoBehaviour:
   isActivated: 0
   previousIsActivated: 0
   ShowRange: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 262144
+  turret: {fileID: 5464355338928721752}
   turretRotationPoint: {fileID: 6225538281299658309}
   bulletSpawnPoint:
   - {fileID: 557329986926289527}
@@ -367,7 +371,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5464355338928721752}

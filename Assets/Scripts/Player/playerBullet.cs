@@ -19,7 +19,6 @@ public class PlayerBullet : MonoBehaviour
     {
         _direction = dir.normalized;
         _playerSpeed = playerSpeed;
-        Debug.Log(_playerSpeed);
         StartCoroutine(destroyObjectIfNotHit());
     }
 
@@ -31,7 +30,7 @@ public class PlayerBullet : MonoBehaviour
         // Debug.Log(rb.velocity);
         // Rigidbody2D의 속도를 방향과 속도에 맞게 설정
         // Debug.Log(_playerSpeed.magnitude);
-        rb.velocity = _direction * bulletSpeed +_playerSpeed;
+        rb.velocity = _direction * (bulletSpeed + _playerSpeed.magnitude);
         // rb.velocity = _direction * bulletSpeed;
         // Debug.Log(rb.velocity);
 

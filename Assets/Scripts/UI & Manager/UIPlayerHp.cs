@@ -11,11 +11,13 @@ using UnityEngine.UI;
  *  Player와 관련된 UI에 대한 스크립트입니다.
  *  HpBar의 Tag는 정해져있습니다.(HpBar)
  */
-public class UIPlayerHp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIPlayerHp : MonoBehaviour
 {
     [SerializeField] private GameObject [] cells;
     [SerializeField] private int maxCell;
     [SerializeField] private int curCell;
+
+    private bool isInit;
     
     private void Start()
     {
@@ -25,15 +27,16 @@ public class UIPlayerHp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             cells = GameObject.FindGameObjectsWithTag("HpBar");
         }
         
+        isInit = false;
         maxCell = cells.Length;
     }
 
     private void FixedUpdate()
     {
-        //  플레이어와 UI 연결 -> 시간 차 오류로 인해 Start에 넣지 않음
-        if (GameManager.Instance.player == null)
+        if (!isInit)
         {
             GameManager.Instance.player.GetComponent<PlayerInfo>().onHpChange.AddListener(SetUIPlayerHp);
+            isInit = true;
         }
     }
 
@@ -57,15 +60,6 @@ public class UIPlayerHp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         
         // Debug.Log(cellNum);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        
     }
 }
 
