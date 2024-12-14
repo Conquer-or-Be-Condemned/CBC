@@ -337,6 +337,8 @@ public class InGameManager : MonoBehaviour
         {
             return;
         }
+        
+        InitWave();
 
         if (curWave == maxWave)
         {
@@ -391,16 +393,15 @@ public class InGameManager : MonoBehaviour
 
         Debug.Log("Wave Start");
         spawnEnd = false;
-
-        InitWave();
+        
         StartCoroutine(ShowInfo()); // 코루틴으로 호출
         
-        if (curWave != maxWave - 1)
+        if (curWave < maxWave - 1 && curWave == maxWave)
         {
             HideAlerts();
             isWave = true;
         }
-        else if(curWave != maxWave)
+        else if(curWave == maxWave - 1)
         {
             //  Boss Spawn 여기서 함
             HideAlertAtFinalWave();
@@ -417,7 +418,7 @@ public class InGameManager : MonoBehaviour
             Debug.LogWarning("Tower is null. Cannot update minimap element.");
             return;
         }
-
+    
         // 타워의 모든 자식 중 "MapElement" 태그를 가진 오브젝트 찾기
         Transform[] children = tower.GetComponentsInChildren<Transform>();
         foreach (Transform child in children)

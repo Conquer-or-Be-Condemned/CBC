@@ -155,7 +155,6 @@ public class StageInfoManager : MonoBehaviour
                     yield return new WaitForSeconds(0.005f);
                 }
             }
-            
         }
         else if (GameManager.Language == 1)
         {
@@ -306,8 +305,8 @@ public class StageInfoManager : MonoBehaviour
         //  Stage 1 - Wave 9개 (임시 3개)
         WaveInfo.Add(new List<int> {200,250,200,250,1,0,0,0,0});
         // WaveInfo.Add(new List<int> {10,10,10,1000,0,0,0,0,0});
-        WaveInfo.Add(new List<int> {225,275,225,275,1,0,0,0,0,0});
-        WaveInfo.Add(new List<int> {250,300,250,300,6,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {240,290,240,290,1,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {280,330,280,330,6,0,0,0,0,0});
     }
     
     public static int GetStageInfo()
