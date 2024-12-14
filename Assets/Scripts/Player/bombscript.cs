@@ -11,7 +11,7 @@ public class bombscript : MonoBehaviour
    // [SerializeField] private GameObject effect;
     public float bombDamage = 250f;
   //  [SerializeField] private Rigidbody2D rb;
-    private float explosionRange = 27.5f;
+    private float explosionRange = 30f;
     [SerializeField] private Animator animator;  // Animator 컴포넌트 참조
     [FormerlySerializedAs("isbam")] public bool isBomb=false;
     

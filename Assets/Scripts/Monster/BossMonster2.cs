@@ -62,6 +62,9 @@ public class BossMonster2 : Monster
         
         //  Spawner 위치 설정
         monsterSpawnerInBoss.transform.position = transform.position;
+        
+        //  Spawn
+        StartCoroutine(MonsterSpawnCoroutine());
     }
 
     private void Update()
@@ -370,6 +373,12 @@ public class BossMonster2 : Monster
         }
 
         return closestPoint;
+    }
+    
+    private IEnumerator MonsterSpawnCoroutine()
+    {
+        StartSpawn(transform.position);
+        yield return new WaitForSeconds(30f);
     }
 
 

@@ -91,10 +91,12 @@ public class InGameManager : MonoBehaviour
     [Header("Boss Animation")] public GameObject bossAnimationManager;
 
     [Header("Game Over")] public bool isGameOver;
+    public float clear;
 
     private void Start()
     {
         isGameOver = false;
+        clear = 0f;
         
         //  Pause, Settings
         pauseVisible = false;
@@ -438,6 +440,7 @@ public class InGameManager : MonoBehaviour
             if (!isClear)
             {
                 Debug.Log("isClear 진입");
+                clear += 0.2f;
                 if (CheckStageClear())
                 {
                     Debug.Log("isStageClear 진입");
@@ -473,6 +476,8 @@ public class InGameManager : MonoBehaviour
                     }
                     
                     StopAllTurrets();
+                    StopAllSpawners();
+                    clear += 0.2f;
 
                     StartCoroutine(MovePlayCoroutine());
                 }
@@ -546,6 +551,7 @@ public class InGameManager : MonoBehaviour
         for (int i = 0; i < monsterSpawners.Length; i++)
         {
             monsterSpawners[i].HideAlert();
+            ActivateFitWaveSpawner(monsterSpawners[i], false);
             if (curWave == monsterSpawners[i].GetWaveId())
             {
                 ActivateFitWaveSpawner(monsterSpawners[i], true);
@@ -554,6 +560,14 @@ public class InGameManager : MonoBehaviour
             {
                 ActivateFitWaveSpawner(monsterSpawners[i], false);
             }
+        }
+    }
+
+    public void StopAllSpawners()
+    {
+        for (int i = 0; i < monsterSpawners.Length; i++)
+        {
+            ActivateFitWaveSpawner(monsterSpawners[i], false);
         }
     }
 
@@ -600,30 +614,32 @@ public class InGameManager : MonoBehaviour
 
     private bool CheckStageClear()
     {
-        if (curWave >= maxWave)
+        if (!isGameOver)
         {
-            //  재 입장 방지용
-            curWave = 1;
-
-            Debug.Log("Stage Clear");
-
-            blind.SetActive(true);
-            stageClearWrapper.SetActive(true);
-            AudioManager.Instance.StopAllSfx();
-            //  다음 스테이지 해금
-            if (DataManager.CurStage <= SceneController.Instance.curSelectStage + 1)
+            if (curWave >= maxWave)
             {
-                DataManager.CurStage++;
-            }
+                //  재 입장 방지용
+                curWave = 1;
+
+                Debug.Log("Stage Clear");
+
+                blind.SetActive(true);
+                stageClearWrapper.SetActive(true);
+                AudioManager.Instance.StopAllSfx();
+                //  다음 스테이지 해금
+                if (DataManager.CurStage <= SceneController.Instance.curSelectStage + 1)
+                {
+                    DataManager.CurStage++;
+                }
             
-            //  Synchronize
-            GameManager.CurStage = DataManager.CurStage;
+                //  Synchronize
+                GameManager.CurStage = DataManager.CurStage;
 
-            int reward = CalculateCoin(1f);
-            StartCoroutine(CoinCoroutine(reward));
-            return true;
+                int reward = CalculateCoin();
+                StartCoroutine(CoinCoroutine(reward));
+                return true;
+            }
         }
-
         return false;
         //  TODO : 이후 스테이지 클리어 화면과 함께 스테이지 선택 씬으로 넘어갈 것.
     }
@@ -639,13 +655,13 @@ public class InGameManager : MonoBehaviour
                 yield break;
             }
 
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.01f);
             cnt++;
             stageCoinText.SetText("+ " + cnt);
         }
     }
 
-    private int CalculateCoin(float clear)
+    private int CalculateCoin()
     {
         int curCUHp = GeneralManager.Instance.towerManager.controlUnit.GetCurHp();
         int maxCUHp = GeneralManager.Instance.towerManager.controlUnit.GetMaxHp();
@@ -668,14 +684,15 @@ public class InGameManager : MonoBehaviour
             Debug.Log("Game Over");
             AudioManager.Instance.StopAllSfx();
             AudioManager.Instance.PlayBGM(AudioManager.Bgm.GameOver, true);
-
+            
+            int reward = CalculateCoin();
+            
             blind.SetActive(true);
             stageClearWrapper.SetActive(true);
 
             stageClearText.SetText("Game Over");
             stageContentText.SetText("Mission failed.");
-        
-            int reward = CalculateCoin(0.5f);
+            
             StartCoroutine(CoinCoroutine(reward));
         }
     }
@@ -690,8 +707,6 @@ public class InGameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(24f);
             
-            //  Boss Spawn 여기서 함
-            HideAlertAtFinalWave();
             isWave = true;
             waveInfo.SetText("Boss Wave");
         }

@@ -6,9 +6,9 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     //  기본 빌드용 값 1 / 개발 빌드용 값 4
-    [Header("About Game")] public static int CurStage = 2;
+    [Header("About Game")] public static int CurStage = 1;
     
-    [Header("Shop")] public static int Coin = 300;
+    [Header("Shop")] public static int Coin = 0;
 
     public const int LEVEL_MAX = 3;
 
@@ -21,7 +21,7 @@ public class DataManager : MonoBehaviour
 
     public static int[] LevelList = { 0, 0, 0, 0, 0, 0 };
 
-    public static int[] MarginList = { 50, 1, 3, 35, 500, 20 };
+    public static int[] MarginList = { 75, 1, 4, 40, 500, 40 };
 
     public static int PlayerHp = 400;
     public static int PlayerBullet = 3;
@@ -47,11 +47,11 @@ public class DataManager : MonoBehaviour
         ControlUnitPower = ControlUnitPowerLv * MarginList[5] + 250;
 
         /*
-         * Player Hp : 400 450 500 550 (+ 50)
+         * Player Hp : 400 475 550 625 (+ 75)
          * Player Bullet : 3 4 5 6 (+ 1)
-         * Turret Bullet : 12 15 18 21 (+ 3)
-         * Turret Missile : 110 145 180 215 (+ 35)
-         * Control Unit Power : 250 270 290 310 (+ 20)
+         * Turret Bullet : 12 16 20 24 (+ 4)
+         * Turret Missile : 110 150 190 230 (+ 40)
+         * Control Unit Power : 250 290 330 370 (+ 40)
          * Control Unit Hp : 1500 2000 2500 3000 (+ 500)
          */
     }
