@@ -304,8 +304,8 @@ public class StageInfoManager : MonoBehaviour
     {
         //  Stage 1 - Wave 9개 (임시 3개)
         WaveInfo.Add(new List<int> {200,250,200,250,1,0,0,0,0});
-        WaveInfo.Add(new List<int> {240,290,240,290,1,0,0,0,0,0});
-        WaveInfo.Add(new List<int> {260,310,270,320,6,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {280,300,250,290,1,0,0,0,0,0});
+        WaveInfo.Add(new List<int> {280,310,270,310,6,0,0,0,0,0});
         
         // WaveInfo.Add(new List<int> {5,5,5,5,1,0,0,0,0});
         // WaveInfo.Add(new List<int> {5,5,5,5,1,0,0,0,0});
