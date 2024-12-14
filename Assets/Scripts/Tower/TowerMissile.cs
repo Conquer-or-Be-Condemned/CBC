@@ -13,6 +13,7 @@ public class TowerMissile : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject explodePrefab;
     [SerializeField] private Transform explosionPosition;
+    [SerializeField] private SpriteRenderer minimapMissile;
 
     [Header("Movement Settings")] 
     [SerializeField] private float initialSpeed = 10f;     // 초기 직진 속도
@@ -35,7 +36,7 @@ public class TowerMissile : MonoBehaviour
     private float _distanceToTarget;
     private string _missileSoundId; // MissileFlying SFX ID 저장
     private string _missileDetectId; // MissileDetect SFX ID 저장
-
+    
     public void SetTarget(Transform target)//각 미사일 터렛에서 호출됨
     {
         _target = target;
@@ -69,18 +70,14 @@ public class TowerMissile : MonoBehaviour
     {
         if (_target == null)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 300);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 300,enemyMask);
             foreach (var monster in hits)
             {
-                if (monster.CompareTag("Enemy"))
+                if(_target == null&&!monster.GetComponent<Monster>().isTargeted)
                 {
-                    if(_target == null&&!monster.GetComponent<Monster>().isTargeted)
-                    {
-                        // _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFinalDetect);
-                        monster.GetComponent<Monster>().isTargeted = true;
-                        _target = monster.transform;
-                    }
-                    else return;
+                    // _missileDetectId =  AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileFinalDetect);
+                    monster.GetComponent<Monster>().isTargeted = true; 
+                    _target = monster.transform;
                 }
             }
         }
@@ -148,6 +145,7 @@ public class TowerMissile : MonoBehaviour
     private IEnumerator DestroyObject()
     {
         _sr.enabled = false;
+        minimapMissile.enabled = false;
         yield return new WaitForSeconds(0.1f);
         if(_target != null)
         {
