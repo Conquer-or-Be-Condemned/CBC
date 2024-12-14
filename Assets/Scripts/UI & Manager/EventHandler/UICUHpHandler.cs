@@ -70,6 +70,10 @@ public class UICUHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void UpdateUIInfo()
     {
+        if (cuInfo.GetCurHp() < 0)
+        {
+            return;
+        }
         // ControlUnit의 HP 정보 업데이트
         uiInfo.SetText("HP : " + cuInfo.GetCurHp() + " / " + cuInfo.GetMaxHp());
     }

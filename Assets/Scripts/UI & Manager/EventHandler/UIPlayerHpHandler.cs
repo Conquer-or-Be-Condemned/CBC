@@ -35,7 +35,7 @@ public class UIPlayerHpHandler : MonoBehaviour, IPointerEnterHandler, IPointerEx
         // Pointer가 UI 위에 있을 때 지속적으로 업데이트
         if (isHover)
         {
-            UpdateUIPosition();
+            uiInfo.SetText("HP : " + player.curHp + " / " + player.maxHp);
         }
     }
 
