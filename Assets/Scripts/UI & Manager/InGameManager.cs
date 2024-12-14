@@ -90,8 +90,12 @@ public class InGameManager : MonoBehaviour
     
     [Header("Boss Animation")] public GameObject bossAnimationManager;
 
+    [Header("Game Over")] public bool isGameOver;
+
     private void Start()
     {
+        isGameOver = false;
+        
         //  Pause, Settings
         pauseVisible = false;
         settingVisible = false;
@@ -344,36 +348,7 @@ public class InGameManager : MonoBehaviour
         {
             Debug.Log("Entering Boss Stage: Deactivating all towers and activating BossAnimationManager.");
 
-            // 모든 타워 비활성화
-            for (int i = 0; i < TowerManager.towerList.Count; i++)
-            {
-                GameObject towerObject = TowerManager.towerList[i];
-                if (towerObject != null)
-                {
-                    // 타워 컴포넌트 가져오기
-                    DefaultCanonTurret canonTurret = towerObject.GetComponent<DefaultCanonTurret>();
-                    DefaultMissileTurret missileTurret = towerObject.GetComponent<DefaultMissileTurret>();
-
-                    if (canonTurret != null)
-                    {
-                        canonTurret.DeactivateTurret();
-                        Debug.Log($"Deactivated Canon Turret: {towerObject.name}");
-                    }
-
-                    if (missileTurret != null)
-                    {
-                        missileTurret.DeactivateTurret();
-                        Debug.Log($"Deactivated Missile Turret: {towerObject.name}");
-                    }
-
-                    // 미니맵 요소 색상 업데이트
-                    UpdateMiniMapElement(towerObject, false); // 비활성화 상태
-                }
-                else
-                {
-                    Debug.LogWarning($"Tower at index {i} in towerList is null.");
-                }
-            }
+            StopAllTurrets();
 
             // BossAnimationManager 활성화
             if (bossAnimationManager != null)
@@ -496,12 +471,50 @@ public class InGameManager : MonoBehaviour
                     {
                         ShowAlerts();
                     }
+                    
+                    StopAllTurrets();
 
                     StartCoroutine(MovePlayCoroutine());
                 }
             }
             
             isWave = false;
+        }
+        
+       
+    }
+
+    private void StopAllTurrets()
+    {
+        // 모든 타워 비활성화
+        for (int i = 0; i < TowerManager.towerList.Count; i++)
+        {
+            GameObject towerObject = TowerManager.towerList[i];
+            if (towerObject != null)
+            {
+                // 타워 컴포넌트 가져오기
+                DefaultCanonTurret canonTurret = towerObject.GetComponent<DefaultCanonTurret>();
+                DefaultMissileTurret missileTurret = towerObject.GetComponent<DefaultMissileTurret>();
+
+                if (canonTurret != null)
+                {
+                    canonTurret.DeactivateTurret();
+                    Debug.Log($"Deactivated Canon Turret: {towerObject.name}");
+                }
+
+                if (missileTurret != null)
+                {
+                    missileTurret.DeactivateTurret();
+                    Debug.Log($"Deactivated Missile Turret: {towerObject.name}");
+                }
+
+                // 미니맵 요소 색상 업데이트
+                UpdateMiniMapElement(towerObject, false); // 비활성화 상태
+            }
+            else
+            {
+                Debug.LogWarning($"Tower at index {i} in towerList is null.");
+            }
         }
     }
 
@@ -606,7 +619,7 @@ public class InGameManager : MonoBehaviour
             //  Synchronize
             GameManager.CurStage = DataManager.CurStage;
 
-            int reward = CalculateCoin();
+            int reward = CalculateCoin(1f);
             StartCoroutine(CoinCoroutine(reward));
             return true;
         }
@@ -632,13 +645,13 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    private int CalculateCoin()
+    private int CalculateCoin(float clear)
     {
         int curCUHp = GeneralManager.Instance.towerManager.controlUnit.GetCurHp();
         int maxCUHp = GeneralManager.Instance.towerManager.controlUnit.GetMaxHp();
 
         float ratio = (float)curCUHp / maxCUHp;
-        int reward = (int)(ratio * StageInfoManager.GetReward());
+        int reward = (int)(ratio * StageInfoManager.GetReward() * clear);
 
         Debug.Log("Reward : " + reward);
 
@@ -649,19 +662,22 @@ public class InGameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over");
-        AudioManager.Instance.StopAllSfx();
-        AudioManager.Instance.PlayBGM(AudioManager.Bgm.GameOver, true);
+        if (!isGameOver)
+        {
+            isGameOver = true;
+            Debug.Log("Game Over");
+            AudioManager.Instance.StopAllSfx();
+            AudioManager.Instance.PlayBGM(AudioManager.Bgm.GameOver, true);
 
-        blind.SetActive(true);
-        stageClearWrapper.SetActive(true);
+            blind.SetActive(true);
+            stageClearWrapper.SetActive(true);
 
-        stageClearText.SetText("Game Over");
-        stageContentText.SetText("Mission failed.");
-        stageCoinText.SetText("");
-        stageCoinImage.SetActive(false);
-
-        Time.timeScale = 0f;
+            stageClearText.SetText("Game Over");
+            stageContentText.SetText("Mission failed.");
+        
+            int reward = CalculateCoin(0.5f);
+            StartCoroutine(CoinCoroutine(reward));
+        }
     }
 
     private IEnumerator ShowInfo()
