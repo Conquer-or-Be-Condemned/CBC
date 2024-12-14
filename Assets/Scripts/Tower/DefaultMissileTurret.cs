@@ -206,11 +206,11 @@ public abstract class DefaultMissileTurret : MonoBehaviour, IActivateTower
     private void FireSound()//코루틴 함수 냉각 역할 수행(OverHeatAnimationController에서 수행)
     {
         // yield return new WaitForSeconds(0.2f);
-        Collider2D player = Physics2D.OverlapCircle(turret.position, 100, playerMask);
+        Collider2D player = Physics2D.OverlapCircle(turret.position, 70, playerMask);
         if (player != null)
         {
             float distance = Vector2.Distance(turret.position, player.transform.position);
-            AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileLaunch, distance, 100);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.MissileLaunch, distance, 70);
         }
     }
     //for Control Unit----------------------------------------------------------------------
