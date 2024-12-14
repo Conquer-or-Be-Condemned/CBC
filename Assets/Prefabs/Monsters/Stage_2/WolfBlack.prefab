@@ -234,10 +234,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: WolfBlack
-  maxHealth: 40000
-  currentHealth: 40000
+  maxHealth: 37500
+  currentHealth: 37500
   attackDamage: 40
-  moveSpeed: 15
+  moveSpeed: 11
   attackRange: 8
   attackCooldown: 5
   isDead: 0

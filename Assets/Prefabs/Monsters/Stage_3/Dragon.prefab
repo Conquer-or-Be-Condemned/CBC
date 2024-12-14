@@ -150,10 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: Dragon
-  maxHealth: 50000
-  currentHealth: 50000
+  maxHealth: 42000
+  currentHealth: 42000
   attackDamage: 80
-  moveSpeed: 15
+  moveSpeed: 13
   attackRange: 13
   attackCooldown: 1
   isDead: 0
