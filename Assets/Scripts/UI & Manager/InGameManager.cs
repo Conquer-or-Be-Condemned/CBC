@@ -454,7 +454,7 @@ public class InGameManager : MonoBehaviour
     private void CheckWaveClear()
     {
         // 만약 현재 웨이브가 마지막 웨이브(보스 웨이브)이고, 보스를 모두 처치했다면 스테이지 클리어
-        if (dieSpawn == curSpawn && curWave == maxWave && isBossWave)
+        if (dieSpawn == curSpawn && curWave == maxWave && isBossWave && curSpawn > 0)
         {
             AudioManager.Instance.StopAllSfx();
             Debug.Log("Wave is End");
