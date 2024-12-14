@@ -473,6 +473,7 @@ public class InGameManager : MonoBehaviour
                     }
                     
                     StopAllTurrets();
+                    StopAllSpawners();
 
                     StartCoroutine(MovePlayCoroutine());
                 }
@@ -546,6 +547,7 @@ public class InGameManager : MonoBehaviour
         for (int i = 0; i < monsterSpawners.Length; i++)
         {
             monsterSpawners[i].HideAlert();
+            ActivateFitWaveSpawner(monsterSpawners[i], false);
             if (curWave == monsterSpawners[i].GetWaveId())
             {
                 ActivateFitWaveSpawner(monsterSpawners[i], true);
@@ -554,6 +556,14 @@ public class InGameManager : MonoBehaviour
             {
                 ActivateFitWaveSpawner(monsterSpawners[i], false);
             }
+        }
+    }
+
+    public void StopAllSpawners()
+    {
+        for (int i = 0; i < monsterSpawners.Length; i++)
+        {
+            ActivateFitWaveSpawner(monsterSpawners[i], false);
         }
     }
 
@@ -690,8 +700,6 @@ public class InGameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(24f);
             
-            //  Boss Spawn 여기서 함
-            HideAlertAtFinalWave();
             isWave = true;
             waveInfo.SetText("Boss Wave");
         }
