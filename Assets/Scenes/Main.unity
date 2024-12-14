@@ -4399,7 +4399,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6bd88a369fa664864bd3bda522e06386, type: 3}
   - {fileID: 8300000, guid: bfecec87b5dd44bfebfb2a44bcb23426, type: 3}
   - {fileID: 8300000, guid: 1d72083ec6e0a4f978e93dea80dafef7, type: 3}
-  sfxVolume: 0.35
+  sfxVolume: 0.4784175
 --- !u!4 &1181962955
 Transform:
   m_ObjectHideFlags: 0
