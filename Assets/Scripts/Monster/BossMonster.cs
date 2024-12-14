@@ -39,7 +39,7 @@ public class BossMonster : Monster
         if (maxHealth == 0) maxHealth = 150f;
         if (attackDamage == 0) attackDamage = 15f;
         if (treadDamage == 0) treadDamage = 25f; // 밟기 데미지 설정
-        if (moveSpeed == 0) moveSpeed = 3f;
+        if (moveSpeed == 0) moveSpeed = 6f;
         if (attackRange == 0) attackRange = 1.5f;
         if (detectionRange == 0) detectionRange = 5f;
         if (attackCooldown == 0) attackCooldown = 1f;
@@ -378,8 +378,8 @@ public class BossMonster : Monster
 
     private IEnumerator MonsterSpawnCoroutine()
     {
-        yield return new WaitForSeconds(30f);
         StartSpawn(transform.position);
+        yield return new WaitForSeconds(18f);
     }
 
 
