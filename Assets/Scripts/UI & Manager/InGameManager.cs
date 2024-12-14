@@ -389,14 +389,14 @@ public class InGameManager : MonoBehaviour
             isBossWave = true;
             //  Spawner ON (wave 1, 2)
         }
-
+        
 
         Debug.Log("Wave Start");
         spawnEnd = false;
         
         StartCoroutine(ShowInfo()); // 코루틴으로 호출
         
-        if (curWave < maxWave - 1 && curWave == maxWave)
+        if (curWave < maxWave - 1 || curWave == maxWave)
         {
             HideAlerts();
             isWave = true;
