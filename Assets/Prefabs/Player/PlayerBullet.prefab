@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3862992205728633600}
   - component: {fileID: 8235949267977876978}
   - component: {fileID: 7264461635004490344}
-  - component: {fileID: 4116581311943147520}
+  - component: {fileID: 5823638767377678441}
   m_Layer: 8
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -168,7 +168,7 @@ PolygonCollider2D:
       - {x: 0.16077869, y: 0.04108595}
       - {x: 0.05116332, y: 0.09173128}
   m_UseDelaunayMesh: 0
---- !u!114 &4116581311943147520
+--- !u!114 &5823638767377678441
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,9 +177,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5527518119625726090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e89816d80eea2b44d90a9a58f4774595, type: 3}
+  m_Script: {fileID: 11500000, guid: 4804cc54a6fe41988b65e715fe1ab955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8235949267977876978}
   bulletSpeed: 30
-  bulletDamage: 9
+  bulletDamage: 13

@@ -8,8 +8,8 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     
     [Header("Attributes")] 
-    [SerializeField] private float bulletSpeed = 5f;
-    [SerializeField] private float bulletDamage = 10f;
+    [SerializeField] private float bulletSpeed = 6f;
+    [SerializeField] private float bulletDamage = 13f;
 
     private Vector2 _direction;
 
@@ -44,7 +44,7 @@ public class PlayerBullet : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
-
+    
     // 충돌 시 총알 파괴
     private void OnCollisionEnter2D(Collision2D other)
     {   

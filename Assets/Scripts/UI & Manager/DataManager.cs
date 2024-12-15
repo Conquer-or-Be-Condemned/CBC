@@ -8,7 +8,7 @@ public class DataManager : MonoBehaviour
     //  기본 빌드용 값 1 / 개발 빌드용 값 4
     [Header("About Game")] public static int CurStage = 3;
     
-    [Header("Shop")] public static int Coin = 500;
+    [Header("Shop")] public static int Coin = 0;
 
     public const int LEVEL_MAX = 3;
 
