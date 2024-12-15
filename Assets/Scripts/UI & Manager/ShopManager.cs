@@ -57,6 +57,8 @@ public class ShopManager : MonoBehaviour
     private void ValidateText()
     {
         coinText.SetText(DataManager.Coin.ToString());
+        
+        LayoutRebuilder.ForceRebuildLayoutImmediate(gameObject.GetComponent<RectTransform>());
 
         for (int i = 0; i < shopTexts.Length; i++)
         {
