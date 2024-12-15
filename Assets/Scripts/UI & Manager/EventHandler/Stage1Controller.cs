@@ -37,7 +37,7 @@ public class Stage1Controller : MonoBehaviour
         float fadeEnd = 1f;
 
         Vector3 startScale = Vector3.one;
-        Vector3 endScale = Vector3.one * 2f;
+        Vector3 endScale = Vector3.one * 4f;
 
         // 두 연출 중 더 긴 시간을 기준으로 Loop
         float totalDuration = Mathf.Max(fadeDuration, scaleDuration);
