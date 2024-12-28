@@ -54,10 +54,10 @@ public class GeneralManager : Singleton<GeneralManager>
         audioManager = AudioManager.Instance;
         settingManager = GetComponent<SettingManager>();
 
-        if (gameManager == null) Debug.LogError("GameManager 스크립트 오류");
-        if (sceneController == null) Debug.LogError("SceneController 스크립트 오류");
-        if (audioManager == null) Debug.LogError("AudioManager 스크립트 오류");
-        if (cursorManager == null) Debug.LogError("CursorManager 스크립트 오류");
+        // if (gameManager == null) Debug.LogError("GameManager 스크립트 오류");
+        // if (sceneController == null) Debug.LogError("SceneController 스크립트 오류");
+        // if (audioManager == null) Debug.LogError("AudioManager 스크립트 오류");
+        // if (cursorManager == null) Debug.LogError("CursorManager 스크립트 오류");
         
         //  TalkManager
         StageInfoManager.SetPlanet();
@@ -93,11 +93,11 @@ public class GeneralManager : Singleton<GeneralManager>
         towerManager = GameObject.Find("TowerManager").GetComponent<TowerManager>();
         inGameManager = GameObject.Find("InGameManager").GetComponent<InGameManager>();
         
-        if(cameraController == null) Debug.LogError("Camera Controller 스크립트 오류");
-        if(minimapController == null) Debug.LogError("MiniMap Controller 스크립트 오류");
-        if(alertManager == null) Debug.LogError("Alert Manager 스크립트 오류");
-        if(towerManager == null) Debug.LogError("Tower Manager 스크립트 오류");
-        if(inGameManager == null) Debug.LogError("InGame Manager 스크립트 오류");
+        // if(cameraController == null) Debug.LogError("Camera Controller 스크립트 오류");
+        // if(minimapController == null) Debug.LogError("MiniMap Controller 스크립트 오류");
+        // if(alertManager == null) Debug.LogError("Alert Manager 스크립트 오류");
+        // if(towerManager == null) Debug.LogError("Tower Manager 스크립트 오류");
+        // if(inGameManager == null) Debug.LogError("InGame Manager 스크립트 오류");
     }
 
     private void DeallocateInGameManagers()
@@ -113,8 +113,8 @@ public class GeneralManager : Singleton<GeneralManager>
         uiCUInfo = GameObject.Find("UICUPower").GetComponent<UICUInfo>();
         uiPlayerHp = GameObject.Find("UIPlayerHp").GetComponent<UIPlayerHp>();
         
-        if(uiCUInfo == null) Debug.LogError("UICUInfo Manager 스크립트 오류");
-        if(uiPlayerHp == null) Debug.LogError("UIPlayerHp Manager 스크립트 오류");
+        // if(uiCUInfo == null) Debug.LogError("UICUInfo Manager 스크립트 오류");
+        // if(uiPlayerHp == null) Debug.LogError("UIPlayerHp Manager 스크립트 오류");
     }
 
     private void DeallocateUIManagements()

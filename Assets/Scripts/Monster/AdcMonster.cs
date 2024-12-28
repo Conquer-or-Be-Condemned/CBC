@@ -47,7 +47,7 @@ public class AdcMonster : Monster
         // ControlUnitStatus가 Monster.cs에서 자동 할당되었는지 확인
         if (controlUnitStatus == null)
         {
-            Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
+            // Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
         }
     }
 
@@ -190,7 +190,7 @@ public class AdcMonster : Monster
         {
             // 타겟 방향 계산
             Vector2 targetDirection = (currentTarget.position - transform.position).normalized;
-            Debug.Log("bulletshot");
+            // Debug.Log("bulletshot");
 
             // 총알 생성
             GameObject bulletObj = Instantiate(bulletPrefabGreen, transform.position, Quaternion.identity);
@@ -204,7 +204,7 @@ public class AdcMonster : Monster
             
             if (controlUnit == null)
             {
-                Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
+                // Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
                 return;
             }
             

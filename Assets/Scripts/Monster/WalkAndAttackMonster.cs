@@ -41,7 +41,7 @@ public class WalkAndAttackMonster : Monster
         // ControlUnitStatus가 Monster.cs에서 자동 할당되었는지 확인
         if (controlUnitStatus == null)
         {
-            Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
+            // Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
         }
     }
 
@@ -194,12 +194,12 @@ public class WalkAndAttackMonster : Monster
             ControlUnitStatus controlUnit = controlUnitStatus;
             if (controlUnit != null)
             {
-                Debug.LogError("Attack CU");
+                // Debug.LogError("Attack CU");
                 controlUnit.GetDamage((int)attackDamage);
             }
             else
             {
-                Debug.LogError("Can not attack CU");
+                // Debug.LogError("Can not attack CU");
             }
         }
         //  요 아래껄로 대체해주세요.
@@ -208,7 +208,7 @@ public class WalkAndAttackMonster : Monster
             ControlUnitStatus controlUnit = controlUnitStatus;
             if (controlUnit == null)
             {
-                Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
+                // Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
                 return;
             }
             foreach (Transform accessPoint in controlUnitStatus.accessPoints)

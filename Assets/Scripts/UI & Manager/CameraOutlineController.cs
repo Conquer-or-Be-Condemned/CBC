@@ -47,7 +47,7 @@ public class CameraOutlineController : MonoBehaviour
     {
         if (mainCamera == null)
         {
-            Debug.LogWarning("메인 카메라가 설정되지 않았습니다.");
+            // Debug.LogWarning("메인 카메라가 설정되지 않았습니다.");
             return;
         }
 

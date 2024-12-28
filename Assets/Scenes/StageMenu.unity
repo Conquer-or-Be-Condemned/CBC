@@ -2731,6 +2731,7 @@ MonoBehaviour:
   checkCancelButton: {fileID: 1012465173}
   alertBox: {fileID: 28844578}
   alertText: {fileID: 218987846}
+  isInit: 0
 --- !u!4 &594218931
 Transform:
   m_ObjectHideFlags: 0
@@ -5026,7 +5027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 63.61, y: 0}
+  m_AnchoredPosition: {x: 68.61, y: 0}
   m_SizeDelta: {x: 67.22, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1002650251
@@ -7880,7 +7881,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 10
+  m_Spacing: 15
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0

@@ -97,7 +97,7 @@ public class TowerManager : MonoBehaviour
 
             if (towerMenu == null)
             {
-                Debug.LogError("Tower Menu가 존재하지 않습니다. MenuBox를 연결해주세요.");
+                // Debug.LogError("Tower Menu가 존재하지 않습니다. MenuBox를 연결해주세요.");
             }
         }
 
@@ -181,7 +181,7 @@ public class TowerManager : MonoBehaviour
             //  Ui 클릭 시
             if (EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("UI is Clicked.");
+                // Debug.Log("UI is Clicked.");
             }
 
             //  DefaultCanonTower을 클릭 시
@@ -293,7 +293,7 @@ public class TowerManager : MonoBehaviour
         //  디버깅 용
         if (curCanonTower == null)
         {
-            Debug.LogError("Tower is Null");
+            // Debug.LogError("Tower is Null");
             return;
         }
 
@@ -324,7 +324,7 @@ public class TowerManager : MonoBehaviour
     {
         if (curMissileTower == null)
         {
-            Debug.LogError("Tower is Null");
+            // Debug.LogError("Tower is Null");
             return;
         }
 
@@ -394,7 +394,7 @@ public class TowerManager : MonoBehaviour
                     else
                     {
                         alertManager.Show(1);
-                        Debug.Log("Power가 부족합니다.");
+                        // Debug.Log("Power가 부족합니다.");
                     }
                 }
             }
@@ -439,14 +439,14 @@ public class TowerManager : MonoBehaviour
                     else
                     {
                         alertManager.Show(1);
-                        Debug.Log("Power가 부족합니다.");
+                        // Debug.Log("Power가 부족합니다.");
                     }
                 }
             }
             //  디버깅 용
             else
             {
-                Debug.LogError("Tower is null");
+                // Debug.LogError("Tower is null");
                 return;
             }
         

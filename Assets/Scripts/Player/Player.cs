@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
             // 플레이어를 충돌 방향 반대쪽으로 밀어냄
             transform.position += pushDirection * pushAmount;
 
-            Debug.Log($"Collision Enter: Push Direction = {pushDirection}");
+            // Debug.Log($"Collision Enter: Push Direction = {pushDirection}");
         }
     }
 
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
             // 충돌 지속 시에도 플레이어를 충돌 반대쪽으로 계속 밀어냄
             transform.position += pushDirection * pushAmount;
 
-            Debug.Log($"Collision Stay: Push Direction = {pushDirection}");
+            // Debug.Log($"Collision Stay: Push Direction = {pushDirection}");
         }
     }
 

@@ -20,7 +20,7 @@ public class Stage1EffectManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         if (redScreen == null)
         {
-            Debug.LogError("Red Screen Image가 할당되지 않았습니다!");
+            // Debug.LogError("Red Screen Image가 할당되지 않았습니다!");
             yield break;
         }
 

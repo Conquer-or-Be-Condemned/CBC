@@ -36,7 +36,7 @@ public class AlertManager : MonoBehaviour
             alertBox = GameObject.FindGameObjectWithTag("AlertBox");
             if (alertBox == null)
             {
-                Debug.LogError("Alert Box가 없습니다.");
+                // Debug.LogError("Alert Box가 없습니다.");
             }
         }
 
@@ -45,7 +45,7 @@ public class AlertManager : MonoBehaviour
             alertInfo = GameObject.FindGameObjectWithTag("AlertInfo").GetComponent<TMP_Text>();
             if (alertInfo == null)
             {
-                Debug.LogError("Alert Info가 없습니다.");
+                // Debug.LogError("Alert Info가 없습니다.");
             }
         }
 
@@ -75,7 +75,7 @@ public class AlertManager : MonoBehaviour
     {
         if (i <= 0)
         {
-            Debug.LogError("Alert Box의 Index 값이 잘못되었습니다.");
+            // Debug.LogError("Alert Box의 Index 값이 잘못되었습니다.");
             return;
         }
 
