@@ -81,7 +81,7 @@ public class GameManager : Singleton<GameManager>
                 player = GameObject.FindGameObjectWithTag("Player");
                 if (player == null)
                 {
-                    Debug.LogError("No player found");
+                    // Debug.LogError("No player found");
                 }
             }
         }
@@ -104,7 +104,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Press!");
+            // Debug.Log("Press!");
             if (SceneController.NowScene == "Loading")
             {
                 SceneController.LoadNextScene();

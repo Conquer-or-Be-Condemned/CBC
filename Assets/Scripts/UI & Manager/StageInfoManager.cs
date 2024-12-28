@@ -55,7 +55,7 @@ public class StageInfoManager : MonoBehaviour
         if (planetSet == null) planetSet = GameObject.Find("PlanetSet");
         if (warpButton == null) warpButton = GameObject.Find("WarpButton");
 
-        if (warpButton == null) Debug.LogError("이거 오류뜨는건 어쩔 수 없습니다. 신경 쓰지마세요.");
+        // if (warpButton == null) Debug.LogError("이거 오류뜨는건 어쩔 수 없습니다. 신경 쓰지마세요.");
         animator = planetSet.GetComponent<Animator>();
         
         warpButton.SetActive(false);

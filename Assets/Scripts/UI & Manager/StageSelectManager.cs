@@ -106,7 +106,7 @@ public class StageSelectManager : MonoBehaviour
             curSelectStage = 0;
             leftButton.GetComponent<Button>().interactable = false;
             rightButton.GetComponent<Button>().interactable = true;
-            Debug.Log("Left Boundary");
+            // Debug.Log("Left Boundary");
         }
         else
         {
@@ -138,7 +138,7 @@ public class StageSelectManager : MonoBehaviour
             curSelectStage = planets.Length - 1;
             leftButton.GetComponent<Button>().interactable = true;
             rightButton.GetComponent<Button>().interactable = false;
-            Debug.Log("Right Boundary");
+            // Debug.Log("Right Boundary");
         }
         else
         {

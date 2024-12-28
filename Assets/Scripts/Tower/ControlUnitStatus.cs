@@ -70,7 +70,7 @@ public class ControlUnitStatus : MonoBehaviour
     
     private void Die()
     {
-        Debug.Log("Control Unit was Destroyed!!!");
+        // Debug.Log("Control Unit was Destroyed!!!");
         
         GeneralManager.Instance.inGameManager.GameOver();
     }

@@ -24,13 +24,13 @@ public class MiniMapController : MonoBehaviour
         
         if (mapVisible == null || mapInvisible == null)
         {
-            Debug.LogError("Error : MiniMap Script에 버튼을 추가해주세요.");
+            // Debug.LogError("Error : MiniMap Script에 버튼을 추가해주세요.");
         }
         
         //  애니메이터 변수 초기화
         if (miniMap == null)
         {
-            Debug.Log("MiniMap Object 찾는 중..");
+            // Debug.Log("MiniMap Object 찾는 중..");
             miniMap = GameObject.FindGameObjectWithTag("MiniMap");
         }
         _animator = miniMap.GetComponent<Animator>();
@@ -48,7 +48,7 @@ public class MiniMapController : MonoBehaviour
             return;
         }
         
-        Debug.Log("Toggled!");
+        // Debug.Log("Toggled!");
         isVisible = status;
         mapInvisible.SetActive(isVisible);
         mapVisible.SetActive(!isVisible);

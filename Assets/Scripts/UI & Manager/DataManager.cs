@@ -60,13 +60,13 @@ public class DataManager : MonoBehaviour
     {
         if (Coin < CostList[LevelList[mode]])
         {
-            Debug.Log("돈 없다 돈 가져와라");
+            // Debug.Log("돈 없다 돈 가져와라");
             return false;
         }
         
         if (LevelList[mode] > LEVEL_MAX)
         {
-            Debug.LogError("Level Boundary Error");
+            // Debug.LogError("Level Boundary Error");
             return false;
         }
 

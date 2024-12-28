@@ -125,7 +125,7 @@ public class InGameManager : MonoBehaviour
         //  진전도 표시
         // if (SceneController.Instance.curSelectStage + 1 >= DataManager.CurStage)
         // {
-            Debug.Log("Talk Process!!");
+            // Debug.Log("Talk Process!!");
             talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
             StartCoroutine(TalkProcess());
         // }
@@ -319,7 +319,7 @@ public class InGameManager : MonoBehaviour
     {
         float bgmVolume = AudioManager.Instance.bgmVolume;
         
-        Debug.LogWarning("BossSpawn");
+        // Debug.LogWarning("BossSpawn");
         
         talkWrapper.GetComponent<Animator>().SetBool("isShow", true);
         StartCoroutine(TalkProcess());
@@ -348,7 +348,7 @@ public class InGameManager : MonoBehaviour
 
         if (curWave == maxWave)
         {
-            Debug.Log("Entering Boss Stage: Deactivating all towers and activating BossAnimationManager.");
+            // Debug.Log("Entering Boss Stage: Deactivating all towers and activating BossAnimationManager.");
 
             StopAllTurrets();
 
@@ -356,11 +356,11 @@ public class InGameManager : MonoBehaviour
             if (bossAnimationManager != null)
             {
                 bossAnimationManager.SetActive(true);
-                Debug.Log("BossAnimationManager 활성화됨.");
+                // Debug.Log("BossAnimationManager 활성화됨.");
             }
             else
             {
-                Debug.LogError("BossAnimationManager가 할당되지 않았습니다.");
+                // Debug.LogError("BossAnimationManager가 할당되지 않았습니다.");
             }
             
             isBossWave = true;
@@ -368,7 +368,7 @@ public class InGameManager : MonoBehaviour
         }
         
 
-        Debug.Log("Wave Start");
+        // Debug.Log("Wave Start");
         spawnEnd = false;
         
         StartCoroutine(ShowInfo()); // 코루틴으로 호출
@@ -392,7 +392,7 @@ public class InGameManager : MonoBehaviour
     {
         if (tower == null)
         {
-            Debug.LogWarning("Tower is null. Cannot update minimap element.");
+            // Debug.LogWarning("Tower is null. Cannot update minimap element.");
             return;
         }
     
@@ -406,11 +406,11 @@ public class InGameManager : MonoBehaviour
                 if (spriteRenderer != null)
                 {
                     spriteRenderer.color = isActive ? Color.green : Color.yellow;
-                    Debug.Log($"MiniMap Element '{child.name}' color set to {(isActive ? "green" : "yellow")}.");
+                    // Debug.Log($"MiniMap Element '{child.name}' color set to {(isActive ? "green" : "yellow")}.");
                 }
                 else
                 {
-                    Debug.LogWarning($"MapElement '{child.name}' does not have a SpriteRenderer.");
+                    // Debug.LogWarning($"MapElement '{child.name}' does not have a SpriteRenderer.");
                 }
             }
         }
@@ -434,16 +434,16 @@ public class InGameManager : MonoBehaviour
         if (dieSpawn == curSpawn && curWave == maxWave && isBossWave && curSpawn > 0)
         {
             AudioManager.Instance.StopAllSfx();
-            Debug.Log("Wave is End");
-            Debug.Log("curWave3: " + curWave);
-            Debug.Log("maxWave3: " + maxWave);
+            // Debug.Log("Wave is End");
+            // Debug.Log("curWave3: " + curWave);
+            // Debug.Log("maxWave3: " + maxWave);
             if (!isClear)
             {
-                Debug.Log("isClear 진입");
+                // Debug.Log("isClear 진입");
                 clear += 0.2f;
                 if (CheckStageClear())
                 {
-                    Debug.Log("isStageClear 진입");
+                    // Debug.Log("isStageClear 진입");
                     isClear = true;
                 }
             }
@@ -459,7 +459,7 @@ public class InGameManager : MonoBehaviour
                 {
                     isClear = true;
 
-                    Debug.Log("Wave ++");
+                    // Debug.Log("Wave ++");
                     curWave++;
                     ShowWaveClear();
 
@@ -504,13 +504,13 @@ public class InGameManager : MonoBehaviour
                 if (canonTurret != null)
                 {
                     canonTurret.DeactivateTurret();
-                    Debug.Log($"Deactivated Canon Turret: {towerObject.name}");
+                    // Debug.Log($"Deactivated Canon Turret: {towerObject.name}");
                 }
 
                 if (missileTurret != null)
                 {
                     missileTurret.DeactivateTurret();
-                    Debug.Log($"Deactivated Missile Turret: {towerObject.name}");
+                    // Debug.Log($"Deactivated Missile Turret: {towerObject.name}");
                 }
 
                 // 미니맵 요소 색상 업데이트
@@ -518,7 +518,7 @@ public class InGameManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Tower at index {i} in towerList is null.");
+                // Debug.LogWarning($"Tower at index {i} in towerList is null.");
             }
         }
     }
@@ -621,7 +621,7 @@ public class InGameManager : MonoBehaviour
                 //  재 입장 방지용
                 curWave = 1;
 
-                Debug.Log("Stage Clear");
+                // Debug.Log("Stage Clear");
 
                 blind.SetActive(true);
                 stageClearWrapper.SetActive(true);
@@ -669,7 +669,7 @@ public class InGameManager : MonoBehaviour
         float ratio = (float)curCUHp / maxCUHp;
         int reward = (int)(ratio * StageInfoManager.GetReward() * clear);
 
-        Debug.Log("Reward : " + reward);
+        // Debug.Log("Reward : " + reward);
 
         DataManager.Coin += reward;
 
@@ -681,7 +681,7 @@ public class InGameManager : MonoBehaviour
         if (!isGameOver)
         {
             isGameOver = true;
-            Debug.Log("Game Over");
+            // Debug.Log("Game Over");
             AudioManager.Instance.StopAllSfx();
             AudioManager.Instance.PlayBGM(AudioManager.Bgm.GameOver, true);
             

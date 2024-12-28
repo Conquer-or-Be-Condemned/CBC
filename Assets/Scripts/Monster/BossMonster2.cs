@@ -55,7 +55,7 @@ public class BossMonster2 : Monster
         // ControlUnitStatus가 Monster.cs에서 자동 할당되었는지 확인
         if (controlUnitStatus == null)
         {
-            Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
+            // Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
         }
 
         GeneralManager.Instance.inGameManager.ListenBossSpawn();
@@ -128,7 +128,7 @@ public class BossMonster2 : Monster
         // 디버깅용
         // int randomAction = 0;
         
-        Debug.Log("Boss" + randomAction);
+        // Debug.Log("Boss" + randomAction);
 
         switch (randomAction)
         {
@@ -226,7 +226,7 @@ public class BossMonster2 : Monster
     {
         if (monsterSpawnerInBoss == null)
         {
-            Debug.LogWarning("Monster Spawner is Null");
+            // Debug.LogWarning("Monster Spawner is Null");
         }
 
         monsterSpawnerInBoss.GetComponent<MonsterSpawner>().BossSkillSpawn();
@@ -284,7 +284,7 @@ public class BossMonster2 : Monster
             ControlUnitStatus controlUnit = controlUnitStatus;
             if (controlUnit == null)
             {
-                Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
+                // Debug.LogError("Control Unit 을 불러올 수 없습니다. 공격 불가");
                 return;
             }
 
