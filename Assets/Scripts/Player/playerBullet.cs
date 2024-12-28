@@ -8,8 +8,8 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     
     [Header("Attributes")] 
-    [SerializeField] private float bulletSpeed = 6f;
-    [SerializeField] private float bulletDamage = 13f;
+    [SerializeField] private float bulletSpeed = 5f;
+    [SerializeField] private float bulletDamage = 10f;
 
     private Vector2 _direction;
 
