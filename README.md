@@ -1,5 +1,49 @@
 # CBC
 
+### Department of Software, Sejong University  
+### Software Design Basics Section 001, Team 2
+
+### [The Developer]
+
+### [Engine Used]  
+Unity 2D
+
+### [Production]  
+Development Start | 2024-09-27  
+Development Period | 78 days  
+Final Build | 2024-12-14
+
+### [Description]  
+Genre: Horde Mode, Tower Defense
+
+&nbsp; *The Developer* is a defense game where the protagonist, a developer, successfully activates a control device to defend the planet from alien lifeforms and secure planetary domination.  
+Turrets pre-installed by the vanguard are scattered across the map and are used to fend off alien waves.  
+Each wave consists of a unique combination of monsters including melee, tank, ranged, and assassin types. A boss monster appears in the final wave.  
+When all monsters in a wave are eliminated, the wave ends.
+
+Turrets include Cannon and Missile types, each with 3 levels. The number of bullets or missiles they can fire increases by level.  
+Since turrets operate within the total power capacity of the control device, the player must manage turning them on and off strategically.  
+The player also has a weapon, allowing them to lure enemies and defend blind spots of the turrets.  
+If either the player or the control device runs out of health, the mission fails and the game is over.  
+If the player successfully survives all waves, the mission is considered a success and they move on to the next planet.
+
+The game is story-driven, allowing players to immerse themselves more deeply by following the storyline.
+
+### [Team Members]  
+- Junghyun Ahn (Team Leader): Monsters, Spawner  
+- Hoseong Jang: Player  
+- Hyunseok Yang: UI, Systems  
+- Jaedong Hwang: Turrets, Audio, Map
+
+### [Copyright Notice]  
+No profit is generated from this video or game.  
+Some copyrighted audio assets are used.
+
+### [Gameplay Video]  
+https://youtu.be/QjagIWVZMQg
+--- 
+# CBC
+
 ### 세종대학교 소프트웨어학과
 ### 소프트웨어 설계 기초 001분반 2조 
 
