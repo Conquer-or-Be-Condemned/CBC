@@ -7,7 +7,7 @@ labels: ["type: assets"]
 
 ## 작업 내용
 - add / replace / remove 중 무엇인가요?
-- 에셋 종류: sprite / tileset / audio / font / vfx / etc
+- 에셋 종류: sprite / tileset / audio / font / vfx / etc.
 
 ## 경로
 - 추가/변경된 경로(Assets/...):
