@@ -21,8 +21,7 @@
 
 ## 변경 내용(핵심)
 - 
-- 
-- 
+
 
 ## Unity 변경 파일(중요한 것만)
 - Scene / Prefab / Data(SO) / Settings 중 바뀐 것:
