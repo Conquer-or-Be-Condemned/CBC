@@ -1,0 +1,82 @@
+name: PR CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify project consistency
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate Unity project structure
+        run: |
+          test -d "Assets" || (echo "Missing Assets/ folder" && exit 1)
+          test -d "Packages" || (echo "Missing Packages/ folder" && exit 1)
+          test -d "ProjectSettings" || (echo "Missing ProjectSettings/ folder" && exit 1)
+          echo "Project folders OK"
+
+      - name: Check missing .meta for changed Assets
+        shell: bash
+        run: |
+          BASE="origin/${{ github.base_ref }}"
+          git fetch origin ${{ github.base_ref }} --depth=1 || true
+
+          CHANGED=$(git diff --name-only "$BASE"...HEAD | tr -d '\r')
+
+          if [[ -z "$CHANGED" ]]; then
+            echo "No changed files."
+            exit 0
+          fi
+
+          FAIL=0
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          while IFS= read -r file; do
+            [[ -z "$file" ]] && continue
+
+            # Assets 아래에서 meta 파일 자체가 아닌 경우만 검사
+            if [[ "$file" == Assets/* && "$file" != *.meta ]]; then
+              # 삭제된 파일은 검사 제외
+              if git cat-file -e HEAD:"$file" 2>/dev/null; then
+                # 파일/폴더 둘 다 meta 필요(보통 Unity가 생성)
+                if [[ ! -f "${file}.meta" && ! -f "$file.meta" ]]; then
+                  echo "::error::Missing .meta for: $file"
+                  FAIL=1
+                fi
+              fi
+            fi
+          done <<< "$CHANGED"
+
+          if [[ $FAIL -eq 1 ]]; then
+            echo "Meta check failed."
+            exit 1
+          fi
+
+          echo "Meta check OK"
+
+      - name: Warn on large files (>50MB) (optional)
+        shell: bash
+        run: |
+          THRESHOLD=52428800
+          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD | tr -d '\r')
+
+          while IFS= read -r file; do
+            [[ -z "$file" ]] && continue
+            if [[ -f "$file" ]]; then
+              size=$(wc -c < "$file")
+              if [[ $size -gt $THRESHOLD ]]; then
+                echo "::warning::Large file detected: $file ($size bytes)"
+              fi
+            fi
+          done <<< "$CHANGED"
