@@ -1,0 +1,38 @@
+name: Perf Scan (Manual)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Scan all C# files for Update/FixedUpdate hotspots (warning only)
+        shell: bash
+        run: |
+          echo "Scanning all .cs files..."
+
+          # Update/FixedUpdate 안에서 경고할 패턴들 (팀 합의로 조절)
+          PATTERN="FindObjectOfType|FindAnyObjectByType|FindObjectsOfType|GameObject\.Find|transform\.Find|Camera\.main|GetComponent<|GetComponentInChildren|GetComponentInParent|Debug\.Log|Instantiate\(|Destroy\(|\.Select\(|\.Where\(|\.ToList\(|string\.Format|\$\"
+
+          # 모든 .cs 파일 대상
+          FILES=$(find Assets -type f -name "*.cs" || true)
+
+          COUNT=0
+          for file in $FILES; do
+            if grep -nE "void (Update|FixedUpdate)\s*\(" "$file" > /dev/null; then
+              # 파일 내에서 패턴이 존재하면 경고 출력
+              while IFS= read -r line; do
+                echo "::warning file=$file::Potential hotspot in Update/FixedUpdate -> $line"
+                COUNT=$((COUNT+1))
+              done < <(grep -nE "$PATTERN" "$file" || true)
+            fi
+          done
+
+          echo "Scan completed. Total warnings: $COUNT"
