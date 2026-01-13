@@ -1692,6 +1692,7 @@ GameObject:
   - component: {fileID: 373859553}
   - component: {fileID: 373859554}
   - component: {fileID: 373859555}
+  - component: {fileID: 373859556}
   m_Layer: 5
   m_Name: SellBox (1)
   m_TagString: Untagged
@@ -1765,6 +1766,29 @@ MonoBehaviour:
   infoNext: {fileID: 770453772}
   infoMaxLevel: {fileID: 825830269}
   infoCost: {fileID: 152299338}
+  canvas: {fileID: 0}
+  canvasSize: {x: 0, y: 0}
+  isHover: 0
+--- !u!114 &373859556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373859552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b44beacd6c5f0c48a51e41706f46d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeInfoWrapper: {fileID: 1387424207}
+  upgradeInfoBox: {fileID: 513435500}
+  infoTitle: {fileID: 1719722560}
+  infoContent: {fileID: 1891568309}
+  infoNext: {fileID: 770453772}
+  infoMaxLevel: {fileID: 825830269}
+  infoCost: {fileID: 152299338}
+  shopBoxType: 1
 --- !u!1 &427824796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,6 +2046,7 @@ GameObject:
   - component: {fileID: 504555175}
   - component: {fileID: 504555176}
   - component: {fileID: 504555177}
+  - component: {fileID: 504555178}
   m_Layer: 5
   m_Name: SellBox (3)
   m_TagString: Untagged
@@ -2095,6 +2120,29 @@ MonoBehaviour:
   infoNext: {fileID: 770453772}
   infoMaxLevel: {fileID: 825830269}
   infoCost: {fileID: 152299338}
+  canvas: {fileID: 0}
+  canvasSize: {x: 0, y: 0}
+  isHover: 0
+--- !u!114 &504555178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504555174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b44beacd6c5f0c48a51e41706f46d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeInfoWrapper: {fileID: 1387424207}
+  upgradeInfoBox: {fileID: 513435500}
+  infoTitle: {fileID: 1719722560}
+  infoContent: {fileID: 1891568309}
+  infoNext: {fileID: 770453772}
+  infoMaxLevel: {fileID: 825830269}
+  infoCost: {fileID: 152299338}
+  shopBoxType: 3
 --- !u!1 &513435500
 GameObject:
   m_ObjectHideFlags: 0
@@ -4151,6 +4199,7 @@ GameObject:
   - component: {fileID: 797796884}
   - component: {fileID: 797796885}
   - component: {fileID: 797796886}
+  - component: {fileID: 797796887}
   m_Layer: 5
   m_Name: SellBox (2)
   m_TagString: Untagged
@@ -4224,6 +4273,29 @@ MonoBehaviour:
   infoNext: {fileID: 770453772}
   infoMaxLevel: {fileID: 825830269}
   infoCost: {fileID: 152299338}
+  canvas: {fileID: 0}
+  canvasSize: {x: 0, y: 0}
+  isHover: 0
+--- !u!114 &797796887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797796883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b44beacd6c5f0c48a51e41706f46d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeInfoWrapper: {fileID: 1387424207}
+  upgradeInfoBox: {fileID: 513435500}
+  infoTitle: {fileID: 1719722560}
+  infoContent: {fileID: 1891568309}
+  infoNext: {fileID: 770453772}
+  infoMaxLevel: {fileID: 825830269}
+  infoCost: {fileID: 152299338}
+  shopBoxType: 2
 --- !u!1 &825830266
 GameObject:
   m_ObjectHideFlags: 0
@@ -4598,6 +4670,7 @@ GameObject:
   - component: {fileID: 935980618}
   - component: {fileID: 935980619}
   - component: {fileID: 935980620}
+  - component: {fileID: 935980621}
   m_Layer: 5
   m_Name: SellBox (4)
   m_TagString: Untagged
@@ -4671,6 +4744,29 @@ MonoBehaviour:
   infoNext: {fileID: 770453772}
   infoMaxLevel: {fileID: 825830269}
   infoCost: {fileID: 152299338}
+  canvas: {fileID: 0}
+  canvasSize: {x: 0, y: 0}
+  isHover: 0
+--- !u!114 &935980621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935980617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b44beacd6c5f0c48a51e41706f46d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeInfoWrapper: {fileID: 1387424207}
+  upgradeInfoBox: {fileID: 513435500}
+  infoTitle: {fileID: 1719722560}
+  infoContent: {fileID: 1891568309}
+  infoNext: {fileID: 770453772}
+  infoMaxLevel: {fileID: 825830269}
+  infoCost: {fileID: 152299338}
+  shopBoxType: 4
 --- !u!1 &946681706
 GameObject:
   m_ObjectHideFlags: 0
@@ -4919,6 +5015,7 @@ GameObject:
   - component: {fileID: 982625286}
   - component: {fileID: 982625287}
   - component: {fileID: 982625288}
+  - component: {fileID: 982625289}
   m_Layer: 5
   m_Name: SellBox (5)
   m_TagString: Untagged
@@ -4992,6 +5089,29 @@ MonoBehaviour:
   infoNext: {fileID: 770453772}
   infoMaxLevel: {fileID: 825830269}
   infoCost: {fileID: 152299338}
+  canvas: {fileID: 0}
+  canvasSize: {x: 0, y: 0}
+  isHover: 0
+--- !u!114 &982625289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982625285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b44beacd6c5f0c48a51e41706f46d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeInfoWrapper: {fileID: 1387424207}
+  upgradeInfoBox: {fileID: 513435500}
+  infoTitle: {fileID: 1719722560}
+  infoContent: {fileID: 1891568309}
+  infoNext: {fileID: 770453772}
+  infoMaxLevel: {fileID: 825830269}
+  infoCost: {fileID: 152299338}
+  shopBoxType: 5
 --- !u!1 &1002650249
 GameObject:
   m_ObjectHideFlags: 0
@@ -5824,6 +5944,7 @@ GameObject:
   - component: {fileID: 1103268610}
   - component: {fileID: 1103268611}
   - component: {fileID: 1103268612}
+  - component: {fileID: 1103268613}
   m_Layer: 5
   m_Name: SellBox
   m_TagString: Untagged
@@ -5897,6 +6018,29 @@ MonoBehaviour:
   infoNext: {fileID: 770453772}
   infoMaxLevel: {fileID: 825830269}
   infoCost: {fileID: 152299338}
+  canvas: {fileID: 0}
+  canvasSize: {x: 0, y: 0}
+  isHover: 0
+--- !u!114 &1103268613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103268609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b44beacd6c5f0c48a51e41706f46d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeInfoWrapper: {fileID: 1387424207}
+  upgradeInfoBox: {fileID: 513435500}
+  infoTitle: {fileID: 1719722560}
+  infoContent: {fileID: 1891568309}
+  infoNext: {fileID: 770453772}
+  infoMaxLevel: {fileID: 825830269}
+  infoCost: {fileID: 152299338}
+  shopBoxType: 0
 --- !u!1 &1105654419
 GameObject:
   m_ObjectHideFlags: 0
