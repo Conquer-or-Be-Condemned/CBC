@@ -5,15 +5,10 @@ title: "fix(영역): "
 labels: ["type: bug"]
 ---
 
-<br>
 
 ### 내용
 - 어떤 문제가 발생하나요?
 
-<br>
-
-### 영역
-- Player / Enemy / UI / Map / System
 
 <br>
 
