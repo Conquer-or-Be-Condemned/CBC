@@ -5,8 +5,6 @@ title: "assets(영역): "
 labels: ["type: assets"]
 ---
 
-<br>
-
 ### 작업 내용
 - add / replace / remove 중 무엇인가요?
 - 에셋 종류: sprite / tileset / audio / font / vfx / etc.

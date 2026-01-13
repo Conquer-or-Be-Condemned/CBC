@@ -14,7 +14,7 @@ public class PlayerInfo : MonoBehaviour
 
     private void Awake()
     {
-        maxHp = DataManager.PlayerHp;
+        maxHp = DataManager.GetAttributeData(AttributeType.PlayerHealth);
         curHp = maxHp;
     }
 

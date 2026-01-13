@@ -43,11 +43,8 @@ public class ControlUnitStatus : MonoBehaviour
     }
     private void ValidateData()
     {
-        maxHealth = DataManager.ControlUnitHp;
-        curHealth = DataManager.ControlUnitHp;
-
-        maxPower = DataManager.ControlUnitPower;
-        currentPower = DataManager.ControlUnitPower;
+        curHealth = maxHealth = DataManager.GetAttributeData(AttributeType.ControlUnitHealth);
+        currentPower = maxPower = DataManager.GetAttributeData(AttributeType.ControlUnitPower);
     }
 
     public void AddUnit(int power)

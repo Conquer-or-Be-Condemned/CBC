@@ -301,7 +301,7 @@ public class TowerManager : MonoBehaviour
 
         nameText.SetText(curCanonTower.GetName());
         levelText.SetText("Lv " + curCanonTower.GetLevel());
-        powerText.SetText("Power : " + (int)(curCanonTower.GetPower() / (float)DataManager.ControlUnitPower * 100)+"%");
+        powerText.SetText("Power : " + (int)(curCanonTower.GetPower() / (float)DataManager.GetAttributeData(AttributeType.ControlUnitPower) * 100)+"%");
         damageText.SetText("Damage : " + curCanonTower.GetDamage());
         rpm.SetText("RPM : " + curCanonTower.GetRpm());
 
@@ -332,7 +332,7 @@ public class TowerManager : MonoBehaviour
 
         nameText.SetText(curMissileTower.GetName());
         levelText.SetText("Lv " + curMissileTower.GetLevel());
-        powerText.SetText("Power : " + (int)(curMissileTower.GetPower()/ (float)DataManager.ControlUnitPower * 100)+"%");
+        powerText.SetText("Power : " + (int)(curMissileTower.GetPower()/ (float)DataManager.GetAttributeData(AttributeType.ControlUnitPower) * 100)+"%");
         damageText.SetText("Damage : " + curMissileTower.GetDamage());
         rpm.SetText("RPM : " + curMissileTower.GetRPM());
 

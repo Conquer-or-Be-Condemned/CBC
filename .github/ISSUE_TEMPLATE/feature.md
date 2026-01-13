@@ -5,15 +5,9 @@ title: "feat(영역): "
 labels: ["type: feature"]
 ---
 
-<br>
-
 ### 목표
 - 무엇을 추가/개선하나요?
 
-<br>
-
-### 영역
-- Player / Enemy / UI / Map / System
 
 <br>
 

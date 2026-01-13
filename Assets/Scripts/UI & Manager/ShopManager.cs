@@ -72,7 +72,7 @@ public class ShopManager : MonoBehaviour
 
         for (int i = 0; i < shopTexts.Length; i++)
         {
-            shopTexts[i].SetText(DataManager.LevelList[i]+" / " + DataManager.LEVEL_MAX);
+            shopTexts[i].SetText(DataManager.GetLevel(i)+" / " + DataManager.LEVEL_MAX);
         }
     }
 
@@ -80,7 +80,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < shopButtons.Length; i++)
         {
-            if (DataManager.LevelList[i] == DataManager.LEVEL_MAX)
+            if (DataManager.GetLevel(i) == DataManager.LEVEL_MAX)
             {
                 shopButtons[i].interactable = false;
             }
