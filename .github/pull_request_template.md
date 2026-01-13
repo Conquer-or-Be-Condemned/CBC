@@ -5,19 +5,19 @@
 - Closes #
 
 ## 분류(Type)
-- [ ] 기능(feat)
-- [ ] 버그수정(fix)
-- [ ] 리팩토링(refactor)
-- [ ] 성능(perf)
-- [ ] 설정/정리(chore/build/docs/test)
-- [ ] 에셋(assets)
+[ ] 기능(feat)
+[ ] 버그수정(fix)
+[ ] 리팩토링(refactor)
+[ ] 성능(perf)
+[ ] 설정/정리(chore/build/docs/test)
+[ ] 에셋(assets)
 
 ## 영역(Scope)
-- [ ] Player
-- [ ] Enemy
-- [ ] UI
-- [ ] Map
-- [ ] System
+[ ] Player
+[ ] Enemy
+[ ] UI
+[ ] Map
+[ ] System
 
 ## 변경 내용(핵심)
 - 
