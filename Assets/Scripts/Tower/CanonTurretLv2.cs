@@ -52,7 +52,7 @@ public class CanonTurretLv2 : DefaultCanonTurret
         //Info for Ui
         Level = 2;
         RPM = (int)(60 / (1 / fireRate));
-        Damage = DataManager.TurretBullet * 2;
+        Damage = DataManager.GetAttributeData(AttributeType.TurretBullet) * 2;
     }
     override 
     protected void Shoot()//총알 객체화 후 목표로 발사(FireRateController에서 수행)

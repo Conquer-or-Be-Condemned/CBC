@@ -21,7 +21,7 @@ public class TowerBullet : MonoBehaviour
 
     private void Awake()
     {
-        _bulletDamage = DataManager.TurretBullet;
+        _bulletDamage = DataManager.GetAttributeData(AttributeType.TurretBullet);
     }
 
     private void Update()

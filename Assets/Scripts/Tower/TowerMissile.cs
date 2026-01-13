@@ -57,7 +57,7 @@ public class TowerMissile : MonoBehaviour
     private void Awake()
     {
         _sr = gameObject.GetComponent<SpriteRenderer>();
-        _bulletDamage = DataManager.TurretMissile;
+        _bulletDamage = DataManager.GetAttributeData(AttributeType.TurretMissile);
     }
     private void FixedUpdate()
     {
