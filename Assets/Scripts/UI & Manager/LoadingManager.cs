@@ -89,11 +89,11 @@ public class LoadingManager : MonoBehaviour
     //  랜덤 Seed를 통해서 팁 하나를 리턴
     private String GetRandomTip()
     {
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == AvailableLanguage.English)
         {
             return tipList_ENG[Random.Range(0, tipList_ENG.Count)];
         }
-        else if (GameManager.Language == 1)
+        else if (GameManager.SelectedLanguage == AvailableLanguage.Korean)
         {
             return tipList_KOR[Random.Range(0, tipList_KOR.Count)];
         }

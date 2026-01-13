@@ -86,7 +86,7 @@ public class OpeningViewer : MonoBehaviour
         yield return new WaitForSeconds(1.4f);
         talkIdx++;
 
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == 0)
         {
             if (talkIdx <= TalkManager.ForOpeningIdx)
             {

@@ -1691,7 +1691,6 @@ GameObject:
   m_Component:
   - component: {fileID: 373859553}
   - component: {fileID: 373859554}
-  - component: {fileID: 373859555}
   - component: {fileID: 373859556}
   m_Layer: 5
   m_Name: SellBox (1)
@@ -1747,28 +1746,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &373859555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373859552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f43e11f94b04fc78f67c3783f77e15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeInfoWrapper: {fileID: 1387424207}
-  upgradeInfoBox: {fileID: 513435500}
-  infoTitle: {fileID: 1719722560}
-  infoContent: {fileID: 1891568309}
-  infoNext: {fileID: 770453772}
-  infoMaxLevel: {fileID: 825830269}
-  infoCost: {fileID: 152299338}
-  canvas: {fileID: 0}
-  canvasSize: {x: 0, y: 0}
-  isHover: 0
 --- !u!114 &373859556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,7 +2022,6 @@ GameObject:
   m_Component:
   - component: {fileID: 504555175}
   - component: {fileID: 504555176}
-  - component: {fileID: 504555177}
   - component: {fileID: 504555178}
   m_Layer: 5
   m_Name: SellBox (3)
@@ -2101,28 +2077,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &504555177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504555174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d9c4e6ca76a4d4bab2ac4802e3646c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeInfoWrapper: {fileID: 1387424207}
-  upgradeInfoBox: {fileID: 513435500}
-  infoTitle: {fileID: 1719722560}
-  infoContent: {fileID: 1891568309}
-  infoNext: {fileID: 770453772}
-  infoMaxLevel: {fileID: 825830269}
-  infoCost: {fileID: 152299338}
-  canvas: {fileID: 0}
-  canvasSize: {x: 0, y: 0}
-  isHover: 0
 --- !u!114 &504555178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4198,7 +4152,6 @@ GameObject:
   m_Component:
   - component: {fileID: 797796884}
   - component: {fileID: 797796885}
-  - component: {fileID: 797796886}
   - component: {fileID: 797796887}
   m_Layer: 5
   m_Name: SellBox (2)
@@ -4254,28 +4207,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &797796886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 797796883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cead38d9c3aa74811ba236ad631f39a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeInfoWrapper: {fileID: 1387424207}
-  upgradeInfoBox: {fileID: 513435500}
-  infoTitle: {fileID: 1719722560}
-  infoContent: {fileID: 1891568309}
-  infoNext: {fileID: 770453772}
-  infoMaxLevel: {fileID: 825830269}
-  infoCost: {fileID: 152299338}
-  canvas: {fileID: 0}
-  canvasSize: {x: 0, y: 0}
-  isHover: 0
 --- !u!114 &797796887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4669,7 +4600,6 @@ GameObject:
   m_Component:
   - component: {fileID: 935980618}
   - component: {fileID: 935980619}
-  - component: {fileID: 935980620}
   - component: {fileID: 935980621}
   m_Layer: 5
   m_Name: SellBox (4)
@@ -4725,28 +4655,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &935980620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935980617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e131c2eb950e84b7bb10389e9bc26206, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeInfoWrapper: {fileID: 1387424207}
-  upgradeInfoBox: {fileID: 513435500}
-  infoTitle: {fileID: 1719722560}
-  infoContent: {fileID: 1891568309}
-  infoNext: {fileID: 770453772}
-  infoMaxLevel: {fileID: 825830269}
-  infoCost: {fileID: 152299338}
-  canvas: {fileID: 0}
-  canvasSize: {x: 0, y: 0}
-  isHover: 0
 --- !u!114 &935980621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5014,7 +4922,6 @@ GameObject:
   m_Component:
   - component: {fileID: 982625286}
   - component: {fileID: 982625287}
-  - component: {fileID: 982625288}
   - component: {fileID: 982625289}
   m_Layer: 5
   m_Name: SellBox (5)
@@ -5070,28 +4977,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &982625288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982625285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1f475f10732f4a0780b208717b7ad5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeInfoWrapper: {fileID: 1387424207}
-  upgradeInfoBox: {fileID: 513435500}
-  infoTitle: {fileID: 1719722560}
-  infoContent: {fileID: 1891568309}
-  infoNext: {fileID: 770453772}
-  infoMaxLevel: {fileID: 825830269}
-  infoCost: {fileID: 152299338}
-  canvas: {fileID: 0}
-  canvasSize: {x: 0, y: 0}
-  isHover: 0
 --- !u!114 &982625289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5943,8 +5828,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1103268610}
   - component: {fileID: 1103268611}
-  - component: {fileID: 1103268612}
   - component: {fileID: 1103268613}
+  - component: {fileID: 1103268615}
+  - component: {fileID: 1103268614}
   m_Layer: 5
   m_Name: SellBox
   m_TagString: Untagged
@@ -5999,28 +5885,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1103268612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103268609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b3ae9e4f2dc3491f9c261283d995a23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeInfoWrapper: {fileID: 1387424207}
-  upgradeInfoBox: {fileID: 513435500}
-  infoTitle: {fileID: 1719722560}
-  infoContent: {fileID: 1891568309}
-  infoNext: {fileID: 770453772}
-  infoMaxLevel: {fileID: 825830269}
-  infoCost: {fileID: 152299338}
-  canvas: {fileID: 0}
-  canvasSize: {x: 0, y: 0}
-  isHover: 0
 --- !u!114 &1103268613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6041,6 +5905,44 @@ MonoBehaviour:
   infoMaxLevel: {fileID: 825830269}
   infoCost: {fileID: 152299338}
   shopBoxType: 0
+--- !u!114 &1103268614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103268609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1103268615
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103268609}
+  m_CullTransparentMesh: 1
 --- !u!1 &1105654419
 GameObject:
   m_ObjectHideFlags: 0

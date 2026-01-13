@@ -96,8 +96,8 @@ public class UIShopHoverHandler : MonoBehaviour, IPointerEnterHandler, IPointerE
             upgradeInfoWrapper.SetActive(true);
             
             //  Set UI Text
-            infoTitle.SetText(infoTitleList[GameManager.Language][(int)shopBoxType]);
-            infoContent.SetText(infoContentList[GameManager.Language][(int)shopBoxType]);
+            infoTitle.SetText(infoTitleList[(int)GameManager.SelectedLanguage][(int)shopBoxType]);
+            infoContent.SetText(infoContentList[(int)GameManager.SelectedLanguage][(int)shopBoxType]);
 
             //  Checking Max Level
             if (DataManager.GetLevel(shopBoxType) == DataManager.LEVEL_MAX)

@@ -113,7 +113,7 @@ public class ShopManager : MonoBehaviour
                 // Debug.Log("돈 없거나 최대 레벨"); //    최대 레벨은 버튼을 막기로 결정
             }
             
-            alertText.SetText(alerts[GameManager.Language][curAlert]);
+            alertText.SetText(alerts[(int)GameManager.SelectedLanguage][curAlert]);
             ShowAlert();
         }
         else
@@ -137,7 +137,7 @@ public class ShopManager : MonoBehaviour
         curMode = mode;
         checkBox.SetActive(true);
 
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == 0)
         {
             checkBoxText.SetText("Are you sure you want to buy it?");
         }
