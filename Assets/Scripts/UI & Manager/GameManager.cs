@@ -10,6 +10,13 @@ using UnityEngine.SceneManagement;
  *  게임 전체를 관할하는 GameManager입니다.
  *  오브젝트로써의 역할도 필요하지만 static으로 선언해야 하는 method도 많으니 참고바랍니다.
  */
+
+public enum AvailableLanguage
+{
+    English,
+    Korean
+};
+
 public class GameManager : Singleton<GameManager>
 {
     [Header("Management")] 
@@ -35,7 +42,7 @@ public class GameManager : Singleton<GameManager>
     //  로딩을 스킵할 수 있는지 확인
     public static bool LoadingSkip;
 
-    [Header("Language")] public static int Language = 0;
+    [Header("Language")] public static AvailableLanguage SelectedLanguage = 0;
 
     [Header("Notice")] public static bool ReadNotice = false;    
 
@@ -123,7 +130,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SetLanguageSetting(int lang)
     {
-        Language = lang;
+        SelectedLanguage = (AvailableLanguage)lang;
     }
     
 }

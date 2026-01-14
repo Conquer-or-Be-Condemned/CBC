@@ -8,25 +8,35 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
+    [Space]
     public TMP_Text[] shopTexts;
     public Button[] shopButtons;
 
+    [Space]
     [Header("UI")] public Button shopButton;
     public Button closeButton;
     public GameObject shopWrapper;
     public GameObject blind;
+
+    [Space] 
+    public GameObject CoinWrapper;
     public TMP_Text coinText;
+    
+    [Space]
     public GameObject checkBox;
     public TMP_Text checkBoxText;
     public Button checkBuyButton;
     public Button checkCancelButton;
 
+    [Space]
     [Header("Handle")] private int curMode;
 
+    [Space]
     [Header("Alert")] public GameObject alertBox;
     public TMP_Text alertText;
+    
     private int curAlert;
-    private string[][] alerts =
+    private readonly string[][] alerts =
     {
         new string[]
         {
@@ -40,6 +50,8 @@ public class ShopManager : MonoBehaviour
         }
     };
 
+    [Space]
+    [Header("Handler")]
     public bool isInit = false;
 
 
@@ -68,6 +80,7 @@ public class ShopManager : MonoBehaviour
     {
         coinText.SetText(DataManager.Coin.ToString());
         
+        RevalidateAlignment();
         // LayoutRebuilder.ForceRebuildLayoutImmediate(gameObject.GetComponent<RectTransform>());
 
         for (int i = 0; i < shopTexts.Length; i++)
@@ -113,7 +126,7 @@ public class ShopManager : MonoBehaviour
                 // Debug.Log("돈 없거나 최대 레벨"); //    최대 레벨은 버튼을 막기로 결정
             }
             
-            alertText.SetText(alerts[GameManager.Language][curAlert]);
+            alertText.SetText(alerts[(int)GameManager.SelectedLanguage][curAlert]);
             ShowAlert();
         }
         else
@@ -137,11 +150,11 @@ public class ShopManager : MonoBehaviour
         curMode = mode;
         checkBox.SetActive(true);
 
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == AvailableLanguage.English)
         {
             checkBoxText.SetText("Are you sure you want to buy it?");
         }
-        else 
+        else if(GameManager.SelectedLanguage == AvailableLanguage.Korean)
         {
             checkBoxText.SetText("구매하시겠습니까?");
         }
@@ -156,6 +169,7 @@ public class ShopManager : MonoBehaviour
     //  Animation
     public void ShowShop()
     {
+        RevalidateAlignment();
         shopWrapper.GetComponent<Animator>().SetBool("visible", true);
         blind.SetActive(true);
     }
@@ -165,11 +179,16 @@ public class ShopManager : MonoBehaviour
         shopWrapper.GetComponent<Animator>().SetBool("visible", false);
         blind.SetActive(false);
     }
+
+    private void RevalidateAlignment()
+    {
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(CoinWrapper.GetComponent<RectTransform>());
+    }
     
     //  Alert
     public void ShowAlert()
     {
-        
         StartCoroutine(AlertCoroutine());
     }
 

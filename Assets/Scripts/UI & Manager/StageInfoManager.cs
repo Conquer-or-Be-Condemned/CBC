@@ -103,7 +103,7 @@ public class StageInfoManager : MonoBehaviour
         planetName.SetText("");
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == AvailableLanguage.English)
         {
             for (var i = 0; i < NameList_ENG[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
             {
@@ -112,7 +112,7 @@ public class StageInfoManager : MonoBehaviour
                 yield return new WaitForSeconds(0.05f);
             }
         }
-        else if (GameManager.Language == 1)
+        else if (GameManager.SelectedLanguage == AvailableLanguage.Korean)
         {
             for (var i = 0; i < NameList_KOR[GeneralManager.Instance.stageSelectManager.curSelectStage].Length; i++)
             {
@@ -135,7 +135,7 @@ public class StageInfoManager : MonoBehaviour
         
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == AvailableLanguage.English)
         {
             if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
@@ -156,7 +156,7 @@ public class StageInfoManager : MonoBehaviour
                 }
             }
         }
-        else if (GameManager.Language == 1)
+        else if (GameManager.SelectedLanguage == AvailableLanguage.Korean)
         {
             if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
@@ -189,7 +189,7 @@ public class StageInfoManager : MonoBehaviour
         
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == AvailableLanguage.English)
         {
             if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {
@@ -201,7 +201,7 @@ public class StageInfoManager : MonoBehaviour
                 }
             }
         }
-        else if (GameManager.Language == 1)
+        else if (GameManager.SelectedLanguage == AvailableLanguage.Korean)
         {
             if (DataManager.CurStage >= GeneralManager.Instance.stageSelectManager.curSelectStage + 1)
             {

@@ -35,7 +35,7 @@ public class SettingManager : MonoBehaviour
             {
                 languageSetting = GameObject.Find("Dropdown").GetComponent<TMP_Dropdown>();
                 
-                languageSetting.value = GameManager.Language;
+                languageSetting.value = (int)GameManager.SelectedLanguage;
                 languageSetting.onValueChanged.AddListener((e)=>GameManager.Instance.SetLanguageSetting(e));
             }
             
