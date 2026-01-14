@@ -64,7 +64,7 @@ public abstract class Monster : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Health bar prefab is not assigned on " + monsterName);
+            // Debug.LogWarning("Health bar prefab is not assigned on " + monsterName);
         }
 
         // ControlUnitStatus가 할당되지 않은 경우, 태그를 통해 씬에서 찾아 할당
@@ -76,12 +76,12 @@ public abstract class Monster : MonoBehaviour
                 controlUnitStatus = controlUnitObj.GetComponent<ControlUnitStatus>();
                 if (controlUnitStatus == null)
                 {
-                    Debug.LogWarning("ControlUnitStatus component not found on the ControlUnit object.");
+                    // Debug.LogWarning("ControlUnitStatus component not found on the ControlUnit object.");
                 }
             }
             else
             {
-                Debug.LogWarning("Control Unit not found in the scene. Please assign it manually.");
+                // Debug.LogWarning("Control Unit not found in the scene. Please assign it manually.");
             }
         }
 
@@ -95,7 +95,7 @@ public abstract class Monster : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Player not found in the scene. Please assign it manually.");
+                // Debug.LogWarning("Player not found in the scene. Please assign it manually.");
             }
         }
 

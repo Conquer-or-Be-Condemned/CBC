@@ -43,11 +43,8 @@ public class ControlUnitStatus : MonoBehaviour
     }
     private void ValidateData()
     {
-        maxHealth = DataManager.ControlUnitHp;
-        curHealth = DataManager.ControlUnitHp;
-
-        maxPower = DataManager.ControlUnitPower;
-        currentPower = DataManager.ControlUnitPower;
+        curHealth = maxHealth = DataManager.GetAttributeData(AttributeType.ControlUnitHealth);
+        currentPower = maxPower = DataManager.GetAttributeData(AttributeType.ControlUnitPower);
     }
 
     public void AddUnit(int power)
@@ -70,7 +67,7 @@ public class ControlUnitStatus : MonoBehaviour
     
     private void Die()
     {
-        Debug.Log("Control Unit was Destroyed!!!");
+        // Debug.Log("Control Unit was Destroyed!!!");
         
         GeneralManager.Instance.inGameManager.GameOver();
     }

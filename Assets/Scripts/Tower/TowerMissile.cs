@@ -57,7 +57,7 @@ public class TowerMissile : MonoBehaviour
     private void Awake()
     {
         _sr = gameObject.GetComponent<SpriteRenderer>();
-        _bulletDamage = DataManager.TurretMissile;
+        _bulletDamage = DataManager.GetAttributeData(AttributeType.TurretMissile);
     }
     private void FixedUpdate()
     {
@@ -115,7 +115,7 @@ public class TowerMissile : MonoBehaviour
         if (hits != null&&_missileSoundId!=null)
         {
             float distance = Vector2.Distance(transform.position, hits.transform.position);
-            Debug.Log("Distance with player" + distance);
+            // Debug.Log("Distance with player" + distance);
             AudioManager.Instance.ChangeVolume(_missileSoundId,distance,80);
         }
 
@@ -160,7 +160,7 @@ public class TowerMissile : MonoBehaviour
         if (!string.IsNullOrEmpty(_missileSoundId))
         {
             AudioManager.Instance.StopSfx(_missileSoundId);
-            Debug.Log("missilesound delete");
+            // Debug.Log("missilesound delete");
         }
         Collider2D[] monsters = Physics2D.OverlapCircleAll(rb.position, explosionRange);
         foreach (var monster in monsters)
@@ -184,6 +184,9 @@ public class TowerMissile : MonoBehaviour
     private void DrawTargetLineToTarget()
     {
         if (_target != null)
-            Debug.DrawLine(transform.position, _target.position, Color.blue, 0.1f);
+        {
+            
+        }
+            // Debug.DrawLine(transform.position, _target.position, Color.blue, 0.1f);
     }
 }

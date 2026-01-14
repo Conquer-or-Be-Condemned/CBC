@@ -92,7 +92,7 @@ public class SceneController : Singleton<SceneController>
         AudioManager.Instance.StopAllSfx();
         
         Time.timeScale = 1f;
-        Debug.Log("Restart!");
+        // Debug.Log("Restart!");
         isStart = false;
 
         GameManager.InGame = false;
@@ -161,7 +161,7 @@ public class SceneController : Singleton<SceneController>
         AudioManager.Instance.RestoreAudioMixerSettings();
         if (sceneName == "Main")
         {
-            Debug.Log("MAIN!!");
+            // Debug.Log("MAIN!!");
             Time.timeScale = 1f;
             
             AudioManager.Instance.PlayBGM(AudioManager.Bgm.Stage1,false);
@@ -183,7 +183,7 @@ public class SceneController : Singleton<SceneController>
             Time.timeScale = 1f;
         }
         
-        Debug.Log("Go to " + sceneName);
+        // Debug.Log("Go to " + sceneName);
         SceneManager.LoadScene(sceneName);
         NowScene = sceneName;
     }

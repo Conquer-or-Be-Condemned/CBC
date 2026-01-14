@@ -51,7 +51,7 @@ public class MissileTurretLV1 : DefaultMissileTurret
     }
     protected override void Shoot()
     {
-        Debug.Log("shooting now");
+        // Debug.Log("shooting now");
         CurMissileCount += 1;
         StartCoroutine(ShootAnimation());
         for (int i = 0; i < _missileObj.Length; i++)

@@ -64,7 +64,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (!isDerivedBoss)
         {
-            Debug.Log("Invalid : 잘못된 접근입니다.");
+            // Debug.Log("Invalid : 잘못된 접근입니다.");
             return;
         }
         // 스폰 배열에서 무작위로 선택하여 몬스터를 스폰
@@ -98,7 +98,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (spawnData.monsterPrefab == null)
         {
-            Debug.LogWarning("Monster prefab is null!");
+            // Debug.LogWarning("Monster prefab is null!");
             return;
         }
 

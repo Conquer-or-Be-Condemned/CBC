@@ -97,19 +97,19 @@ public class AudioManager : Singleton<AudioManager>
         // BGM 기본 볼륨 초기화
         if (bgmMixerGroup != null)
         {
-            Debug.Log("bgm mixer group set");
+            // Debug.Log("bgm mixer group set");
             bgmMixerGroup.audioMixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Clamp(bgmVolume, 0.0001f, 1f)) * 20+42f);
         }
 
         // SFX 기본 볼륨 초기화
         if (sfxMixerGroup != null)
         {
-            Debug.Log("sfx mixer group set");
+            // Debug.Log("sfx mixer group set");
             sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(sfxVolume, 0.0001f, 1f)) * 20+16f);
         }
         else
         {
-            Debug.LogWarning("SFX Mixer Group is not assigned! Skipping SFX volume initialization.");
+            // Debug.LogWarning("SFX Mixer Group is not assigned! Skipping SFX volume initialization.");
         }
     }
 
@@ -194,7 +194,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (_activeSfx.ContainsKey(id))
         {
-            Debug.Log("Volume changed");
+            // Debug.Log("Volume changed");
             _activeSfx[id].volume = (sfxVolume - sfxVolume * (distance / searchDistance));
         }
     }

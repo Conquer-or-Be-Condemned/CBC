@@ -45,8 +45,8 @@ public class SettingManager : MonoBehaviour
             bgmSlider.value = AudioManager.Instance.bgmVolume;
             sfxSlider.value = AudioManager.Instance.sfxVolume;
             
-            Debug.Log(bgmSlider.value);
-            Debug.Log(sfxSlider.value);
+            // Debug.Log(bgmSlider.value);
+            // Debug.Log(sfxSlider.value);
             
             return true;
         }
@@ -66,8 +66,8 @@ public class SettingManager : MonoBehaviour
         bgmSlider.value = AudioManager.Instance.bgmVolume;
         sfxSlider.value = AudioManager.Instance.sfxVolume;
             
-        Debug.Log(bgmSlider.value);
-        Debug.Log(sfxSlider.value);
+        // Debug.Log(bgmSlider.value);
+        // Debug.Log(sfxSlider.value);
         
         bgmSlider.onValueChanged.AddListener((e)=>audioManager.ChangeBgmVolume(e));
         sfxSlider.onValueChanged.AddListener((e)=>audioManager.ChangeSfxVolume(e));

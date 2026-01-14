@@ -40,8 +40,10 @@ public class ShopManager : MonoBehaviour
         }
     };
 
+    public bool isInit = false;
 
-    private void Start()
+
+    private void Awake()
     {
         ValidateText();
 
@@ -54,15 +56,23 @@ public class ShopManager : MonoBehaviour
         ValidateUpgradeButtons();
     }
 
+    private void FixedUpdate()
+    {
+        if (!isInit)
+        {
+            Awake();
+        }
+    }
+
     private void ValidateText()
     {
         coinText.SetText(DataManager.Coin.ToString());
         
-        LayoutRebuilder.ForceRebuildLayoutImmediate(gameObject.GetComponent<RectTransform>());
+        // LayoutRebuilder.ForceRebuildLayoutImmediate(gameObject.GetComponent<RectTransform>());
 
         for (int i = 0; i < shopTexts.Length; i++)
         {
-            shopTexts[i].SetText(DataManager.LevelList[i]+" / " + DataManager.LEVEL_MAX);
+            shopTexts[i].SetText(DataManager.GetLevel(i)+" / " + DataManager.LEVEL_MAX);
         }
     }
 
@@ -70,7 +80,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < shopButtons.Length; i++)
         {
-            if (DataManager.LevelList[i] == DataManager.LEVEL_MAX)
+            if (DataManager.GetLevel(i) == DataManager.LEVEL_MAX)
             {
                 shopButtons[i].interactable = false;
             }
@@ -79,6 +89,8 @@ public class ShopManager : MonoBehaviour
                 shopButtons[i].interactable = true;
             }
         }
+
+        isInit = true;
     }
 
     public void Buy(bool buy)
@@ -89,7 +101,7 @@ public class ShopManager : MonoBehaviour
             {
                 ValidateText();
                 ValidateUpgradeButtons();
-                Debug.Log("업그레이드 완료");
+                // Debug.Log("업그레이드 완료");
                 curAlert = 0;
                 //  TODO : Alert + Audio
             }
@@ -97,8 +109,8 @@ public class ShopManager : MonoBehaviour
             {
                 //  TODO : Alert
                 curAlert = 1;
-                Debug.Log("업그레이드 불가");
-                Debug.Log("돈 없거나 최대 레벨"); //    최대 레벨은 버튼을 막기로 결정
+                // Debug.Log("업그레이드 불가");
+                // Debug.Log("돈 없거나 최대 레벨"); //    최대 레벨은 버튼을 막기로 결정
             }
             
             alertText.SetText(alerts[GameManager.Language][curAlert]);
@@ -106,7 +118,7 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("구매 취소 처리 완료");
+            // Debug.Log("구매 취소 처리 완료");
         }
         
         //  button click 방지 해제

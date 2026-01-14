@@ -27,8 +27,6 @@ public class Player : MonoBehaviour
     private float _timeTilFire;
     private int _bulletsPerShot; // 한 번에 발사할 총알 수
     private float _spreadAngle; // 총알 퍼짐 각도
-    
-    
 
     [Header("Bomb")] 
     public int maxBombCount;
@@ -41,7 +39,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _bulletsPerShot = DataManager.PlayerBullet;
+        _bulletsPerShot = DataManager.GetAttributeData(AttributeType.PlayerBullet);
         _spreadAngle = _bulletsPerShot * 5;
 
         //  최대 소지 개수
@@ -126,7 +124,7 @@ public class Player : MonoBehaviour
             // 플레이어를 충돌 방향 반대쪽으로 밀어냄
             transform.position += pushDirection * pushAmount;
 
-            Debug.Log($"Collision Enter: Push Direction = {pushDirection}");
+            // Debug.Log($"Collision Enter: Push Direction = {pushDirection}");
         }
     }
 
@@ -140,7 +138,7 @@ public class Player : MonoBehaviour
             // 충돌 지속 시에도 플레이어를 충돌 반대쪽으로 계속 밀어냄
             transform.position += pushDirection * pushAmount;
 
-            Debug.Log($"Collision Stay: Push Direction = {pushDirection}");
+            // Debug.Log($"Collision Stay: Push Direction = {pushDirection}");
         }
     }
 

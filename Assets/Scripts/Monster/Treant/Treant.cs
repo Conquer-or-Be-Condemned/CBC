@@ -43,7 +43,7 @@ public class Treant : Monster
         // ControlUnitStatus가 Monster.cs에서 자동 할당되었는지 확인
         if (controlUnitStatus == null)
         {
-            Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
+            // Debug.LogWarning($"{monsterName}의 Control Unit이 할당되지 않았습니다.");
         }
     }
 

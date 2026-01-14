@@ -14,7 +14,7 @@ public class PlayerInfo : MonoBehaviour
 
     private void Awake()
     {
-        maxHp = DataManager.PlayerHp;
+        maxHp = DataManager.GetAttributeData(AttributeType.PlayerHealth);
         curHp = maxHp;
     }
 
@@ -30,7 +30,7 @@ public class PlayerInfo : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("Player Die");
+        // Debug.Log("Player Die");
         
         //  SceneController를 사용할 때는 반드시 Build Setting 확인
         

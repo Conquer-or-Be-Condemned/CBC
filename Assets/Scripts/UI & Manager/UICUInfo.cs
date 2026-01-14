@@ -37,7 +37,7 @@ public class UICUInfo : MonoBehaviour
             hpText = GameObject.FindWithTag("CUHpText").GetComponent<TMP_Text>();
             if (hpText == null)
             {
-                Debug.LogError("UI ERROR : Hp Text를 반드시 연결해주어야 합니다.");
+                // Debug.LogError("UI ERROR : Hp Text를 반드시 연결해주어야 합니다.");
                 SceneController.ExitProgram();
             }
         }

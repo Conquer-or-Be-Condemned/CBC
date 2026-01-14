@@ -1,0 +1,132 @@
+name: PR CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify project consistency
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate Unity project structure
+        run: |
+          test -d "Assets" || (echo "Missing Assets/ folder" && exit 1)
+          test -d "Packages" || (echo "Missing Packages/ folder" && exit 1)
+          test -d "ProjectSettings" || (echo "Missing ProjectSettings/ folder" && exit 1)
+          echo "Project folders OK"
+
+      - name: Check missing .meta for changed Assets
+        shell: bash
+        run: |
+          BASE="origin/${{ github.base_ref }}"
+          git fetch origin ${{ github.base_ref }} --depth=1 || true
+
+          CHANGED=$(git diff --name-only "$BASE"...HEAD | tr -d '\r')
+
+          if [[ -z "$CHANGED" ]]; then
+            echo "No changed files."
+            exit 0
+          fi
+
+          FAIL=0
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          while IFS= read -r file; do
+            [[ -z "$file" ]] && continue
+
+            # Assets 아래에서 meta 파일 자체가 아닌 경우만 검사
+            if [[ "$file" == Assets/* && "$file" != *.meta ]]; then
+              # 삭제된 파일은 검사 제외
+              if git cat-file -e HEAD:"$file" 2>/dev/null; then
+                # 파일/폴더 둘 다 meta 필요(보통 Unity가 생성)
+                if [[ ! -f "${file}.meta" && ! -f "$file.meta" ]]; then
+                  echo "::error::Missing .meta for: $file"
+                  FAIL=1
+                fi
+              fi
+            fi
+          done <<< "$CHANGED"
+
+          if [[ $FAIL -eq 1 ]]; then
+            echo "Meta check failed."
+            exit 1
+          fi
+
+          echo "Meta check OK"
+
+      - name: Warn on large files (>50MB) (optional)
+        shell: bash
+        run: |
+          THRESHOLD=52428800
+          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD | tr -d '\r')
+
+          while IFS= read -r file; do
+            [[ -z "$file" ]] && continue
+            if [[ -f "$file" ]]; then
+              size=$(wc -c < "$file")
+              if [[ $size -gt $THRESHOLD ]]; then
+                echo "::warning::Large file detected: $file ($size bytes)"
+              fi
+            fi
+          done <<< "$CHANGED"
+      
+      # CS 파일 검사 후 Rich Logic 경고
+      - name: Warn on Update/FixedUpdate hotspots (Unity)
+        shell: bash
+        run: |
+          echo "Checking hotspots inside Update / FixedUpdate (warning only)..."
+
+          # 이번 PR에서 변경된 .cs 파일만 검사
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '\.cs$' || true)
+
+          # 경고 패턴(팀 합의에 따라 줄이거나 늘려도 됨)
+          PATTERN="FindObjectOfType|FindAnyObjectByType|FindObjectsOfType|GameObject\.Find|transform\.Find|Camera\.main|GetComponent<|GetComponentInChildren|GetComponentInParent|Instantiate\(|Destroy\(|Debug\.Log|Debug\.LogWarning|Debug\.LogError|\.Select\(|\.Where\(|\.ToList\("
+
+          if [[ -z "$FILES" ]]; then
+            echo "No changed C# files."
+            exit 0
+          fi
+
+          for file in $FILES; do
+            [[ -f "$file" ]] || continue
+
+            # Update/FixedUpdate 함수 본문(대략)만 잘라서 패턴 검색
+            # - 완벽한 C# 파서는 아니지만, CI 경고용으로는 실용적
+            for fn in Update FixedUpdate; do
+              if grep -nE "^\s*(public|private|protected|internal)?\s*(override\s+)?void\s+$fn\s*\(" "$file" >/dev/null; then
+                # 함수 시작 라인 번호(첫 번째 매칭 기준)
+                start=$(grep -nE "^\s*(public|private|protected|internal)?\s*(override\s+)?void\s+$fn\s*\(" "$file" | head -n1 | cut -d: -f1)
+
+                # 함수 시작부터 아래쪽 120줄만 스캔(대부분의 Update는 이 안에 들어옴)
+                # 너무 길면 팀 자체가 구조 개선을 고려해야 하는 신호이기도 함
+                end=$((start + 120))
+
+                snippet=$(awk -v s="$start" -v e="$end" 'NR>=s && NR<=e {print NR ":" $0}' "$file")
+
+                # snippet 안에서만 패턴 탐지 -> 경고 출력
+                echo "$snippet" | grep -nE "$PATTERN" | while read -r hit; do
+                  # hit 형식: (grep의 줄번호):(원본라인번호:코드)
+                  # 원본 라인 번호 추출
+                  orig_line=$(echo "$hit" | sed -E 's/^[0-9]+:([0-9]+):.*/\1/')
+                  code=$(echo "$hit" | sed -E 's/^[0-9]+:[0-9]+:(.*)/\1/')
+
+                  echo "::warning file=$file,line=$orig_line::Potential hotspot in $fn -> $code"
+                done
+              fi
+            done
+          done
+
+          echo "Hotspot warning check completed."
+
+
