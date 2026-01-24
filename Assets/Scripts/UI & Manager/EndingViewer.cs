@@ -50,12 +50,12 @@ public class EndingViewer : MonoBehaviour
 
         int leng = 0;
         
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == AvailableLanguage.English)
         {
             endingText.GetComponent<TMP_Text>().SetText(endingList_ENG[idx]);
             leng = endingList_ENG.Count;
         }
-        else if (GameManager.Language == 1)
+        else if (GameManager.SelectedLanguage == AvailableLanguage.Korean)
         {
             endingText.GetComponent<TMP_Text>().SetText(endingList_KOR[idx]);
             leng = endingList_KOR.Count;
@@ -95,11 +95,11 @@ public class EndingViewer : MonoBehaviour
 
     private IEnumerator ResetTextCoroutine(int idx)
     {
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == AvailableLanguage.English)
         {
             endingText.GetComponent<TMP_Text>().SetText(endingList_ENG[idx]);
         }
-        else if (GameManager.Language == 1)
+        else if (GameManager.SelectedLanguage == AvailableLanguage.Korean)
         {
             endingText.GetComponent<TMP_Text>().SetText(endingList_KOR[idx]);
         }

@@ -224,7 +224,7 @@ public class TalkManager : MonoBehaviour
 
     public static string GetTalk(int id, int talkIndex)
     {
-        if (GameManager.Language == 0)
+        if (GameManager.SelectedLanguage == 0)
         {
             if (talkIndex == TalkData_ENG[id].Length)
             {
