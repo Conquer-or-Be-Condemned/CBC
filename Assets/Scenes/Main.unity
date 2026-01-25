@@ -4362,14 +4362,14 @@ MonoBehaviour:
   sfxMixerGroup: {fileID: 3207809838944338997, guid: f6014605c49cf422399886f1b2f51b04, type: 2}
   bgmClips:
   - {fileID: 8300000, guid: 2f79a64ec3b3dda4493ee50055e87b82, type: 3}
-  - {fileID: 8300000, guid: 3f094c970d96d4ab09dd03b7b8839c07, type: 3}
-  - {fileID: 8300000, guid: 996885a4e12894d6e94bef6da29f0cb7, type: 3}
+  - {fileID: 8300000, guid: 5d007b8e58fd98a4f92d6588f162e765, type: 3}
+  - {fileID: 8300000, guid: ee72066e7ef216b4981d23298234df2f, type: 3}
   - {fileID: 8300000, guid: a0365209bdaf04a348ea76c6ea6111e5, type: 3}
   - {fileID: 8300000, guid: 4ea1ebb321c4340d485050c01b8ec071, type: 3}
   - {fileID: 8300000, guid: 32c6dfa5571aa46b8ad3d9416a852742, type: 3}
   - {fileID: 8300000, guid: fe1c9fcf47a7f40949054370aee96561, type: 3}
   - {fileID: 8300000, guid: eaa9ee289c7244b158b19fd6056b5611, type: 3}
-  - {fileID: 8300000, guid: b1c9b76e26c59413980a93793991ee5a, type: 3}
+  - {fileID: 8300000, guid: eaa9ee289c7244b158b19fd6056b5611, type: 3}
   bgmVolume: 0.03381025
   sfxClips:
   - {fileID: 8300000, guid: 582934a8a10fd4e00a71c5598571bb7c, type: 3}
