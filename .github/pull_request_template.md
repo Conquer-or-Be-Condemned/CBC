@@ -19,8 +19,9 @@
 ### Scope
 - [ ] Player
 - [ ] Enemy
-- [ ] UI
+- [ ] Tower
 - [ ] Map
+- [ ] UI
 - [ ] System
 
 ---
